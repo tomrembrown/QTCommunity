@@ -1,0 +1,11 @@
+# Ignore packages installed by npm
+node_modules
+
+# Ignore files used by the WebStorm IDE
+.idea
+
+# Ignore the file created by the OSX systems
+.DS_Store
+
+# Ignore backup files
+*~
