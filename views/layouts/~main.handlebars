@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Queer Toronto</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- favicons for Firefox & Chrome -->
+    <link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
+
+    <!-- for IE -->
+    <link rel="icon" type="image/x-icon" href="/img/favicons/favicon.ico" >
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicons/favicon.ico"/>
+    
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="/vendor/bootstrap.min.css">
+
+    <!-- Stylesheet for testing - only run when test set -->
+    {{#if showTests}}
+        <link rel="stylesheet" href="/vendor/mocha.css">
+    {{/if}}
+
+</head>
+<body>
+    <header><img src="/img/logo.png" alt="Queer Toronto Logo" width="80"></header>
+    {{{body}}}
+
+    {{#if showTests}}
+        <div id="mocha"></div>
+        <script src="/vendor/mocha.js"></script>
+        <script src="/vendor/chai.js"></script>
+        <script>
+            mocha.ui('tdd');
+            var assert = chai.assert;
+        </script>
+        <script src="/qa/tests-global.js"></script>
+        {{#if pageTestScript}}
+            <script src="{{pageTestScript}}"></script>
+        {{/if}}
+        <script>mocha.run();</script>
+    {{/if}}
+
+</body>
+</html>

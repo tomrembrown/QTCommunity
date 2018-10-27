@@ -18,7 +18,6 @@ app.use(express.static(__dirname + '/public'));
 app.use(function(req, res, next){
   res.locals.showTests = app.get('env') !== 'production' &&
     req.query.test === '1';
-  console.log('Tests: ' + req.locals.showTests);
   next();
 });
 
