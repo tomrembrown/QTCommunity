@@ -1,11 +1,13 @@
-var quotes = require('./lib/quotes.js');
+"use strict";
 
-var express = require('express');
+let quotes = require('./lib/quotes.js');
 
-var app = express();
+let express = require('express');
+
+let app = express();
 
 // set up handlebars view engine
-var handlebars = require('express-handlebars').create({defaultLayout: 'main'});
+let handlebars = require('express-handlebars').create({defaultLayout: 'main'});
 app.engine('handlebars',handlebars.engine);
 app.set('view engine','handlebars');
 
@@ -23,12 +25,14 @@ app.use(function(req, res, next){
 
 // Routes
 app.get('/', function(req, res){
-  var randomQuote = quotes.getQuote();
+  const randomQuote = quotes.getQuote();
   res.render('home', {quote: randomQuote.quote, person: randomQuote.person});
 });
 
 app.get('/about', function(req, res) {
-  res.render('about');
+  res.render('about', {
+    pageTestScript: '/qa/tests-about.js'
+  });
 });
 
 // custom 404 page
@@ -48,3 +52,5 @@ app.listen(app.get('port'), function(){
   console.log( ' Express started on http://localhost:' +
     app.get('port') + '; press Ctrl-C to terminate.' );
 });
+
+

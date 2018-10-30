@@ -17,14 +17,25 @@
     "Trans",
     "Events"
   ],
+  "homepage": "https://github.com/tomrembrown/QTCommunity",
   "author": "Tom Brown",
-  "license": "Proprietary",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomrembrown/QTCommunity.git"
+  },
   "dependencies": {
     "express": "^4.16.2",
-    "express-handlebars": "^3.0.0"
+    "express-handlebars": "^3.0.0",
+    "npm": "^6.4.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "mocha": "^5.0.0"
+    "grunt": "^1.0.3",
+    "grunt-contrib-jshint": "^2.0.0",
+    "grunt-exec": "^3.0.0",
+    "grunt-mocha-test": "^0.13.3",
+    "mocha": "^5.0.0",
+    "zombie": "^6.1.3"
   }
 }
