@@ -1,9 +1,7 @@
 # Community Website - Queer Toronto
 
-This is a Single Page Application that has the code for a community website that provides a list of 
-organizations and a calendar of events.  This is the Queer Toronto version of the web application.  It
-is built using PostgreSQL, NodeJS, Express, VUE, VueStrap (a variant of Bootstrap 4 that 
-replaces the jQuery JS code with Vue JS code.)
+This will be a Single Page Application that has the code for a community website that provides a list of organizations and a calendar of events.  This is the Queer Toronto version of the web application.  It will be built using PostgreSQL, NodeJS, Express, VUE, and VueStrap (a variant of Bootstrap 4 that 
+replaces the jQuery JS code with Vue JS code.)  Currently it just has NodeJS, Express, and BootStrap 4.  There is no database or Vue.js at the moment.
 
 ## Getting Started
 
@@ -13,9 +11,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ```
 A Linux OS
-PostgreSQL
 NodeJS
 NPM
+Grunt
 ```
 
 ### Installing
@@ -23,46 +21,26 @@ NPM
 Clone GIT repository and download
 
 ```
-Give commands
+git clone https://github.com/tomrembrown/QTCommunity
 ```
 
 Build NPM script
 
 ```
-Give commands
+npm build
 ```
 
-Build PostgreSQL initial database
+Build PostgreSQL initial database.  Database to come in the future.
 
-```
-Give commands
-```
 
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+Running the command 'grunt' in the 
 
 ### Break down into end to end tests
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+These tests handle linting with jshint, link checking, and some cross-page and unit tests.
 
 ## Built With
 
@@ -74,17 +52,13 @@ Add additional notes about how to deploy this on a live system
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+This is a proprietary project.  Please ask Tom Brown (tom@tomrembrown.com) to add you to the private github repository in order to contribute.
 
 ## Authors
 
 * **Tom Brown** - *Initial work*
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/tomrembrown/QTCommunity/contributors) who participated in this project.
 
 ## License
 
@@ -93,3 +67,5 @@ This project is proprietary - see the [LICENSE.md](LICENSE.md) file for details
 ## Acknowledgments
 
 * Following along Ethan Brown's book 'Web Development with Node & Express' was useful
+* Watching the NodeJS - The Complete Guide by Maximilian Schwarzmuller on udemy.com was helpful to upgrade the node and express to the latest ES2016 code.
+* The series "You Don't Know JS" by Kyle Simpson was helpful to make sure the JavaScript was coded properly.

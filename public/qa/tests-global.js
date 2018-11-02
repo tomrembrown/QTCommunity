@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 suite('Global Tests', function(){
   test('page has a valid title', function(){

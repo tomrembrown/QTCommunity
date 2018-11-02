@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let quote = require('../lib/quotes.js');
 let expect = require('chai').expect;

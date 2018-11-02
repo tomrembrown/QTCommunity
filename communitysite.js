@@ -1,10 +1,13 @@
-"use strict";
+'use strict';
 
 let quotes = require('./lib/quotes.js');
 
 let express = require('express');
 
 let app = express();
+
+// For security reasons, don't send info on server to client
+app.disable('x-powered-by');
 
 // set up handlebars view engine
 let handlebars = require('express-handlebars').create({defaultLayout: 'main'});
@@ -35,6 +38,14 @@ app.get('/about', function(req, res) {
   });
 });
 
+app.get('/headers', function(req,res) {
+  res.set('Content-Type','text/plain');
+  var s='';
+  for (var name in req.headers) 
+    s += name + ': ' + req.headers[name] + '\n';
+  res.send(s);
+});
+
 // custom 404 page
 app.use(function(req, res){
   res.status(404);
@@ -45,7 +56,7 @@ app.use(function(req, res){
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500);
-  res.render('500');
+  res.render('error');
 });
 
 app.listen(app.get('port'), function(){
