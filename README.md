@@ -32,7 +32,11 @@ npm build
 
 Build PostgreSQL initial database.  Database to come in the future.
 
+Start the Server
 
+```
+node communitysite.js
+```
 
 ## Running the tests
 
