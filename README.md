@@ -36,9 +36,9 @@ Build PostgreSQL initial database.  Database to come in the future.
 
 ## Running the tests
 
-Running the command 'grunt' in the 
+Running the command 'grunt' in the project directory to run the tests.
 
-### Break down into end to end tests
+### What the tests do
 
 These tests handle linting with jshint, link checking, and some cross-page and unit tests.
 
@@ -69,3 +69,4 @@ This project is proprietary - see the [LICENSE.md](LICENSE.md) file for details
 * Following along Ethan Brown's book 'Web Development with Node & Express' was useful
 * Watching the NodeJS - The Complete Guide by Maximilian Schwarzmuller on udemy.com was helpful to upgrade the node and express to the latest ES2016 code.
 * The series "You Don't Know JS" by Kyle Simpson was helpful to make sure the JavaScript was coded properly.
+* Super sweet David Yim has provided much advice, support and encouragement :-)
