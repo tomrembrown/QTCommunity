@@ -27,7 +27,7 @@ git clone https://github.com/tomrembrown/QTCommunity
 Build NPM script
 
 ```
-npm build
+npm install
 ```
 
 Build PostgreSQL initial database.  Database to come in the future.

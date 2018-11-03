@@ -4,7 +4,8 @@
   "description": "A Single Page Web Application that presents a community website with a list of events and organizations",
   "main": "communitysite.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node communitysite.js"
   },
   "keywords": [
     "Community",
@@ -36,6 +37,7 @@
     "grunt-exec": "^3.0.0",
     "grunt-mocha-test": "^0.13.3",
     "mocha": "^5.0.0",
+    "nodemon": "^1.18.5",
     "zombie": "^6.1.3"
   }
 }
