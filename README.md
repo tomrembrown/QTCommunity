@@ -35,7 +35,7 @@ Build PostgreSQL initial database.  Database to come in the future.
 Start the Server
 
 ```
-node communitysite.js
+npm start
 ```
 
 ## Running the tests
@@ -48,7 +48,7 @@ These tests handle linting with jshint, link checking, and some cross-page and u
 
 ## Built With
 
-* [Node.JS](https://nodejs.org/) - Backend language
+* [Node.JS](https://nodejs.org/) - JavaScript runtime that allows server-side JavaScript
 * [Express](https://expressjs.com/) - Backend framework
 * [PostgreSQL 10](https://www.postgresql.org/) - Database
 * [Vue.js](https://vuejs.org/) - Frontend framework

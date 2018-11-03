@@ -1,11 +1,11 @@
 'use strict';
 
-let quote = require('../lib/quotes.js');
-let expect = require('chai').expect;
+const quote = require('../lib/quotes.js');
+const expect = require('chai').expect;
 
-suite('Quotes tests', function(){
+suite('Quotes tests', () => {
 
-	test('getQuote() should return a quote', function(){
+	test('getQuote() should return a quote', () => {
 		expect(typeof quote.getQuote() === 'object');
 	});
 
