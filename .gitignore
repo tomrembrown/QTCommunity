@@ -1,8 +1,12 @@
 # Ignore packages installed by npm
-node_modules
+node_modules/
 
-# Ignore files used by the WebStorm IDE
+# Ignore files used by various IDEs
 .idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
 
 # Ignore the file created by the OSX systems
 .DS_Store
@@ -10,3 +14,13 @@ node_modules
 # Ignore backup files
 *~
 *.bak
+
+# Ignore the build files created by webpack
+dist/
+
+# Ignore log file
+npm-debug.log
+yarn-error.log
+
+# Ignore the environment parameters file - it will be different on prod vs. dev servers
+.env

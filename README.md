@@ -14,6 +14,7 @@ A Linux OS
 NodeJS
 NPM
 Grunt
+Vue CLI
 ```
 
 ### Installing
