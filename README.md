@@ -1,7 +1,6 @@
 # Community Website - Queer Toronto
 
-This will be a Single Page Application that has the code for a community website that provides a list of organizations and a calendar of events.  This is the Queer Toronto version of the web application.  It will be built using PostgreSQL, NodeJS, Express, VUE, and VueStrap (a variant of Bootstrap 4 that 
-replaces the jQuery JS code with Vue JS code.)  Currently it just has NodeJS, Express, and BootStrap 4.  There is no database or Vue.js at the moment.
+This IS a Single Page Application that has the code for a community website that provides a list of organizations and a calendar of events.  This is the Queer Toronto version of the web application.  It is built using PostgreSQL 10, NodeJS, Express, VUE, and BootStrap-VUE (a variant of Bootstrap 4 that replaces the jQuery JS code with Vue JS code.)  
 
 ## Getting Started
 
@@ -15,6 +14,7 @@ NodeJS
 NPM
 Grunt
 Vue CLI
+PostgreSQL 10
 ```
 
 ### Installing
@@ -31,7 +31,15 @@ Build NPM script
 npm install
 ```
 
-Build PostgreSQL initial database.  Database to come in the future.
+Build PostgreSQL initial database. 
+
+```
+su - postgres (enter postgres user password)
+psql
+CREATE DATABASE queer_toronto;
+CREATE ROLE qt_computer_access WITH ENCRYPTED PASSWORD 'abc';
+GRANT ALL PRIVILEGES ON DATABASE queer_toronto TO qt_computer_access;
+```
 
 Start the Server
 
