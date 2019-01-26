@@ -9,9 +9,7 @@ var urls = ['http://www.the519.org/calendar/?type=daily#', 'http://www.the519.or
 const regex1 = /&amp;nbsp;/gm;
 const regex2 = /\r\n/gm;
 const regex3 = /[ ]{2,}|\u0007|\t/gm;
-
-
-
+const regex4 = /background-image: url\('(.*2x.*)'\)/gm;
 
 for(var i in urls){
 	console.log("Processing " + urls[i] + "\n");
@@ -58,6 +56,24 @@ for(var i in urls){
 					
 					delete data['startDate'];
 					
+					//get the image
+					var image_div = xpath.select1('string(//article[contains(@id, "event-listing")]/div[contains(@class, "grid full-img-1")]/style)', page_document);
+					let match, matchTextAt;
+					
+					while ((match = regex4.exec(image_div)) !== null) {
+						// This is necessary to avoid infinite loops with zero-width matches
+						if (match.index === regex4.lastIndex) {
+							regex4.lastIndex++;
+						}
+					
+						// The result can be accessed through the `m`-variable.
+						match.forEach((matchText, groupIndex) => {
+							matchTextAt = matchText;
+						});
+					}
+					
+					data['image'] = 'http://www.the519.org' + matchTextAt;
+					
 					//flatten the array
 					data['url'] = data['url'][0];
 					data['location'] = data['location'][0];
@@ -69,7 +85,7 @@ for(var i in urls){
 					
 					data = JSON.stringify(data);	
 					
-					var file_name = '519-' + md5(page_url_local) + '.json';
+					var file_name = 'The519/The519-' + md5(page_url_local) + '.json';
 					console.log("\tWriting to " + file_name + "\n");
 					fs.writeFile(file_name, data, function(error){});
 					
