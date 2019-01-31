@@ -7,6 +7,7 @@ const path = require('path');
 
 // Additional requires
 require('dotenv').config();  // load the environment variables from .env
+console.log(process.env.PGHOST);
 const querystring = require('querystring');
 
 // Parse the input

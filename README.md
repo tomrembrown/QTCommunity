@@ -14,7 +14,7 @@ NodeJS
 NPM
 Grunt
 Vue CLI
-PostgreSQL 10
+PostgreSQL 10 with postgresql-contrib
 ```
 
 ### Installing
@@ -31,14 +31,26 @@ Build NPM script
 npm install
 ```
 
-Build PostgreSQL initial database. 
+Determine port postgres runs on
+
+```
+sudo netstat -plunt |grep postgres
+```
+
+Move .env_prod or .env_dev to .env and adjust params as necessary
+
+Build PostgreSQL initial database and add extension. 
 
 ```
 su - postgres (enter postgres user password)
-psql
+psql --port (port determined for postgresql server)
 CREATE DATABASE queer_toronto;
 CREATE ROLE qt_computer_access WITH ENCRYPTED PASSWORD 'abc';
 GRANT ALL PRIVILEGES ON DATABASE queer_toronto TO qt_computer_access;
+ALTER ROLE "qt_computer_access" WITH LOGIN;
+CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
+\c queer_toronto
+CREATE EXTENSION IF NOT EXISTS citext;
 ```
 
 Start the Server
