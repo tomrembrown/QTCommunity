@@ -31,6 +31,12 @@ Build NPM script
 npm install
 ```
 
+Create environment file (copy either .env_prod or .env_dev)
+
+```
+cp .env_dev .env
+```
+
 Determine port postgres runs on
 
 ```
@@ -73,7 +79,7 @@ These tests handle linting with jshint, link checking, and some cross-page and u
 * [Express](https://expressjs.com/) - Backend framework
 * [PostgreSQL 10](https://www.postgresql.org/) - Database
 * [Vue.js](https://vuejs.org/) - Frontend framework
-* [VueStrap](https://wffranco.github.io/vue-strap/) - Bootstrap based responsive web framework
+* [Bootstrap + Vue](https://bootstrap-vue.js.org/) - Bootstrap based responsive web framework
 
 ## Contributing
 
@@ -82,6 +88,7 @@ This is a proprietary project.  Please ask Tom Brown (tom@tomrembrown.com) to ad
 ## Authors
 
 * **Tom Brown** - *Initial work*
+* **David Yim** - *Access APIs to gather event data automatically*
 
 See also the list of [contributors](https://github.com/tomrembrown/QTCommunity/contributors) who participated in this project.
 
