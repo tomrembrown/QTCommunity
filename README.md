@@ -43,7 +43,7 @@ Determine port postgres runs on
 sudo netstat -plunt |grep postgres
 ```
 
-Move .env_prod or .env_dev to .env and adjust params as necessary
+Adjust parameters in .env as necessary (such as postgres port)
 
 Build PostgreSQL initial database and add extension. 
 
