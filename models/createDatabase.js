@@ -1,6 +1,6 @@
 const { Pool, Client } = require('pg');
 const fs = require('fs');
-require('dotenv').config({path:'../.env'});  // load the environment variables from .env
+require('dotenv').config({path:__dirname+'/../.env'});  // load the environment variables from .env
 
 const pool = new Pool({
   user: process.env.PGUSER,
@@ -10,7 +10,7 @@ const pool = new Pool({
   port: process.env.PGPORT
 });
 
-let sqlScript = fs.readFileSync('createDatabase.sql').toString();
+let sqlScript = fs.readFileSync(__dirname+'/createDatabase.sql').toString();
 
 pool.query(sqlScript, (err, res) => {
   if (err) {

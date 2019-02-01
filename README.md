@@ -59,6 +59,12 @@ CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
 CREATE EXTENSION IF NOT EXISTS citext;
 ```
 
+Create the database tables
+
+```
+npm run createDatabase
+```
+
 Start the Server
 
 ```
