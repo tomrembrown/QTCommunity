@@ -51,7 +51,7 @@ Build PostgreSQL initial database and add extension.
 su - postgres (enter postgres user password)
 psql --port (port determined for postgresql server)
 CREATE DATABASE queer_toronto;
-CREATE ROLE qt_computer_access WITH ENCRYPTED PASSWORD 'abc';
+CREATE ROLE qt_computer_access WITH ENCRYPTED PASSWORD (enter password here);
 GRANT ALL PRIVILEGES ON DATABASE queer_toronto TO qt_computer_access;
 ALTER ROLE "qt_computer_access" WITH LOGIN;
 CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;

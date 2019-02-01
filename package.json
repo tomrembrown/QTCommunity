@@ -33,31 +33,32 @@
     "not ie <= 8"
   ],
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.5.0",
+    "@fortawesome/fontawesome-free": "^5.7.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
-    "bootstrap": "^4.1.3",
+    "bootstrap": "^4.2.1",
     "bootstrap-vue": "^2.0.0-rc.11",
-    "dotenv": "^6.1.0",
-    "express": "^4.16.2",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
     "md5": "^2.2.1",
     "microdata-node": "^1.0.0",
-    "pg": "^7.7.1",
+    "pg": "^7.8.0",
+    "pg-promise": "^8.5.5",
     "querystring": "^0.2.0",
-    "vue": "^2.5.17",
+    "vue": "^2.5.22",
     "vue-resource": "^1.5.1",
     "xmldom": "^0.1.27",
     "xpath": "0.0.27"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
+    "chai": "^4.2.0",
     "grunt": "^1.0.3",
     "grunt-contrib-jshint": "^2.0.0",
     "grunt-exec": "^3.0.0",
     "grunt-mocha-test": "^0.13.3",
     "mocha": "^5.0.0",
-    "nodemon": "^1.18.5",
-    "webpack": "^4.25.1",
-    "zombie": "^6.1.3"
+    "nodemon": "^1.18.9",
+    "webpack": "^4.29.0",
+    "zombie": "^6.1.4"
   }
 }
