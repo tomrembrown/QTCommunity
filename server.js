@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 
 // The one route for now - just go to the main page
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname,'/communitysite.html'));
+  res.sendFile(path.join(__dirname,'/templates/index.html'));
 });
 
 // An AJAX call to get a quote
