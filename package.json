@@ -43,7 +43,6 @@
     "md5": "^2.2.1",
     "microdata-node": "^1.0.0",
     "pg": "^7.8.0",
-    "pg-promise": "^8.5.5",
     "querystring": "^0.2.0",
     "vue": "^2.5.22",
     "vue-resource": "^1.5.1",
