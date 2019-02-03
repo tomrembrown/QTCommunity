@@ -15,38 +15,67 @@ DROP TABLE IF EXISTS member_types;
 
 -- Now, create them - from simplest and depends on nothing - to more complex
 CREATE TABLE member_types(
-  member_type_id SMALLSERIAL PRIMARY KEY,
+  id SMALLSERIAL PRIMARY KEY,
   name_english TEXT NOT NULL,
   name_french TEXT NOT NULL
 );
 
 CREATE TABLE categories(
-  category_id SMALLSERIAL PRIMARY KEY,
+  id SMALLSERIAL PRIMARY KEY,
   name_english TEXT NOT NULL,
   name_french TEXT NOT NULL,
   colour CHAR(6) NOT NULL
 );
 
-CREATE TABLE locales(
-  locale_id SERIAL PRIMARY KEY,
+CREATE TABLE places(
+  id SERIAL PRIMARY KEY,
   address TEXT NOT NULL,
   latitude DECIMAL(9,6),
-  longitude DECIMAL(9,6)
+  longitude DECIMAL(9,6),
+
+  -- Information about who place is geared for 
+  -- Below is also in organizations & events
+  family_friendly BOOLEAN NOT NULL,
+  male_ok BOOLEAN NOT NULL DEFAULT TRUE,
+  female_ok BOOLEAN NOT NULL DEFAULT TRUE,
+  trans_ok BOOLEAN NOT NULL DEFAULT TRUE,
+  min_age SMALLINT CHECK (min_age >= 0 AND min_age <= 100),
+  max_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100),
+  orientation TEXT,
+  race_religion TEXT DEFAULT NULL,
+  only_race_religion BOOLEAN NOT NULL DEFAULT FALSE,
+
+  -- Information about who place is for - only in place
+  wheelchair_accessible BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-CREATE TABLE members(
-  member_id SERIAL PRIMARY KEY,
-  login CITEXT UNIQUE NOT NULL,
+CREATE TABLE organizations(
+
+  -- Primay key
+  id SERIAL PRIMARY KEY,
+  
+  -- Basic information about organization
   name_english TEXT,
   name_french TEXT,
-  password_encrypted TEXT NOT NULL,
-  logo_path TEXT,
-  member_type_id SMALLINT REFERENCES member_types(member_type_id),
+  organization_type_id SMALLINT REFERENCES organization_types(id),
   description_english TEXT,
   description_french TEXT,
-  locale_id INTEGER REFERENCES locales(locale_id),
-  locale_room TEXT,
+  image TEXT,
+
+  -- Login information (some organizations don't - just get data from parser feed)
+  is_member BOOLEAN NOT NULL DEFAULT FALSE,
+  is_shown BOOLEAN NOT NULL DEFAULT FALSE,
+  login CITEXT UNIQUE,
+  password_encrypted TEXT,
   signup_date TIMESTAMP,
+  logged_in BOOLEAN,
+  last_logged_in TIMESTAMP,
+  
+  -- Physical location
+  place_id INTEGER REFERENCES places(place_id),
+  place_room TEXT,
+
+  -- Contact information
   email CITEXT,
   display_email BOOLEAN NOT NULL DEFAULT FALSE,
   phone BIGINT CHECK (phone >= 2000000000 AND phone <= 9999999999),
@@ -61,37 +90,71 @@ CREATE TABLE members(
   display_twitter BOOLEAN NOT NULL DEFAULT FALSE,
   linked_in TEXT,
   display_linked_in BOOLEAN NOT NULL DEFAULT FALSE,
-  logged_in BOOLEAN,
-  last_logged_in TIMESTAMP,
-  family_friendly BOOLEAN, 
-  is_member BOOLEAN NOT NULL DEFAULT FALSE,
-  is_shown BOOLEAN NOT NULL DEFAULT FALSE
+  
+  -- Information about who organization is geared for
+  family_friendly BOOLEAN DEFAULT TRUE,
+  male_ok BOOLEAN DEFAULT TRUE,
+  female_ok BOOLEAN DEFAULT TRUE,
+  trans_ok BOOLEAN DEFAULT TRUE,
+  min_age SMALLINT CHECK (min_age >= 0 AND min_age <= 100),
+  max_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100),
+  orientation TEXT,
+  race_religion TEXT DEFAULT NULL,
+  only_race_religion BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-CREATE TABLE events(
-  event_id SERIAL PRIMARY KEY,
-  member_id INTEGER REFERENCES members(member_id),
-  category_id INTEGER REFERENCES categories(category_id),
-  locale_id INTEGER REFERENCES locales(locale_id),
-  locale_room TEXT,
-  start_time TIMESTAMP NOT NULL,
-  end_time TIMESTAMP NOT NULL,
-  description_english TEXT,
-  description_french TEXT, 
+CREATE TABLE event_groups(
+
+  -- Primary key
+  id SERIAL PRIMARY KEY,
+
+  -- Basic information about event
   long_title_english TEXT NOT NULL,
   long_title_french TEXT NOT NULL,
   short_title_english TEXT NOT NULL,
   short_title_french TEXT NOT NULL,
+  mobile_title_english TEXT NOT NULL,
+  mobile_title_french TEXT NOT NULL,
+  description_english TEXT,
+  description_french TEXT, 
+  image TEXT,
+
+  -- Is Shown, organization, registration
+  is_shown BOOLEAN NOT NULL DEFAULT TRUE,
+  organization_id INTEGER REFERENCES organizations(id),
+  registration_website_english TEXT,
+  registration_website_french TEXT, 
+  need_registration BOOLEAN NOT NULL DEFAULT TRUE,
+  price MONEY DEFAULT NULL,
+  
+  -- Category and contact information
+  category_id INTEGER REFERENCES categories(id),
+  website_english TEXT,
+  website_french TEXT,
+
+  -- Information about who event is geared for
   family_friendly BOOLEAN NOT NULL,
-  min_age SMALLINT CHECK (min_age >= 0 AND min_age <= 100),
-  max_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100),
-  race_religion TEXT,
-  only_race_religion BOOLEAN NOT NULL DEFAULT FALSE,
   male_ok BOOLEAN NOT NULL DEFAULT TRUE,
   female_ok BOOLEAN NOT NULL DEFAULT TRUE,
   trans_ok BOOLEAN NOT NULL DEFAULT TRUE,
+  min_age SMALLINT CHECK (min_age >= 0 AND min_age <= 100),
+  max_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100),
   orientation TEXT,
-  is_shown BOOLEAN NOT NULL DEFAULT TRUE,
-  need_registration BOOLEAN NOT NULL DEFAULT TRUE,
-  price MONEY NOT NULL DEFAULT 0
+  race_religion TEXT DEFAULT NULL,
+  only_race_religion BOOLEAN NOT NULL DEFAULT FALSE  
+);
+
+CREATE TABLE event_details(
+
+  -- Primary key
+  id SERIAL PRIMARY KEY,
+
+  -- Link to main event group
+  event_group_id INTEGER REFERENCES event_groups(id),
+
+  -- Details about this specific event
+  place_id INTEGER REFERENCES places(id),
+  place_room TEXT,
+  start_time TIMESTAMP NOT NULL,
+  end_time TIMESTAMP NOT NULL
 );
