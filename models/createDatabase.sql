@@ -7,14 +7,22 @@ Script to create the Queer Toronto database
 -- queer_toronto database as user qt_computer_access
 
 -- Drop tables in reverse order of creation
-DROP TABLE IF EXISTS events;
+DROP TABLE IF EXISTS categories_event_groups_relations;
+DROP TABLE IF EXISTS event_details;
+DROP TABLE IF EXISTS event_groups;
+DROP TABLE IF EXISTS organizations;
+DROP TABLE IF EXISTS places;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS organization_types;
+
+-- Drop tables with the older names
+DROP TABLE IF EXISTS member_types;
 DROP TABLE IF EXISTS members;
 DROP TABLE IF EXISTS locales;
-DROP TABLE IF EXISTS categories;
-DROP TABLE IF EXISTS member_types;
+DROP TABLE IF EXISTS events;
 
 -- Now, create them - from simplest and depends on nothing - to more complex
-CREATE TABLE member_types(
+CREATE TABLE organization_types(
   id SMALLSERIAL PRIMARY KEY,
   name_english TEXT NOT NULL,
   name_french TEXT NOT NULL
@@ -35,13 +43,13 @@ CREATE TABLE places(
 
   -- Information about who place is geared for 
   -- Below is also in organizations & events
-  family_friendly BOOLEAN NOT NULL,
+  family_friendly BOOLEAN NOT NULL DEFAULT TRUE,
   male_ok BOOLEAN NOT NULL DEFAULT TRUE,
   female_ok BOOLEAN NOT NULL DEFAULT TRUE,
   trans_ok BOOLEAN NOT NULL DEFAULT TRUE,
   min_age SMALLINT CHECK (min_age >= 0 AND min_age <= 100),
   max_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100),
-  orientation TEXT,
+  orientation TEXT DEFAULT NULL,
   race_religion TEXT DEFAULT NULL,
   only_race_religion BOOLEAN NOT NULL DEFAULT FALSE,
 
@@ -60,7 +68,7 @@ CREATE TABLE organizations(
   organization_type_id SMALLINT REFERENCES organization_types(id),
   description_english TEXT,
   description_french TEXT,
-  image TEXT,
+  image_link TEXT,
 
   -- Login information (some organizations don't - just get data from parser feed)
   is_member BOOLEAN NOT NULL DEFAULT FALSE,
@@ -72,7 +80,7 @@ CREATE TABLE organizations(
   last_logged_in TIMESTAMP,
   
   -- Physical location
-  place_id INTEGER REFERENCES places(place_id),
+  place_id INTEGER REFERENCES places(id),
   place_room TEXT,
 
   -- Contact information
@@ -98,7 +106,7 @@ CREATE TABLE organizations(
   trans_ok BOOLEAN DEFAULT TRUE,
   min_age SMALLINT CHECK (min_age >= 0 AND min_age <= 100),
   max_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100),
-  orientation TEXT,
+  orientation TEXT DEFAULT NULL,
   race_religion TEXT DEFAULT NULL,
   only_race_religion BOOLEAN NOT NULL DEFAULT FALSE
 );
@@ -117,7 +125,7 @@ CREATE TABLE event_groups(
   mobile_title_french TEXT NOT NULL,
   description_english TEXT,
   description_french TEXT, 
-  image TEXT,
+  image_link TEXT,
 
   -- Is Shown, organization, registration
   is_shown BOOLEAN NOT NULL DEFAULT TRUE,
@@ -127,19 +135,18 @@ CREATE TABLE event_groups(
   need_registration BOOLEAN NOT NULL DEFAULT TRUE,
   price MONEY DEFAULT NULL,
   
-  -- Category and contact information
-  category_id INTEGER REFERENCES categories(id),
+  -- Contact information
   website_english TEXT,
   website_french TEXT,
 
   -- Information about who event is geared for
-  family_friendly BOOLEAN NOT NULL,
+  family_friendly BOOLEAN NOT NULL DEFAULT TRUE,
   male_ok BOOLEAN NOT NULL DEFAULT TRUE,
   female_ok BOOLEAN NOT NULL DEFAULT TRUE,
   trans_ok BOOLEAN NOT NULL DEFAULT TRUE,
   min_age SMALLINT CHECK (min_age >= 0 AND min_age <= 100),
   max_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100),
-  orientation TEXT,
+  orientation TEXT DEFAULT NULL,
   race_religion TEXT DEFAULT NULL,
   only_race_religion BOOLEAN NOT NULL DEFAULT FALSE  
 );
@@ -157,4 +164,12 @@ CREATE TABLE event_details(
   place_room TEXT,
   start_time TIMESTAMP NOT NULL,
   end_time TIMESTAMP NOT NULL
+);
+
+CREATE TABLE categories_event_groups_relations(
+
+  -- Ids of two tables that combined make composite primary key
+  category_id SMALLINT REFERENCES categories(id),
+  event_group_id INTEGER REFERENCES event_groups(id),
+  PRIMARY KEY(category_id, event_group_id)
 );
