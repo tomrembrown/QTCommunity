@@ -13,9 +13,6 @@
  * 
  */
 
-// The object to open connection to actual postgresql database
-const db = require('./../implementation/database');
-
 // Require all methods from implementation directory that are referred to in this interface
 const insertEvent = require('./../implementation/insertEvent');
 const insertPlace = require('./../implementation/insertPlace');
