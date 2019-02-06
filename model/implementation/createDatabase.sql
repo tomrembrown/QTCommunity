@@ -37,9 +37,10 @@ CREATE TABLE categories(
 
 CREATE TABLE places(
   id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
   address TEXT NOT NULL,
-  latitude DECIMAL(9,6),
-  longitude DECIMAL(9,6),
+  latitude DECIMAL(9,6) DEFAULT NULL,
+  longitude DECIMAL(9,6) DEFAULT NULL,
 
   -- Information about who place is geared for 
   -- Below is also in organizations & events
@@ -47,8 +48,8 @@ CREATE TABLE places(
   male_ok BOOLEAN NOT NULL DEFAULT TRUE,
   female_ok BOOLEAN NOT NULL DEFAULT TRUE,
   trans_ok BOOLEAN NOT NULL DEFAULT TRUE,
-  min_age SMALLINT CHECK (min_age >= 0 AND min_age <= 100),
-  max_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100),
+  min_age SMALLINT CHECK (min_age >= 0 AND min_age <= 100) DEFAULT NULL,
+  max_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100) DEFAULT NULL,
   orientation TEXT DEFAULT NULL,
   race_religion TEXT DEFAULT NULL,
   only_race_religion BOOLEAN NOT NULL DEFAULT FALSE,

@@ -1,5 +1,7 @@
+'use strict';
+
 const { Pool, Client } = require('pg');
-require('dotenv').config({path:__dirname+'/../.env'});  // load the environment variables from .env
+require('dotenv').config({path:__dirname+'/../../.env'});  // load the environment variables from .env
 
 const pool = new Pool({
   user: process.env.PGUSER,

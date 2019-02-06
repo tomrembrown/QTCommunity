@@ -1,3 +1,5 @@
+'use strict';
+
 const db = require('./database');
 
 db.query('SELECT NOW() AS "theTime"', (err, res) => {
