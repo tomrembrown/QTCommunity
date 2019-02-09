@@ -37,7 +37,7 @@ CREATE TABLE categories(
 
 CREATE TABLE places(
   id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
+  name TEXT NOT NULL UNIQUE,
   address TEXT NOT NULL,
   latitude DECIMAL(9,6) DEFAULT NULL,
   longitude DECIMAL(9,6) DEFAULT NULL,
@@ -64,8 +64,7 @@ CREATE TABLE organizations(
   id SERIAL PRIMARY KEY,
   
   -- Basic information about organization
-  name_english TEXT,
-  name_french TEXT,
+  name TEXT NOT NULL UNIQUE,
   organization_type_id SMALLINT REFERENCES organization_types(id),
   description_english TEXT,
   description_french TEXT,

@@ -14,9 +14,9 @@
  */
 
 // Require all methods from implementation directory that are referred to in this interface
-const insertEvent = require('./../implementation/insertEvent');
-const insertPlace = require('./../implementation/insertPlace');
-const insertOrganization = require('./../implementation/insertOrganization');
+const insertEvent = require('./inserts/insertEvent');
+const insertPlace = require('./inserts/insertPlace');
+const insertOrganization = require('./inserts/insertOrganization');
 
 const dbInterface = {
   

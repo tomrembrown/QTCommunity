@@ -1,9 +1,9 @@
 'use strict';
 
-const db = require('../implementation/database');
+const db = require('./db');
 const fs = require('fs');
 
-let sqlScript = fs.readFileSync(__dirname+'/../implementation/createDatabase.sql').toString();
+let sqlScript = fs.readFileSync(__dirname+'/createDatabase.sql').toString();
 
 db.query(sqlScript, (err, res) => {
   if (err) {
