@@ -91,7 +91,7 @@ new Vue({
 		},
 		getQuote: function() {
 			this.$http
-				.get('/getQuote')
+				.get('/ajaxRoutes/getRandomQuote')
 				.then(function(res) {
 					this.quote = res.data.quote;
 					this.person = res.data.person;

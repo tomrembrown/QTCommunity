@@ -16,9 +16,7 @@ app.use(bodyParser.json());
 
 // Requires of my files
 const quotes = require('./lib/quotes');
-const generalRoutes = require('./routes/general');
-const adminRoutes = require('./routes/admin');
-const userRoutes = require('./routes/user');
+const ajaxRoutes = require('./vm-server/ajaxRoutes');
 
 // For security reasons, don't send info on server to client
 app.disable('x-powered-by');
@@ -38,7 +36,7 @@ app.use((req, res, next) => {
 
 // The one route for now - just go to the main page
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname,'/templates/index.html'));
+  res.sendFile(path.join(__dirname,'/view/index.html'));
 });
 
 // An AJAX call to get a quote
@@ -47,11 +45,8 @@ app.get('/getQuote', function(req, res) {
   res.send(data);
 });
 
-// Routes
-app.use('/user',userRoutes);
-app.use('/admin',adminRoutes);
-app.use(generalRoutes);
-
+// External routes
+app.use('/ajaxRoutes', ajaxRoutes);
 
 // Page not found & error
 

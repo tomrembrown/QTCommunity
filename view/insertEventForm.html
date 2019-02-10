@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Insert Event</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- favicons for Firefox & Chrome -->
+    <link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
+
+    <!-- for IE -->
+    <link rel="icon" type="image/x-icon" href="/img/favicons/favicon.ico" >
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicons/favicon.ico"/>
+    
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <!-- Bootstrap-VUE CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap-vue/dist/bootstrap-vue.min.css">
+
+    <!-- Our custom CSS style sheet -->
+    <link rel="stylesheet" href="public/css/style.css">
+
+    <!-- Stylesheet for testing - only run when test set -->
+   <!--  {{#if showTests}}
+        <link rel="stylesheet" href="public/vendor/mocha.css">
+    {{/if}} -->
+
+</head>
+<body>
+    
+  <div id="app">
+
+    <form>
+      <div class="form-group">
+        <label for="longTitle">Long Title</label>
+        <input type="text" class="form-control" id="longTitle" aria-describedby="longTitleHelp" placeholder="Enter long title">
+        <small id="longTitleHelp" class="form-text text-muted">The title to display when showing the whole event.</small>
+      </div>
+      <div class="form-group">
+        <label for="shortTitle">Short Title</label>
+        <input type="text" class="form-control" id="shortTitle" aria-describedby="shortTitleHelp" placeholder="Enter short title">
+        <small id="shortTitleHelp" class="form-text text-muted">The title to display in the calendar on desktops and laptops.</small>
+      </div>
+      <div class="form-group">
+        <label for="mobileTitle">MobileTitle</label>
+        <input type="text" class="form-control" id="mobileTitle" aria-describedby="mobileTitleHelp" placeholder="Enter mobile title">
+        <small id="mobileTitleHelp" class="form-text text-muted">The title to display on cell phones.</small>
+      </div>
+      <div class="form-group">
+        <label for="decription">Description</label>
+        <textarea class="form-control" id="description" placeholder="Enter description of event" rows="10"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="longTitle">Image Link</label>
+        <input type="url" class="form-control" id="imageLink" aria-describedby="imageLinkHelp" placeholder="Enter link to image for event">
+        <small id="imageLinkHelp" class="form-text text-muted">A link to an image to display next to event in detailed description screen.</small>
+      </div>
+      <div class="form-group">
+        <label for="longTitle">Website</label>
+        <input type="text" class="form-control" id="website" aria-describedby="websiteHelp" placeholder="Enter primary website for event">
+        <small id="websiteHelp" class="form-text text-muted">Enter the primary website or facebook page describing the event.  Leave blank if none.</small>
+      </div>
+
+    </form>
+
+  </div>
+
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
+  <script src="node_modules/bootstrap-vue/dist/bootstrap-vue.min.js"></script>
+  <script type="text/javascript" src="public/js/script.js"></script>
+    
+
+<!-- 
+
+    <script>
+       // Get the current year for the copyright
+       $('#year').text(new Date().getFullYear());
+    </script>
+
+    {{#if showTests}}
+        <div id="mocha"></div>
+        <script src="/vendor/mocha.js"></script>
+        <script src="/vendor/chai.js"></script>
+        <script>
+            mocha.ui('tdd');
+            var assert = chai.assert;
+        </script>
+        <script src="/qa/tests-global.js"></script>
+        {{#if pageTestScript}}
+            <script src="{{pageTestScript}}"></script>
+        {{/if}}
+        <script>mocha.run();</script>
+    {{/if}} -->
+
+</body>
+</html>
