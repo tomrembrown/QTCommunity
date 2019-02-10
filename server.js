@@ -13,9 +13,7 @@ const querystring = require('querystring');
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-
 // Requires of my files
-const quotes = require('./lib/quotes');
 const ajaxRoutes = require('./vm-server/ajaxRoutes');
 
 // For security reasons, don't send info on server to client
@@ -23,8 +21,9 @@ app.disable('x-powered-by');
 
 app.set('port', process.env.PORT);
 
-// Run static files out of pubic directory
-app.use('/public',express.static(path.join(__dirname,'public')));
+// Run static files out of pubic directories in view & view-model on client
+app.use('/view',express.static(path.join(__dirname,'view/public')));
+app.use('/vm-client',express.static(path.join(__dirname,'vm-client/public')))
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 
 // To check if test environment
@@ -39,14 +38,13 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname,'/view/index.html'));
 });
 
-// An AJAX call to get a quote
-app.get('/getQuote', function(req, res) {
-  const data = quotes.getQuote();
-  res.send(data);
-});
-
 // External routes
 app.use('/ajaxRoutes', ajaxRoutes);
+
+// Prototype route for form - will eventually be replaced
+app.get('/insertEventForm', (req, res) => {
+  res.sendFile(path.join(__dirname,'/view/insertEventForm.html'));
+});
 
 // Page not found & error
 

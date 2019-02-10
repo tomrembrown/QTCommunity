@@ -8,28 +8,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <!-- favicons for Firefox & Chrome -->
-    <link rel="icon" type="image/png" href="/img/favicons/favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="/img/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/view/img/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/view/img/favicons/favicon-32x32.png" sizes="32x32">
 
     <!-- for IE -->
-    <link rel="icon" type="image/x-icon" href="/img/favicons/favicon.ico" >
-    <link rel="shortcut icon" type="image/x-icon" href="/img/favicons/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="/view/img/favicons/favicon.ico" >
+    <link rel="shortcut icon" type="image/x-icon" href="/view/img/favicons/favicon.ico"/>
     
     <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
 
     <!-- Bootstrap 4 CSS -->
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 
     <!-- Bootstrap-VUE CSS -->
-    <link rel="stylesheet" href="node_modules/bootstrap-vue/dist/bootstrap-vue.min.css">
+    <link rel="stylesheet" href="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.css">
 
     <!-- Our custom CSS style sheet -->
-    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="stylesheet" href="/view/css/style.css">
 
     <!-- Stylesheet for testing - only run when test set -->
    <!--  {{#if showTests}}
-        <link rel="stylesheet" href="public/vendor/mocha.css">
+        <link rel="stylesheet" href="/view/vendor/mocha.css">
     {{/if}} -->
 
 </head>
@@ -126,56 +126,30 @@
 	        </div>
         </header>
 
-        <!-- HEADER -->
-<!--        <header id="main-header" class="py-2">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <a href="/" class="navbar-brand"><img src="public/img/logo.png" alt="Queer Toronto Logo" height="100%"></a>
-                    </div>
-                    <div class="col-md-8">
-                        <blockquote class="blockquote text-right d-flex align-items-center h-100">
-                            <p class="mb-0 d-inline">{{quote}}</p>
-                            <footer class="blockquote-footer d-inline">
-                                    {{person}}
-                            </footer>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        </section> -->
-
     </div>
 
-    <script src="node_modules/vue/dist/vue.js"></script>
-    <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
-    <script src="node_modules/bootstrap-vue/dist/bootstrap-vue.min.js"></script>
-    <script type="text/javascript" src="public/js/script.js"></script>
-    
+    <script src="/node_modules/vue/dist/vue.js"></script>
+    <script src="/node_modules/vue-resource/dist/vue-resource.js"></script>
+    <script src="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.js"></script>
+    <script type="text/javascript" src="/vm-client/js/script.js"></script>
 
-<!-- 
-
-    <script>
-       // Get the current year for the copyright
-       $('#year').text(new Date().getFullYear());
-    </script>
+    <!--
 
     {{#if showTests}}
         <div id="mocha"></div>
-        <script src="/vendor/mocha.js"></script>
-        <script src="/vendor/chai.js"></script>
+        <script src="/vm-client/vendor/mocha.js"></script>
+        <script src="/vm-client/vendor/chai.js"></script>
         <script>
             mocha.ui('tdd');
             var assert = chai.assert;
         </script>
-        <script src="/qa/tests-global.js"></script>
+        <script src="/vm-client/qa/tests-global.js"></script>
         {{#if pageTestScript}}
             <script src="{{pageTestScript}}"></script>
         {{/if}}
         <script>mocha.run();</script>
-    {{/if}} -->
+    {{/if}}
+      -->
 
 </body>
 </html>
