@@ -1,7 +1,7 @@
 new Vue({
 	el: '#app',
 	data: {
-		quote: 'to put here',
+		quotation: 'to put here',
 		person: 'a person',
 		header: '',
 		isCalendar: false,
@@ -18,82 +18,82 @@ new Vue({
 	},
 	methods: {
 		displayCalendar: function() {
-			this.getQuote();
+			this.getRandomQuotation();
 			this.header = 'Events';
 			this.setAllLinksFalse();
 			this.isCalendar = true;
 		},
 		displayContact: function() {
-			this.getQuote();
+			this.getRandomQuotation();
 			this.header = 'Contact Us';
 			this.setAllLinksFalse();
 			this.isContact = true;
 		},
 		displayAbout: function() {
-			this.getQuote();
+			this.getRandomQuotation();
 			this.header = 'About Queer Toronto';
 			this.setAllLinksFalse();
 			this.isAbout = true;
 		},
 		displayAddEvent: function() {
-			this.getQuote();
+			this.getRandomQuotation();
 			this.header = 'Add Event';
 			this.setAllLinksFalse();
 			this.isAddEvent = true;
 		},
 		displayLogin: function() {
-			this.getQuote();
+			this.getRandomQuotation();
 			this.header = 'Login';
 			this.setAllLinksFalse();
 			this.isLogin = true;
 		},
 		displayEditDeleteEvents: function() {
-			this.getQuote();
+			this.getRandomQuotation();
 			this.header = 'Edit / Delete Events';
 			this.setAllLinksFalse();
 			this.isEditDeleteEvents = true;
 		},
 		displayEditOrganization: function() {
-			this.getQuote();
+			this.getRandomQuotation();
 			this.header = 'Edit Organization';
 			this.setAllLinksFalse();
 			this.isEditOrganization = true;
 		},
 		displayRegisterOrganization: function() {
-			this.getQuote();
+			this.getRandomQuotation();
 			this.header = 'Register Organization';
 			this.setAllLinksFalse();
 			this.isRegisterOrganization = true;
 		},
 		displayAddVolunteer: function() {
-			this.getQuote();
+			this.getRandomQuotation();
 			this.header = 'Add Volunteer Opportunity';
 			this.setAllLinksFalse();
 			this.isAddVolunteer = true;
 		},
 		displayEditDeleteVolunteer: function() {
-			this.getQuote();
+			this.getRandomQuotation();
 			this.header = 'Edit / Delete Volunteer Opportunity';
 			this.setAllLinksFalse();
 			this.isEditDeleteVolunteer = true;
 		},
 		displayOrganizations: function() {
-			this.getQuote();
+			this.getRandomQuotation();
 			this.header = 'Organizations';
 			this.setAllLinksFalse();
 			this.isOrganizations = true;
 		},
 		displayVolunteer: function() {
-			this.getQuote();
+			this.getRandomQuotation();
 			this.header = 'Volunteer Opportunities';
 			this.setAllLinksFalse();
 			this.isVolunteer = true;
 		},
-		getQuote: function() {
+		getRandomQuotation: function() {
 			this.$http
-				.get('/ajaxRoutes/getRandomQuote')
+				.get('/ajaxRoutes/getRandomQuotation')
 				.then(function(res) {
-					this.quote = res.data.quote;
+					this.quotation = res.data.quotation;
 					this.person = res.data.person;
 				});
 		},

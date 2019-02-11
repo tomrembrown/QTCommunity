@@ -14,12 +14,18 @@
  */
 
 // Require all methods from implementation directory that are referred to in this interface
+const getRandomQuotation = require('./other/getRandomQuotation');
 const insertEvent = require('./inserts/insertEvent');
 const insertPlace = require('./inserts/insertPlace');
 const insertOrganization = require('./inserts/insertOrganization');
 
 const dbInterface = {
   
+  /* ******
+   * Other details in database than events, places, organizations
+   * ******/
+  getRandomQuotation: getRandomQuotation,
+
   /* ******
    * Create database entries
    * ******/

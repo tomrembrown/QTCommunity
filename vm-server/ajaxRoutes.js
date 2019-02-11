@@ -13,13 +13,14 @@
  */
 
 const express = require('express');
-const quotes = require('../lib/quotes');
+const model = require('../model');
 const router = express.Router();
 
 // Get a random quote from model/database and send back to client
-router.get('/getRandomQuote', function(req, res) {
-  const data = quotes.getRandomQuote();
-  res.send(data);
+router.get('/getRandomQuotation', function(req, res) {
+  model.getRandomQuotation().then(quotationObject => {
+    res.send(quotationObject);
+  });
 });
 
 module.exports = router;

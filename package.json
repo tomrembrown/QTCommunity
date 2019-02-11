@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./server.js",
-    "createDatabase": "node ./model/interface/createDatabase.js"
+    "createDatabase": "node ./model/createDatabase.js"
   },
   "keywords": [
     "Community",

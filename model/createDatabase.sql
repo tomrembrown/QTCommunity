@@ -226,5 +226,5 @@ INSERT INTO quotations
     'Alex Sanchez'),
   ('We should indeed keep calm in the face of difference, and live our lives in a state of inclusion and wonder at the diversity of humanity.',
     'George Takei'),
-  ('Please remembeer, especially in these times of group-think and the right-on chorus, that no person is your friend (or kin) who demands your silence, or denies your right to grow and be perceived as fully blossomeed as you were intended.',
+  ('Please remember, especially in these times of group-think and the right-on chorus, that no person is your friend (or kin) who demands your silence, or denies your right to grow and be perceived as fully blossomeed as you were intended.',
     'Alice Walker');
