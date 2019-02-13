@@ -46,6 +46,10 @@ app.get('/insertEventForm', (req, res) => {
   res.sendFile(path.join(__dirname,'/view/insertEventForm.html'));
 });
 
+app.get('/niceCheckbox', (req, res) => {
+  res.sendFile(path.join(__dirname,'/view/niceCheckbox.html'));
+});
+
 // Page not found & error
 
 // custom 404 page

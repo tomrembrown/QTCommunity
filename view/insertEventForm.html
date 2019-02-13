@@ -148,31 +148,231 @@
             </div>
           </div>
 
-            <div class="row">
+            <div class="row align-items-center">
               <div class="col-md-6">
-                <label for="requireRegistration" class="checkbox">
-                  <input type="checkbox" name="requireRegistration" id="requireRegistration">
-                  <i></i>Event Requires Registration
-                </label>
+                <section>
+                  <label for="requireRegistration" class="checkbox">
+                    <input type="checkbox" name="requireRegistration" id="requireRegistration">
+                    <i></i>Event Requires Registration
+                  </label>
+                </section>
               </div>
               <div class="col-md-6">
-                <label class="label" for="price">Price</label>
-                <label class="input">
-                  <input type="text" id="price" name="price" aria-describedby="priceHelp">
-                </label>
-                <div class="note" id="priceHelp">Enter price of event.  Leave blank if unknown</div>
+                <section>
+                  <label class="label" for="price">Price</label>
+                  <label class="input">
+                    <input type="text" id="price" name="price" aria-describedby="priceHelp">
+                  </label>
+                  <div class="note" id="priceHelp">Enter price of event.  Leave blank if unknown</div>
+                </section>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
-                <label class="label" for="mobileTitle">Registration Website</label>
-                <label class="input">
-                  <input type="text" id="registrationWebsite" name="registrationWebsite" aria-describedby="registrationWebsiteHelp" placeholder="Enter registration website">
-                </label>
-                <div class="note" id="registrationWebsiteHelp">Enter website for users to register for event.  Leave blank if no registration needed or website not known.</div>
+                <section>
+                  <label class="label" for="mobileTitle">Registration Website</label>
+                  <label class="input">
+                    <input type="text" id="registrationWebsite" name="registrationWebsite" aria-describedby="registrationWebsiteHelp" placeholder="Enter registration website">
+                  </label>
+                  <div class="note" id="registrationWebsiteHelp">Enter website for users to register for event.  Leave blank if no registration needed or website not known.</div>
+                </section>
               </div>
             </div>
           </fieldset>
+
+          <fieldset>
+
+            <div class="row">
+              <div class="col-md-12">
+                <h2>Target Audience</h2>
+              </div>
+            </div>
+
+              <div class="row align-items-center">
+                <div class="form-group col-md-4">
+                  <section>
+                    <label for="familyFriendly" class="checkbox">
+                      <input type="checkbox" id="familyFriendly" name="familyFriendly" checked>
+                      <i></i>Is event family friendly?
+                    </label>
+                  </section>
+                </div>
+                <div class="form-group col-md-4">
+                  <section>
+                    <label class="label" for="minimumAge">Minimum Age</label>
+                    <label class="input">
+                      <input type="text" id="minimumAge" name="minimumAge" aria-describedby="minimumAgeHelp">
+                    </label>
+                    <div class="note" id="minimumAgeHelp">Enter minimum age to attend event.  Leave blank if none.</div>
+                  </section>
+                </div>
+                <div class="form-group col-md-4">
+                  <section>
+                    <label class="label" for="maximumAge">Maximum Age</label>
+                    <label class="input">
+                      <input type="text" id="maximumAge" name="maximumAge" aria-describedby="maximumAgeHelp">
+                    </label>
+                    <div class="note" id="maximumAgeHelp">Enter maximum age that can attend event.  Leave blank if none.</div>
+                  </section>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3>Gender Identities Welcome</h3>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="form-group col-md-4">
+                  <label for="gender_female" class="checkbox">
+                    Female
+                    <input type="checkbox" id="gender_female" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="gender_male" class="checkbox">
+                    Male
+                    <input type="checkbox" id="gender_male" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="gender_transgendered" class="checkbox">
+                    Transgendered
+                    <input type="checkbox" id="gender_transgendered" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="form-group col-md-4">
+                  <label for="gender_two_spirit" class="checkbox">
+                    Two-spirit
+                    <input type="checkbox" id="gender_two_spirit" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="gender_m2f_transexual" class="checkbox">
+                    Male to Female Transexual
+                    <input type="checkbox" id="gender_m2f_transexual" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="gender_f2m_transexual" class="checkbox">
+                    Female to Male Transexual
+                    <input type="checkbox" id="gender_f2m_transexual" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="form-group col-md-4">
+                  <label for="gender_intersex" class="checkbox">
+                    Intersex
+                    <input type="checkbox" id="gender_intersex" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3>Sexual Orientations Welcome</h3>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="form-group col-md-4">
+                  <label for="orientation_lesbian" class="checkbox">
+                    Lesbian
+                    <input type="checkbox" id="orientation_lesbian" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="orientation_gay" class="checkbox">
+                    Gay
+                    <input type="checkbox" id="orientation_gay" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="orientation_bisexual" class="checkbox">
+                    Bisexual
+                    <input type="checkbox" id="orientation_bisexual" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="form-group col-md-4">
+                  <label for="orientation_queer" class="checkbox">
+                    Queer
+                    <input type="checkbox" id="orientation_queer" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="orientation_questioning" class="checkbox">
+                    Questioning
+                    <input type="checkbox" id="orientation_questioning" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="orientation_asexual" class="checkbox">
+                    Asexual
+                    <input type="checkbox" id="orientation_asexual" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="form-group col-md-4">
+                  <label for="orientation_pansexual" class="checkbox">
+                    Pansexual
+                    <input type="checkbox" id="orientation_pansexual" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="orientation_heterosexual" class="checkbox">
+                    Heterosexual
+                    <input type="checkbox" id="orientation_heterosexual" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3>Race or Religion</h3>
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="form-group col-md-4">
+                  <label for="race_religion_targetted" class="checkbox">
+                    Aimed at a race or religion?
+                    <input type="checkbox" id="race_religion_targetted" class="form-control" checked>
+                    <i></i>
+                  </label>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="race_religion_only" class="radio">
+                    Only for this race or religion
+                    <input type="radio" name="race_religion" id="only" class="form-control" value="only">
+                    <i></i>
+                  </label>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="race_religion_allies" class="radio">
+                    Admirers and allies welcome too
+                    <input type="radio" name="race_religion" id="allies" class="form-control" value="allies">
+                    <i></i>
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+
 
         <footer>
             <button type="submit" class="button">Submit</button>

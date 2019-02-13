@@ -8,6 +8,8 @@ Creation Date: February, 2019
 /**/
 /* Overall form */
 /**/
+
+
 .sky-form {
   margin: 40px 0;
   outline: none;
@@ -19,6 +21,7 @@ Creation Date: February, 2019
 .sky-form * {
   margin: 0;
   padding: 0;
+  box-sizing: content-box;
 }
 
 .sky-form header {
