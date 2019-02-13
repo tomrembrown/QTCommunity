@@ -1,194 +1,139 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Insert Event</title>
+    <title>Insert Event</title>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <!-- favicons for Firefox & Chrome -->
-  <link rel="icon" type="image/png" href="/view/img/favicons/favicon-16x16.png" sizes="16x16">
-  <link rel="icon" type="image/png" href="/view/img/favicons/favicon-32x32.png" sizes="32x32">
+    <!-- favicons for Firefox & Chrome -->
+    <link rel="icon" type="image/png" href="/view/img/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/view/img/favicons/favicon-32x32.png" sizes="32x32">
 
-  <!-- for IE -->
-  <link rel="icon" type="image/x-icon" href="/view/img/favicons/favicon.ico" >
-  <link rel="shortcut icon" type="image/x-icon" href="/view/img/favicons/favicon.ico"/>
+    <!-- for IE -->
+    <link rel="icon" type="image/x-icon" href="/view/img/favicons/favicon.ico" >
+    <link rel="shortcut icon" type="image/x-icon" href="/view/img/favicons/favicon.ico"/>
+    
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
 
-  <!-- Font Awesome CSS -->
-  <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 
-  <!-- Bootstrap 4 CSS -->
-  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Bootstrap-VUE CSS -->
+    <link rel="stylesheet" href="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.css">
 
-  <!-- Bootstrap-VUE CSS -->
-  <link rel="stylesheet" href="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.css">
+    <!-- Our custom CSS general style sheet -->
+    <link rel="stylesheet" href="/view/css/style.css">
 
-  <!-- Our custom CSS general style sheet -->
-  <link rel="stylesheet" href="/view/css/style.css">
+    <!-- Custom CSS style sheet for forms -->
+    <link rel="stylesheet" href="/view/css/forms.css">
 
-  <!-- Custom CSS style sheet for forms -->
-  <link rel="stylesheet" href="/view/css/forms.css">
+    <!-- Stylesheet for testing - only run when test set -->
+   <!--  {{#if showTests}}
+        <link rel="stylesheet" href="public/vendor/mocha.css">
+    {{/if}} -->
 
 </head>
 <body>
+    
   <div id="app">
     <div class="container">
-      <form action="" class="sky-form">
-        <header>Create New Event</header>
+      <h1>Create New Event</h1>
+      <form>
         <fieldset>
-          
           <div class="row">
             <div class="col-md-12">
               <h2>Main Information</h2>
             </div>
           </div>
-
           <div class="row">
-            <div class="col-md-12">
-              <section>
-                <label class="label" for="longTitle">Long Title</label>
-                <label class="input">
-                  <input type="text" id="longTitle" name="longTitle" aria-describedby="longTitleHelp" placeholder="Enter long title">
-                </label>
-                <div class="note" id="longTitleHelp">The title to display when showing the whole event.</div>
-              </section>
+            <div class="form-group col-md-12">
+              <label for="longTitle">Long Title</label>
+              <input type="text" class="form-control" id="longTitle" aria-describedby="longTitleHelp" placeholder="Enter long title">
+              <small id="longTitleHelp" class="form-text text-muted">The title to display when showing the whole event.</small>
             </div>
           </div>
-
           <div class="row">
-            <div class="col-md-6">
-              <section>
-                <label class="label" for="shortTitle">Short Title</label>
-                <label class="input">
-                  <input type="text" id="shortTitle" name="shortTitle" aria-describedby="shortTitleHelp" placeholder="Enter short title">
-                </label>
-                <div class="note" id="shortTitleHelp">The title to display in the calendar on desktops and laptops.</div>
-              </section>
-            </div>
-            <div class="col-md-6">
-              <section>
-                <label class="label" for="mobileTitle">Mobile Title</label>
-                <label class="input">
-                 <input type="text" id="mobileTitle" name="mobileTitle" aria-describedby="mobileTitleHelp" placeholder="Enter mobile title">
-                </label>
-                <div class="note" id="mobileTitleHelp">The title to display on cell phones.</div>
-              </section>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-12">
-              <section>
-                <label class="label" for="decription">Description</label>
-                <label class="textarea textarea-expandable">
-                  <textarea id="description" name="description" placeholder="Enter description of event" rows="5"></textarea>
-                </label>
-              </section>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <section>
-                <label class="label" for="imageLink">Image Link</label>
-                <label class="input">
-                  <input type="url" id="imageLink" name="imageLink" aria-describedby="imageLinkHelp" placeholder="Enter link to image for event">
-                </label>
-                <div class="note" id="imageLinkHelp">A link to an image to display next to event in detailed description screen.</div>
-              </section>
+            <div class="form-group col-md-6">
+              <label for="shortTitle">Short Title</label>
+              <input type="text" class="form-control" id="shortTitle" aria-describedby="shortTitleHelp" placeholder="Enter short title">
+              <small id="shortTitleHelp" class="form-text text-muted">The title to display in the calendar on desktops and laptops.</small>
             </div>
             <div class="form-group col-md-6">
-              <section>
-                <label class="label" for="website">Website</label>
-                <label class="input">
-                  <input type="url" id="website" name="website" aria-describedby="websiteHelp" placeholder="Enter primary website for event">
-                </label>
-                <div class="note" id="websiteHelp">Enter the primary website or facebook page describing the event.  Leave blank if none.</div>
-              </section>
+              <label for="mobileTitle">Mobile Title</label>
+              <input type="text" class="form-control" id="mobileTitle" aria-describedby="mobileTitleHelp" placeholder="Enter mobile title">
+              <small id="mobileTitleHelp" class="form-text text-muted">The title to display on cell phones.</small>
             </div>
           </div>
-
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="decription">Description</label>
+              <textarea class="form-control" id="description" placeholder="Enter description of event" rows="5"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="longTitle">Image Link</label>
+              <input type="url" class="form-control" id="imageLink" aria-describedby="imageLinkHelp" placeholder="Enter link to image for event">
+              <small id="imageLinkHelp" class="form-text text-muted">A link to an image to display next to event in detailed description screen.</small>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="longTitle">Website</label>
+              <input type="text" class="form-control" id="website" aria-describedby="websiteHelp" placeholder="Enter primary website for event">
+              <small id="websiteHelp" class="form-text text-muted">Enter the primary website or facebook page describing the event.  Leave blank if none.</small>
+            </div>
+          </div>
         </fieldset>
-
         <fieldset>
-
           <div class="row">
             <div class="col-md-12">
               <h2>Organization</h2>
             </div>
           </div>
-
           <div class="row">
-            <div class="col-md-12">
-              <section>
-                <label class="label" for="organization">Organization Hosting the Event</label>
-                <label class="select">
-                  <select id="organization" name="organization">
-                    <option value="1">The 519</option>
-                    <option value="2">Buddies in Bad Times Theatre</option>
-                    <option value="3">Spa Excess</option>
-                    <option value="4">TNT Men</option>
-                    <option value="5">Venture Out</option>
-                    <option value="New">Enter New Organization</option>
-                  </select>
-                  <i></i>
-                </label>
-              </section>
+            <div class="form-group col-md-12">
+              <label for="organization">Organization Hosting The Event</label>
+              <select class="form-control" id="organization">
+                <option value="1">The 519</option>
+                <option value="2">Buddies in Bad Times Theatre</option>
+                <option value="3">Spa Excess</option>
+                <option value="4">TNT Men</option>
+                <option value="5">Venture Out</option>
+                <option value="New">Enter New Organization</option>
+              </select>
             </div>
           </div>
-
         </fieldset>
-
         <fieldset>
-
           <div class="row">
             <div class="col-md-12">
               <h2>Registration</h2>
             </div>
           </div>
-
-            <div class="row">
-              <div class="col-md-6">
-                <label for="requireRegistration" class="checkbox">
-                  <input type="checkbox" name="requireRegistration" id="requireRegistration">
-                  <i></i>Event Requires Registration
-                </label>
-              </div>
-              <div class="col-md-6">
-                <label class="label" for="price">Price</label>
-                <label class="input">
-                  <input type="text" id="price" name="price" aria-describedby="priceHelp">
-                </label>
-                <div class="note" id="priceHelp">Enter price of event.  Leave blank if unknown</div>
-              </div>
+          <div class="row align-items-center">
+            <div class="form-group col-md-6">
+              <label for="requireRegistration" class="checkbox">
+                Event Requires Registration
+                <input type="checkbox" id="requireRegistration" class="form-control">
+                <i></i>
+              </label>
             </div>
-            <div class="row">
-              <div class="col-md-12">
-                <label class="label" for="mobileTitle">Registration Website</label>
-                <label class="input">
-                  <input type="text" id="registrationWebsite" name="registrationWebsite" aria-describedby="registrationWebsiteHelp" placeholder="Enter registration website">
-                </label>
-                <div class="note" id="registrationWebsiteHelp">Enter website for users to register for event.  Leave blank if no registration needed or website not known.</div>
-              </div>
+            <div class="form-group col-md-6">
+              <label for="price">Price</label>
+              <input type="text" class="form-control" id="price" aria-describedby="priceHelp">
+              <small id="priceHelp" class="form-text text-muted">Enter price of event.  Leave blank if unknown</small>
             </div>
-          </fieldset>
-
-        <footer>
-            <button type="submit" class="button">Submit</button>
-            <button type="reset"  class="button button-secondary">Reset</button>
-        </footer>
-
-      </form>
-    </div>
-  </div>
-    
-    
-          
-
-          <!--
-
-
+          </div>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="mobileTitle">Registration Website</label>
+              <input type="text" class="form-control" id="registrationWebsite" aria-describedby="registrationWebsiteHelp" placeholder="Enter registration website">
+              <small id="registrationWebsiteHelp" class="form-text text-muted">Enter website for users to register for event.  Leave blank if no registration needed or website not known.</small>
+            </div>
+          </div>
+        </fieldset>
         <fieldset>
           <div class="row">
             <div class="col-md-12">
@@ -373,11 +318,29 @@
       </form>
     </div>
   </div>
--->
+
   <script src="/node_modules/vue/dist/vue.js"></script>
   <script src="/node_modules/vue-resource/dist/vue-resource.js"></script>
   <script src="/node_modules/bootstrap-vue/dist/bootstrap-vue.min.js"></script>
   <script type="text/javascript" src="/vm-client/js/script.js"></script>
+    
+
+<!-- 
+
+    {{#if showTests}}
+        <div id="mocha"></div>
+        <script src="/vendor/mocha.js"></script>
+        <script src="/vendor/chai.js"></script>
+        <script>
+            mocha.ui('tdd');
+            var assert = chai.assert;
+        </script>
+        <script src="/qa/tests-global.js"></script>
+        {{#if pageTestScript}}
+            <script src="{{pageTestScript}}"></script>
+        {{/if}}
+        <script>mocha.run();</script>
+    {{/if}} -->
 
 </body>
 </html>

@@ -152,8 +152,8 @@ CREATE TABLE event_groups(
   male_ok BOOLEAN NOT NULL DEFAULT TRUE,
   female_ok BOOLEAN NOT NULL DEFAULT TRUE,
   trans_ok BOOLEAN NOT NULL DEFAULT TRUE,
-  min_age SMALLINT CHECK (min_age >= 0 AND min_age <= 100),
-  max_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100),
+  minimum_age SMALLINT CHECK (min_age >= 0 AND min_age <= 100),
+  maximum_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100),
   orientation TEXT DEFAULT NULL,
   race_religion TEXT DEFAULT NULL,
   only_race_religion BOOLEAN NOT NULL DEFAULT FALSE  
