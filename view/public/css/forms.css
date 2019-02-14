@@ -39,6 +39,14 @@ Creation Date: February, 2019
   margin: 0 0 20px;
 }
 
+.sky-form h3 {
+  font-size: 21px;
+  font-weight: 350;
+  font-style: italic;
+  margin: 15px 0 5px;
+  color: #2da5da;
+}
+
 .sky-form fieldset {
   display: block;
   padding: 25px 30px 5px;
