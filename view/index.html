@@ -49,42 +49,42 @@
 
                         <li class="nav-item px-2">
                             <a  href="/" 
-                                v-on:click.prevent="displayCalendar" 
+                                @click.prevent="displayCalendar" 
                                 class="nav-link"
-                                v-bind:class="{ active: isCalendar}">
+                                :class="{ active: isCalendar}">
                             Events
                             </a>
                         </li>
                         <li class="nav-item px-2">
                             <a  href="/" 
-                                v-on:click.prevent="displayOrganizations" 
+                                @click.prevent="displayOrganizations" 
                                 class="nav-link"
-                                v-bind:class="{ active: isOrganizations}">
+                                :class="{ active: isOrganizations}">
                             Organizations
                             </a>
                         </li>
                         <li class="nav-item px-2">
                             <a 
                                 href="/"
-                                v-on:click.prevent="displayVolunteer" 
+                                @click.prevent="displayVolunteer" 
                                 class="nav-link"
-                                v-bind:class="{ active: isVolunteer}">
+                                :class="{ active: isVolunteer}">
                             Volunteer
                             </a>
                         </li>
                         <li class="nav-item px-2">
                             <a  href="/" 
-                                v-on:click.prevent="displayAbout"
+                                @click.prevent="displayAbout"
                                 class="nav-link"
-                                v-bind:class="{ active: isAbout}">
+                                :class="{ active: isAbout}">
                             About Us
                             </a>
                         </li>
                         <li class="nav-item px-2">
                             <a  href="/" 
-                                v-on:click.prevent="displayContact"
+                                @click.prevent="displayContact"
                                 class="nav-link"
-                                v-bind:class="{ active: isContact}">
+                                :class="{ active: isContact}">
                             Contact Us
                             </a>
                         </li>
@@ -93,17 +93,17 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item px-2">
                             <a  href="/"
-                                v-on:click.prevent="displayRegisterOrganization"
+                                @click.prevent="displayRegisterOrganization"
                                 class="nav-link"
-                                v-bind:class="{ active: isRegisterOrganization}">
+                                :class="{ active: isRegisterOrganization}">
                             <i class="fas fa-user"></i> Register
                             </a>
                         </li>
                         <li class="nav-item">
                             <a  href="/" 
-                                v-on:click.prevent="displayLogin"
+                                @click.prevent="displayLogin"
                                 class="nav-link"
-                                v-bind:class = "{ active: isLogin}">
+                                :class = "{ active: isLogin}">
                             <i class="fas fa-user"></i> Login
                             </a>
                         </li>
