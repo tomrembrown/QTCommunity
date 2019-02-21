@@ -16,7 +16,7 @@ node_modules/
 *.bak
 
 # Ignore the build files created by webpack
-dist/
+build/
 
 # Ignore log file
 npm-debug.log
