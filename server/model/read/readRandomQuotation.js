@@ -1,6 +1,6 @@
 'use strict';
 /*
- * getRandomQuotation
+ * readRandomQuotation
  *
  * Makes an SQL query to quotations table in database to extract a random quotation 
  * object with a quotation and person and the object properties
@@ -14,9 +14,9 @@
 
 const db = require('./../db');
 
-const getRandomQuotation = async function() {
+const readRandomQuotation = async function() {
 
-  const getRandomQuotationQuery = 
+  const readRandomQuotationQuery = 
     "SELECT quotation, person "+
     "FROM quotations " +
     "OFFSET floor(random()* " + 
@@ -26,7 +26,7 @@ const getRandomQuotation = async function() {
   let quotationObject;
 
   try {
-    const { rows } = await db.query(getRandomQuotationQuery);
+    const { rows } = await db.query(readRandomQuotationQuery);
     quotationObject = rows[0];
   } catch (err) {
     console.error('error running query', err);
@@ -35,4 +35,4 @@ const getRandomQuotation = async function() {
    
 };
 
-module.exports = getRandomQuotation;
+module.exports = readRandomQuotation;

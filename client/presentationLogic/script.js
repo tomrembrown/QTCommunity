@@ -45,7 +45,7 @@ new Vue({
     displayVolunteer: function() { this.page = PageEnum.volunteer; },
     getRandomQuotation: function() {
       this.$http
-        .get('/ajaxRoutes/getRandomQuotation')
+        .get('readRoutesServer/readRandomQuotation')
         .then(function(res) {
               this.quotation = res.data.quotation;
               this.person = res.data.person;

@@ -14,7 +14,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 // Requires of my files
-const ajaxRoutes = require('./vm-server/ajaxRoutes');
+const readRoutesServer = require('./server/ajaxRoutesServer/readRoutesServer');
 
 // For security reasons, don't send info on server to client
 app.disable('x-powered-by');
@@ -22,9 +22,9 @@ app.disable('x-powered-by');
 app.set('port', process.env.PORT);
 
 // Run static files out of pubic directories in view & view-model on client
-app.use('/view',express.static(path.join(__dirname,'view/public')));
-app.use('/vm-client',express.static(path.join(__dirname,'vm-client/public')))
+app.use('/',express.static(path.join(__dirname,'client/view/public')));
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
+app.use('/presentationLogic', express.static(path.join(__dirname, 'client/presentationLogic')));
 
 // To check if test environment
 app.use((req, res, next) => {
@@ -35,19 +35,15 @@ app.use((req, res, next) => {
 
 // The one route for now - just go to the main page
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname,'/view/index.html'));
+  res.sendFile(path.join(__dirname,'/client/view/index.html'));
 });
 
 // External routes
-app.use('/ajaxRoutes', ajaxRoutes);
+app.use('/readRoutesServer', readRoutesServer);
 
 // Prototype route for form - will eventually be replaced
-app.get('/insertEventForm', (req, res) => {
-  res.sendFile(path.join(__dirname,'/view/insertEventForm.html'));
-});
-
-app.get('/niceCheckbox', (req, res) => {
-  res.sendFile(path.join(__dirname,'/view/niceCheckbox.html'));
+app.get('/createEventForm', (req, res) => {
+  res.sendFile(path.join(__dirname,'/client/view/createEventForm.html'));
 });
 
 // Page not found & error

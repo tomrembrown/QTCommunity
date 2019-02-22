@@ -65,6 +65,12 @@ Create the database tables
 npm run createDatabase
 ```
 
+Increase the number of watches allowed for nodemon to work properly
+
+```
+echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
+
 Start the Server
 
 ```
@@ -83,7 +89,7 @@ These tests handle linting with jshint, link checking, and some cross-page and u
 
 * [Node.JS](https://nodejs.org/) - JavaScript runtime that allows server-side JavaScript
 * [Express](https://expressjs.com/) - Backend framework
-* [PostgreSQL 10](https://www.postgresql.org/) - Database
+* [PostgreSQL 11](https://www.postgresql.org/) - Database
 * [Vue.js](https://vuejs.org/) - Frontend framework
 * [Bootstrap + Vue](https://bootstrap-vue.js.org/) - Bootstrap based responsive web framework
 
