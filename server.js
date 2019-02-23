@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 
 // The one route for now - just go to the main page
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname,'/client/view/index.html'));
+  res.sendFile(path.join(__dirname,'/client/view/public/index.html'));
 });
 
 // External routes

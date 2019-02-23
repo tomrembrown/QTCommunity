@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./server.js",
-    "dev": "nodemon ./server.js",
+    "start": "npm run prod",
+    "dev": "concurrently --kill-others \"webpack-dev-server --inline --hot\" \"nodemon ./server.js\"",
     "createDatabase": "node ./server/model/initial/createDatabase.js",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --mode=production",
     "prod": "node ./server.js"
@@ -41,6 +41,7 @@
     "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.11",
+    "concurrently": "^4.1.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "md5": "^2.2.1",
@@ -66,7 +67,7 @@
     "grunt-mocha-test": "^0.13.3",
     "mocha": "^6.0.0",
     "node-sass": "^4.11.0",
-    "nodemon": "^1.18.9",
+    "nodemon": "^1.18.10",
     "sass-loader": "^7.1.0",
     "vue-loader": "^15.6.4",
     "vue-template-compiler": "^2.6.7",
