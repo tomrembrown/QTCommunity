@@ -1,12 +1,15 @@
 {
-  "name": "site",
+  "name": "queertoronto",
   "version": "1.0.0",
   "description": "A Single Page Web Application that presents a community website with a list of events and organizations",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./server.js",
-    "createDatabase": "node ./server/model/initial/createDatabase.js"
+    "dev": "nodemon ./server.js",
+    "createDatabase": "node ./server/model/initial/createDatabase.js",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --mode=production",
+    "prod": "node ./server.js"
   },
   "keywords": [
     "Community",
@@ -36,7 +39,7 @@
     "@fortawesome/fontawesome-free": "^5.7.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
-    "bootstrap": "^4.2.1",
+    "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.11",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
@@ -44,16 +47,15 @@
     "microdata-node": "^1.0.0",
     "pg": "^7.8.0",
     "querystring": "^0.2.0",
-    "vue": "^2.5.22",
+    "vue": "^2.6.7",
     "vue-resource": "^1.5.1",
     "xmldom": "^0.1.27",
     "xpath": "0.0.27"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-3": "^6.24.1",
+    "@babel/core": "^7.3.3",
+    "@babel/preset-env": "^7.3.1",
+    "babel-loader": "^8.0.5",
     "chai": "^4.2.0",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.0",
@@ -66,8 +68,8 @@
     "node-sass": "^4.11.0",
     "nodemon": "^1.18.9",
     "sass-loader": "^7.1.0",
-    "vue-loader": "^14.2.4",
-    "vue-template-compiler": "^2.6.6",
+    "vue-loader": "^15.6.4",
+    "vue-template-compiler": "^2.6.7",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.0",

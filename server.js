@@ -25,6 +25,7 @@ app.set('port', process.env.PORT);
 app.use('/',express.static(path.join(__dirname,'client/view/public')));
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 app.use('/presentationLogic', express.static(path.join(__dirname, 'client/presentationLogic')));
+app.use('/build', express.static(path.join(__dirname, 'build')));
 
 // To check if test environment
 app.use((req, res, next) => {
