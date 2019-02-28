@@ -1,20 +1,21 @@
 'use strict';
 
-// Node & Express related requires
 const express = require('express');
-const app = express();
 const path = require('path');
-
-// Additional requires
-require('dotenv').config();  // load the environment variables from .env
-const querystring = require('querystring');
-
-// Parse the input
+const history = require('connect-history-api-fallback');
 const bodyParser = require('body-parser');
-app.use(bodyParser.json());
+
+require('dotenv').config();  // load the environment variables from .env
 
 // Requires of my files
 const readRoutesServer = require('./server/ajaxRoutesServer/readRoutesServer');
+
+const app = express();
+
+const querystring = require('querystring');
+
+app.use(history()); // To get the SPA router to work
+app.use(bodyParser.json()); // Parse the input
 
 // For security reasons, don't send info on server to client
 app.disable('x-powered-by');
@@ -24,7 +25,6 @@ app.set('port', process.env.PORT);
 // Run static files out of pubic directories in view & view-model on client
 app.use('/',express.static(path.join(__dirname,'client/view/public')));
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
-app.use('/presentationLogic', express.static(path.join(__dirname, 'client/presentationLogic')));
 app.use('/build', express.static(path.join(__dirname, 'build')));
 
 // To check if test environment
@@ -39,28 +39,13 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname,'/client/view/public/index.html'));
 });
 
-// External routes
+// AJAX routes 
 app.use('/readRoutesServer', readRoutesServer);
 
 // Prototype route for form - will eventually be replaced
 app.get('/createEventForm', (req, res) => {
   res.sendFile(path.join(__dirname,'/client/view/createEventForm.html'));
 });
-
-// Page not found & error
-
-// custom 404 page
-//app.use((req, res) => {
-//  res.status(404);
-//  res.render('404');
-//});
-
-// custom 500 page
-//app.use((err, req, res, next) => {
-//  console.error(err.stack);
-//  res.status(500);
-//  res.render('500 ');
-//});
 
 // Start server listening for requests from browser
 app.listen(app.get('port'), () => {

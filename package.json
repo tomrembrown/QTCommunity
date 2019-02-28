@@ -36,26 +36,28 @@
     "not ie <= 8"
   ],
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.7.0",
+    "@fortawesome/fontawesome-free": "^5.7.2",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
-    "bootstrap-vue": "^2.0.0-rc.11",
+    "bootstrap-vue": "^2.0.0-rc.13",
     "concurrently": "^4.1.0",
+    "connect-history-api-fallback": "^1.6.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "md5": "^2.2.1",
     "microdata-node": "^1.0.0",
-    "pg": "^7.8.0",
+    "pg": "^7.8.1",
     "querystring": "^0.2.0",
     "vue": "^2.6.7",
     "vue-resource": "^1.5.1",
+    "vue-router": "^3.0.2",
     "xmldom": "^0.1.27",
     "xpath": "0.0.27"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.3",
-    "@babel/preset-env": "^7.3.1",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
     "babel-loader": "^8.0.5",
     "chai": "^4.2.0",
     "cross-env": "^5.2.0",
@@ -65,7 +67,7 @@
     "grunt-contrib-jshint": "^2.0.0",
     "grunt-exec": "^3.0.0",
     "grunt-mocha-test": "^0.13.3",
-    "mocha": "^6.0.0",
+    "mocha": "^6.0.2",
     "node-sass": "^4.11.0",
     "nodemon": "^1.18.10",
     "sass-loader": "^7.1.0",
@@ -73,7 +75,7 @@
     "vue-template-compiler": "^2.6.7",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.2.0",
+    "webpack-dev-server": "^3.2.1",
     "zombie": "^6.1.4"
   }
 }

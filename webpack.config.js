@@ -101,7 +101,10 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new VueLoaderPlugin()
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -113,10 +116,13 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
-    new VueLoaderPlugin(),
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
   ])
+  module.exports.mode = 'production'
+}
+else {
+  module.exports.mode = 'development'
 }
 
