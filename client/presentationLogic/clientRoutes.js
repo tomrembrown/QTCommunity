@@ -1,9 +1,9 @@
-import AboutUs from '../view/templates/aboutUs/aboutUs.vue';
-import ContactUs from '../view/templates/contactUs/contactUs.vue';
-import CreateEvent from '../view/templates/createEvent/createEvent.vue';
-import Events from '../view/templates/events/events.vue';
-import Home from '../view/templates/home/home.vue';
-import Organizations from '../view/templates/organizations/organizations.vue';
+const AboutUs = () => import(/* webpackChunkName: "AboutUs" */'../view/templates/aboutUs/aboutUs.vue');
+const ContactUs = () => import(/* webpackChunkName: "ContactUs" */'../view/templates/contactUs/contactUs.vue');
+const CreateEvent = () => import(/* webpackChunkName: "CreateEvent" */'../view/templates/createEvent/createEvent.vue');
+const Events = () => import(/* webpackChunkName: "Events" */'../view/templates/events/events.vue');
+const Home = () => import(/* webpackChunkName: "Home" */'../view/templates/home/home.vue');
+const Organizations = () => import(/* webpackChunkName: "Organizations" */'../view/templates/organizations/organizations.vue');
 
 export const routes = [
   { path: '', name: 'Home', component: Home },

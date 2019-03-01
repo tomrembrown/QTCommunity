@@ -525,6 +525,33 @@
         </div>
       </fieldset>
 
+      <fieldset>
+        <div class="row align-items-center">
+          <div class="col-md-12">
+            <h2>Time and Date</h2>
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <section>
+              <datetime v-model="date" type="datetime" input-class="myInput" input-id="startTime">
+                <label for="startTime" slot="before" class="label">Start Date and Time</label>
+                <div class="note" id="startTimeHelp" slot="after">Enter the start date and time of the event</div>
+              </datetime>
+            </section>
+          </div>
+          <div class="col-md-6">
+            <section>
+              <datetime v-model="date" type="datetime" input-class="myInput" input-id="endTime">
+                <label for="endTime" slot="before" class="label">End Date and Time</label>
+                <div class="note" id="endTimeHelp" slot="after">Enter the end date and time of the event</div>
+              </datetime>
+            </section>
+          </div>
+        </div>
+        
+      </fieldset>
+
       <footer>
         <button type="submit" class="button">Submit</button>
         <button type="reset" class="button button-secondary">Reset</button>
@@ -534,10 +561,18 @@
 </template>
 
 <script>
-export default {};
+import { Datetime } from 'vue-datetime';
+
+export default {
+  components: {
+    'datetime': Datetime
+  }
+};
 </script>
 
 <style lang="scss" scoped>
+@import '/node_modules/vue-datetime/dist/vue-datetime.min.css';
+
 /*  
 Name:  forms.css
 Comes largely from sky form at https://codepen.io/stephanrusu/pen/EVORRx by Stefan Rusu
@@ -681,7 +716,8 @@ Creation Date: February, 2019
 .sky-form .checkbox i,
 .sky-form .toggle i,
 .sky-form .icon-append,
-.sky-form .icon-prepend {
+.sky-form .icon-prepend
+{
   border-color: #e5e5e5;
   transition: border-color 0.3s;
   -o-transition: border-color 0.3s;
@@ -842,6 +878,7 @@ Creation Date: February, 2019
 /* inputs */
 /**/
 .sky-form .input,
+.vue-sf-datetime,
 .sky-form .textarea,
 .sky-form .select {
   margin-right: 15px;
@@ -1188,96 +1225,28 @@ Creation Date: February, 2019
 }
 
 /**/
-/* datepicker */
+/* datepicker - override vue-datetime classes */
 /**/
-.ui-datepicker {
-  display: none;
-  padding: 10px 12px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  font: 13px/1.55 "Open Sans", Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: #666;
+.vdatetime input {
+  border-color: red !important;
+  border: 5px solid red !important;
 }
 
-.ui-datepicker a {
-  color: #404040;
+.vdatetime {
+  border-color: red !important;
 }
 
-.ui-datepicker-header {
-  position: relative;
-  margin: -10px -12px 10px;
-  padding: 10px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  font-size: 15px;
-  line-height: 27px;
+.vdatetime-input input {
+  border-color: red !important;
 }
 
-.ui-datepicker-prev,
-.ui-datepicker-next {
-  position: absolute;
-  top: 0;
-  display: block;
-  width: 47px;
-  height: 47px;
-  font-size: 15px;
-  line-height: 47px;
-  text-decoration: none;
-  cursor: pointer;
+.vdatetime-input {
+  border-color: red !important;
 }
 
-.ui-datepicker-prev {
-  left: 0;
-}
-
-.ui-datepicker-next {
-  right: 0;
-}
-
-.ui-datepicker-calendar {
-  border-collapse: collapse;
-  font-size: 13px;
-  line-height: 27px;
-}
-
-.ui-datepicker-calendar th {
-  color: #999;
-}
-
-.ui-datepicker-calendar a,
-.ui-datepicker-calendar span {
-  display: block;
-  width: 31px;
-  margin: auto;
-  text-decoration: none;
-  color: #404040;
-}
-
-.ui-datepicker-calendar a:hover {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.ui-datepicker-calendar span {
-  color: #bfbfbf;
-}
-
-.ui-datepicker-today a {
-  font-weight: 700;
-}
-
-.ui-datepicker-calendar .ui-state-active {
-  background: rgba(0, 0, 0, 0.05);
-  cursor: default;
-}
-
-.ui-datepicker-inline {
-  border: 2px solid #e5e5e5;
-  background: #fff;
-  box-shadow: none;
-}
-
-.ui-datepicker-inline .ui-datepicker-calendar {
-  width: 100%;
+.myInput {
+  border-color: red !important;
+  border: 5px solid red !important;
 }
 
 
