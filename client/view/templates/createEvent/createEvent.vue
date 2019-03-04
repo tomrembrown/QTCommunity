@@ -2,125 +2,10 @@
   <div class="container">
     <form action class="sky-form">
       <header>Create New Event</header>
-      <fieldset>
-        <div class="row align-items-center">
-          <div class="col-md-12">
-            <h2>Main Information</h2>
-          </div>
-        </div>
 
-        <div class="row align-items-center">
-          <div class="col-md-12">
-            <section>
-              <label class="label" for="longTitle">Long Title</label>
-              <label class="input">
-                <input
-                  type="text"
-                  id="longTitle"
-                  name="longTitle"
-                  aria-describedby="longTitleHelp"
-                  placeholder="Enter long title"
-                >
-              </label>
-              <div
-                class="note"
-                id="longTitleHelp"
-              >The title to display when showing the whole event.</div>
-            </section>
-          </div>
-        </div>
+      <qt-main-information></qt-main-information>
 
-        <div class="row align-items-center">
-          <div class="col-md-6">
-            <section>
-              <label class="label" for="shortTitle">Short Title</label>
-              <label class="input">
-                <input
-                  type="text"
-                  id="shortTitle"
-                  name="shortTitle"
-                  aria-describedby="shortTitleHelp"
-                  placeholder="Enter short title"
-                >
-              </label>
-              <div
-                class="note"
-                id="shortTitleHelp"
-              >The title to display in the calendar on desktops and laptops.</div>
-            </section>
-          </div>
-          <div class="col-md-6">
-            <section>
-              <label class="label" for="mobileTitle">Mobile Title</label>
-              <label class="input">
-                <input
-                  type="text"
-                  id="mobileTitle"
-                  name="mobileTitle"
-                  aria-describedby="mobileTitleHelp"
-                  placeholder="Enter mobile title"
-                >
-              </label>
-              <div class="note" id="mobileTitleHelp">The title to display on cell phones.</div>
-            </section>
-          </div>
-        </div>
-
-        <div class="row align-items-center">
-          <div class="col-md-12">
-            <section>
-              <label class="label" for="decription">Description</label>
-              <label class="textarea textarea-expandable">
-                <textarea
-                  id="description"
-                  name="description"
-                  placeholder="Enter description of event"
-                  rows="5"
-                ></textarea>
-              </label>
-            </section>
-          </div>
-        </div>
-
-        <div class="row align-items-center">
-          <div class="col-md-6">
-            <section>
-              <label class="label" for="imageLink">Image Link</label>
-              <label class="input">
-                <input
-                  type="url"
-                  id="imageLink"
-                  name="imageLink"
-                  aria-describedby="imageLinkHelp"
-                  placeholder="Enter link to image for event"
-                >
-              </label>
-              <div
-                class="note"
-                id="imageLinkHelp"
-              >A link to an image to display next to event in detailed description screen.</div>
-            </section>
-          </div>
-          <div class="form-group col-md-6">
-            <section>
-              <label class="label" for="website">Website</label>
-              <label class="input">
-                <input
-                  type="url"
-                  id="website"
-                  name="website"
-                  aria-describedby="websiteHelp"
-                  placeholder="Enter primary website for event"
-                >
-              </label>
-              <div
-                class="note"
-                id="websiteHelp"
-              >Enter the primary website or facebook page describing the event. Leave blank if none.</div>
-            </section>
-          </div>
-        </div>
-      </fieldset>
+      <qt-place></qt-place>
 
       <fieldset>
         <div class="row align-items-center">
@@ -489,52 +374,13 @@
       <fieldset>
         <div class="row align-items-center">
           <div class="col-md-12">
-            <h2>Place</h2>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <section>
-              <label class="label" for="place">Location Where Event is Held</label>
-              <label class="select">
-                <select id="place" name="place">
-                  <option value="1">The 519</option>
-                  <option value="2">Buddies in Bad Times Theatre</option>
-                  <option value="3">Spa Excess</option>
-                  <option value="4">Steam Works</option>
-                  <option value="5">The Black Eagle</option>
-                  <option value="New">Enter New Place</option>
-                </select>
-                <i></i>
-              </label>
-            </section>
-          </div>
-          <div class="col-md-6">
-            <section>
-              <label class="label" for="placeRoom">Room in place</label>
-              <label class="input">
-                <input type="text" id="placeRoom" name="placeRoom" aria-describedby="placeRoomHelp">
-              </label>
-              <div
-                class="note"
-                id="placeRoomHelp"
-              >Enter specific room in location where event is held. Leave blank if unknown or not applicable.</div>
-            </section>
-          </div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <div class="row align-items-center">
-          <div class="col-md-12">
             <h2>Time and Date</h2>
           </div>
         </div>
         <div class="row align-items-center">
           <div class="col-md-6">
             <section>
-              <datetime v-model="date" type="datetime" input-class="myInput" input-id="startTime">
+              <datetime type="datetime" input-class="myInput" input-id="startTime">
                 <label for="startTime" slot="before" class="label">Start Date and Time</label>
                 <div class="note" id="startTimeHelp" slot="after">Enter the start date and time of the event</div>
               </datetime>
@@ -542,14 +388,30 @@
           </div>
           <div class="col-md-6">
             <section>
-              <datetime v-model="date" type="datetime" input-class="myInput" input-id="endTime">
+              <datetime type="datetime" input-class="myInput" input-id="endTime">
                 <label for="endTime" slot="before" class="label">End Date and Time</label>
                 <div class="note" id="endTimeHelp" slot="after">Enter the end date and time of the event</div>
               </datetime>
             </section>
           </div>
         </div>
-        
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <section>
+              <label class="label" for="repeats">Event Repeats</label>
+              <label class="select">
+                <select id="repeats" name="repeats">
+                  <option value="never">Never</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="biweekly">Biweekly</option>
+                  <option value="twiceMonth">Twice a month</option>
+                  <option value="monthly">Monthly</option>
+                </select>
+                <i></i>
+              </label>
+            </section>
+          </div>
+        </div>
       </fieldset>
 
       <footer>
@@ -562,15 +424,21 @@
 
 <script>
 import { Datetime } from 'vue-datetime';
+import Textbox from './textbox.vue';
+import MainInformation from './mainInformation.vue';
+import Place from './place.vue';
 
 export default {
   components: {
-    'datetime': Datetime
+    'datetime': Datetime, 
+    'ash-textbox': Textbox,
+    'qt-main-information': MainInformation,
+    'qt-place': Place
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '/node_modules/vue-datetime/dist/vue-datetime.min.css';
 
 /*  
@@ -1227,26 +1095,27 @@ Creation Date: February, 2019
 /**/
 /* datepicker - override vue-datetime classes */
 /**/
-.vdatetime input {
-  border-color: red !important;
-  border: 5px solid red !important;
-}
 
 .vdatetime {
-  border-color: red !important;
-}
-
-.vdatetime-input input {
-  border-color: red !important;
-}
-
-.vdatetime-input {
-  border-color: red !important;
+  margin-right:15px;
+  color: #666;
 }
 
 .myInput {
-  border-color: red !important;
-  border: 5px solid red !important;
+  display: block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  width: 100%;
+  height: 39px;
+  padding: 8px 10px;
+  outline: none;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 0;
+  background: #fff;
+  font: 15px/19px "Open Sans", Helvetica, Arial, sans-serif;
+  color: #404040;
+  border-color: #666;
 }
 
 
