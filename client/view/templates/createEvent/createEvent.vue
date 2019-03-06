@@ -89,286 +89,8 @@
           </div>
         </div>
 
-        <div class="row align-items-center">
-          <div class="form-group col-md-4">
-            <section>
-              <label for="familyFriendly" class="checkbox">
-                <input type="checkbox" id="familyFriendly" name="familyFriendly" checked>
-                <i></i>Is event family friendly?
-              </label>
-            </section>
-          </div>
-          <div class="form-group col-md-4">
-            <section>
-              <label class="label" for="minimumAge">Minimum Age</label>
-              <label class="input">
-                <input
-                  type="text"
-                  id="minimumAge"
-                  name="minimumAge"
-                  aria-describedby="minimumAgeHelp"
-                >
-              </label>
-              <div
-                class="note"
-                id="minimumAgeHelp"
-              >Enter minimum age to attend event. Leave blank if none.</div>
-            </section>
-          </div>
-          <div class="form-group col-md-4">
-            <section>
-              <label class="label" for="maximumAge">Maximum Age</label>
-              <label class="input">
-                <input
-                  type="text"
-                  id="maximumAge"
-                  name="maximumAge"
-                  aria-describedby="maximumAgeHelp"
-                >
-              </label>
-              <div
-                class="note"
-                id="maximumAgeHelp"
-              >Enter maximum age that can attend event. Leave blank if none.</div>
-            </section>
-          </div>
-        </div>
+        <qt-target-audience type="event" verb="attend"></qt-target-audience>
 
-        <div class="row align-items-center">
-          <div class="col-md-12">
-            <h3>Gender Identities Welcome</h3>
-          </div>
-        </div>
-
-        <div class="row align-items-center">
-          <div class="col-md-4">
-            <section>
-              <label for="gender_female" class="checkbox">
-                <input type="checkbox" name="gender_female" id="gender_female" checked>
-                <i></i>Female
-              </label>
-            </section>
-          </div>
-          <div class="col-md-4">
-            <section>
-              <label for="gender_male" class="checkbox">
-                <input type="checkbox" name="gender_male" id="gender_male" checked>
-                <i></i>Male
-              </label>
-            </section>
-          </div>
-          <div class="col-md-4">
-            <section>
-              <label for="gender_transgendered" class="checkbox">
-                <input
-                  type="checkbox"
-                  name="gender_transgendered"
-                  id="gender_transgendered"
-                  checked
-                >
-                <i></i>Transgendered
-              </label>
-            </section>
-          </div>
-        </div>
-
-        <div class="row align-items-center">
-          <div class="col-md-4">
-            <section>
-              <label for="gender_two_spirit" class="checkbox">
-                <input type="checkbox" name="gender_two_spirit" id="gender_two_spirit" checked>
-                <i></i>Two-spirit
-              </label>
-            </section>
-          </div>
-          <div class="col-md-4">
-            <section>
-              <label for="gender_m2f_transexual" class="checkbox">
-                <input
-                  type="checkbox"
-                  name="gender_m2f_transexual"
-                  id="gender_m2f_transexual"
-                  checked
-                >
-                <i></i>Male to Female Transexual
-              </label>
-            </section>
-          </div>
-          <div class="col-md-4">
-            <section>
-              <label for="gender_f2m_transexual" class="checkbox">
-                <input
-                  type="checkbox"
-                  name="gender_f2m_transexual"
-                  id="gender_f2m_transexual"
-                  checked
-                >
-                <i></i>Female to Male Transexual
-              </label>
-            </section>
-          </div>
-        </div>
-
-        <div class="row align-items-center">
-          <div class="col-md-4">
-            <section>
-              <label for="gender_intersex" class="checkbox">
-                <input type="checkbox" name="gender_intersex" id="gender_intersex" checked>
-                <i></i>Intersex
-              </label>
-            </section>
-          </div>
-        </div>
-
-        <div class="row align-items-center">
-          <div class="col-md-12">
-            <h3>Sexual Orientations Welcome</h3>
-          </div>
-        </div>
-
-        <div class="row align-items-center">
-          <div class="col-md-4">
-            <section>
-              <label for="orientation_lesbian" class="checkbox">
-                <input type="checkbox" name="orentiation_lesbian" id="orientation_lesbian" checked>
-                <i></i>Lesbian
-              </label>
-            </section>
-          </div>
-          <div class="col-md-4">
-            <section>
-              <label for="orientation_gay" class="checkbox">
-                <input type="checkbox" namee="orientation_gay" id="orientation_gay" checked>
-                <i></i>Gay
-              </label>
-            </section>
-          </div>
-          <div class="col-md-4">
-            <section>
-              <label for="orientation_bisexual" class="checkbox">
-                <input
-                  type="checkbox"
-                  name="orientation_bisexual"
-                  id="orientation_bisexual"
-                  checked
-                >
-                <i></i>Bisexual
-              </label>
-            </section>
-          </div>
-        </div>
-
-        <div class="row align-items-center">
-          <div class="col-md-4">
-            <section>
-              <label for="orientation_queer" class="checkbox">
-                <input type="checkbox" name="orientation_queer" id="orientation_queer" checked>
-                <i></i>Queer
-              </label>
-            </section>
-          </div>
-          <div class="col-md-4">
-            <section>
-              <label for="orientation_questioning" class="checkbox">
-                <input
-                  type="checkbox"
-                  name="orientation_questioning"
-                  id="orientation_questioning"
-                  checked
-                >
-                <i></i>Questioning
-              </label>
-            </section>
-          </div>
-          <div class="col-md-4">
-            <section>
-              <label for="orientation_asexual" class="checkbox">
-                <input
-                  type="checkbox"
-                  name="orientation_questioning"
-                  id="orientation_asexual"
-                  checked
-                >
-                <i></i>Asexual
-              </label>
-            </section>
-          </div>
-        </div>
-
-        <div class="row align-items-center">
-          <div class="col-md-4">
-            <section>
-              <label for="orientation_pansexual" class="checkbox">
-                <input
-                  type="checkbox"
-                  name="orientation_pansexual"
-                  id="orientation_pansexual"
-                  checked
-                >
-                <i></i>Pansexual
-              </label>
-            </section>
-          </div>
-          <div class="col-md-4">
-            <section>
-              <label for="orientation_heterosexual" class="checkbox">
-                <input
-                  type="checkbox"
-                  name="orientation_heterosexual"
-                  id="orientation_heterosexual"
-                  checked
-                >
-                <i></i>Heterosexual
-              </label>
-            </section>
-          </div>
-        </div>
-
-        <div class="row align-items-center">
-          <div class="col-md-12">
-            <h3>Race or Religion</h3>
-          </div>
-        </div>
-
-        <div class="row align-items-center">
-          <div class="col-md-4">
-            <section>
-              <label for="race_religion_targetted" class="checkbox">
-                <input type="checkbox" name="race_religion_targetted" id="race_religion_targetted">
-                <i></i>Aimed at a race or religion?
-              </label>
-            </section>
-          </div>
-          <div class="col-md-4">
-            <section>
-              <label class="radio">
-                <input type="radio" name="race_religion">
-                <i></i>Only for this race or religion
-              </label>
-              <label class="radio">
-                <input type="radio" name="race_religion">
-                <i></i>Admirers and allies welcome too
-              </label>
-            </section>
-          </div>
-          <div class="col-md-4">
-            <section>
-              <label class="label" for="raceReligion">Race or Religion</label>
-              <label class="input">
-                <input
-                  type="text"
-                  id="raceReligion"
-                  name="raceReligion"
-                  aria-describedby="raceReligionHelp"
-                >
-              </label>
-              <div
-                class="note"
-                id="raceReligionHelp"
-              >Enter name of race or religion. Leave blank if not applicable.</div>
-            </section>
-          </div>
-        </div>
       </fieldset>
 
       <fieldset>
@@ -427,13 +149,15 @@ import { Datetime } from 'vue-datetime';
 import Textbox from './textbox.vue';
 import MainInformation from './mainInformation.vue';
 import Place from './place.vue';
+import TargetAudience from './targetAudience.vue';
 
 export default {
   components: {
     'datetime': Datetime, 
     'ash-textbox': Textbox,
     'qt-main-information': MainInformation,
-    'qt-place': Place
+    'qt-place': Place,
+    'qt-target-audience': TargetAudience
   }
 };
 </script>
@@ -486,7 +210,6 @@ Creation Date: February, 2019
   font-size: 21px;
   font-weight: 350;
   font-style: italic;
-  margin: 15px 0 5px;
   color: #2da5da;
 }
 

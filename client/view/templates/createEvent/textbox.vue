@@ -26,14 +26,17 @@ export default {
       type: String,
       required: true
     },
+    idName: {
+      type: String,
+      default: function() {
+        return this.heading.trim().charAt(0).toLowerCase() + 
+               this.heading.trim().slice(1).replace(/ /g,"");
+      }
+    },
     placeholder: String,
     helpText: String
   }, 
   computed: {
-    idName: function() {
-      return  this.heading.trim().charAt(0).toLowerCase() + 
-              this.heading.trim().slice(1).replace(" ","");
-    },
     idHelp: function() {
       return this.idName + "Help";
     }

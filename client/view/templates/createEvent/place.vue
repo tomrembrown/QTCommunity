@@ -25,7 +25,8 @@
       </div>
       <div class="col-md-6">
         <ash-textbox
-          heading="Room in place"
+          heading="Room in Place"
+          idName="roomPlace"
           helpText="Enter specific room in location where event is held. Leave blank if unknown or not applicable."
         ></ash-textbox>
       </div>
@@ -54,4 +55,5 @@ export default {
 </script>
 
 <style>
+
 </style>

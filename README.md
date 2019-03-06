@@ -34,7 +34,7 @@ npm install
 Create environment file (copy either .env_prod or .env_dev)
 
 ```
-cp .env_dev .env
+cp .env_development .env
 ```
 
 Determine port postgres runs on
@@ -71,11 +71,21 @@ Increase the number of watches allowed for nodemon to work properly
 echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 ```
 
-Start the Server
+For development mode, start the server
 
 ```
-npm start
+npm run dev
 ```
+
+In development mode, run webpack-dev server in browser at localhost:8080
+
+For production mode, first build the bundles
+
+```
+npm run build
+```
+
+In development mode, run the node-express server at localhost:3000
 
 ## Running the tests
 
