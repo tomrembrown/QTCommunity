@@ -3,7 +3,6 @@
 const express = require('express');
 const path = require('path');
 const history = require('connect-history-api-fallback');
-const bodyParser = require('body-parser');
 
 require('dotenv').config();  // load the environment variables from .env
 
@@ -12,10 +11,7 @@ const readRoutesServer = require('./server/ajaxRoutesServer/readRoutesServer');
 
 const app = express();
 
-const querystring = require('querystring');
-
 app.use(history()); // To get the SPA router to work
-app.use(bodyParser.json()); // Parse the input
 
 // For security reasons, don't send info on server to client
 app.disable('x-powered-by');
@@ -48,9 +44,12 @@ app.get('/createEventForm', (req, res) => {
 });
 
 // Start server listening for requests from browser
+let logString = ' Express started on http://localhost:' + app.get('port') + '; ';
+if (app.get('env') === 'development') logString += 'Open page on webpack server at localhost:8080; ';
+logString += 'press Ctr-C to terminate.';
+
 app.listen(app.get('port'), () => {
-  console.log( ' Express started on http://localhost:' +
-    app.get('port') + '; press Ctrl-C to terminate.' );
+  console.log(logString);
 });
 
 

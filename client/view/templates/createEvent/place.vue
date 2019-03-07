@@ -11,7 +11,7 @@
         <section>
           <label class="label" for="place">Location Where Event is Held</label>
           <label class="select">
-            <select id="place" name="place">
+            <select id="place" name="place" @change="onChangePlace($event)">
               <option value="1">The 519</option>
               <option value="2">Buddies in Bad Times Theatre</option>
               <option value="3">Spa Excess</option>
@@ -32,15 +32,60 @@
       </div>
     </div>
 
-    <div v-if="newPlace">
-      
-    </div>
+    <transition name="fade">
+      <div v-if="newPlace">
+        <div class="row align-items-center">
+          <div class="col-md-4">
+            <ash-textbox
+              heading="Name of Place"
+              idName="placeName"
+              placeholder="Enter name"
+              helpText="Enter a short, unique, name to refer to new place">
+            </ash-textbox>
+          </div>
+          <div class="col-md-8">
+            <section>
+              <label class="label" for="placeAddress">Address of Place</label>
+              <label class="textarea textarea-expandable">
+                <textarea
+                  id="placeAddress"
+                  name="placeAddress"
+                  placeholder="Enter address"
+                  rows="3">
+                </textarea>
+              </label>
+              <div class="note" id="placeAddressHelp">
+                Enter full street address of the place
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <qt-target-audience type="place" verb="enter"></qt-target-audience>
+
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <section>
+              <label for="wheelChairAccessible" class="checkbox">
+                <input 
+                  type="checkbox" 
+                  name="wheelChairAccessible" 
+                  id="wheelChairAccessible">
+                <i></i>Is place wheel chair accessible?
+              </label>
+            </section>
+          </div>
+        </div>
+
+      </div>
+    </transition>
 
   </fieldset>
 </template>
 
 <script>
 import Textbox from './textbox.vue';
+import TargetAudience from './targetAudience.vue';
 
 export default {
   data() {
@@ -48,12 +93,26 @@ export default {
       newPlace: false
     }
   },
+  methods: {
+    onChangePlace(event) {
+      if (event.target.value === 'New')
+        this.newPlace = true;
+      else
+        this.newPlace = false;
+    }
+  },
   components: {
-    'ash-textbox': Textbox
+    'ash-textbox': Textbox,
+    'qt-target-audience': TargetAudience
   }
 };
 </script>
 
-<style>
-
+<style lang="scss">
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
 </style>
