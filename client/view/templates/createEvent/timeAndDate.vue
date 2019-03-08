@@ -57,5 +57,6 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+  @import '/node_modules/vue-datetime/dist/vue-datetime.min.css';
 </style>

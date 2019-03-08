@@ -14,7 +14,7 @@
       <fieldset>
         <div class="row align-items-center">
           <div class="col-md-12">
-            <h2>Target Audience</h2>
+            <h2>Target Audience for Event</h2>
           </div>
         </div>
 
@@ -53,6 +53,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '/node_modules/vue-datetime/dist/vue-datetime.min.css';
-@import '../../scss/forms.scss';
+  @import '../../scss/forms.scss';
 </style>
