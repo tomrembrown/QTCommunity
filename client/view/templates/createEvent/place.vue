@@ -40,7 +40,7 @@
               heading="Name of Place"
               idName="placeName"
               placeholder="Enter name"
-              helpText="Enter a short, unique, name to refer to new place">
+              helpText="Enter a short, unique, name to refer to the place">
             </ash-textbox>
           </div>
           <div class="col-md-8">
@@ -108,6 +108,12 @@ export default {
 };
 </script>
 
-<style lang="scss">
-  @import '../../scss/fade';
+<style lang="scss" scoped>
+  @import '../../scss/forms/fade';
+  @import '../../scss/forms/section';
+  @import '../../scss/forms/label';
+  @import '../../scss/forms/select';
+  @import '../../scss/forms/checkbox';
+  @import '../../scss/forms/select';
+  @import '../../scss/forms/textarea';
 </style>

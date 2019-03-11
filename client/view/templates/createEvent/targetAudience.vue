@@ -24,7 +24,7 @@
         ></ash-textbox>
       </div>
     </div>
-
+  
     <div class="row">
       <div class="col-md-6">
         <h3>Gender Identities Welcome at {{ typeCapitalized }}</h3>
@@ -229,7 +229,7 @@
               name="race_religion_targetted" 
               id="race_religion_targetted"
               v-model="aimedAtRaceReligion">
-            <i></i>Aimed at a race or religion?
+            <i></i>Is {{ type }} aimed at a particular race or religion?
           </label>
         </section>
       </div>
@@ -294,6 +294,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
-  @import '../../scss/fade';
+<style lang="scss" scoped>
+  @import '../../scss/forms/fade';
+  @import '../../scss/forms/section';
+  @import '../../scss/forms/checkbox';
+  @import '../../scss/forms/h3';
+  @import '../../scss/forms/radio';
+  @import '../../scss/forms/section';
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form action class="sky-form">
+    <form action class="sky-form form-sizing-reset">
       <header>Create New Event</header>
 
       <qt-main-information></qt-main-information>
@@ -52,6 +52,11 @@ export default {
 };
 </script>
 
-<style lang="scss">
-  @import '../../scss/forms.scss';
+<style lang="scss" scoped>
+  @import '../../scss/forms/form';
+  @import '../../scss/forms/header';
+  @import '../../scss/forms/fieldset';
+  @import '../../scss/forms/h2';
+  @import '../../scss/forms/footer';
+  @import '../../scss/forms/buttons';
 </style>

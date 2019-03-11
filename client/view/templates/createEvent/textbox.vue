@@ -45,4 +45,8 @@ export default {
 </script>
 
 <style lang="scss">
+  @import '../../scss/forms/label';  
+  @import '../../scss/forms/input';  
+  @import '../../scss/forms/note';  
+  @import '../../scss/forms/section';
 </style>

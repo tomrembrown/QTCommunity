@@ -58,6 +58,9 @@ export default {
 };
 </script>
 
-<style lang="scss">
-  @import '../../scss/fade';
+<style lang="scss" scoped>
+  @import '../../scss/forms/fade';
+  @import '../../scss/forms/h2';
+  @import '../../scss/forms/section';
+  @import '../../scss/forms/checkbox';
 </style>

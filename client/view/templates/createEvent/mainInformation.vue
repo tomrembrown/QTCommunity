@@ -78,5 +78,10 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+  @import '../../scss/forms/fieldset';
+  @import '../../scss/forms/h2';
+  @import '../../scss/forms/section';
+  @import '../../scss/forms/label';
+  @import '../../scss/forms/textarea';
 </style>

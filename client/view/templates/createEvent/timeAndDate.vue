@@ -8,22 +8,16 @@
     <div class="row align-items-center">
       <div class="col-md-6">
         <section>
-          <datetime type="datetime" input-class="myInput" input-id="startTime">
-            <label for="startTime" slot="before" class="label">Start Date and Time</label>
-            <div
-              class="note"
-              id="startTimeHelp"
-              slot="after"
-            >Enter the start date and time of the event</div>
-          </datetime>
+          <label class="label" for="startTime">Start Date and Time</label>
+          <my-date-time-box myInputId="startTime"></my-date-time-box>
+          <div class="note" id="startTimeHelp">Enter the start date and time of the event</div>
         </section>
       </div>
       <div class="col-md-6">
         <section>
-          <datetime type="datetime" input-class="myInput" input-id="endTime">
-            <label for="endTime" slot="before" class="label">End Date and Time</label>
-            <div class="note" id="endTimeHelp" slot="after">Enter the end date and time of the event</div>
-          </datetime>
+          <label class="label" for="endTime">End Date and Time</label>
+          <my-date-time-box myInputId="endTime"></my-date-time-box>
+          <div class="note" id="endTimeHelp">Enter the end date and time of the event</div>
         </section>
       </div>
     </div>
@@ -48,15 +42,18 @@
 </template>
 
 <script>
-import { Datetime } from 'vue-datetime';
+import MyDateTimeBox from './myDateTimeBox.vue';
 
 export default {
   components: {
-    'datetime': Datetime
+    'my-date-time-box': MyDateTimeBox
   }
 };
 </script>
 
-<style lang="scss">
-  @import '/node_modules/vue-datetime/dist/vue-datetime.min.css';
+<style lang="scss" scoped>
+  @import '../../scss/forms/h2';
+  @import '../../scss/forms/label';
+  @import '../../scss/forms/select';
+  @import '../../scss/forms/section';
 </style>

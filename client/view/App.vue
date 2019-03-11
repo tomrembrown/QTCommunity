@@ -19,4 +19,5 @@
 
 <style lang="scss">
   @import 'node_modules/bootstrap/scss/bootstrap.scss';
+  @import './scss/forms/resetSizing';
 </style>
