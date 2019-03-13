@@ -30,18 +30,14 @@ app.use((req, res, next) => {
   next();
 });
 
-// The one route for now - just go to the main page
+// The one route for now - just go to the main page - all routing actually
+// handled by the front-end SPA (except AJAX routes below)
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname,'/client/view/public/index.html'));
 });
 
 // AJAX routes 
 app.use('/readRoutesServer', readRoutesServer);
-
-// Prototype route for form - will eventually be replaced
-app.get('/createEventForm', (req, res) => {
-  res.sendFile(path.join(__dirname,'/client/view/createEventForm.html'));
-});
 
 // Start server listening for requests from browser
 let logString = ' Express started on http://localhost:' + app.get('port') + '; ';
