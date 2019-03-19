@@ -11,6 +11,12 @@ export const store = new Vuex.Store({
     isLoggedIn: state => {
       return state.loggedIn;
     }
+  },
+  mutations: {
+
+  },
+  actions: {
+    
   }
 });
 

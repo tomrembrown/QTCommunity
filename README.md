@@ -1,6 +1,6 @@
 # Community Website - Queer Toronto
 
-This IS a Single Page Application that has the code for a community website that provides a list of organizations and a calendar of events.  This is the Queer Toronto version of the web application.  It is built using PostgreSQL 10, NodeJS, Express, VUE, and BootStrap-VUE (a variant of Bootstrap 4 that replaces the jQuery JS code with Vue JS code.)  
+This is a Single Page Application that has the code for a community website that provides a list of organizations and a calendar of events.  This is the Queer Toronto version of the web application.  It is built using PostgreSQL 10, NodeJS, Express, VUE, and BootStrap-VUE (a variant of Bootstrap 4 that replaces the jQuery JS code with Vue JS code.)  
 
 ## Getting Started
 

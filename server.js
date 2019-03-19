@@ -13,6 +13,8 @@ const app = express();
 
 app.use(history()); // To get the SPA router to work
 
+app.use(express.json()); // For handling json data from POST requests
+
 // For security reasons, don't send info on server to client
 app.disable('x-powered-by');
 
