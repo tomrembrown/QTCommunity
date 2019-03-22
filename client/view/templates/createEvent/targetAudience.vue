@@ -31,11 +31,11 @@
       </div>
       <div class="col-md-6">
         <section>
-          <label for="gender_all" class="checkbox">
+          <label :for="'gender_all'+typeCapitalized" class="checkbox">
             <input 
               type="checkbox" 
-              name="gender_all" 
-              id="gender_all" 
+              :name="'gender_all'+typeCapitalized" 
+              :id="'gender_all'+typeCapitalized" 
               v-model="allGendersWelcome">
             <i></i>All are welcome
           </label>

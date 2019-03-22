@@ -25,7 +25,12 @@
       <qt-time-and-date></qt-time-and-date>
 
       <footer>
-        <button type="submit" class="button">Submit</button>
+        <button 
+          type="submit" 
+          class="button"
+          @click.prevent="submitForm">
+          Submit
+        </button>
         <button type="reset" class="button button-secondary">Reset</button>
       </footer>
     </form>
@@ -41,6 +46,12 @@ import TargetAudience from './targetAudience.vue';
 import TimeAndDate from './timeAndDate.vue';
 
 export default {
+  methods: {
+    submitForm() {
+      console.log("In Create Event")
+      this.$store.commit('submitForm')
+    }
+  },
   components: {
     'qt-main-information': MainInformation,
     'qt-place': Place,

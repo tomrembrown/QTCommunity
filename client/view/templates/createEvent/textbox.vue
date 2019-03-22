@@ -8,6 +8,8 @@
         :name="idName"
         :aria-describedby="idHelp"
         :placeholder="placeholder"
+        v-model="value"
+        @change="updateStore"
       >
     </label>
     <div 
@@ -21,6 +23,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      value: ''
+    }
+  },
   props: {
     heading: {
       type: String,
@@ -36,6 +43,15 @@ export default {
     placeholder: String,
     helpText: String
   }, 
+  methods: {
+    updateStore() {
+      this.$store.commit({
+        type: 'setTextboxElement',
+        element: this.idName,
+        value: this.value
+      })
+    }
+  },
   computed: {
     idHelp: function() {
       return this.idName + "Help";
