@@ -128,37 +128,6 @@
         <div class="row align-items-center">
           <div class="col-md-5">
             <ash-textbox
-              heading="Email"
-              helpText="Enter email address for organization. Leave blank if none">
-            </ash-textbox>
-          </div>
-          <div class="col-md-1">
-            <section>
-              <label for="show_email" class="checkbox">
-                <input type="checkbox" name="show_email" id="show_email" checked>
-                <i></i>Show
-              </label>
-            </section>
-          </div>
-          <div class="col-md-5">
-            <ash-textbox
-              heading="Website"
-              helpText="Enter website for organization. Leave blank if none">
-            </ash-textbox>
-          </div>
-          <div class="col-md-1">
-            <section>
-              <label for="show_website" class="checkbox">
-                <input type="checkbox" name="show_website" id="show_website" checked>
-                <i></i>Show
-              </label>
-            </section>
-          </div>
-        </div>
-
-        <div class="row align-items-center">
-          <div class="col-md-5">
-            <ash-textbox
               heading="Facebook"
               helpText="Enter facebook page for organization. Leave blank if none">
             </ash-textbox>
