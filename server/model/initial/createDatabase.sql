@@ -33,13 +33,13 @@ CREATE TABLE quotations(
 CREATE TABLE organization_types(
   id SMALLSERIAL PRIMARY KEY,
   name_english TEXT NOT NULL,
-  name_french TEXT NOT NULL
+  name_french TEXT DEFAULT NULL
 );
 
 CREATE TABLE categories(
   id SMALLSERIAL PRIMARY KEY,
   name_english TEXT NOT NULL,
-  name_french TEXT NOT NULL,
+  name_french TEXT DEFAULT NULL,
   colour CHAR(6) NOT NULL
 );
 
@@ -52,13 +52,24 @@ CREATE TABLE places(
 
   -- Information about who place is geared for 
   -- Below is also in organizations & events
-  family_friendly BOOLEAN NOT NULL DEFAULT TRUE,
-  male_ok BOOLEAN NOT NULL DEFAULT TRUE,
-  female_ok BOOLEAN NOT NULL DEFAULT TRUE,
-  trans_ok BOOLEAN NOT NULL DEFAULT TRUE,
+  family_friendly BOOLEAN NOT NULL DEFAULT TRUE,  
   min_age SMALLINT CHECK (min_age >= 0 AND min_age <= 100) DEFAULT NULL,
   max_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100) DEFAULT NULL,
-  orientation TEXT DEFAULT NULL,
+  gender_female TEXT DEFAULT TRUE,
+  gender_male TEXT DEFAULT TRUE,
+  gender_transgendered BOOLEAN NOT NULL DEFAULT TRUE,
+  gender_two_spirit BOOLEAN NOT NULL DEFAULT TRUE,
+  gender_m2f_transexual BOOLEAN NOT NULL DEFAULT TRUE,
+  gender_f2m_transexual BOOLEAN NOT NULL DEFAULT TRUE,
+  gender_intersex BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_lesbian BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_gay BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_bisexual BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_queer BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_questioning BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_asexual BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_pansexual BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_heterosexual BOOLEAN NOT NULL DEFAULT TRUE,
   race_religion TEXT DEFAULT NULL,
   only_race_religion BOOLEAN NOT NULL DEFAULT FALSE,
 
@@ -73,48 +84,59 @@ CREATE TABLE organizations(
   
   -- Basic information about organization
   name TEXT NOT NULL UNIQUE,
-  organization_type_id SMALLINT REFERENCES organization_types(id),
-  description_english TEXT,
-  description_french TEXT,
-  image_link TEXT,
+  organization_type_id SMALLINT REFERENCES organization_types(id) NOT NULL,
+  description_english TEXT DEFAULT NULL,
+  description_french TEXT DEFAULT NULL,
+  image_link TEXT DEFAULT NULL,
 
   -- Login information (some organizations don't - just get data from parser feed)
   is_member BOOLEAN NOT NULL DEFAULT FALSE,
   is_shown BOOLEAN NOT NULL DEFAULT FALSE,
-  login CITEXT UNIQUE,
-  password_encrypted TEXT,
-  signup_date TIMESTAMP,
-  logged_in BOOLEAN,
-  last_logged_in TIMESTAMP,
+  login CITEXT UNIQUE DEFAULT NULL,
+  password_encrypted TEXT DEFAULT NULL,
+  signup_date TIMESTAMP DEFAULT NULL,
+  logged_in BOOLEAN DEFAULT NULL,
+  last_logged_in TIMESTAMP DEFAULT NULL,
   
   -- Physical location
-  place_id INTEGER REFERENCES places(id),
-  place_room TEXT,
+  place_id INTEGER REFERENCES places(id) DEFAULT NULL,
+  place_room TEXT DEFAULT NULL,
 
   -- Contact information
-  email CITEXT,
+  email CITEXT DEFAULT NULL,
   display_email BOOLEAN NOT NULL DEFAULT FALSE,
-  phone BIGINT CHECK (phone >= 2000000000 AND phone <= 9999999999),
-  phone_extension INTEGER,
+  phone BIGINT CHECK (phone >= 2000000000 AND phone <= 9999999999) DEFAULT NULL,
+  phone_extension INTEGER DEFAULT NULL,
   display_phone BOOLEAN NOT NULL DEFAULT FALSE,
-  website_english TEXT,
-  website_french TEXT,
+  website_english TEXT DEFAULT NULL,
+  website_french TEXT DEFAULT NULL,
   display_website BOOLEAN NOT NULL DEFAULT FALSE,
-  facebook TEXT,
+  facebook TEXT DEFAULT NULL,
   display_facebook BOOLEAN NOT NULL DEFAULT FALSE,
-  twitter TEXT,
+  twitter TEXT DEFAULT NULL,
   display_twitter BOOLEAN NOT NULL DEFAULT FALSE,
-  linked_in TEXT,
+  linked_in TEXT DEFAULT NULL,
   display_linked_in BOOLEAN NOT NULL DEFAULT FALSE,
   
   -- Information about who organization is geared for
-  family_friendly BOOLEAN DEFAULT TRUE,
-  male_ok BOOLEAN DEFAULT TRUE,
-  female_ok BOOLEAN DEFAULT TRUE,
-  trans_ok BOOLEAN DEFAULT TRUE,
-  min_age SMALLINT CHECK (min_age >= 0 AND min_age <= 100),
-  max_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100),
-  orientation TEXT DEFAULT NULL,
+  family_friendly BOOLEAN NOT NULL DEFAULT TRUE,  
+  min_age SMALLINT CHECK (min_age >= 0 AND min_age <= 100) DEFAULT NULL,
+  max_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100) DEFAULT NULL,
+  gender_female TEXT DEFAULT TRUE,
+  gender_male TEXT DEFAULT TRUE,
+  gender_transgendered BOOLEAN NOT NULL DEFAULT TRUE,
+  gender_two_spirit BOOLEAN NOT NULL DEFAULT TRUE,
+  gender_m2f_transexual BOOLEAN NOT NULL DEFAULT TRUE,
+  gender_f2m_transexual BOOLEAN NOT NULL DEFAULT TRUE,
+  gender_intersex BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_lesbian BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_gay BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_bisexual BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_queer BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_questioning BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_asexual BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_pansexual BOOLEAN NOT NULL DEFAULT TRUE,
+  orientation_heterosexual BOOLEAN NOT NULL DEFAULT TRUE,
   race_religion TEXT DEFAULT NULL,
   only_race_religion BOOLEAN NOT NULL DEFAULT FALSE
 );
@@ -148,15 +170,13 @@ CREATE TABLE event_groups(
   website_french TEXT,
 
   -- Information about who event is geared for
-  family_friendly BOOLEAN NOT NULL DEFAULT TRUE,
-  male_ok BOOLEAN NOT NULL DEFAULT TRUE,
-  female_ok BOOLEAN NOT NULL DEFAULT TRUE,
-  trans_ok BOOLEAN NOT NULL DEFAULT TRUE,
-  minimum_age SMALLINT CHECK (minimum_age >= 0 AND minimum_age <= 100),
-  maximum_age SMALLINT CHECK (maximum_age >= 1 AND maximum_age <= 100),
+  family_friendly BOOLEAN NOT NULL DEFAULT TRUE,  
+  min_age SMALLINT CHECK (min_age >= 0 AND min_age <= 100) DEFAULT NULL,
+  max_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100) DEFAULT NULL,
+  gender TEXT DEFAULT NULL,
   orientation TEXT DEFAULT NULL,
   race_religion TEXT DEFAULT NULL,
-  only_race_religion BOOLEAN NOT NULL DEFAULT FALSE  
+  only_race_religion BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE event_details(
@@ -228,3 +248,11 @@ INSERT INTO quotations
     'George Takei'),
   ('Please remember, especially in these times of group-think and the right-on chorus, that no person is your friend (or kin) who demands your silence, or denies your right to grow and be perceived as fully blossomed as you were intended.',
     'Alice Walker');
+
+INSERT INTO organization_types
+  (name_english) VALUES
+  ('Community Organization'), 
+  ('Health and Social Services'), 
+  ('Bar or Dance Club'), 
+  ('Art, Theatre, Culture'), 
+  ('Adult Entertainment');

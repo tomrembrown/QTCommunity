@@ -15,6 +15,7 @@
 
 // Require all methods from CRUD directories that are referred to in this interface
 const readRandomQuotation = require('./read/readRandomQuotation');
+const getIDForPlace = require('./read/getIDForPlace');
 const createEvent = require('./create/createEvent');
 const createPlace = require('./create/createPlace');
 const createOrganization = require('./create/createOrganization');
@@ -25,6 +26,11 @@ const model = {
    * Other details in database than events, places, organizations
    * ******/
   readRandomQuotation: readRandomQuotation,
+
+  /* ******
+   * Lookup specific information
+   * ******/
+  getIDForPlace: getIDForPlace,
 
   /* ******
    * Create database entries

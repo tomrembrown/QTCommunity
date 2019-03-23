@@ -25,7 +25,7 @@
           </li>
         </ul>
 
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto"> 
           <li class="nav-item px-2">
             <router-link to="/createEvent" class="nav-link" active-class="active">Create New Event</router-link>
           </li>

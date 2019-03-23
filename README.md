@@ -12,9 +12,7 @@ These instructions will get you a copy of the project up and running on your loc
 A Linux OS
 NodeJS
 NPM
-Grunt
-Vue CLI
-PostgreSQL 10 with postgresql-contrib
+PostgreSQL 11 with postgresql-contrib
 ```
 
 ### Installing
@@ -89,7 +87,7 @@ In development mode, run the node-express server at localhost:3000
 
 ## Running the tests
 
-Running the command 'grunt' in the project directory to run the tests.
+Tests are not currently configured
 
 ### What the tests do
 
@@ -101,7 +99,6 @@ These tests handle linting with jshint, link checking, and some cross-page and u
 * [Express](https://expressjs.com/) - Backend framework
 * [PostgreSQL 11](https://www.postgresql.org/) - Database
 * [Vue.js](https://vuejs.org/) - Frontend framework
-* [Bootstrap + Vue](https://bootstrap-vue.js.org/) - Bootstrap based responsive web framework
 
 ## Contributing
 
