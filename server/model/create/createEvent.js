@@ -1,7 +1,6 @@
 'use strict';
 
 const db = require('./../db');
-const readEvent = require('./../read/');
 
 const createEvent = async function(eventDetails) {
 	let columnList = 	['long_title_english', 'organization_id'];

@@ -2,16 +2,33 @@
   <div class="container">
     <form action class="sky-form form-sizing-reset">
       <header>Register Organization</header>
-
+      <fieldset>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <ash-textbox
               heading="Organization Name"
               placeholder="Enter name"
               helpText="Enter a short, unique, name to refer to the organization">
             </ash-textbox>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
+            <section>
+              <label class="label" for="password">Password</label>
+              <label class="input">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  aria-describedby="passwordHelp"
+                  placeholder="Password"
+                >
+              </label>
+              <div class="note" id="passwordHelp">
+                Enter password for organization to login
+              </div>
+            </section>
+          </div>
+          <div class="col-md-4">
             <section>
               <label class="label" for="organizationType">Type of Organization</label>
               <label class="select">
@@ -43,6 +60,9 @@
             </section>
           </div>
         </div>
+
+      </fieldset>
+      <fieldset>
 
         <div class="row align-items-center">
           <div class="col-md-3">
@@ -184,7 +204,12 @@
           </div>
         </div>
 
+      </fieldset>
+      <fieldset>
+
         <qt-target-audience type="organization" verb="participate in"></qt-target-audience>
+
+      </fieldset>
 
       <footer>
         <button 
@@ -200,29 +225,21 @@
 </template>
 
 <script>
-import MainInformation from './mainInformation.vue';
-import Place from './place.vue';
-import Organization from './organization.vue';
-import Registration from './registration.vue';
-import TargetAudience from './targetAudience.vue';
-import TimeAndDate from './timeAndDate.vue';
+import Textbox from '../generalFormElements/textbox.vue';
+import TargetAudience from '../generalFormElements/targetAudience.vue';
 
 export default {
   methods: {
     submitForm() {
-      console.log("In Create Event")
+      console.log("In Create ")
       this.$store.commit('submitRegisterOrganizationForm')
     }
   },
   components: {
-    'qt-main-information': MainInformation,
-    'qt-place': Place,
-    'qt-organization': Organization,
-    'qt-registration': Registration,
-    'qt-target-audience': TargetAudience,
-    'qt-time-and-date': TimeAndDate
+    'ash-textbox': Textbox,
+    'qt-target-audience': TargetAudience
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -232,4 +249,10 @@ export default {
   @import '../../scss/forms/h2';
   @import '../../scss/forms/footer';
   @import '../../scss/forms/buttons';
+  @import '../../scss/forms/section';
+  @import '../../scss/forms/label';
+  @import '../../scss/forms/select';
+  @import '../../scss/forms/textarea';
+  @import '../../scss/forms/section';
+  @import '../../scss/forms/checkbox';
 </style>
