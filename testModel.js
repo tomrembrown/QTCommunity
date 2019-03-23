@@ -1,11 +1,11 @@
-'use strict';
+'use strict'
 
-const model = require('./server/model');
+const model = require('./server/model')
 
 const create519PlaceData = {
   name: "The 519",
   address: "519 Church St., Toronto, ON M4Y 2C9"
-};
+}
 
 const createSpaPlaceData = {
   name: "Spa Excess",
@@ -18,12 +18,15 @@ const createSpaPlaceData = {
   gender_intersex: false,
   family_friendly: false,
   min_age: 19
-};
+}
 
 let create519OrganizationData = {
   name: "The 519",
-  
+
 }
+
+let placeID
+let orgID
 
 model.createPlace(create519PlaceData).then(() => {
   console.log('Created The 519 place')
@@ -32,10 +35,13 @@ model.createPlace(create519PlaceData).then(() => {
   console.log('Created Spa excess place')
   return model.getIDForPlace("The 519")
 }).then((id) => {
-  console.log("Got id for the 519 " + id);
-}).then(() => {
-  console.log('Closing database now')
-  model.close();
+  placeID = id
+  console.log('Got id for the 519 ' + id)
+  return model.getIDForOrganizationType('Community Organization')
+}).then((id) => {
+  orgID = id
+  console.log('Got id for organization type ' + orgID)
+  model.close()
 }).then(() => {
   console.log('Closed database')
 })

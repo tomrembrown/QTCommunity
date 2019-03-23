@@ -1,26 +1,24 @@
 'use strict';
 
-const db = require('./../db');
+const db = require('./../db')
 
 const getIDForPlace = async function(name) {
 
   const getIDForPlaceQuery = 
     "SELECT id "+
     "FROM places " +
-    "WHERE name='" + name + "';";
+    "WHERE name='" + name + "';"
 
-  let id;
-
-  console.log('getIDForPlaceQuery: ' + getIDForPlaceQuery)
+  let id
 
   try {
-    const { rows } = await db.query(getIDForPlaceQuery);
-    id = rows[0].id;
+    const { rows } = await db.query(getIDForPlaceQuery)
+    id = rows[0].id
   } catch (err) {
-    console.error('error running query', err);
+    console.error('error running query', err)
   } 
-  return id;
+  return id
    
-};
+}
 
-module.exports = getIDForPlace;
+module.exports = getIDForPlace

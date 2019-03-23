@@ -1,26 +1,24 @@
-'use strict';
+'use strict'
 
-const db = require('./../db');
+const db = require('./../db')
 
 const getIDForOrganizationType = async function(name) {
 
   const getIDForOrganizationTypeQuery = 
     "SELECT id "+
     "FROM organization_types " +
-    "WHERE name_english='" + name + "';";
+    "WHERE name_english='" + name + "';"
 
-  let id;
-
-  console.log('getIDForPlaceQuery: ' + getIDForPlaceQuery)
+  let id
 
   try {
-    const { rows } = await db.query(getIDForPlaceQuery);
-    id = rows[0].id;
+    const { rows } = await db.query(getIDForOrganizationTypeQuery)
+    id = rows[0].id
   } catch (err) {
-    console.error('error running query', err);
+    console.error('error running query', err)
   } 
-  return id;
+  return id
    
-};
+}
 
-module.exports = getIDForPlace;
+module.exports = getIDForOrganizationType

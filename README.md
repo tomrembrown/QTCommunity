@@ -10,8 +10,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 ```
 A Linux OS
-NodeJS
-NPM
+node version 11.12.0 or later
+npm version 6.9.0 or later
 PostgreSQL 11 with postgresql-contrib
 ```
 
@@ -22,6 +22,20 @@ Clone GIT repository and download
 ```
 git clone https://github.com/tomrembrown/QTCommunity
 ```
+
+Update npm, node, and postgresql to latest versions and install postgresql-contrib
+Using npm 6.9.0, node 11.12.0, psql 11.2
+
+```
+sudo npm update -g npm
+sudo npm install -g n
+sudo n latest
+echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main 11"
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo apt update && sudo apt-get install postgresql-11
+sudo apt-get install postgresql-contrib
+```
+
 
 Build NPM script
 
@@ -41,8 +55,6 @@ Determine port postgres runs on
 sudo netstat -plunt |grep postgres
 ```
 
-Adjust parameters in .env as necessary (such as postgres port)
-
 Build PostgreSQL initial database and add extension. 
 
 ```
@@ -56,6 +68,8 @@ CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;
 \c queer_toronto
 CREATE EXTENSION IF NOT EXISTS citext;
 ```
+
+Adjust parameters in .env as necessary (such as postgres port and qt_computer_access password)
 
 Create the database tables
 
