@@ -38,12 +38,12 @@
 </template>
 
 <script>
-import MainInformation from './mainInformation.vue';
-import Place from './place.vue';
-import Organization from './organization.vue';
-import Registration from './registration.vue';
-import TargetAudience from './targetAudience.vue';
-import TimeAndDate from './timeAndDate.vue';
+import MainInformation from '../generalFormElements/mainInformation.vue';
+import Place from '../generalFormElements/place.vue';
+import Organization from '../generalFormElements/organization.vue';
+import Registration from '../generalFormElements/registration.vue';
+import TargetAudience from '../generalFormElements/targetAudience.vue';
+import TimeAndDate from '../generalFormElements/timeAndDate.vue';
 
 export default {
   methods: {
