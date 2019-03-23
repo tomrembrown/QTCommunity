@@ -97,7 +97,11 @@ For production mode, first build the bundles
 npm run build
 ```
 
-In development mode, run the node-express server at localhost:3000
+In production mode, run the node-express server at localhost:3000
+
+```
+npm run prod
+```
 
 ## Running the tests
 

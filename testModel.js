@@ -22,7 +22,16 @@ const createSpaPlaceData = {
 
 let create519OrganizationData = {
   name: "The 519",
-
+  description_english: "The 519 is a city organization dedicated to advocacy for the inclusion of LGBTQ communities. See upcoming events, programming, and location details.",
+  is_shown: true,
+  email: "Info@The519.org",
+  display_email: false,
+  phone: 4163926874,
+  display_phone: false,
+  website_english: "http://www.the519.org/",
+  display_website: true,
+  facebook: "https://www.facebook.com/The519",
+  display_facebook: true
 }
 
 let placeID
@@ -41,6 +50,11 @@ model.createPlace(create519PlaceData).then(() => {
 }).then((id) => {
   orgID = id
   console.log('Got id for organization type ' + orgID)
+  create519OrganizationData.organization_type_id = orgID
+  create519OrganizationData.place_id = placeID
+  return model.createOrganization(create519OrganizationData)
+}).then(()=> {
+  console.log('Created The 519 Organization')
   model.close()
 }).then(() => {
   console.log('Closed database')

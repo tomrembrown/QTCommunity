@@ -5,7 +5,7 @@ const createOrganization = async function(objectInputData) {
 
   let createOrganizationQuery = "INSERT INTO organizations "
 
-  let columnList = "(name, organization_type_id, "
+  let columnList = "(name, organization_type_id"
   let columnData = "VALUES ('" + objectInputData.name + "', " + 
                               objectInputData.organization_type_id
 
