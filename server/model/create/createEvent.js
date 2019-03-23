@@ -1,11 +1,12 @@
 'use strict';
 
 const db = require('./../db');
-const readEvent = require('./../read/');
+const readEvent = require('./../read/getIDForEvent');
+const writeEventInstance = require('./../create/createEventInstance');
 
 const createEvent = async function(eventDetails) {
 	let columnList = 	['long_title_english', 'organization_id'];
-	let dataList = 		[objectInputData.title, objectInputData.organization_id];	
+	let dataList = 		[eventDetails.long_title_english, eventDetails.organization_id];	
 
 	const optionalColumnList = [
 		"long_title_french", 
@@ -33,7 +34,7 @@ const createEvent = async function(eventDetails) {
 	];
  
 	for(let col of optionalColumnList) {
-		if (typeof objectInputData[col.name] !== 'undefined') {
+		if (typeof eventDetails[col.name] !== 'undefined') {
 			columnList.push(col.name);
 			columnData.push(objectInputData[col.name]);
 		}
@@ -42,12 +43,18 @@ const createEvent = async function(eventDetails) {
 	let parameters = Array.from([...Array(columnList.length + 1).keys()], x=>"$" + x);
 	parameters.shift();
 	
-	let createPlaceQuery = "INSERT INTO places (" + columnList.join(', ') + ") VALUES (" + parameters.join() + ");";
+	let createPlaceQuery = "INSERT INTO event_groups (" + columnList.join(', ') + ") VALUES (" + parameters.join() + ");";
 	
 
 	try {
 		await db.query(createPlaceQuery, dataList)
+		let eventID = await readEvent(eventDetails.long_title_english, eventDetails.organization_id);
 		
+		for(let i in eventDetails.instances){
+			let payload = eventDetails.instances[i];
+			payload.event_group_id = eventID;
+			writeEventInstance(payload).then(()=>{}).catch((err)=>{console.log(err);});
+		}
 	} 
 	catch (err) {
 		console.error('error running query', err)

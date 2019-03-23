@@ -148,11 +148,11 @@ CREATE TABLE event_groups(
 
   -- Basic information about event
   long_title_english TEXT NOT NULL,
-  long_title_french TEXT NOT NULL,
-  short_title_english TEXT NOT NULL,
-  short_title_french TEXT NOT NULL,
-  mobile_title_english TEXT NOT NULL,
-  mobile_title_french TEXT NOT NULL,
+  long_title_french TEXT NULL,
+  short_title_english TEXT NULL,
+  short_title_french TEXT NULL,
+  mobile_title_english TEXT NULL,
+  mobile_title_french TEXT NULL,
   description_english TEXT,
   description_french TEXT, 
   image_link TEXT,
@@ -191,7 +191,7 @@ CREATE TABLE event_details(
   place_id INTEGER REFERENCES places(id),
   place_room TEXT,
   start_time TIMESTAMP NOT NULL,
-  end_time TIMESTAMP NOT NULL
+  end_time TIMESTAMP NULL
 );
 
 CREATE TABLE categories_event_groups_relations(

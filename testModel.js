@@ -51,7 +51,7 @@ let createSpaOrganizationData = {
 
 
 //519
-/*{
+{
 	let placeID, organizationTypeID;	
 	
 	model.createPlace(create519PlaceData).then(() => {
@@ -68,7 +68,7 @@ let createSpaOrganizationData = {
 		create519OrganizationData.place_id = placeID
 		return model.createOrganization(create519OrganizationData)		
 	});
-}		*/
+}
 		
 //Spa
 {
