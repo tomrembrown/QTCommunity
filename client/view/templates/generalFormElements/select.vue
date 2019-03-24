@@ -1,0 +1,78 @@
+<template>
+  <section>
+    <label class="label" :for="idName">{{ heading }}</label>
+    <label class="select">
+      <select :id="idName" :name="idName">
+        <option 
+          v-for="thisValue in valuesList" 
+          :value="thisValue.id"
+          :key="thisValue.text">
+          {{ thisValue.text }}
+        </option>
+      </select>
+      <i></i>
+    </label>
+  </section>
+
+</template>
+
+<script>
+import axios from 'axios'
+
+export default {
+  data() {
+    return {
+      value: '',
+      valuesList: []
+    }
+  },
+  props: {
+    heading: {
+      type: String,
+      required: true
+    },
+    table: {
+      type: String,
+      required: true
+    },
+    idName: {
+      type: String,
+      default: function() {
+        return this.heading.trim().charAt(0).toLowerCase() + 
+               this.heading.trim().slice(1).replace(/ /g,"")
+      }
+    }
+  }, 
+  methods: {
+    updateStore() {
+      this.$store.commit({
+        type: 'setSelectElement',
+        element: this.idName,
+        value: this.value
+      })
+    }, 
+    getValuesList() {
+      let $this = this
+      axios
+        .get("readRoutesServer/getValuesList/" + this.table)
+        .then((response) => {
+          $this.valuesList = response.data
+        })
+    }
+  },
+  computed: {
+    idHelp: function() {
+      return this.idName + "Help";
+    }
+  },
+  beforeMount() {
+    this.getValuesList()
+  }
+}
+</script>
+
+<style lang="scss">
+  @import '../../scss/forms/label';  
+  @import '../../scss/forms/select';
+  @import '../../scss/forms/section';
+</style>

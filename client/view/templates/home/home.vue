@@ -17,30 +17,30 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 
 export default {
   data() {
     return {
       quotation: "to put here",
       person: "a person"
-    };
+    }
   },
   methods: {
-    getRandomQuotation: function() {
-      let $this = this;
+    readRandomQuotation() {
+      let $this = this
       axios
         .get("readRoutesServer/readRandomQuotation")
-        .then(function(response) {
-          $this.quotation = response.data.quotation;
-          $this.person = response.data.person;
-        });
+        .then((response) => {
+          $this.quotation = response.data.quotation
+          $this.person = response.data.person
+        })
     }
   },
   beforeMount() {
-    this.getRandomQuotation();
+    this.readRandomQuotation()
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

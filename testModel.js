@@ -87,5 +87,7 @@ let createSpaOrganizationData = {
 		createSpaOrganizationData.organization_type_id = organizationTypeID
 		createSpaOrganizationData.place_id = placeID
 		return model.createOrganization(createSpaOrganizationData)		
-	});
+	}).then(()=>{
+    model.close()
+  })
 }

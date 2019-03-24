@@ -6,53 +6,51 @@
         <div class="row">
           <div class="col-md-4">
             <ash-textbox
-              heading="Organization Name"
+              heading="Login"
+              placeholder="Login"
+              helpText="Enter a login for the organization">
+            </ash-textbox>
+          </div>
+          <div class="col-md-4">
+            <ash-password
+              heading="Password"
+              placeholder="Password"
+              helpText="Enter password for organization to login">
+            </ash-password>
+          </div>
+          <div class="col-md-4">
+            <ash-password
+              heading="Verify Password"
+              placeholder="Verify Password"
+              helpText="Re-enter password to verify">
+            </ash-password>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <ash-textbox
+              heading="Name"
               placeholder="Enter name"
               helpText="Enter a short, unique, name to refer to the organization">
             </ash-textbox>
           </div>
-          <div class="col-md-4">
-            <section>
-              <label class="label" for="password">Password</label>
-              <label class="input">
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  aria-describedby="passwordHelp"
-                  placeholder="Password"
-                >
-              </label>
-              <div class="note" id="passwordHelp">
-                Enter password for organization to login
-              </div>
-            </section>
-          </div>
-          <div class="col-md-4">
-            <section>
-              <label class="label" for="organizationType">Type of Organization</label>
-              <label class="select">
-                <select id="organizationType" name="organizationType">
-                  <option value="1">Community Organization</option>
-                  <option value="2">Health and Social Services</option>
-                  <option value="3">Bar or Dance Club</option>
-                  <option value="4">Art, Theatre, Culture</option>
-                  <option value="5">Adult Entertainment</option>
-                </select>
-                <i></i>
-              </label>
-            </section>
+          <div class="col-md-6">
+            <ash-select
+              heading="Type of Organization"
+              idName="organizationType"
+              table="organization_types">
+            </ash-select>
           </div>
         </div>
 
         <div class="row align-items-center">
           <div class="col-md-12">
             <section>
-              <label class="label" for="organizaton_description">Description of Organization</label>
+              <label class="label" for="description_english">Description of Organization</label>
               <label class="textarea textarea-expandable">
                 <textarea
-                  id="organization_description"
-                  name="organization_description"
+                  id="description_english"
+                  name="description_english"
                   placeholder="Enter description of organization"
                   rows="5"
                 ></textarea>
@@ -74,7 +72,7 @@
           </div>
           <div class="col-md-2">
             <ash-textbox
-              heading="Extension"
+              heading="Phone Extension"
               helpText="Phone extension. Blank if none">
             </ash-textbox>
           </div>
@@ -194,8 +192,10 @@
 </template>
 
 <script>
-import Textbox from '../generalFormElements/textbox.vue';
-import TargetAudience from '../generalFormElements/targetAudience.vue';
+import Textbox from '../generalFormElements/textbox.vue'
+import Password from '../generalFormElements/password.vue'
+import TargetAudience from '../generalFormElements/targetAudience.vue'
+import Select from '../generalFormElements/select.vue'
 
 export default {
   methods: {
@@ -206,7 +206,9 @@ export default {
   },
   components: {
     'ash-textbox': Textbox,
-    'qt-target-audience': TargetAudience
+    'ash-password': Password,
+    'qt-target-audience': TargetAudience,
+    'ash-select': Select
   }
 }
 </script>
@@ -222,6 +224,5 @@ export default {
   @import '../../scss/forms/label';
   @import '../../scss/forms/select';
   @import '../../scss/forms/textarea';
-  @import '../../scss/forms/section';
   @import '../../scss/forms/checkbox';
 </style>

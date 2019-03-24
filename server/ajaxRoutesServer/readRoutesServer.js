@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 /*
  * readRoutesServer
  *
@@ -15,15 +15,21 @@
  * 
  */
 
-const express = require('express');
-const model = require('../model');
-const router = express.Router();
+const express = require('express')
+const model = require('../model')
+const router = express.Router()
 
 // Get a random quote from model/database and send back to client
-router.get('/readRandomQuotation', function(req, res) {
+router.get('/readRandomQuotation', (req, res) => {
   model.readRandomQuotation().then(quotationObject => {
-    res.send(quotationObject);
-  });
-});
+    res.send(quotationObject)
+  })
+})
+
+router.get('/getValuesList/:table', (req, res) => {
+  model.getValuesList(req.params.table).then(valuesList => {
+    res.send(valuesList)
+  })
+})
 
 module.exports = router;

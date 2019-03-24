@@ -255,4 +255,5 @@ INSERT INTO organization_types
   ('Health and Social Services'), 
   ('Bar or Dance Club'), 
   ('Art, Theatre, Culture'), 
-  ('Adult Entertainment');
+  ('Adult Entertainment'),
+  ('Athletic Club');
