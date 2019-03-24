@@ -8,7 +8,7 @@
         :name="idName"
         :aria-describedby="idHelp"
         :placeholder="placeholder"
-        v-model="value"
+        v-model.lazy="value"
         @change="updateStore"
       >
     </label>
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import { convertHeadingToName } from './convertHeadingToName'
+
 export default {
   data() {
     return {
@@ -36,12 +38,17 @@ export default {
     idName: {
       type: String,
       default: function() {
-        return this.heading.trim().charAt(0).toLowerCase() + 
-               this.heading.trim().slice(1).replace(/ /g,"");
+        return convertHeadingToName(this.heading)
       }
     },
-    placeholder: String,
-    helpText: String
+    placeholder: {
+      type: String,
+      default: ''
+    },
+    helpText: {
+      type: String,
+      default: ''
+    }
   }, 
   methods: {
     updateStore() {

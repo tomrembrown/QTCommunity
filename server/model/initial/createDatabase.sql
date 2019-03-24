@@ -115,8 +115,8 @@ CREATE TABLE organizations(
   display_facebook BOOLEAN NOT NULL DEFAULT FALSE,
   twitter TEXT DEFAULT NULL,
   display_twitter BOOLEAN NOT NULL DEFAULT FALSE,
-  linked_in TEXT DEFAULT NULL,
-  display_linked_in BOOLEAN NOT NULL DEFAULT FALSE,
+  linkedin TEXT DEFAULT NULL,
+  display_linkedin BOOLEAN NOT NULL DEFAULT FALSE,
   
   -- Information about who organization is geared for
   family_friendly BOOLEAN NOT NULL DEFAULT TRUE,  

@@ -37,7 +37,7 @@
           <div class="col-md-6">
             <ash-select
               heading="Type of Organization"
-              idName="organizationType"
+              idName="organization_type"
               table="organization_types">
             </ash-select>
           </div>
@@ -71,16 +71,14 @@
             </ash-textbox>
           </div>
           <div class="col-md-1">
-            <section>
-              <label for="show_phone" class="checkbox">
-                <input type="checkbox" name="show_phone" id="show_phone" checked>
-                <i></i>Show
-              </label>
-            </section>
+            <ash-checkbox
+              heading="Show"
+              idName="display_phone">
+            </ash-checkbox>
           </div>
           <div class="col-md-6">
             <ash-textbox
-              heading="Image"
+              heading="Image Link"
               helpText="Enter web address for logo for organization.  Leave blank if none">
             </ash-textbox>
           </div>
@@ -94,12 +92,10 @@
             </ash-textbox>
           </div>
           <div class="col-md-1">
-            <section>
-              <label for="show_email" class="checkbox">
-                <input type="checkbox" name="show_email" id="show_email" checked>
-                <i></i>Show
-              </label>
-            </section>
+            <ash-checkbox
+              heading="Show"
+              idName="display_email">
+            </ash-checkbox>
           </div>
           <div class="col-md-5">
             <ash-textbox
@@ -108,12 +104,10 @@
             </ash-textbox>
           </div>
           <div class="col-md-1">
-            <section>
-              <label for="show_website" class="checkbox">
-                <input type="checkbox" name="show_website" id="show_website" checked>
-                <i></i>Show
-              </label>
-            </section>
+            <ash-checkbox
+              heading="Show"
+              idName="display_website">
+            </ash-checkbox>
           </div>
         </div>
 
@@ -125,12 +119,10 @@
             </ash-textbox>
           </div>
           <div class="col-md-1">
-            <section>
-              <label for="show_facebook" class="checkbox">
-                <input type="checkbox" name="show_facebook" id="show_facebook" checked>
-                <i></i>Show
-              </label>
-            </section>
+            <ash-checkbox
+              heading="Show"
+              idName="display_facebook">
+            </ash-checkbox>
           </div>
           <div class="col-md-5">
             <ash-textbox
@@ -139,12 +131,10 @@
             </ash-textbox>
           </div>
           <div class="col-md-1">
-            <section>
-              <label for="show_twitter" class="checkbox">
-                <input type="checkbox" name="show_twitter" id="show_twitter" checked>
-                <i></i>Show
-              </label>
-            </section>
+            <ash-checkbox
+              heading="Show"
+              idName="display_twitter">
+            </ash-checkbox>
           </div>
         </div>
 
@@ -156,12 +146,10 @@
             </ash-textbox>
           </div>
           <div class="col-md-1">
-            <section>
-              <label for="show_linkedin" class="checkbox">
-                <input type="checkbox" name="show_linkedin" id="show_linkedin" checked>
-                <i></i>Show
-              </label>
-            </section>
+            <ash-checkbox
+              heading="Show"
+              idName="display_linkedin">
+            </ash-checkbox>
           </div>
         </div>
 
@@ -191,6 +179,7 @@ import Password from '../generalFormElements/password.vue'
 import TargetAudience from '../generalFormElements/targetAudience.vue'
 import Select from '../generalFormElements/select.vue'
 import Textarea from '../generalFormElements/textarea.vue'
+import Checkbox from '../generalFormElements/checkbox.vue'
 
 export default {
   methods: {
@@ -204,7 +193,8 @@ export default {
     'ash-password': Password,
     'qt-target-audience': TargetAudience,
     'ash-select': Select,
-    'ash-textarea': Textarea
+    'ash-textarea': Textarea,
+    'ash-checkbox': Checkbox
   }
 }
 </script>

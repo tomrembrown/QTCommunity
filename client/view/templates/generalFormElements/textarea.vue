@@ -8,7 +8,7 @@
         :aria-describedby="idHelp"
         :placeholder="placeholder"
         rows="5"
-        v-model="value"
+        v-model.lazy="value"
         @change="updateStore">
       </textarea>
     </label>
