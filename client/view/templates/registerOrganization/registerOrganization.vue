@@ -45,17 +45,11 @@
 
         <div class="row align-items-center">
           <div class="col-md-12">
-            <section>
-              <label class="label" for="description_english">Description of Organization</label>
-              <label class="textarea textarea-expandable">
-                <textarea
-                  id="description_english"
-                  name="description_english"
-                  placeholder="Enter description of organization"
-                  rows="5"
-                ></textarea>
-              </label>
-            </section>
+            <ash-textarea
+              heading="Description of Organization"
+              idName="description_english"
+              placeholder="Enter description of organization">
+            </ash-textarea>
           </div>
         </div>
 
@@ -196,6 +190,7 @@ import Textbox from '../generalFormElements/textbox.vue'
 import Password from '../generalFormElements/password.vue'
 import TargetAudience from '../generalFormElements/targetAudience.vue'
 import Select from '../generalFormElements/select.vue'
+import Textarea from '../generalFormElements/textarea.vue'
 
 export default {
   methods: {
@@ -208,7 +203,8 @@ export default {
     'ash-textbox': Textbox,
     'ash-password': Password,
     'qt-target-audience': TargetAudience,
-    'ash-select': Select
+    'ash-select': Select,
+    'ash-textarea': Textarea
   }
 }
 </script>
