@@ -37,7 +37,7 @@
           <div class="col-md-6">
             <ash-select
               heading="Type of Organization"
-              idName="organization_type"
+              idName="organization_type_id"
               table="organization_types">
             </ash-select>
           </div>
@@ -73,7 +73,8 @@
           <div class="col-md-1">
             <ash-checkbox
               heading="Show"
-              idName="display_phone">
+              idName="display_phone"
+              :value="false">
             </ash-checkbox>
           </div>
           <div class="col-md-6">
@@ -94,19 +95,22 @@
           <div class="col-md-1">
             <ash-checkbox
               heading="Show"
-              idName="display_email">
+              idName="display_email"
+              :value="false">
             </ash-checkbox>
           </div>
           <div class="col-md-5">
             <ash-textbox
               heading="Website"
+              idName="website_english"
               helpText="Enter website for organization. Leave blank if none">
             </ash-textbox>
           </div>
           <div class="col-md-1">
             <ash-checkbox
               heading="Show"
-              idName="display_website">
+              idName="display_website"
+              :value="false">
             </ash-checkbox>
           </div>
         </div>
@@ -121,7 +125,8 @@
           <div class="col-md-1">
             <ash-checkbox
               heading="Show"
-              idName="display_facebook">
+              idName="display_facebook"
+              :value="false">
             </ash-checkbox>
           </div>
           <div class="col-md-5">
@@ -133,7 +138,8 @@
           <div class="col-md-1">
             <ash-checkbox
               heading="Show"
-              idName="display_twitter">
+              idName="display_twitter"
+              :value="false">
             </ash-checkbox>
           </div>
         </div>
@@ -148,7 +154,8 @@
           <div class="col-md-1">
             <ash-checkbox
               heading="Show"
-              idName="display_linkedin">
+              idName="display_linkedin"
+              :value="false">
             </ash-checkbox>
           </div>
         </div>
@@ -184,8 +191,7 @@ import Checkbox from '../generalFormElements/checkbox.vue'
 export default {
   methods: {
     submitForm() {
-      console.log("In Create ")
-      this.$store.commit('submitRegisterOrganizationForm')
+      this.$store.dispatch('submitRegisterOrganizationForm')
     }
   },
   components: {

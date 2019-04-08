@@ -96,6 +96,11 @@ module.exports = {
         context: ['/readRoutesServer'],
         target: 'http://localhost:' + process.env.PORT,
         secure: false
+      },
+      {
+        context: ['/createRoutesServer'],
+        target: 'http://localhost:' + process.env.PORT,
+        secure: false
       }
     ]
   },

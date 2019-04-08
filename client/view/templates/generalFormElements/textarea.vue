@@ -9,9 +9,14 @@
         :placeholder="placeholder"
         rows="5"
         v-model.lazy="value"
-        @change="updateStore">
+        @blur="updateStore">
       </textarea>
     </label>
+    <div
+      v-if="isError"
+      class="note error">
+      {{ errorMessage }}
+    </div>
     <div 
       v-if="helpText.length>0" 
       class="note" 
@@ -52,16 +57,24 @@ export default {
   }, 
   methods: {
     updateStore() {
-      this.$store.commit({
-        type: 'setTextareaElement',
+      const payload = {
         element: this.idName,
         value: this.value
-      })
+      }
+      this.$store.dispatch('checkErrorAndSetElement', payload)
     }
   },
   computed: {
     idHelp: function() {
       return this.idName + "Help"
+    },
+    isError() {
+      let thisError = this.$store.getters.getError(this.idName).length === 0 ? false : true;
+      return thisError
+    },
+    errorMessage() {
+      let errorObject = this.$store.getters.getError(this.idName)
+      return errorObject[0].message
     }
   }
 }

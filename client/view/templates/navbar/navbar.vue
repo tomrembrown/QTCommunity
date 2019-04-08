@@ -83,5 +83,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
+  @import "/node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 </style>

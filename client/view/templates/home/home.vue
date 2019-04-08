@@ -46,6 +46,6 @@ export default {
 <style lang="scss" scoped>
 
 @import "/node_modules/@fortawesome/fontawesome-free/css/all.min.css";
-@import '../../scss/home.scss';
+@import "../../scss/home.scss";
 
 </style>

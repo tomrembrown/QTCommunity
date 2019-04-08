@@ -2,7 +2,11 @@
   <section>
     <label class="label" :for="idName">{{ heading }}</label>
     <label class="select">
-      <select :id="idName" :name="idName">
+      <select 
+        :id="idName" 
+        :name="idName" 
+        v-model="value"
+        @change="updateStore">
         <option 
           v-for="thisValue in valuesList" 
           :value="thisValue.id"
@@ -18,11 +22,12 @@
 
 <script>
 import axios from 'axios'
+import { convertHeadingToName } from './convertHeadingToName'
 
 export default {
   data() {
     return {
-      value: '',
+      value: 1,
       valuesList: []
     }
   },
@@ -38,15 +43,14 @@ export default {
     idName: {
       type: String,
       default: function() {
-        return this.heading.trim().charAt(0).toLowerCase() + 
-               this.heading.trim().slice(1).replace(/ /g,"")
+        return convertHeadingToName(this.heading)
       }
     }
   }, 
   methods: {
     updateStore() {
       this.$store.commit({
-        type: 'setSelectElement',
+        type: 'setElement',
         element: this.idName,
         value: this.value
       })
@@ -67,6 +71,7 @@ export default {
   },
   beforeMount() {
     this.getValuesList()
+    this.updateStore()
   }
 }
 </script>

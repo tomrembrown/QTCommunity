@@ -4,7 +4,6 @@
   "description": "A Single Page Web Application that presents a community website with a list of events and organizations",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run prod",
     "dev": "concurrently --kill-others \"webpack-dev-server --inline --hot\" \"nodemon ./server.js\"",
     "createDatabase": "node ./server/model/initial/createDatabase.js",
@@ -44,30 +43,27 @@
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "luxon": "^1.12.0",
+    "md5": "^2.2.1",
     "microdata-node": "^1.0.0",
+    "password-hash": "^1.2.2",
     "pg": "^7.9.0",
     "vue": "^2.6.10",
     "vue-datetime": "^1.0.0-beta.10",
     "vue-router": "^3.0.2",
     "vuex": "^3.1.0",
     "weekstart": "^1.0.0",
+    "xmldom": "^0.1.27",
     "xpath": "0.0.27"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.0",
+    "@babel/core": "^7.4.3",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-env": "^7.4.3",
     "babel-loader": "^8.0.5",
-    "chai": "^4.2.0",
     "compression-webpack-plugin": "^2.0.0",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
     "file-loader": "^3.0.1",
-    "grunt": "^1.0.4",
-    "grunt-contrib-jshint": "^2.1.0",
-    "grunt-exec": "^3.0.0",
-    "grunt-mocha-test": "^0.13.3",
-    "mocha": "^6.0.2",
     "node-sass": "^4.11.0",
     "nodemon": "^1.18.10",
     "sass-loader": "^7.1.0",
@@ -75,7 +71,6 @@
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.2.1",
-    "zombie": "^6.1.4"
+    "webpack-dev-server": "^3.2.1"
   }
 }

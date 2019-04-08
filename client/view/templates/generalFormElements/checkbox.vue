@@ -5,7 +5,8 @@
         type="checkbox" 
         :name="idName" 
         :id="idName" 
-        v-bind:checked="checked">
+        v-bind:checked="value"
+        @click=switched()>
       <i></i> {{ heading }}
     </label>
   </section>
@@ -26,18 +27,20 @@ export default {
         return convertHeadingToName(this.heading)
       }
     },
-    checked: {
+    value: {
       type: Boolean,
       default: true
     }
   }, 
   methods: {
-    updateStore() {
+    switched() {
+      this.value = !this.value
+      this.$emit('input',this.value)
       this.$store.commit({
-        type: 'setCheckboxElement',
+        type: 'setElement',
         element: this.idName,
-        value: this.checked
-      })
+        value: this.value
+       })
     }
   }
 }
