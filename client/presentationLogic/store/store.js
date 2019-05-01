@@ -1,3 +1,5 @@
+'use strict'
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 import authentication from './modules/authentication'
@@ -10,4 +12,3 @@ export const store = new Vuex.Store({
     authentication, registerOrganizationForm
   }
 })
-

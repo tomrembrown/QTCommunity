@@ -4,7 +4,7 @@ const express = require('express')
 const path = require('path')
 const history = require('connect-history-api-fallback')
 
-require('dotenv').config()  // load the environment variables from .env
+require('dotenv').config() // load the environment variables from .env
 
 // Requires of my files
 const readRoutesServer = require('./server/ajaxRoutesServer/readRoutesServer')
@@ -22,17 +22,17 @@ app.disable('x-powered-by')
 app.set('port', process.env.PORT)
 
 // Run static files out of pubic directories in view & view-model on client
-app.use('/',express.static(path.join(__dirname,'client/view/public')))
+app.use('/', express.static(path.join(__dirname, 'client/view/public')))
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')))
 app.use('/build', express.static(path.join(__dirname, 'build')))
 
 // The one route for now - just go to the main page - all routing actually
 // handled by the front-end SPA (except AJAX routes below)
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname,'/client/view/public/index.html'))
+  res.sendFile(path.join(__dirname, '/client/view/public/index.html'))
 })
 
-// AJAX routes 
+// AJAX routes
 app.use('/readRoutesServer', readRoutesServer)
 app.use('/createRoutesServer', createRoutesServer)
 
@@ -42,7 +42,5 @@ if (app.get('env') === 'development') logString += 'Open page on webpack server 
 logString += 'press Ctr-C to terminate.'
 
 app.listen(app.get('port'), () => {
-  console.log(logString);
+  console.log(logString)
 })
-
-

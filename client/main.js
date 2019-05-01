@@ -1,3 +1,5 @@
+'use strict'
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './view/App.vue'
@@ -6,11 +8,12 @@ import { store } from './presentationLogic/store/store'
 
 Vue.use(VueRouter)
 
-const router = new VueRouter({ 
+const router = new VueRouter({
   routes,
   mode: 'history'
 })
 
+/* eslint-disable no-new */
 new Vue({
   el: '#app',
   store: store,

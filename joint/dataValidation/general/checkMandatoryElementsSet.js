@@ -1,7 +1,8 @@
 'use strict'
+
 const constants = require('../../constants')
 
-const checkMandatoryElementsSet = function(formElements) {
+const checkMandatoryElementsSet = function (formElements) {
   let missingErrors = []
 
   constants.mandatoryElements.forEach((element) => {

@@ -1,3 +1,5 @@
+'use strict'
+
 import axios from 'axios'
 const checkError = require('../../../../joint/dataValidation/general/checkError')
 const checkMandatoryElementsSet = require('../../../../joint/dataValidation/general/checkMandatoryElementsSet')
@@ -21,12 +23,12 @@ const mutations = {
     const errorLocation = state.errors.indexOf(
       state.errors.find(
         (error) => {
-          return error.element == element
+          return error.element === element
         })
     )
 
-    if (errorLocation !== -1)  {
-      state.errors.splice(errorLocation,1)
+    if (errorLocation !== -1) {
+      state.errors.splice(errorLocation, 1)
     }
   },
   pushError (state, thisError) {
@@ -43,33 +45,32 @@ const getters = {
 }
 
 const actions = {
-  checkErrorAndSetElement: ({commit}, payload) => {
+  checkErrorAndSetElement: ({ commit }, payload) => {
     console.log('In checkErrorAndSetElement, element: ' + payload.element + ', value: ' + payload.value)
     commit('setElement', payload)
     const thisError = checkError(payload.element, payload.value, state.formElements)
     commit('removeError', payload.element)
     commit('pushError', thisError)
   },
-  submitRegisterOrganizationForm: ({commit, state}) => {
+  submitRegisterOrganizationForm: ({ commit, state }) => {
     const missingErrors = checkMandatoryElementsSet(state.formElements)
     if (missingErrors.length > 0) {
       missingErrors.forEach((thisError) => {
-        commit('removeError',thisError.element)
-        commit('pushError',thisError)
+        commit('removeError', thisError.element)
+        commit('pushError', thisError)
       })
       document.getElementById(missingErrors[0].element).scrollIntoView()
     }
 
     const verifyError = checkVerifyPassword(state.formElements)
     if (verifyError !== null) {
-      commit('removeError',verifyError.element) 
-      commit('pushError',verifyError)
+      commit('removeError', verifyError.element)
+      commit('pushError', verifyError)
       document.getElementById(verifyError.element).scrollIntoView()
     }
 
     // Only submit form if no errors
     if (state.errors.length === 0) {
-
       // Verified that password = verify password above - don't need verify password on server
       commit('removeElement', 'verify_password')
 

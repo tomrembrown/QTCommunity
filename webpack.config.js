@@ -1,8 +1,10 @@
-const path = require('path');
-const webpack = require('webpack');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const CompressionPlugin = require('compression-webpack-plugin');
-require('dotenv').config();  // load the environment variables from .env
+'use strict'
+
+const path = require('path')
+const webpack = require('webpack')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
+require('dotenv').config() // load the environment variables from .env
 
 module.exports = {
   entry: './client/main.js',
@@ -18,7 +20,7 @@ module.exports = {
         use: [
           'vue-style-loader',
           'css-loader'
-        ],
+        ]
       },
       {
         test: /\.scss$/,
@@ -26,7 +28,7 @@ module.exports = {
           'vue-style-loader',
           'css-loader',
           'sass-loader'
-        ],
+        ]
       },
       {
         test: /\.sass$/,
@@ -34,7 +36,7 @@ module.exports = {
           'vue-style-loader',
           'css-loader',
           'sass-loader?indentedSyntax'
-        ],
+        ]
       },
       {
         test: /\.vue$/,
@@ -128,8 +130,6 @@ if (process.env.NODE_ENV === 'production') {
     })
   ])
   module.exports.mode = 'production'
-}
-else {
+} else {
   module.exports.mode = 'development'
 }
-

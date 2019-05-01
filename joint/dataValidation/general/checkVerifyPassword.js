@@ -1,6 +1,6 @@
 'use strict'
 
-const checkVerifyPassword = function(formElements) {
+const checkVerifyPassword = function (formElements) {
   if (formElements.password !== formElements.verify_password) {
     return {
       element: 'verify_password',

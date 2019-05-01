@@ -1,14 +1,16 @@
-'use strict';
+'use strict'
 
-const db = require('./../db');
-const fs = require('fs');
+const path = require('path')
 
-let sqlScript = fs.readFileSync(__dirname+'/createDatabase.sql').toString();
+const db = require('./../db')
+const fs = require('fs')
+
+let sqlScript = fs.readFileSync(path.join(__dirname, '/createDatabase.sql')).toString()
 
 db.query(sqlScript, (err, res) => {
   if (err) {
-    return console.error('error running query', err);
+    return console.error('error running query', err)
   }
-  console.log('Tables successfully created!');
-  db.end();
-});
+  console.log('Tables successfully created!')
+  db.end()
+})

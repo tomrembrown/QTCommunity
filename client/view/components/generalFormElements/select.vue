@@ -58,7 +58,7 @@ export default {
     getValuesList() {
       let $this = this
       axios
-        .get("readRoutesServer/getValuesList/" + this.table)
+        .get('readRoutesServer/getValuesList/' + this.table)
         .then((response) => {
           $this.valuesList = response.data
         })
@@ -66,7 +66,7 @@ export default {
   },
   computed: {
     idHelp: function() {
-      return this.idName + "Help";
+      return this.idName + 'Help';
     }
   },
   beforeMount() {
