@@ -9,6 +9,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   modules: {
-    authentication, registerOrganizationForm
+    authentication,
+    registerOrganizationForm
   }
 })

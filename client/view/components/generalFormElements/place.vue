@@ -40,7 +40,8 @@
               heading="Name of Place"
               idName="placeName"
               placeholder="Enter name"
-              helpText="Enter a short, unique, name to refer to the place">
+              helpText="Enter a short, unique, name to refer to the place"
+            >
             </ash-textbox>
           </div>
           <div class="col-md-8">
@@ -51,7 +52,8 @@
                   id="placeAddress"
                   name="placeAddress"
                   placeholder="Enter address"
-                  rows="3">
+                  rows="3"
+                >
                 </textarea>
               </label>
               <div class="note" id="placeAddressHelp">
@@ -67,25 +69,24 @@
           <div class="col-md-6">
             <section>
               <label for="wheelChairAccessible" class="checkbox">
-                <input 
-                  type="checkbox" 
-                  name="wheelChairAccessible" 
-                  id="wheelChairAccessible">
+                <input
+                  type="checkbox"
+                  name="wheelChairAccessible"
+                  id="wheelChairAccessible"
+                />
                 <i></i>Is place wheel chair accessible?
               </label>
             </section>
           </div>
         </div>
-
       </div>
     </transition>
-
   </fieldset>
 </template>
 
 <script>
-import Textbox from './textbox.vue';
-import TargetAudience from './targetAudience.vue';
+import Textbox from './textbox.vue'
+import TargetAudience from './targetAudience.vue'
 
 export default {
   data() {
@@ -95,25 +96,23 @@ export default {
   },
   methods: {
     onChangePlace(event) {
-      if (event.target.value === 'New')
-        this.newPlace = true;
-      else
-        this.newPlace = false;
+      if (event.target.value === 'New') this.newPlace = true
+      else this.newPlace = false
     }
   },
   components: {
     'ash-textbox': Textbox,
     'qt-target-audience': TargetAudience
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
-  @import '../../scss/forms/fade';
-  @import '../../scss/forms/section';
-  @import '../../scss/forms/label';
-  @import '../../scss/forms/select';
-  @import '../../scss/forms/checkbox';
-  @import '../../scss/forms/select';
-  @import '../../scss/forms/textarea';
+@import '../../scss/forms/fade';
+@import '../../scss/forms/section';
+@import '../../scss/forms/label';
+@import '../../scss/forms/select';
+@import '../../scss/forms/checkbox';
+@import '../../scss/forms/select';
+@import '../../scss/forms/textarea';
 </style>

@@ -6,18 +6,16 @@
 </template>
 
 <script>
+import Navbar from './components/navbar/navbar.vue'
 
-  import Navbar from './components/navbar/navbar.vue';
-
-  export default {
-    components: {
-      qtNavbar: Navbar
-    }
+export default {
+  components: {
+    qtNavbar: Navbar
   }
-
+}
 </script>
 
 <style lang="scss">
-  @import 'node_modules/bootstrap/scss/bootstrap.scss';
-  @import './scss/forms/resetSizing';
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import './scss/forms/resetSizing';
 </style>

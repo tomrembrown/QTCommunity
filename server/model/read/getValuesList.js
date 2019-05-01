@@ -13,14 +13,13 @@ const getValuesList = async function (table) {
   const textColName = textName.get(table)
 
   const getValuesListQuery =
-    'SELECT id, ' + textColName +
-    ' FROM ' + table + ';'
+    'SELECT id, ' + textColName + ' FROM ' + table + ';'
 
   let valuesList
 
   try {
     const { rows } = await db.query(getValuesListQuery)
-    valuesList = rows.map((row) => {
+    valuesList = rows.map(row => {
       return { id: row.id, text: row[textColName] }
     })
   } catch (err) {

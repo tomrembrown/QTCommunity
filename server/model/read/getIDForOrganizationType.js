@@ -6,7 +6,9 @@ const getIDForOrganizationType = async function (name) {
   const getIDForOrganizationTypeQuery =
     'SELECT id ' +
     'FROM organization_types ' +
-    "WHERE name_english='" + name + "';"
+    "WHERE name_english='" +
+    name +
+    "';"
 
   let id
 

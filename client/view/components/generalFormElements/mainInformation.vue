@@ -69,19 +69,19 @@
 </template>
 
 <script>
-import Textbox from './textbox.vue';
+import Textbox from './textbox.vue'
 
 export default {
   components: {
     'ash-textbox': Textbox
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
-  @import '../../scss/forms/fieldset';
-  @import '../../scss/forms/h2';
-  @import '../../scss/forms/section';
-  @import '../../scss/forms/label';
-  @import '../../scss/forms/textarea';
+@import '../../scss/forms/fieldset';
+@import '../../scss/forms/h2';
+@import '../../scss/forms/section';
+@import '../../scss/forms/label';
+@import '../../scss/forms/textarea';
 </style>

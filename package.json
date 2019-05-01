@@ -11,7 +11,7 @@
     "prod": "node ./server.js",
     "pretest": "eslint --ignore-path .gitignore .",
     "fixlint": "./node_modules/.bin/eslint --fix --ignore-path .gitignore .",
-    "makepretty": "./node_modules/.bin/prettier --write **/*.js"
+    "makepretty": "./node_modules/.bin/prettier --write --ignore-path .gitignore '**/*.js' '**/*.vue'"
   },
   "keywords": [
     "Community",

@@ -40,19 +40,34 @@ const createEvent = async function (eventDetails) {
     }
   }
 
-  let parameters = Array.from([...Array(columnList.length + 1).keys()], x => '$' + x)
+  let parameters = Array.from(
+    [...Array(columnList.length + 1).keys()],
+    x => '$' + x
+  )
   parameters.shift()
 
-  let createPlaceQuery = 'INSERT INTO event_groups (' + columnList.join(', ') + ') VALUES (' + parameters.join() + ');'
+  let createPlaceQuery =
+    'INSERT INTO event_groups (' +
+    columnList.join(', ') +
+    ') VALUES (' +
+    parameters.join() +
+    ');'
 
   try {
     await db.query(createPlaceQuery, dataList)
-    let eventID = await readEvent(eventDetails.long_title_english, eventDetails.organization_id)
+    let eventID = await readEvent(
+      eventDetails.long_title_english,
+      eventDetails.organization_id
+    )
 
     for (let i in eventDetails.instances) {
       let payload = eventDetails.instances[i]
       payload.event_group_id = eventID
-      writeEventInstance(payload).then(() => {}).catch((err) => { console.log(err) })
+      writeEventInstance(payload)
+        .then(() => {})
+        .catch(err => {
+          console.log(err)
+        })
     }
   } catch (err) {
     console.error('error running query', err)

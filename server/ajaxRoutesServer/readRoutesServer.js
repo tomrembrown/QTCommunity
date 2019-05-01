@@ -33,13 +33,17 @@ router.get('/getValuesList/:table', (req, res) => {
 })
 
 router.get('/checkElementTaken/:element/:value', (req, res) => {
-  console.log('In check Element, element = ' + req.params.element,
-    ' value = ' + req.params.value)
+  console.log(
+    'In check Element, element = ' + req.params.element,
+    ' value = ' + req.params.value
+  )
 
-  model.checkElementTaken(req.params.element, req.params.value).then(isTaken => {
-    console.log('In call back in checkElementTaken, taken = ' + isTaken)
-    res.send(isTaken)
-  })
+  model
+    .checkElementTaken(req.params.element, req.params.value)
+    .then(isTaken => {
+      console.log('In call back in checkElementTaken, taken = ' + isTaken)
+      res.send(isTaken)
+    })
 })
 
 module.exports = router

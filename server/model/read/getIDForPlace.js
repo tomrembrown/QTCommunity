@@ -4,9 +4,7 @@ const db = require('./../db')
 
 const getIDForPlace = async function (name) {
   const getIDForPlaceQuery =
-    'SELECT id ' +
-    'FROM places ' +
-    "WHERE name='" + name + "';"
+    'SELECT id ' + 'FROM places ' + "WHERE name='" + name + "';"
 
   let id
 

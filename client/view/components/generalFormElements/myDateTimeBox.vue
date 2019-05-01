@@ -1,9 +1,13 @@
 <template>
-  <datetime type="datetime" input-class="my-datetime-class" :input-id="myInputId"></datetime>
+  <datetime
+    type="datetime"
+    input-class="my-datetime-class"
+    :input-id="myInputId"
+  ></datetime>
 </template>
 
 <script>
-import { Datetime } from 'vue-datetime';
+import { Datetime } from 'vue-datetime'
 
 export default {
   props: {
@@ -13,13 +17,12 @@ export default {
     }
   },
   components: {
-    'datetime': Datetime
+    datetime: Datetime
   }
-};
+}
 </script>
 
 <style lang="scss">
-  @import '/node_modules/vue-datetime/dist/vue-datetime.min.css';
-  @import '../../scss/forms/myDateTimeBox';
+@import '/node_modules/vue-datetime/dist/vue-datetime.min.css';
+@import '../../scss/forms/myDateTimeBox';
 </style>
-

@@ -26,7 +26,6 @@ const createOrganization = require('./create/createOrganization')
 const close = require('./final/close')
 
 const model = {
-
   /* ******
    * Other details in database than events, places, organizations
    * ******/
@@ -56,7 +55,6 @@ const model = {
    * Create database entries
    * ******/
   close: close
-
 }
 
 module.exports = model

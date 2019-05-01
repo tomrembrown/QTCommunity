@@ -6,8 +6,8 @@ const checkMandatoryElementsSet = require('../../../../joint/dataValidation/gene
 const checkVerifyPassword = require('../../../../joint/dataValidation/general/checkVerifyPassword')
 
 const state = {
-  formElements: { },
-  errors: [ ]
+  formElements: {},
+  errors: []
 }
 
 const mutations = {
@@ -21,10 +21,9 @@ const mutations = {
   },
   removeError (state, element) {
     const errorLocation = state.errors.indexOf(
-      state.errors.find(
-        (error) => {
-          return error.element === element
-        })
+      state.errors.find(error => {
+        return error.element === element
+      })
     )
 
     if (errorLocation !== -1) {
@@ -39,23 +38,32 @@ const mutations = {
 }
 
 const getters = {
-  getError: (state) => (thisElement) => {
+  getError: state => thisElement => {
     return state.errors.filter(error => error.element === thisElement)
   }
 }
 
 const actions = {
   checkErrorAndSetElement: ({ commit }, payload) => {
-    console.log('In checkErrorAndSetElement, element: ' + payload.element + ', value: ' + payload.value)
+    console.log(
+      'In checkErrorAndSetElement, element: ' +
+        payload.element +
+        ', value: ' +
+        payload.value
+    )
     commit('setElement', payload)
-    const thisError = checkError(payload.element, payload.value, state.formElements)
+    const thisError = checkError(
+      payload.element,
+      payload.value,
+      state.formElements
+    )
     commit('removeError', payload.element)
     commit('pushError', thisError)
   },
   submitRegisterOrganizationForm: ({ commit, state }) => {
     const missingErrors = checkMandatoryElementsSet(state.formElements)
     if (missingErrors.length > 0) {
-      missingErrors.forEach((thisError) => {
+      missingErrors.forEach(thisError => {
         commit('removeError', thisError.element)
         commit('pushError', thisError)
       })
@@ -75,8 +83,7 @@ const actions = {
       commit('removeElement', 'verify_password')
 
       axios
-        .post('createRoutesServer/createOrganization',
-          state.formElements)
+        .post('createRoutesServer/createOrganization', state.formElements)
         .then(function (response) {
           console.log(response)
         })
@@ -88,5 +95,8 @@ const actions = {
 }
 
 export default {
-  state, mutations, getters, actions
+  state,
+  mutations,
+  getters,
+  actions
 }

@@ -2,22 +2,18 @@
   <section>
     <label class="label" :for="idName">{{ heading }}</label>
     <label class="select">
-      <select 
-        :id="idName" 
-        :name="idName" 
-        v-model="value"
-        @change="updateStore">
-        <option 
-          v-for="thisValue in valuesList" 
+      <select :id="idName" :name="idName" v-model="value" @change="updateStore">
+        <option
+          v-for="thisValue in valuesList"
           :value="thisValue.id"
-          :key="thisValue.text">
+          :key="thisValue.text"
+        >
           {{ thisValue.text }}
         </option>
       </select>
       <i></i>
     </label>
   </section>
-
 </template>
 
 <script>
@@ -46,7 +42,7 @@ export default {
         return convertHeadingToName(this.heading)
       }
     }
-  }, 
+  },
   methods: {
     updateStore() {
       this.$store.commit({
@@ -54,19 +50,19 @@ export default {
         element: this.idName,
         value: this.value
       })
-    }, 
+    },
     getValuesList() {
       let $this = this
       axios
         .get('readRoutesServer/getValuesList/' + this.table)
-        .then((response) => {
+        .then(response => {
           $this.valuesList = response.data
         })
     }
   },
   computed: {
     idHelp: function() {
-      return this.idName + 'Help';
+      return this.idName + 'Help'
     }
   },
   beforeMount() {
@@ -77,7 +73,7 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '../../scss/forms/label';  
-  @import '../../scss/forms/select';
-  @import '../../scss/forms/section';
+@import '../../scss/forms/label';
+@import '../../scss/forms/select';
+@import '../../scss/forms/section';
 </style>

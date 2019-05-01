@@ -38,7 +38,7 @@ app.use('/createRoutesServer', createRoutesServer)
 
 // Start server listening for requests from browser
 let logString = ' Express started on http://localhost:' + app.get('port') + '; '
-if (app.get('env') === 'development') logString += 'Open page on webpack server at localhost:8080; '
+if (app.get('env') === 'development') { logString += 'Open page on webpack server at localhost:8080; ' }
 logString += 'press Ctr-C to terminate.'
 
 app.listen(app.get('port'), () => {

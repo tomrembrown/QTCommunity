@@ -4,10 +4,10 @@
       <div class="quote-wrapper">
         <div class="quote">
           <i class="fas fa-quote-left"></i>
-          {{quotation}}
+          {{ quotation }}
           <i class="fas fa-quote-right"></i>
         </div>
-        <div class="attribute">{{person}}</div>
+        <div class="attribute">{{ person }}</div>
       </div>
     </div>
     <div class="headliner-wrapper">
@@ -22,19 +22,17 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      quotation: "to put here",
-      person: "a person"
+      quotation: 'to put here',
+      person: 'a person'
     }
   },
   methods: {
     readRandomQuotation() {
       let $this = this
-      axios
-        .get("readRoutesServer/readRandomQuotation")
-        .then((response) => {
-          $this.quotation = response.data.quotation
-          $this.person = response.data.person
-        })
+      axios.get('readRoutesServer/readRandomQuotation').then(response => {
+        $this.quotation = response.data.quotation
+        $this.person = response.data.person
+      })
     }
   },
   beforeMount() {
@@ -44,8 +42,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-@import "/node_modules/@fortawesome/fontawesome-free/css/all.min.css";
-@import "../../scss/home.scss";
-
+@import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+@import '../../scss/home.scss';
 </style>

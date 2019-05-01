@@ -1,3 +1,6 @@
 export function convertHeadingToName (heading) {
-  return heading.trim().toLowerCase().replace(/ /g, '_')
+  return heading
+    .trim()
+    .toLowerCase()
+    .replace(/ /g, '_')
 }

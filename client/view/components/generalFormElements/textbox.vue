@@ -10,18 +10,13 @@
         :placeholder="placeholder"
         v-model.lazy="value"
         @blur="updateStore"
-      >
+      />
     </label>
-    <div 
-      v-if="isError"
-      class="note error">
+    <div v-if="isError" class="note error">
       {{ errorMessage }}
     </div>
-    <div 
-      v-else-if="helpText.length>0" 
-      class="note" 
-      :id="idHelp">
-        {{ helpText }}
+    <div v-else-if="helpText.length > 0" class="note" :id="idHelp">
+      {{ helpText }}
     </div>
   </section>
 </template>
@@ -54,7 +49,7 @@ export default {
       type: String,
       default: ''
     }
-  }, 
+  },
   methods: {
     updateStore() {
       const payload = {
@@ -69,7 +64,8 @@ export default {
       return this.idName + 'Help'
     },
     isError() {
-      let thisError = this.$store.getters.getError(this.idName).length === 0 ? false : true;
+      let thisError =
+        this.$store.getters.getError(this.idName).length === 0 ? false : true
       return thisError
     },
     errorMessage() {
@@ -81,8 +77,8 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '../../scss/forms/label';  
-  @import '../../scss/forms/input';  
-  @import '../../scss/forms/note';  
-  @import '../../scss/forms/section';
+@import '../../scss/forms/label';
+@import '../../scss/forms/input';
+@import '../../scss/forms/note';
+@import '../../scss/forms/section';
 </style>

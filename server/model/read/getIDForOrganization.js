@@ -3,7 +3,8 @@
 const db = require('./../db')
 
 const getIDForOrganization = async function (name) {
-  const getIDForOrganizationTypeQuery = 'SELECT id FROM organizations WHERE name = $1;'
+  const getIDForOrganizationTypeQuery =
+    'SELECT id FROM organizations WHERE name = $1;'
 
   let id
   try {

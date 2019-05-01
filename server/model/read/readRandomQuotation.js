@@ -19,7 +19,7 @@ const readRandomQuotation = async function () {
     'SELECT quotation, person ' +
     'FROM quotations ' +
     'OFFSET floor(random()* ' +
-       '(SELECT COUNT(*) FROM quotations)) ' +
+    '(SELECT COUNT(*) FROM quotations)) ' +
     'LIMIT 1;'
 
   let quotationObject

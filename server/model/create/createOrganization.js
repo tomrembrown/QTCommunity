@@ -62,10 +62,18 @@ const createOrganization = async function (objectInputData) {
     }
   }
 
-  let parameters = Array.from([...Array(columnList.length + 1).keys()], x => '$' + x)
+  let parameters = Array.from(
+    [...Array(columnList.length + 1).keys()],
+    x => '$' + x
+  )
   parameters.shift()
 
-  let createOrganizationQuery = 'INSERT INTO organizations (' + columnList.join(', ') + ') VALUES (' + parameters.join() + ');'
+  let createOrganizationQuery =
+    'INSERT INTO organizations (' +
+    columnList.join(', ') +
+    ') VALUES (' +
+    parameters.join() +
+    ');'
 
   try {
     await db.query(createOrganizationQuery, dataList)

@@ -5,7 +5,7 @@ const constants = require('../../constants')
 const checkMandatoryElementsSet = function (formElements) {
   let missingErrors = []
 
-  constants.mandatoryElements.forEach((element) => {
+  constants.mandatoryElements.forEach(element => {
     if (typeof formElements[element] === 'undefined') {
       missingErrors.push({
         element: element,

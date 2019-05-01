@@ -36,10 +36,18 @@ const createPlace = async function (objectInputData) {
     }
   }
 
-  let parameters = Array.from([...Array(columnList.length + 1).keys()], x => '$' + x)
+  let parameters = Array.from(
+    [...Array(columnList.length + 1).keys()],
+    x => '$' + x
+  )
   parameters.shift()
 
-  let createPlaceQuery = 'INSERT INTO places (' + columnList.join(', ') + ') VALUES (' + parameters.join() + ');'
+  let createPlaceQuery =
+    'INSERT INTO places (' +
+    columnList.join(', ') +
+    ') VALUES (' +
+    parameters.join() +
+    ');'
 
   try {
     await db.query(createPlaceQuery, dataList)

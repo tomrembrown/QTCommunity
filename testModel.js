@@ -22,7 +22,8 @@ const createSpaPlaceData = {
 
 let create519OrganizationData = {
   name: 'The 519',
-  description_english: 'The 519 is a city organization dedicated to advocacy for the inclusion of LGBTQ communities. See upcoming events, programming, and location details.',
+  description_english:
+    'The 519 is a city organization dedicated to advocacy for the inclusion of LGBTQ communities. See upcoming events, programming, and location details.',
   is_shown: true,
   email: 'Info@The519.org',
   display_email: false,
@@ -36,7 +37,8 @@ let create519OrganizationData = {
 
 let createSpaOrganizationData = {
   name: 'Spa Excess',
-  description_english: "Spa Excess is Toronto's largest and best bathhouse, catering to men looking for state of the art facilities, a fully licensed bar, and 24-hour access.",
+  description_english:
+    "Spa Excess is Toronto's largest and best bathhouse, catering to men looking for state of the art facilities, a fully licensed bar, and 24-hour access.",
   is_shown: true,
   email: 'spaexcessinfo@gmail.com',
   display_email: false,
@@ -52,40 +54,49 @@ let createSpaOrganizationData = {
 {
   let placeID, organizationTypeID
 
-  model.createPlace(create519PlaceData).then(() => {
-    console.log('Created The 519 place')
-    return model.getIDForPlace('The 519')
-  }).then((id) => {
-    placeID = id
-    console.log('Got place id for the 519: ' + id)
-    return model.getIDForOrganizationType('Community Organization')
-  }).then((id) => {
-    organizationTypeID = id
-    console.log('Got id for organization type: ' + organizationTypeID)
-    create519OrganizationData.organization_type_id = organizationTypeID
-    create519OrganizationData.place_id = placeID
-    return model.createOrganization(create519OrganizationData)
-  })
+  model
+    .createPlace(create519PlaceData)
+    .then(() => {
+      console.log('Created The 519 place')
+      return model.getIDForPlace('The 519')
+    })
+    .then(id => {
+      placeID = id
+      console.log('Got place id for the 519: ' + id)
+      return model.getIDForOrganizationType('Community Organization')
+    })
+    .then(id => {
+      organizationTypeID = id
+      console.log('Got id for organization type: ' + organizationTypeID)
+      create519OrganizationData.organization_type_id = organizationTypeID
+      create519OrganizationData.place_id = placeID
+      return model.createOrganization(create519OrganizationData)
+    })
 }
 
 // Spa
 {
   let placeID, organizationTypeID
 
-  model.createPlace(createSpaPlaceData).then(() => {
-    console.log('Created Spa Excess place')
-    return model.getIDForPlace('Spa Excess')
-  }).then((id) => {
-    placeID = id
-    console.log('Got place id for Spa Excess: ' + id)
-    return model.getIDForOrganizationType('Adult Entertainment')
-  }).then((id) => {
-    organizationTypeID = id
-    console.log('Got id for organization type: ' + organizationTypeID)
-    createSpaOrganizationData.organization_type_id = organizationTypeID
-    createSpaOrganizationData.place_id = placeID
-    return model.createOrganization(createSpaOrganizationData)
-  }).then(() => {
-    model.close()
-  })
+  model
+    .createPlace(createSpaPlaceData)
+    .then(() => {
+      console.log('Created Spa Excess place')
+      return model.getIDForPlace('Spa Excess')
+    })
+    .then(id => {
+      placeID = id
+      console.log('Got place id for Spa Excess: ' + id)
+      return model.getIDForOrganizationType('Adult Entertainment')
+    })
+    .then(id => {
+      organizationTypeID = id
+      console.log('Got id for organization type: ' + organizationTypeID)
+      createSpaOrganizationData.organization_type_id = organizationTypeID
+      createSpaOrganizationData.place_id = placeID
+      return model.createOrganization(createSpaOrganizationData)
+    })
+    .then(() => {
+      model.close()
+    })
 }
