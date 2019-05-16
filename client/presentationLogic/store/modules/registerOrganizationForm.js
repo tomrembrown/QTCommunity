@@ -39,6 +39,7 @@ const mutations = {
 
 const getters = {
   getError: state => thisElement => {
+	  debugger;
     return state.errors.filter(error => error.element === thisElement)
   }
 }

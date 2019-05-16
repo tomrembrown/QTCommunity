@@ -44,6 +44,7 @@ router.get('/checkElementTaken/:element/:value', (req, res) => {
       console.log('In call back in checkElementTaken, taken = ' + isTaken)
       res.send(isTaken)
     })
+  
 })
 
 module.exports = router

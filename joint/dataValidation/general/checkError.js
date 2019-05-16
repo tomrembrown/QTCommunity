@@ -26,13 +26,16 @@ const checkError = function (element, value, formElements) {
     const verifyError = checkVerifyPassword(formElements)
     if (verifyError !== null) return verifyError
   }
+  
+  checkDuplicateInUniqueField(element, value);
 
   // Unique field already taken
-  checkDuplicateInUniqueField(element, value).then(duplicateError => {
+/*  checkDuplicateInUniqueField(element, value).then(duplicateError => {
     console.log('Duplicate error is: ')
     console.log(duplicateError)
     return duplicateError
   })
+ */
 }
 
 module.exports = checkError
