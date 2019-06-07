@@ -4,7 +4,7 @@ const constants = require('../../constants')
 const checkVerifyPassword = require('./checkVerifyPassword')
 const checkDuplicateInUniqueField = require('./checkDuplicateInUniqueField')
 
-const checkError = function (element, value, formElements) {
+const checkError = async (element, value, formElements) => {
   // Less than min length error
   if (
     element in constants.minLengths &&
@@ -26,16 +26,15 @@ const checkError = function (element, value, formElements) {
     const verifyError = checkVerifyPassword(formElements)
     if (verifyError !== null) return verifyError
   }
-  
-  checkDuplicateInUniqueField(element, value);
 
-  // Unique field already taken
-/*  checkDuplicateInUniqueField(element, value).then(duplicateError => {
-    console.log('Duplicate error is: ')
-    console.log(duplicateError)
-    return duplicateError
-  })
- */
+  const isDuplicate = await checkDuplicateInUniqueField(element, value)
+
+  if (isDuplicate) {
+    return {
+      element: element,
+      message: "'" + value + "' as a " + element + " is already taken"
+    }
+  }
 }
 
 module.exports = checkError

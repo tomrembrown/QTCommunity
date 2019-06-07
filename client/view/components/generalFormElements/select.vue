@@ -7,9 +7,7 @@
           v-for="thisValue in valuesList"
           :value="thisValue.id"
           :key="thisValue.text"
-        >
-          {{ thisValue.text }}
-        </option>
+        >{{ thisValue.text }}</option>
       </select>
       <i></i>
     </label>
@@ -45,11 +43,11 @@ export default {
   },
   methods: {
     updateStore() {
-      this.$store.commit({
-        type: 'setElement',
+      const payload = {
         element: this.idName,
         value: this.value
-      })
+      }
+      this.$store.dispatch('checkErrorAndSetElement', payload)
     },
     getValuesList() {
       let $this = this

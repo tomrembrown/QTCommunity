@@ -22,7 +22,7 @@ const mutations = {
   removeError (state, element) {
     const errorLocation = state.errors.indexOf(
       state.errors.find(error => {
-        return error.element === element
+        return error!== undefined && error.element === element
       })
     )
 
@@ -39,21 +39,14 @@ const mutations = {
 
 const getters = {
   getError: state => thisElement => {
-	  debugger;
-    return state.errors.filter(error => error.element === thisElement)
+    return state.errors.filter(error => error !== undefined && error.element === thisElement)
   }
 }
 
 const actions = {
-  checkErrorAndSetElement: ({ commit }, payload) => {
-    console.log(
-      'In checkErrorAndSetElement, element: ' +
-        payload.element +
-        ', value: ' +
-        payload.value
-    )
+  checkErrorAndSetElement: async ({ commit }, payload) => {
     commit('setElement', payload)
-    const thisError = checkError(
+    const thisError = await checkError(
       payload.element,
       payload.value,
       state.formElements
