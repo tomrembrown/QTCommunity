@@ -55,6 +55,7 @@ const actions = {
     commit('pushError', thisError)
   },
   submitRegisterOrganizationForm: ({ commit, state }) => {
+
     const missingErrors = checkMandatoryElementsSet(state.formElements)
     if (missingErrors.length > 0) {
       missingErrors.forEach(thisError => {
@@ -71,17 +72,23 @@ const actions = {
       document.getElementById(verifyError.element).scrollIntoView()
     }
 
+    // For some reason sometimes undefined errors appear - remove any
+    state.errors = state.errors.filter((error) => error !== undefined)
+
     // Only submit form if no errors
     if (state.errors.length === 0) {
+
       // Verified that password = verify password above - don't need verify password on server
       commit('removeElement', 'verify_password')
 
       axios
         .post('createRoutesServer/createOrganization', state.formElements)
         .then(function (response) {
+          console.log('Submit returned ok')
           console.log(response)
         })
         .catch(function (error) {
+          console.log('Submit returned with errors')
           console.log(error)
         })
     }

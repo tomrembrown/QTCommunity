@@ -77,7 +77,6 @@ const createOrganization = async function (objectInputData) {
 
   try {
     await db.query(createOrganizationQuery, dataList)
-    console.log('Organization inserted correctly')
   } catch (err) {
     console.error('error running query', err)
   }
