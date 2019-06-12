@@ -10,8 +10,8 @@ module.exports = {
   entry: './client/main.js',
   output: {
     path: path.resolve(__dirname, './build'),
-    publicPath: '/build/',
-    filename: 'bundle.js'
+    publicPath: '/dist/',
+    filename: 'build.js'
   },
   module: {
     rules: [

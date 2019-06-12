@@ -17,6 +17,7 @@ node_modules/
 
 # Ignore the build files created by webpack
 build/
+dist/
 
 # Ignore log file
 logs
