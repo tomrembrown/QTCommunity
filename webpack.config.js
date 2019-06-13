@@ -9,7 +9,7 @@ require('dotenv').config() // load the environment variables from .env
 module.exports = {
   entry: './client/main.js',
   output: {
-    path: path.resolve(__dirname, './build'),
+    path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
     filename: 'build.js'
   },

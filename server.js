@@ -24,7 +24,7 @@ app.set('port', process.env.PORT)
 // Run static files out of pubic directories in view & view-model on client
 app.use('/', express.static(path.join(__dirname, 'client/view/public')))
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')))
-app.use('/build', express.static(path.join(__dirname, 'build')))
+app.use('/dist', express.static(path.join(__dirname, 'dist')))
 
 // The one route for now - just go to the main page - all routing actually
 // handled by the front-end SPA (except AJAX routes below)

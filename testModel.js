@@ -22,17 +22,21 @@ const createSpaPlaceData = {
 
 let create519OrganizationData = {
   name: 'The 519',
+  login: 'the519',
   description_english:
     'The 519 is a city organization dedicated to advocacy for the inclusion of LGBTQ communities. See upcoming events, programming, and location details.',
   is_shown: true,
   email: 'Info@The519.org',
-  display_email: false,
+  image_link: 'https://charityvillage.com/api/v1/images/1e2562f1-d6ba-e711-80d4-000af7847803',
+  display_email: true,
   phone: 4163926874,
-  display_phone: false,
+  display_phone: true,
   website_english: 'http://www.the519.org/',
   display_website: true,
   facebook: 'https://www.facebook.com/The519',
-  display_facebook: true
+  display_facebook: true,
+  twitter: 'https://twitter.com/The519',
+  display_twitter: true
 }
 
 let createSpaOrganizationData = {
@@ -47,7 +51,8 @@ let createSpaOrganizationData = {
   website_english: 'https://spaexcess.com/',
   display_website: true,
   facebook: 'https://www.facebook.com/SpaExcess',
-  display_facebook: true
+  display_facebook: true,
+  image_link: 'https://bearsinexcess.files.wordpress.com/2015/03/spa_excess-logo-web.jpg'
 }
 
 async function create519() {

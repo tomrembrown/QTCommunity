@@ -83,7 +83,7 @@
           <div class="col-md-6">
             <ash-textbox
               heading="Image Link"
-              helpText="Enter web address for logo for organization.  Leave blank if none"
+              helpText="Enter web address for logo for organization.  Mandatory field"
             >
             </ash-textbox>
           </div>
