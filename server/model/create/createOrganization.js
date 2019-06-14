@@ -1,12 +1,12 @@
 'use strict'
 
-const db = require('./../db')
+const createGeneric = require('./createGeneric')
 
-const createOrganization = async function (objectInputData) {
-  let columnList = ['name', 'organization_type_id']
-  let dataList = [objectInputData.name, objectInputData.organization_type_id]
+const createOrganization = async function(objectInputData) {
 
-  const optionalColumnList = [
+  const possibleColumnList = [
+    'name',
+    'organization_type_id',
     'description_english',
     'description_french',
     'image_link',
@@ -55,31 +55,12 @@ const createOrganization = async function (objectInputData) {
     'only_race_religion'
   ]
 
-  for (let col of optionalColumnList) {
-    if (typeof objectInputData[col.name] !== 'undefined') {
-      columnList.push(col.name)
-      dataList.push(objectInputData[col.name])
-    }
-  }
-
-  let parameters = Array.from(
-    [...Array(columnList.length + 1).keys()],
-    x => '$' + x
-  )
-  parameters.shift()
-
-  let createOrganizationQuery =
-    'INSERT INTO organizations (' +
-    columnList.join(', ') +
-    ') VALUES (' +
-    parameters.join() +
-    ');'
-
   try {
-    await db.query(createOrganizationQuery, dataList)
+    await createGeneric(objectInputData, possibleColumnList, 'organizations')
   } catch (err) {
-    console.error('error running query', err)
+    throw Error(err)
   }
+
 }
 
 module.exports = createOrganization

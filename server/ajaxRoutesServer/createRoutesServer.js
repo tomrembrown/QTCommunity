@@ -14,7 +14,6 @@ router.post('/createOrganization', (req, res) => {
   delete objectInputData.password
 
   model.createOrganization(objectInputData).then(() => {
-    model.close()
     res.send('Success')
   })
 })

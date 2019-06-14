@@ -1,12 +1,12 @@
 'use strict'
 
-const db = require('./../db')
+const createGeneric = require('./createGeneric')
 
 const createPlace = async function (objectInputData) {
-  let columnList = ['name', 'address']
-  let dataList = [objectInputData.name, objectInputData.address]
-
-  const optionalColumnList = [
+  
+  const possibleColumnList = [
+    'name',
+    'address',
     'family_friendly',
     'min_age',
     'max_age',
@@ -29,31 +29,12 @@ const createPlace = async function (objectInputData) {
     'only_race_religion'
   ]
 
-  for (let col of optionalColumnList) {
-    if (typeof objectInputData[col.name] !== 'undefined') {
-      columnList.push(col.name)
-      dataList.push(objectInputData[col.name])
-    }
-  }
-
-  let parameters = Array.from(
-    [...Array(columnList.length + 1).keys()],
-    x => '$' + x
-  )
-  parameters.shift()
-
-  let createPlaceQuery =
-    'INSERT INTO places (' +
-    columnList.join(', ') +
-    ') VALUES (' +
-    parameters.join() +
-    ');'
-
   try {
-    await db.query(createPlaceQuery, dataList)
+    await createGeneric(objectInputData, possibleColumnList, 'places')
   } catch (err) {
-    console.error('error running query', err)
+    throw Error(err)
   }
+
 }
 
 module.exports = createPlace

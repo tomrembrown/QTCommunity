@@ -1,14 +1,12 @@
 'use strict'
 
-const db = require('./../db')
-const readEvent = require('./../read/getIDForEvent')
-const writeEventInstance = require('./../create/createEventInstance')
+const createGeneric = require('./createGeneric')
 
-const createEvent = async function (eventDetails) {
-  let columnList = ['long_title_english', 'organization_id']
-  let dataList = [eventDetails.long_title_english, eventDetails.organization_id]
+const createEvent = async function (objectInputData) {
 
-  const optionalColumnList = [
+  const possibleColumnList = [
+    'long_title_english',
+    'organization_id',
     'long_title_french',
     'short_title_english',
     'short_title_french',
@@ -40,38 +38,12 @@ const createEvent = async function (eventDetails) {
     }
   }
 
-  let parameters = Array.from(
-    [...Array(columnList.length + 1).keys()],
-    x => '$' + x
-  )
-  parameters.shift()
-
-  let createPlaceQuery =
-    'INSERT INTO event_groups (' +
-    columnList.join(', ') +
-    ') VALUES (' +
-    parameters.join() +
-    ');'
-
   try {
-    await db.query(createPlaceQuery, dataList)
-    let eventID = await readEvent(
-      eventDetails.long_title_english,
-      eventDetails.organization_id
-    )
-
-    for (let i in eventDetails.instances) {
-      let payload = eventDetails.instances[i]
-      payload.event_group_id = eventID
-      writeEventInstance(payload)
-        .then(() => {})
-        .catch(err => {
-          console.log(err)
-        })
-    }
+    await createGeneric(objectInputData, possibleColumnList, 'event_groups')
   } catch (err) {
-    console.error('error running query', err)
+    throw Error(err)
   }
+
 }
 
 module.exports = createEvent
