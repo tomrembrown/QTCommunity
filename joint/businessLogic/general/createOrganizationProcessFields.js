@@ -4,7 +4,18 @@ const passwordHash = require('password-hash')
 const constants = require('../../constants')
 
 const createOrganizationProcessFields = objectInputData => {
-  
+  // Trim all fields and remove any that are empty
+  for (let field in objectInputData) {
+    if (objectInputData.hasOwnProperty(field)) {
+      if (typeof objectInputData[field] === 'string')
+        objectInputData[field] = objectInputData[field].trim()
+
+      if (objectInputData[field] === '') {
+        delete objectInputData[field]
+      }
+    }
+  }
+
   // Convert password field to password encrypted
   objectInputData.password_encrypted = passwordHash.generate(
     objectInputData.password
@@ -19,7 +30,6 @@ const createOrganizationProcessFields = objectInputData => {
   }
 
   return objectInputData
-
 }
 
 module.exports = createOrganizationProcessFields

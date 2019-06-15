@@ -7,7 +7,8 @@ const checkVerifyPassword = require('../../../../joint/dataValidation/general/ch
 
 const state = {
   formElements: {},
-  errors: []
+  errors: [],
+  organizationRegistered: false
 }
 
 const mutations = {
@@ -42,6 +43,9 @@ const getters = {
     return state.errors.filter(
       error => error !== undefined && error.element === thisElement
     )
+  },
+  getOrganizationRegistered: state => {
+    return state.organizationRegistered
   }
 }
 
@@ -91,6 +95,7 @@ const actions = {
 
         // Everything worked ok - organization registered
         // Display message and switch the admin toolbar to reflect this
+        state.organizationRegistered = true
 
       }
     } catch (error) {
