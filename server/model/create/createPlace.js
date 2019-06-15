@@ -32,7 +32,7 @@ const createPlace = async function (objectInputData) {
   try {
     await createGeneric(objectInputData, possibleColumnList, 'places')
   } catch (err) {
-    throw Error(err)
+    throw Error(err.message)
   }
 
 }

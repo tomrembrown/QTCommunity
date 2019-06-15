@@ -36,6 +36,12 @@ app.get('/', (req, res) => {
 app.use('/readRoutesServer', readRoutesServer)
 app.use('/createRoutesServer', createRoutesServer)
 
+// Error handling
+app.use((error, req, res, next) => {
+  console.log('Error occurred in express')
+  res.json({ isError: true, message: error.message })
+})
+
 // Start server listening for requests from browser
 let logString = ' Express started on http://localhost:' + app.get('port') + '; '
 if (app.get('env') === 'development') { logString += 'Open page on webpack server at localhost:8080; ' }

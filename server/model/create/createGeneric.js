@@ -35,12 +35,12 @@ const createGeneric = async function(
   try {
     await db.query(createQuery, dataList)
   } catch (err) {
-    console.error('error running query', err)
+    console.error('error running query in createGeneric', err)
     throw Error(
-      'Error running query in createGeneric.js, query: ',
-      createQuery,
-      '; error: ',
-      err
+      'Error running query in createGeneric.js, query: ' +
+      createQuery +
+      ' error: ' +
+      err.message
     )
   }
 }

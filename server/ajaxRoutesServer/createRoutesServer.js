@@ -3,19 +3,19 @@
 const express = require('express')
 const model = require('../model')
 const router = express.Router()
-const passwordHash = require('password-hash')
 
-router.post('/createOrganization', (req, res) => {
-  // Hash password in new field, then remove regular password
+const asyncMiddleware = require('../utils/asyncMiddleware')
+const createOrganizationProcessFields = require('../../joint/businessLogic/general/createOrganizationProcessFields')
+
+router.post('/createOrganization', asyncMiddleware(async (req, res) => {
+
   let objectInputData = req.body
-  objectInputData.password_encrypted = passwordHash.generate(
-    objectInputData.password
-  )
-  delete objectInputData.password
+  objectInputData = createOrganizationProcessFields(objectInputData )
 
-  model.createOrganization(objectInputData).then(() => {
-    res.send('Success')
-  })
-})
+  await model.createOrganization(objectInputData)
+  console.log('About to send OK')
+  res.json({isError: false, createdOrganization: true})
+
+}))
 
 module.exports = router

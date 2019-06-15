@@ -58,7 +58,8 @@ const createOrganization = async function(objectInputData) {
   try {
     await createGeneric(objectInputData, possibleColumnList, 'organizations')
   } catch (err) {
-    throw Error(err)
+    console.log('Caught error in createOrganization')
+    throw Error(err.message)
   }
 
 }

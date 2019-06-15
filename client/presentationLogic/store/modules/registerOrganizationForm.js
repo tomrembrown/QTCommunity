@@ -11,18 +11,18 @@ const state = {
 }
 
 const mutations = {
-  setElement (state, payload) {
+  setElement(state, payload) {
     state.formElements[payload.element] = payload.value
   },
-  removeElement (state, element) {
+  removeElement(state, element) {
     if (element in state.formElements) {
       delete state.formElements[element]
     }
   },
-  removeError (state, element) {
+  removeError(state, element) {
     const errorLocation = state.errors.indexOf(
       state.errors.find(error => {
-        return error!== undefined && error.element === element
+        return error !== undefined && error.element === element
       })
     )
 
@@ -30,7 +30,7 @@ const mutations = {
       state.errors.splice(errorLocation, 1)
     }
   },
-  pushError (state, thisError) {
+  pushError(state, thisError) {
     if (thisError !== null) {
       state.errors.push(thisError)
     }
@@ -39,7 +39,9 @@ const mutations = {
 
 const getters = {
   getError: state => thisElement => {
-    return state.errors.filter(error => error !== undefined && error.element === thisElement)
+    return state.errors.filter(
+      error => error !== undefined && error.element === thisElement
+    )
   }
 }
 
@@ -54,43 +56,46 @@ const actions = {
     commit('removeError', payload.element)
     commit('pushError', thisError)
   },
-  submitRegisterOrganizationForm: ({ commit, state }) => {
-
-    const missingErrors = checkMandatoryElementsSet(state.formElements)
-    if (missingErrors.length > 0) {
-      missingErrors.forEach(thisError => {
-        commit('removeError', thisError.element)
-        commit('pushError', thisError)
-      })
-      document.getElementById(missingErrors[0].element).scrollIntoView()
-    }
-
-    const verifyError = checkVerifyPassword(state.formElements)
-    if (verifyError !== null) {
-      commit('removeError', verifyError.element)
-      commit('pushError', verifyError)
-      document.getElementById(verifyError.element).scrollIntoView()
-    }
-
-    // For some reason sometimes undefined errors appear - remove any
-    state.errors = state.errors.filter((error) => error !== undefined)
-
-    // Only submit form if no errors
-    if (state.errors.length === 0) {
-
-      // Verified that password = verify password above - don't need verify password on server
-      commit('removeElement', 'verify_password')
-
-      axios
-        .post('createRoutesServer/createOrganization', state.formElements)
-        .then(function (response) {
-          console.log('Submit returned ok')
-          console.log(response)
+  submitRegisterOrganizationForm: async ({ commit, state }) => {
+    try {
+      const missingErrors = checkMandatoryElementsSet(state.formElements)
+      if (missingErrors.length > 0) {
+        missingErrors.forEach(thisError => {
+          commit('removeError', thisError.element)
+          commit('pushError', thisError)
         })
-        .catch(function (error) {
-          console.log('Submit returned with errors')
-          console.log(error)
-        })
+        document.getElementById(missingErrors[0].element).scrollIntoView()
+      }
+
+      const verifyError = checkVerifyPassword(state.formElements)
+      if (verifyError !== null) {
+        commit('removeError', verifyError.element)
+        commit('pushError', verifyError)
+        document.getElementById(verifyError.element).scrollIntoView()
+      }
+
+      // For some reason sometimes undefined errors appear - remove any
+      state.errors = state.errors.filter(error => error !== undefined)
+
+      // Only submit form if no errors
+      if (state.errors.length === 0) {
+        // Verified that password = verify password above - don't need verify password on server
+        commit('removeElement', 'verify_password')
+
+        const response = await axios.post(
+          'createRoutesServer/createOrganization',
+          state.formElements
+        )
+        console.log('response.data', response.data)
+        if (response.data.isError) throw new Error(response.data.message)
+
+        // Everything worked ok - organization registered
+        // Display message and switch the admin toolbar to reflect this
+
+      }
+    } catch (error) {
+      console.log('Error: ', error)
+      alert('Error attempting to register organization: ' + error.message)
     }
   }
 }

@@ -14,7 +14,7 @@ const createEvent = async function(objectInputData) {
   try {
     await createGeneric(objectInputData, possibleColumnList, 'event_details')
   } catch (err) {
-    throw Error(err)
+    throw Error(err.message)
   }
 }
 
