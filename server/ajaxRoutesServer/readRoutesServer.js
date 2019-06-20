@@ -27,20 +27,28 @@ router.get('/readRandomQuotation', asyncMiddleware(async (req, res) => {
   res.send(quotationObject)
 }))
  
-// Get a 
+// Get a list of values from a table for a drop-down (i.e. drop down of places)
 router.get('/getValuesList/:table', asyncMiddleware(async (req, res) => {
   const valuesList = await model.getValuesList(req.params.table)
   res.send(valuesList)
 }))
  
+// Check if a unique element in taken
 router.get('/checkElementTaken/:element/:value', asyncMiddleware(async (req, res) => {
   const isTaken = await model.checkElementTaken(req.params.element, req.params.value)
   res.send(isTaken)
 }))
 
+// Check that the login and password match what in database
 router.get('/checkPassword/:login/:password', asyncMiddleware(async(req, res) => {
   const authenticated = await model.checkPassword(req.params.login, req.params.password)
   res.send(authenticated)
+}))
+
+// A list of all organization in database
+router.get('/readOrganizations', asyncMiddleware(async (req, res) => {
+  const organizations = await model.readOrganizations()
+  res.send(organizations)
 }))
 
 module.exports = router

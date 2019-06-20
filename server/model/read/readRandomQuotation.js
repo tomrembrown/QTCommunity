@@ -29,6 +29,8 @@ const readRandomQuotation = async function () {
     quotationObject = rows[0]
   } catch (err) {
     console.error('error running query', err)
+    throw new Error('Error running read random quotation query, query: ' +
+      readRandomQuotationQuery + ', error: ' + err.module)
   }
   return quotationObject
 }
