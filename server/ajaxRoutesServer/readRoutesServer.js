@@ -39,9 +39,7 @@ router.get('/checkElementTaken/:element/:value', asyncMiddleware(async (req, res
 }))
 
 router.get('/checkPassword/:login/:password', asyncMiddleware(async(req, res) => {
-  console.log('In read routes, login: ' + req.params.login + ', password: ' + req.params.password)
   const authenticated = await model.checkPassword(req.params.login, req.params.password)
-  console.log('In read route after model, authenticated: ' + authenticated)
   res.send(authenticated)
 }))
 

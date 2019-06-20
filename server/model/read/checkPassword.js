@@ -23,11 +23,9 @@ const checkPassword = async function (login, password) {
 	catch(error){
 		console.log("Error running query", error);
 	}
-  console.log('password encrypted: ' + passwordEncrypted)
-  console.log('password: ' + password)
+
 	if(passwordEncrypted !== null || passwordEncrypted !== undefined){
     authenticated = passwordHash.verify(password, passwordEncrypted);
-    console.log('Checking authentication: ' + authenticated)
 	}
 	
 	if(authenticated){

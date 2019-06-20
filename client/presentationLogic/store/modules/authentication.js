@@ -31,9 +31,6 @@ const actions = {
   loginOrganization: async ({ commit, state }, payload) => {
     try {
 
-      console.log('In Store, payload is: ')
-      console.log(payload)
-
       const response = await axios.get(
         '/readRoutesServer/checkPassword/' +
           payload.login +
