@@ -13,7 +13,6 @@ router.post('/createOrganization', asyncMiddleware(async (req, res) => {
   objectInputData = createOrganizationProcessFields(objectInputData )
 
   await model.createOrganization(objectInputData)
-  console.log('About to send OK')
   res.json({isError: false, createdOrganization: true})
 
 }))

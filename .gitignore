@@ -3,6 +3,7 @@ node_modules/
 
 # Ignore files used by various IDEs
 .idea
+.vscode
 *.suo
 *.ntvs*
 *.njsproj

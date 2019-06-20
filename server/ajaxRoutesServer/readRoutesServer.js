@@ -14,41 +14,35 @@
  * February, 2019   Thomas Brown        Initial Creation
  *
  */
-
+ 
 const express = require('express')
 const model = require('../model')
 const router = express.Router()
 
-
+const asyncMiddleware = require('../utils/asyncMiddleware')
+ 
 // Get a random quote from model/database and send back to client
-router.get('/readRandomQuotation', (req, res) => {
-  model.readRandomQuotation().then(quotationObject => {
-    res.send(quotationObject)
-  })
-})
+router.get('/readRandomQuotation', asyncMiddleware(async (req, res) => {
+  const quotationObject = await model.readRandomQuotation()
+  res.send(quotationObject)
+}))
+ 
+// Get a 
+router.get('/getValuesList/:table', asyncMiddleware(async (req, res) => {
+  const valuesList = await model.getValuesList(req.params.table)
+  res.send(valuesList)
+}))
+ 
+router.get('/checkElementTaken/:element/:value', asyncMiddleware(async (req, res) => {
+  const isTaken = await model.checkElementTaken(req.params.element, req.params.value)
+  res.send(isTaken)
+}))
 
-router.get('/getValuesList/:table', (req, res) => {
-  model.getValuesList(req.params.table).then(valuesList => {
-    res.send(valuesList)
-  })
-})
-
-router.get('/checkElementTaken/:element/:value', async (req, res) => {
-
-  try {
-    const isTaken = await model.checkElementTaken(req.params.element, req.params.value)
-    res.send(isTaken)
-  }
-  catch (err) {
-    res.send('Error occurred: ' + err)
-  }
-  
-})
-
-router.get('/checkPassword/:login/:password', (req, res) => {
-  model.checkPassword(req.params.login, req.params.password).then(authenticated => {
-    res.send(authenticated)
-  })
-})
+router.get('/checkPassword/:login/:password', asyncMiddleware(async(req, res) => {
+  console.log('In read routes, login: ' + req.params.login + ', password: ' + req.params.password)
+  const authenticated = await model.checkPassword(req.params.login, req.params.password)
+  console.log('In read route after model, authenticated: ' + authenticated)
+  res.send(authenticated)
+}))
 
 module.exports = router
