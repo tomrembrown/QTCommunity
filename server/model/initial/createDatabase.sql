@@ -94,6 +94,7 @@ CREATE TABLE organizations(
   is_shown BOOLEAN NOT NULL DEFAULT FALSE,
   login CITEXT UNIQUE DEFAULT NULL,
   password_encrypted TEXT DEFAULT NULL,
+  login_token TEXT DEFAULT NULL,
   signup_date TIMESTAMP DEFAULT NULL,
   logged_in BOOLEAN DEFAULT NULL,
   last_logged_in TIMESTAMP DEFAULT NULL,

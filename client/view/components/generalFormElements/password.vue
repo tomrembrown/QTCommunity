@@ -10,6 +10,7 @@
         :placeholder="placeholder"
         v-model.lazy="value"
         @blur="updateStore"
+        @input="$emit('input', $event.target.value)"
       />
     </label>
     <div v-if="isError" class="note error">
@@ -48,15 +49,21 @@ export default {
     helpText: {
       type: String,
       default: ''
+    },
+    validate: {
+	    type: Boolean,
+	    default: true
     }
   },
   methods: {
     updateStore() {
-      const payload = {
-        element: this.idName,
-        value: this.value
-      }
-      this.$store.dispatch('checkErrorAndSetElement', payload)
+	  if(this.validate){
+	      const payload = {
+	        element: this.idName,
+	        value: this.value
+	      }
+	      this.$store.dispatch('checkErrorAndSetElement', payload)		  
+	  }
     }
   },
   computed: {

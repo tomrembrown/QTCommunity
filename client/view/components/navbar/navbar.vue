@@ -92,15 +92,27 @@
                 Register Organization
               </router-link>
             </li>
-            <li class="nav-item px-2">
-              <router-link
-                to="/organizationLogin"
+            <li class="nav-item px-2" v-show="!this.$store.state.authentication.loggedIn">
+              <a
+              	href="#"
+                @click="loginModal"
                 class="nav-link"
                 active-class="active"
               >
                 <i class="fas fa-user"></i>
                 Organization Login
-              </router-link>
+              </a>
+            </li>
+             <li class="nav-item px-2" v-show="this.$store.state.authentication.loggedIn">
+              <a
+              	href="#"
+                @click="logout"
+                class="nav-link"
+                active-class="active"
+              >
+                <i class="fas fa-user"></i>
+                Organization Logout
+              </a>
             </li>
           </ul>
         </div>
@@ -119,7 +131,13 @@ export default {
   methods: {
     clickAdmin() {
       this.showAdminBar = !this.showAdminBar
-    }
+    },
+	loginModal() {
+		this.$login.toggle();
+	},
+	logout() {
+		this.$store.dispatch('logoutOrganization');
+	}
   }
 }
 </script>

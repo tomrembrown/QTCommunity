@@ -19,11 +19,13 @@ const getIDForPlace = require('./read/getIDForPlace')
 const getIDForOrganization = require('./read/getIDForOrganization')
 const getIDForOrganizationType = require('./read/getIDForOrganizationType')
 const getValuesList = require('./read/getValuesList')
+const checkPassword = require('./read/checkPassword')
 const checkElementTaken = require('./read/checkElementTaken')
 const createEvent = require('./create/createEvent')
 const createPlace = require('./create/createPlace')
 const createOrganization = require('./create/createOrganization')
 const close = require('./final/close')
+
 
 const model = {
   /* ******
@@ -43,6 +45,7 @@ const model = {
    * ******/
   getValuesList: getValuesList,
   checkElementTaken: checkElementTaken,
+  checkPassword: checkPassword,
 
   /* ******
    * Create database entries

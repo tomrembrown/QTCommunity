@@ -2,6 +2,7 @@
   <div>
     <qt-navbar></qt-navbar>
     <router-view></router-view>
+    <login-modal/>
   </div>
 </template>
 

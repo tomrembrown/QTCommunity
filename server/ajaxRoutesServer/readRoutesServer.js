@@ -19,6 +19,7 @@ const express = require('express')
 const model = require('../model')
 const router = express.Router()
 
+
 // Get a random quote from model/database and send back to client
 router.get('/readRandomQuotation', (req, res) => {
   model.readRandomQuotation().then(quotationObject => {
@@ -42,6 +43,12 @@ router.get('/checkElementTaken/:element/:value', async (req, res) => {
     res.send('Error occurred: ' + err)
   }
   
+})
+
+router.get('/checkPassword/:login/:password', (req, res) => {
+  model.checkPassword(req.params.login, req.params.password).then(authenticated => {
+    res.send(authenticated)
+  })
 })
 
 module.exports = router
