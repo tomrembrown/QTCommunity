@@ -44,7 +44,7 @@ const actions = {
         commit('login', response.data.loginToken)
       }
     } catch (error) {
-      console.log(`Error: ${error.message}`)
+      console.log(`Error attempting to login organization: ${error.message}`)
       alert(`Error attempting to login organization: ${error.message}`)
     }
   },

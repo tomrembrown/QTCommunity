@@ -97,10 +97,13 @@ const actions = {
         // Display message and switch the admin toolbar to reflect this
         state.organizationRegistered = true
 
+        // Also, switch to being logged in and store login token
+        commit('login', response.data.loginToken)
+
       }
     } catch (error) {
-      console.log('Error: ', error)
-      alert('Error attempting to register organization: ' + error.message)
+      console.log(`Error attempting to register organization: ${error.message}`)
+      alert(`Error attempting to register organization: ${error.message}`)
     }
   }
 }
