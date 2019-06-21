@@ -4,7 +4,8 @@ import axios from 'axios'
 
 const state = {
   loggedIn: false,
-  loginToken: null
+  loginToken: null,
+  organizationLogin: null
 }
 
 const getters = {
@@ -17,13 +18,15 @@ const getters = {
 }
 
 const mutations = {
-  login(state, loginToken) {
+  login(state, payload) {
     state.loggedIn = true
-    state.loginToken = loginToken
+    state.loginToken = payload.loginToken
+    state.organizationLogin = payload.organizationLogin
   },
   logout(state) {
     state.loggedIn = false
     state.loginToken = null
+    state.organizationLogin = null
   }
 }
 
@@ -41,7 +44,10 @@ const actions = {
       if (response.data.isError) throw new Error(response.data.message)
 
       if (response.data.loginToken != null) {
-        commit('login', response.data.loginToken)
+        commit('login', {
+          loginToken: response.data.loginToken,
+          organizationLogin: payload.login 
+        })
       }
     } catch (error) {
       console.log(`Error attempting to login organization: ${error.message}`)

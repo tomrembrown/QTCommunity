@@ -279,8 +279,8 @@
 </template>
 
 <script>
-import Textbox from './textbox.vue'
-import TargetAudience from './targetAudience.vue'
+import Textbox from '../../formElements/textbox.vue'
+import TargetAudience from '../generalComponents/targetAudience.vue'
 
 export default {
   data() {
@@ -302,13 +302,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/forms/fade';
-@import '../../scss/forms/fieldset';
-@import '../../scss/forms/h2';
-@import '../../scss/forms/section';
-@import '../../scss/forms/label';
-@import '../../scss/forms/select';
-@import '../../scss/forms/textarea';
-@import '../../scss/forms/section';
-@import '../../scss/forms/checkbox';
+@import '../../../scss/forms/forms/fade';
+@import '../../../scss/forms/fieldset';
+@import '../../../scss/forms/h2';
+@import '../../../scss/forms/section';
+@import '../../../scss/forms/label';
+@import '../../../scss/forms/select';
+@import '../../../scss/forms/textarea';
+@import '../../../scss/forms/section';
+@import '../../../scss/forms/checkbox';
 </style>

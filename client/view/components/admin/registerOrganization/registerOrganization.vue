@@ -193,12 +193,12 @@
 </template>
 
 <script>
-import Textbox from '../generalFormElements/textbox.vue'
-import Password from '../generalFormElements/password.vue'
-import TargetAudience from '../generalFormElements/targetAudience.vue'
-import Select from '../generalFormElements/select.vue'
-import Textarea from '../generalFormElements/textarea.vue'
-import Checkbox from '../generalFormElements/checkbox.vue'
+import TargetAudience from '../generalComponents/targetAudience.vue'
+import Textbox from '../../formElements/textbox.vue'
+import Password from '../../formElements/password.vue'
+import Select from '../../formElements/select.vue'
+import Textarea from '../../formElements/textarea.vue'
+import Checkbox from '../../formElements/checkbox.vue'
 
 export default {
   methods: {
@@ -223,15 +223,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/forms/form';
-@import '../../scss/forms/header';
-@import '../../scss/forms/fieldset';
-@import '../../scss/forms/h2';
-@import '../../scss/forms/footer';
-@import '../../scss/forms/buttons';
-@import '../../scss/forms/section';
-@import '../../scss/forms/label';
-@import '../../scss/forms/select';
-@import '../../scss/forms/textarea';
-@import '../../scss/forms/checkbox';
+@import '../../../scss/forms/form';
+@import '../../../scss/forms/header';
+@import '../../../scss/forms/fieldset';
+@import '../../../scss/forms/h2';
+@import '../../../scss/forms/footer';
+@import '../../../scss/forms/buttons';
+@import '../../../scss/forms/section';
+@import '../../../scss/forms/label';
+@import '../../../scss/forms/select';
+@import '../../../scss/forms/textarea';
+@import '../../../scss/forms/checkbox';
 </style>

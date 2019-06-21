@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data() {
     return {
@@ -25,17 +27,16 @@ export default {
     }
   },
   methods: {
-    getRandomQuotation: function() {
-      this.$http
-        .get('readRoutesServer/readRandomQuotation')
-        .then(function(response) {
-          this.quotation = response.data.quotation
-          this.person = response.data.person
-        })
+    readRandomQuotation() {
+      let $this = this
+      axios.get('readRoutesServer/readRandomQuotation').then(response => {
+        $this.quotation = response.data.quotation
+        $this.person = response.data.person
+      })
     }
   },
   beforeMount() {
-    this.getRandomQuotation()
+    this.readRandomQuotation()
   }
 }
 </script>

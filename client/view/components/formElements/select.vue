@@ -16,7 +16,7 @@
 
 <script>
 import axios from 'axios'
-import { convertHeadingToName } from './convertHeadingToName'
+import { convertHeadingToName } from '../../../utils/convertHeadingToName'
 
 export default {
   data() {

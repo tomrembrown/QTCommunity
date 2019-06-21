@@ -231,8 +231,8 @@
 </template>
 
 <script>
-import Textbox from './textbox.vue'
-import Checkbox from './checkbox.vue'
+import Textbox from '../../formElements/textbox.vue'
+import Checkbox from '../../formElements/checkbox.vue'
 
 export default {
   data() {
@@ -280,10 +280,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/forms/fade';
-@import '../../scss/forms/section';
-@import '../../scss/forms/checkbox';
-@import '../../scss/forms/h3';
-@import '../../scss/forms/radio';
-@import '../../scss/forms/section';
+@import '../../../scss/forms/fade';
+@import '../../../scss/forms/section';
+@import '../../../scss/forms/checkbox';
+@import '../../../scss/forms/h3';
+@import '../../../scss/forms/radio';
+@import '../../../scss/forms/section';
 </style>

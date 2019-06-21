@@ -1,29 +1,29 @@
 <template>
   <section>
     <label class="label" :for="idName">{{ heading }}</label>
-    <label class="textarea textarea-expandable">
-      <textarea
+    <label class="input">
+      <input
+        type="password"
         :id="idName"
         :name="idName"
         :aria-describedby="idHelp"
         :placeholder="placeholder"
-        rows="5"
         v-model.lazy="value"
         @blur="updateStore"
-      >
-      </textarea>
+        @input="$emit('input', $event.target.value)"
+      />
     </label>
     <div v-if="isError" class="note error">
       {{ errorMessage }}
     </div>
-    <div v-if="helpText.length > 0" class="note" :id="idHelp">
+    <div v-else-if="helpText.length > 0" class="note" :id="idHelp">
       {{ helpText }}
     </div>
   </section>
 </template>
 
 <script>
-import { convertHeadingToName } from './convertHeadingToName'
+import { convertHeadingToName } from '../../../utils/convertHeadingToName'
 
 export default {
   data() {
@@ -49,15 +49,21 @@ export default {
     helpText: {
       type: String,
       default: ''
+    },
+    validate: {
+	    type: Boolean,
+	    default: true
     }
   },
   methods: {
     updateStore() {
-      const payload = {
-        element: this.idName,
-        value: this.value
-      }
-      this.$store.dispatch('checkErrorAndSetElement', payload)
+	  if(this.validate){
+	      const payload = {
+	        element: this.idName,
+	        value: this.value
+	      }
+	      this.$store.dispatch('checkErrorAndSetElement', payload)		  
+	  }
     }
   },
   computed: {
@@ -79,7 +85,7 @@ export default {
 
 <style lang="scss">
 @import '../../scss/forms/label';
-@import '../../scss/forms/textarea';
+@import '../../scss/forms/input';
 @import '../../scss/forms/note';
 @import '../../scss/forms/section';
 </style>

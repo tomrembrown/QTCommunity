@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { convertHeadingToName } from './convertHeadingToName'
+import { convertHeadingToName } from '../../../utils/convertHeadingToName'
 
 export default {
   props: {

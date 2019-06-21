@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import Textbox from './textbox.vue'
+import Textbox from '../../formElements/textbox.vue'
 
 export default {
   data() {
@@ -59,8 +59,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/forms/fade';
-@import '../../scss/forms/h2';
-@import '../../scss/forms/section';
-@import '../../scss/forms/checkbox';
+@import '../../../scss/forms/fade';
+@import '../../../scss/forms/h2';
+@import '../../../scss/forms/section';
+@import '../../../scss/forms/checkbox';
 </style>

@@ -3,7 +3,7 @@
     <label class="label" :for="idName">{{ heading }}</label>
     <label class="input">
       <input
-        type="password"
+        type="text"
         :id="idName"
         :name="idName"
         :aria-describedby="idHelp"
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { convertHeadingToName } from './convertHeadingToName'
+import { convertHeadingToName } from '../../../utils/convertHeadingToName'
 
 export default {
   data() {
@@ -57,17 +57,17 @@ export default {
   },
   methods: {
     updateStore() {
-	  if(this.validate){
+	    if(this.validate){
 	      const payload = {
 	        element: this.idName,
 	        value: this.value
 	      }
-	      this.$store.dispatch('checkErrorAndSetElement', payload)		  
-	  }
+	      this.$store.dispatch('checkErrorAndSetElement', payload)		    
+	    }
     }
   },
   computed: {
-    idHelp: function() {
+    idHelp() {
       return this.idName + 'Help'
     },
     isError() {

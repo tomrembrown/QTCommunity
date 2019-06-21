@@ -27,7 +27,7 @@
             class="alert alert-danger"
             role="alert"
             v-show="errorVisible"
-          >Either your login or password do not match our record!</div>
+          >Either your login or password does not match our records!</div>
           <form action class="sky-form form-sizing-reset">
             <div>
               <div class="row">
@@ -64,8 +64,8 @@
 </template>
 
 <script>
-import Textbox from '../generalFormElements/textbox.vue'
-import Password from '../generalFormElements/password.vue'
+import Textbox from '../../formElements/textbox.vue'
+import Password from '../../formElements/password.vue'
 import LoginModal from './organizationLogin.js'
 
 export default {

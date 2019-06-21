@@ -86,6 +86,8 @@ const actions = {
         // Verified that password = verify password above - don't need verify password on server
         commit('removeElement', 'verify_password')
 
+        const login = state.formElements.login
+
         const response = await axios.post(
           'createRoutesServer/createOrganization',
           state.formElements
@@ -98,7 +100,10 @@ const actions = {
         state.organizationRegistered = true
 
         // Also, switch to being logged in and store login token
-        commit('login', response.data.loginToken)
+        commit('login', {
+          loginToken: response.data.loginToken,
+          organizationLogin: login
+        })
 
       }
     } catch (error) {

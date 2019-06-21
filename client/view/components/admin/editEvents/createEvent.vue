@@ -34,12 +34,12 @@
 </template>
 
 <script>
-import MainInformation from '../generalFormElements/mainInformation.vue'
-import Place from '../generalFormElements/place.vue'
-import Organization from '../generalFormElements/organization.vue'
-import Registration from '../generalFormElements/registration.vue'
-import TargetAudience from '../generalFormElements/targetAudience.vue'
-import TimeAndDate from '../generalFormElements/timeAndDate.vue'
+import MainInformation from './mainInformation.vue'
+import Place from '../places/place.vue'
+import Organization from '../editOrganization/organization.vue'
+import Registration from './registration.vue'
+import TargetAudience from '../generalComponents/targetAudience.vue'
+import TimeAndDate from '../../formElements/timeAndDate.vue'
 
 export default {
   methods: {
@@ -60,10 +60,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/forms/form';
-@import '../../scss/forms/header';
-@import '../../scss/forms/fieldset';
-@import '../../scss/forms/h2';
-@import '../../scss/forms/footer';
-@import '../../scss/forms/buttons';
+@import '../../../scss/forms/form';
+@import '../../../scss/forms/header';
+@import '../../../scss/forms/fieldset';
+@import '../../../scss/forms/h2';
+@import '../../../scss/forms/footer';
+@import '../../../scss/forms/buttons';
 </style>
