@@ -1,15 +1,7 @@
 'use strict'
 /*
- * readRandomQuotation
- *
  * Makes an SQL query to quotations table in database to extract a random quotation
  * object with a quotation and person and the object properties
- *
- * Modification History
- *
- * Date             Name                Description
- * February, 2019   Thomas Brown        Initial Creation
- *
  */
 
 const db = require('./../db')

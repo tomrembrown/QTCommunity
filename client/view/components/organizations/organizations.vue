@@ -19,7 +19,6 @@ export default {
     readOrganizations() {
       let $this = this
       axios.get('readRoutesServer/readOrganizations').then(response => {
-        console.log(response)
         $this.organizations = response.data
       })
     }

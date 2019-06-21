@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const state = {
   loggedIn: false,
-  loggedInToken: null
+  loginToken: null
 }
 
 const getters = {
@@ -12,25 +12,24 @@ const getters = {
     return state.loggedIn
   },
   getLoginToken: state => {
-    return state.loggedInToken
+    return state.loginToken
   }
 }
 
 const mutations = {
-  login(state, token) {
+  login(state, loginToken) {
     state.loggedIn = true
-    state.loggedInToken = token
+    state.loginToken = loginToken
   },
   logout(state) {
     state.loggedIn = false
-    state.loggedInToken = null
+    state.loginToken = null
   }
 }
 
 const actions = {
   loginOrganization: async ({ commit, state }, payload) => {
     try {
-
       const response = await axios.get(
         '/readRoutesServer/checkPassword/' +
           payload.login +
@@ -41,18 +40,13 @@ const actions = {
 
       if (response.data.isError) throw new Error(response.data.message)
 
-      if (
-        response.data.authenticationToken !== null &&
-        response.data.authenticationToken !== undefined
-      ) {
-        commit('login', response.data.authenticationToken)
+      if (response.data.loginToken != null) {
+        commit('login', response.data.loginToken)
       }
     } catch (error) {
-      console.log('Error: ', error)
-      alert('Error attempting to login organization: ' + error.message)
+      console.log(`Error: ${error.message}`)
+      alert(`Error attempting to login organization: ${error.message}`)
     }
-
-    return
   },
   logoutOrganization: async ({ commit, state }) => {
     commit('logout')
