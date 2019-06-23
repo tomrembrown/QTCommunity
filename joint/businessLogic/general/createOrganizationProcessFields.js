@@ -16,6 +16,9 @@ const createOrganizationProcessFields = objectInputData => {
     }
   }
 
+  // So this organization is shown
+  objectInputData.is_shown = 'TRUE'
+
   // Convert password field to password encrypted
   objectInputData.password_encrypted = passwordHash.generate(
     objectInputData.password

@@ -1,5 +1,6 @@
 // === COLORS ===
-$text-color: #ffb3ec;
+$text-color: #ffaeeb;
+$text-shadow: 4px 8px 6px rgba(0,0,0,0.6), 0px -5px 35px rgba(255,255,255,0.7);
 
 #home:after {
   position: absolute;
@@ -33,14 +34,21 @@ $text-color: #ffb3ec;
 
   .quote-wrapper {
     .quote {
+      font-weight: bold;
       font-size: 1.4em;
       margin-bottom: 10px;
+      text-shadow: $text-shadow;
+      i {
+        font-size: 0.7em;
+        vertical-align: top;
+      }
     }
     .attribute {
       font-weight: bold;
       font-size: 1.7em;
       font-style: italic;
       color: $text-color;
+      text-shadow: $text-shadow;
     }
     .attribute:before {
       content: "- ";
@@ -58,6 +66,7 @@ $text-color: #ffb3ec;
       font-size: 4em;
       color: $text-color;
       font-style: italic;
+      text-shadow: $text-shadow;
     }
   }
 

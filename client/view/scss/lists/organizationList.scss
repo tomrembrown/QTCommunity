@@ -1,0 +1,28 @@
+@import url(https://fonts.googleapis.com/css?family=Mali);
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+.description-text {
+  font: 13px "Mali", Helvetica, Arial, sans-serif;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0 0 20px;
+}
+
+.contact-heading {
+  font: 12px "Mali", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
+.contact-text {
+  font: 12px "Anonymous Pro", Garamond, "Times New Roman", serif;
+}

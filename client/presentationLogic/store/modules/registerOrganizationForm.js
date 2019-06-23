@@ -97,7 +97,7 @@ const actions = {
           'createRoutesServer/createOrganization',
           state.formElements
         )
-        console.log('response.data', response.data)
+   
         if (response.data.isError) throw new Error(response.data.message)
 
         // Everything worked ok - organization registered
