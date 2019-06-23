@@ -35,6 +35,11 @@ const mutations = {
     if (thisError !== null) {
       state.errors.push(thisError)
     }
+  },
+  resetRegistrationForm(state) {
+    state.formElements = {}
+    state.errors = []
+    state.organizationRegistered = false
   }
 }
 

@@ -1,5 +1,5 @@
 // === COLORS ===
-$text-color: #fff;
+$text-color: #ffb3ec;
 
 #home:after {
   position: absolute;
@@ -14,7 +14,7 @@ $text-color: #fff;
 
 #home {
   background-size: cover;
-  background-image: url("/img/queer-toronto-header-1.jpg");
+  background-image: url("/img/local_area_main_image.jpg");
   background-position: 50% 50%;
   width: 100%;
   height: 500px;
@@ -33,11 +33,14 @@ $text-color: #fff;
 
   .quote-wrapper {
     .quote {
-      font-size: 1.2em;
+      font-size: 1.4em;
       margin-bottom: 10px;
     }
     .attribute {
       font-weight: bold;
+      font-size: 1.7em;
+      font-style: italic;
+      color: $text-color;
     }
     .attribute:before {
       content: "- ";
@@ -52,8 +55,9 @@ $text-color: #fff;
       position: absolute;
       bottom: 25px;
       left: 25px;
-      font-size: 3em;
+      font-size: 4em;
       color: $text-color;
+      font-style: italic;
     }
   }
 

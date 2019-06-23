@@ -55,6 +55,7 @@ const actions = {
     }
   },
   logoutOrganization: async ({ commit, state }) => {
+    commit('resetRegistrationForm')
     commit('logout')
   }
 }

@@ -23,8 +23,6 @@ router.post('/createOrganization', asyncMiddleware(async (req, res) => {
 
   const loginToken = await model.updateNewLogin(login, password)
 
-  console.log('In create organization, login token: ' + loginToken)
-
   res.json({loginToken: loginToken})
 
 }))

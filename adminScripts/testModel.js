@@ -1,6 +1,6 @@
 'use strict'
 
-const model = require('./server/model')
+const model = require('../server/model')
 
 const create519PlaceData = {
   name: 'The 519',

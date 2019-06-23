@@ -15,6 +15,8 @@ const getIDForPlace = require('./read/getIDForPlace')
 const getIDForOrganization = require('./read/getIDForOrganization')
 const getIDForOrganizationType = require('./read/getIDForOrganizationType')
 const getValuesList = require('./read/getValuesList')
+const getMandatoryColumns = require('./read/getMandatoryColumns')
+const getColumnDefaults = require('./read/getColumnDefaults')
 const getPasswordEncrypted = require('./read/getPasswordEncrypted')
 const checkElementTaken = require('./read/checkElementTaken')
 const readOrganizations = require('./read/readOrganizations')
@@ -42,6 +44,8 @@ const model = {
   getIDForOrganization: getIDForOrganization,
   getIDForOrganizationType: getIDForOrganizationType,
   getValuesList: getValuesList,
+  getMandatoryColumns: getMandatoryColumns,
+  getColumnDefaults: getColumnDefaults,
   getPasswordEncrypted: getPasswordEncrypted,
 
   // Checks

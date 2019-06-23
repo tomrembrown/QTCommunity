@@ -1,7 +1,12 @@
 <template>
   <div class="container">
-    <h2>List of Organizations</h2>
-    <single-organization v-for="organization in organizations" :organization="organization" :key="organization.name"></single-organization>
+    <div class="sky-form" v-if="organizations.length > 0">
+      <header>List of Organizations</header>
+      <single-organization v-for="organization in organizations" :organization="organization" :key="organization.name"></single-organization>
+    </div>
+    <div class="sky-form" v-else>
+      <header>No Organizations Found Matching Criteria</header>
+    </div>
   </div>
 </template>
  
@@ -32,4 +37,7 @@ export default {
 }
 </script>
  
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import '../../../scss/forms/form';
+@import '../../../scss/forms/header';
+</style>

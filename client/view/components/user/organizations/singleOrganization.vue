@@ -1,13 +1,15 @@
 <template>
-  <div class="card flex-row flew-wrap">
-    <div class="card-header border=0">
-      <img :src="organization.image_link" :alt="organization.name">
+  <fieldset>
+    <div class="row">
+      <div class="col-md-3">
+        <img :src="organization.image_link" :alt="organization.name" width="90%">
+      </div>
+      <div class="col-md-9">
+        <h2>{{ organization.name }}</h2>
+        <p class="card-text">{{ organization.description_english }}</p>
+      </div>
     </div>
-    <div class="card-block px-2">
-      <h4 class="card-title">{{ organization.name }}</h4>
-      <p class="card-text">{{ organization.description_english }}</p>
-    </div>
-  </div>
+  </fieldset>
 </template>
  
 <script>
@@ -22,5 +24,6 @@ export default {
 </script>
  
 <style lang="scss" scoped>
- 
+@import '../../../scss/forms/fieldset';
+@import '../../../scss/forms/h2';
 </style>
