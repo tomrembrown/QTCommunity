@@ -5,7 +5,18 @@
         <img :src="organization.image_link" :alt="organization.name" width="90%">
       </div>
       <div class="col-md-9">
-        <h2>{{ organization.name }}</h2>
+        <div class="row">
+          <div class="col-md-9">
+            <h2>{{ organization.name }}</h2>
+          </div>
+          <div class="col-md-3" v-if="isSocialMedia">
+            <a :href="facebook" target="_blank" v-b-tooltip.hover title="Facebook" v-if="isFacebook"><i class="fab fa-lg fa-fw fa-facebook-square"></i></a>
+            <a :href="twitter" target="_blank" v-b-tooltip.hover title="Twitter" v-if="isTwitter"><i class="fab fa-lg fa-fw fa-twitter"></i></a>
+            <a :href="youtube" target="_blank" v-b-tooltip.hover title="YouTube" v-if="isYoutube"><i class="fab fa-lg fa-fw fa-youtube"></i></a>
+            <a :href="instagram" target="_blank" v-b-tooltip.hover title="Instagram" v-if="isInstagram"><i class="fab fa-lg fa-fw fa-instagram"></i></a>
+            <a :href="linkedin" target="_blank" v-b-tooltip.hover title="LinkedIn" v-if="isLinkedin"><i class="fab fa-lg fa-fw fa-linkedin"></i></a>
+          </div>
+        </div>
         <p class="description-text">{{ organization.description_english }}</p>
         <hr>
         <section v-if="displayContactSection">
@@ -193,12 +204,48 @@ export default {
     },
     alliesWelcome() {
       return (this.organization.only_race_religion == true)
-    }
+    },
+    isFacebook() {
+      return (this.organization.display_facebook == true && this.organization.facebook)
+    },
+    facebook() {
+      return this.isFacebook ? this.organization.facebook : '' 
+    },
+    isTwitter() {
+      return (this.organization.display_twitter == true && this.organization.twitter)
+    },
+    twitter() {
+      return this.isTwitter ? this.organization.twitter : '' 
+    },
+    isYoutube() {
+      console.log('Display youtube: ' + this.organization.display_youtube)
+      console.log('youtube: ' + this.organization.youtube)
+      return (this.organization.display_youtube == true && this.organization.youtube)
+    },
+    youtube() {
+      return this.isYoutube ? this.organization.youtube : '' 
+    },
+    isInstagram() {
+      return (this.organization.display_instagram == true && this.organization.instagram)
+    },
+    instagram() {
+      return this.isInstagram ? this.organization.instagram : '' 
+    },
+    isLinkedin() {
+      return (this.organization.display_linkedin == true && this.organization.linkedin)
+    },
+    linkedin() {
+      return this.isLinkedin ? this.organization.linkedin : '' 
+    },
+    isSocialMedia() {
+      return (this.isFacebook || this.isTwitter || this.isYoutube || this.isInstagram || this.isLinkedin)
+    },
   }
 }
 </script>
  
 <style lang="scss" scoped>
+@import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 @import '../../../scss/lists/organizationList';
 @import '../../../scss/forms/fieldset';
 </style>

@@ -2,13 +2,16 @@
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import BootStrapVue from 'bootstrap-vue'
 import App from './view/App.vue'
 import { routes } from './presentationLogic/clientRoutes'
 import { store } from './presentationLogic/store/store'
 import LoginModal from './view/components/admin/organizationLogin/organizationLogin.js'
+import { isFlowBaseAnnotation } from '@babel/types';
 
 Vue.use(VueRouter)
 Vue.use(LoginModal)
+Vue.use(BootStrapVue)
 
 const router = new VueRouter({
   routes,
