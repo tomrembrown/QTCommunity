@@ -302,7 +302,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../scss/forms/forms/fade';
+@import '../../../scss/forms/fade';
 @import '../../../scss/forms/fieldset';
 @import '../../../scss/forms/h2';
 @import '../../../scss/forms/section';

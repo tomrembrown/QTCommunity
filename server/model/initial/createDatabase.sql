@@ -47,6 +47,7 @@ CREATE TABLE places(
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL UNIQUE,
   address TEXT NOT NULL,
+  google_places_id TEXT NOT NULL,  
   latitude DECIMAL(9,6) DEFAULT NULL,
   longitude DECIMAL(9,6) DEFAULT NULL,
 

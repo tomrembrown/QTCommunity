@@ -35,7 +35,7 @@
 
 <script>
 import MainInformation from './mainInformation.vue'
-import Place from '../places/place.vue'
+import Place from '../editPlaces/place.vue'
 import Organization from '../editOrganization/organization.vue'
 import Registration from './registration.vue'
 import TargetAudience from '../generalComponents/targetAudience.vue'

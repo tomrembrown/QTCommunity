@@ -72,11 +72,13 @@
                 active-class="active"
               >Edit Organization</router-link>
             </li>
+            
             <li class="nav-item px-2" v-if="isLoggedIn">
-              <router-link to="/editPlaces" class="nav-link" active-class="active">Edit Places</router-link>
-            </li>
+              <router-link to="/editPlaces" class="nav-link" active-class="active">Add/Edit Places</router-link>
+            </li>                      
+            
             <li class="nav-item px-2" v-if="isLoggedIn">
-              <router-link to="/editEvents" class="nav-link" active-class="active">Edit Events</router-link>
+              <router-link to="/editEvents" class="nav-link" active-class="active">Add/Edit Events</router-link>
             </li>
           </ul>
 

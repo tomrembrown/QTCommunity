@@ -5,7 +5,7 @@
         type="checkbox"
         :name="idName"
         :id="idName"
-        v-bind:checked="value"
+        v-bind:checked="checked"
         @click="switched()"
       />
       <i></i> {{ heading }}
@@ -17,6 +17,11 @@
 import { convertHeadingToName } from '../../../utils/convertHeadingToName'
 
 export default {
+	data(){
+		return{
+			checked:true //https://michaelnthiessen.com/avoid-mutating-prop-directly
+		}
+	},
   props: {
     heading: {
       type: String,
@@ -33,14 +38,17 @@ export default {
       default: true
     }
   },
+  mounted(){
+	 this.checked = this.value;
+  },
   methods: {
     switched() {
-      this.value = !this.value
+      this.checked = !this.checked
       this.$emit('input', this.value)
       this.$store.commit({
         type: 'setElement',
         element: this.idName,
-        value: this.value
+        value: this.checked
       })
     }
   }

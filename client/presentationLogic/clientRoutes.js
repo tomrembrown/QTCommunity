@@ -39,6 +39,12 @@ const EditPlaces = () =>
   import(
     /* webpackChunkName: "EditPlaces" */ '../view/components/admin/editPlaces/editPlaces.vue'
   )
+
+const addEvent = () =>
+  import(
+    /* webpackChunkName: "RegisterOrganization" */ '../view/components/admin/editEvents/createEvent.vue'
+  )  
+  
 const EditEvents = () =>
   import(
     /* webpackChunkName: "RegisterOrganization" */ '../view/components/admin/editEvents/editEvents.vue'
@@ -76,6 +82,11 @@ export const routes = [
     name: 'EditPlaces',
     component: EditPlaces
   },
+  {
+    path: '/addEvent',
+    name: 'AddEvent',
+    component: addEvent
+  },  
   {
     path: '/editEvents',
     name: 'EditEvents',

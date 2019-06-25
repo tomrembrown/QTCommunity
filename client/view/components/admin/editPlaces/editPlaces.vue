@@ -1,11 +1,24 @@
 <template>
-  <div>
-    <h2>Places</h2>
+  <div class="container">
+    <h2>Add/Edit Places</h2>
+    <ash-place-add></ash-place-add>
   </div>
 </template>
 
 <script>
-export default {}
+import addPlace from './addPlace.vue'
+
+export default {
+  data() {
+    return {
+    }
+  },
+  methods: {
+  },
+  components: {
+    'ash-place-add': addPlace
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>
