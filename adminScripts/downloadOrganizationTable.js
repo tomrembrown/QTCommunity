@@ -1,11 +1,25 @@
 'use strict'
 
+/*
+ * This subroutine is to be designed to be run from node at the command 
+ * prompt. It gets all data from the organization table, then extracts
+ * only that data that is either in mandatory columns or is entered and 
+ * different from the defaults. It puts it in an object with the first
+ * property being an array of column names, and the second being an array
+ * (of rows) of arrays (of columns) containing the data. Then it outputs
+ * this to a JSON object in a file.
+ */
+
 const model = require('../server/model')
+const buildRowsArray = require('../joint/utils/buildRowsArray')
+const checkColumns = require('../joint/utils/checkColumns')
+const selectUnique = require('../joint/utils/selectUnique')
+const saveOutput = require('./saveOutput')
 
 async function runAll() {
   try {
     // Get all data from organizations table
-    const organizationsArray = await model.readOrganizations()
+    const organizationsArray = await model.readOrganizations(true)
 
     // Figure out which columns to populate
 
@@ -32,90 +46,10 @@ async function runAll() {
     // Convert to JSON and output
     const outputJSON = JSON.stringify(finalObject)
 
-    await saveOutput(outputJSON)
+    await saveOutput('ORGANIZATIONS',outputJSON)
   } catch (error) {
     console.log('Error: ' + error.message)
   }
 }
 
 runAll()
-
-/*
- * Subroutines
- */
-
-function checkColumns(organizationsArray, columnDefaults) {
-  let columnsWithData = []
-
-  organizationsArray.forEach(organizationData => {
-    Object.keys(organizationData).forEach(column => {
-      if (
-        !columnsWithData.includes(column) &&
-        column !== 'id' &&
-        organizationData[column] != columnDefaults[column]
-      ) {
-        columnsWithData.push(column)
-      }
-    })
-  })
-
-  return columnsWithData
-}
-
-function selectUnique(array1, array2) {
-  const uniqueArray = []
-
-  const arr = array1.concat(array2)
-  let len = arr.length
-  const assoc = {}
-
-  while (len--) {
-    const item = arr[len]
-
-    if (!assoc[item]) {
-      uniqueArray.unshift(item)
-      assoc[item] = true
-    }
-  }
-
-  return uniqueArray
-}
-
-function buildRowsArray(columnList, organizationsArray) {
-  const rowsArray = []
-
-  organizationsArray.forEach(organizationData => {
-    const thisOrganization = []
-    columnList.forEach(column => {
-      thisOrganization.push(organizationData[column])
-    })
-    rowsArray.push(thisOrganization)
-  })
-
-  return rowsArray
-}
-
-function saveOutput(outputJSON) {
-  const fs = require('fs')
-
-  const now = new Date()
-  const filename = './DATA_' + 
-                    now.getFullYear() +'_' + 
-                    twoDigits(now.getMonth()+1) + '_' + 
-                    twoDigits(now.getDate()) + '_' +
-                    twoDigits(now.getHours()) + '_' + 
-                    twoDigits(now.getMinutes()) + "_" + 
-                    twoDigits(now.getSeconds()) + '.dat'
-
-  fs.writeFile(filename, outputJSON, error => {
-    if (error) {
-      console.error(error)
-      return
-    }
-    console.log('File ' + filename + ' has been created')
-  })
-}
-
-function twoDigits(myNumber) {
-  return ("0" + myNumber).slice(-2)
-}

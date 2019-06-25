@@ -1,69 +1,17 @@
 'use strict'
 
 const createGeneric = require('./createGeneric')
+const buildRowsArray = require('../../../joint/utils/buildRowsArray')
 
 const createOrganization = async function(objectInputData) {
 
-  const possibleColumnList = [
-    'name',
-    'organization_type_id',
-    'description_english',
-    'description_french',
-    'image_link',
-    'is_member',
-    'is_shown',
-    'login',
-    'password_encrypted',
-    'signup_date',
-    'logged_in',
-    'last_logged_in',
-    'place_id',
-    'place_room',
-    'email',
-    'display_email',
-    'phone',
-    'phone_extension',
-    'display_phone',
-    'website_english',
-    'website_french',
-    'display_website',
-    'facebook',
-    'display_facebook',
-    'twitter',
-    'display_twitter',
-    'youtube',
-    'display_youtube',
-    'instagram',
-    'display_instagram',
-    'linkedin',
-    'display_linkedin',
-    'family_friendly',
-    'min_age',
-    'max_age',
-    'gender_female',
-    'gender_male',
-    'gender_transgendered',
-    'gender_two_spirit',
-    'gender_m2f_transexual',
-    'gender_f2m_transexual',
-    'gender_intersex',
-    'orientation_lesbian',
-    'orientation_gay',
-    'orientation_bisexual',
-    'orientation_queer',
-    'orientation_questioning',
-    'orientation_asexual',
-    'orientation_pansexual',
-    'orientation_heterosexual',
-    'race_religion',
-    'only_race_religion'
-  ]
-
   try {
-    await createGeneric(objectInputData, possibleColumnList, 'organizations')
-  } catch (err) {
-    console.log('Caught error in createOrganization')
-    throw Error(err.message)
+    let columnList = Object.keys(objectInputData)
+    let rowsArray = buildRowsArray(columnList, objectInputData)
+    await createGeneric(columnList, rowsArray, 'organizations')
+  } catch (error) {
+    console.log(`Caught error in createOrganization: ${error.message}`)
+    throw error
   }
 
 }

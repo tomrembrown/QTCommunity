@@ -10,16 +10,71 @@
             <h2>{{ organization.name }}</h2>
           </div>
           <div class="col-md-3" v-if="isSocialMedia">
-            <a :href="facebook" target="_blank" v-b-tooltip.hover title="Facebook" v-if="isFacebook"><i class="fab fa-lg fa-fw fa-facebook-square"></i></a>
-            <a :href="twitter" target="_blank" v-b-tooltip.hover title="Twitter" v-if="isTwitter"><i class="fab fa-lg fa-fw fa-twitter"></i></a>
-            <a :href="youtube" target="_blank" v-b-tooltip.hover title="YouTube" v-if="isYoutube"><i class="fab fa-lg fa-fw fa-youtube"></i></a>
-            <a :href="instagram" target="_blank" v-b-tooltip.hover title="Instagram" v-if="isInstagram"><i class="fab fa-lg fa-fw fa-instagram"></i></a>
-            <a :href="linkedin" target="_blank" v-b-tooltip.hover title="LinkedIn" v-if="isLinkedin"><i class="fab fa-lg fa-fw fa-linkedin"></i></a>
+            <a
+              :href="facebook"
+              target="_blank"
+              v-b-tooltip.hover
+              title="Facebook"
+              v-if="isFacebook"
+            >
+              <i class="fab fa-lg fa-fw fa-facebook-square"></i>
+            </a>
+            <a :href="twitter" target="_blank" v-b-tooltip.hover title="Twitter" v-if="isTwitter">
+              <i class="fab fa-lg fa-fw fa-twitter"></i>
+            </a>
+            <a :href="youtube" target="_blank" v-b-tooltip.hover title="YouTube" v-if="isYoutube">
+              <i class="fab fa-lg fa-fw fa-youtube"></i>
+            </a>
+            <a
+              :href="instagram"
+              target="_blank"
+              v-b-tooltip.hover
+              title="Instagram"
+              v-if="isInstagram"
+            >
+              <i class="fab fa-lg fa-fw fa-instagram"></i>
+            </a>
+            <a
+              :href="linkedin"
+              target="_blank"
+              v-b-tooltip.hover
+              title="LinkedIn"
+              v-if="isLinkedin"
+            >
+              <i class="fab fa-lg fa-fw fa-linkedin"></i>
+            </a>
+            <a
+              :href="pinterest"
+              target="_blank"
+              v-b-tooltip.hover
+              title="Pinterest"
+              v-if="isPinterest"
+            >
+              <i class="fab fa-lg fa-fw fa-pinterest"></i>
+            </a>
+            <a
+              :href="googlePlus"
+              target="_blank"
+              v-b-tooltip.hover
+              title="Google Plus"
+              v-if="isGooglePlus"
+            >
+              <i class="fab fa-lg fa-fw fa-google-plus"></i>
+            </a>
+            <a
+              :href="rss"
+              target="_blank"
+              v-b-tooltip.hover
+              title="RSS Feed"
+              v-if="isRss"
+            >
+              <i class="fas fa-lg fa-fw fa-rss-square"></i>
+            </a>
           </div>
         </div>
         <p class="description-text">{{ organization.description_english }}</p>
-        <hr>
         <section v-if="displayContactSection">
+          <hr>
           <div class="row" v-if="displayWebsite">
             <div class="col-md-3 contact-heading">Website</div>
             <div class="col-md-9 contact-text">
@@ -116,7 +171,7 @@ export default {
       }
     },
     isFamilyFriendly() {
-      return (this.organization.family_friendly) ? true : false
+      return this.organization.family_friendly ? true : false
     },
     isMinAge() {
       return !(this.organization.min_age == undefined)
@@ -127,36 +182,52 @@ export default {
     minimumAge() {
       return this.isMinAge ? this.organization.min_age.toString() : ''
     },
-    maximumAge() {      
+    maximumAge() {
       return this.isMaxAge ? this.organization.max_age.toString() : ''
     },
     isAgeLimits() {
-      return (this.isMinAge || this.isMaxAge)
+      return this.isMinAge || this.isMaxAge
     },
     genderIdentitiesWelcome() {
-      const female = (this.organization.gender_female == true)
-      const male = (this.organization.gender_male == true)
-      const trans = (this.organization.gender_transgendered == true)
-      const twoSpirit = (this.organization.gender_two_spirit == true)
-      const m2f = (this.organization.gender_m2f_transexual == true)
-      const f2m = (this.organization.gender_f2m_transexual == true)
-      const intersex = (this.organization.gender_intersex == true)
+      const female = this.organization.gender_female == true
+      const male = this.organization.gender_male == true
+      const trans = this.organization.gender_transgendered == true
+      const twoSpirit = this.organization.gender_two_spirit == true
+      const m2f = this.organization.gender_m2f_transexual == true
+      const f2m = this.organization.gender_f2m_transexual == true
+      const intersex = this.organization.gender_intersex == true
 
       if (female && male && trans && twoSpirit && m2f && f2m && intersex) {
         return 'ALL'
-      }
-      else {
+      } else {
         let returnString = ''
         let firstTime = true
-        const booleanArray = [female, male, trans, twoSpirit, m2f, f2m, intersex]
-        const textArray = ['female', 'male', 'transgendered', 'two-spirit', 'male to female transexual', 'female to male transexual', 'intersex']
+        const booleanArray = [
+          female,
+          male,
+          trans,
+          twoSpirit,
+          m2f,
+          f2m,
+          intersex
+        ]
+        const textArray = [
+          'female',
+          'male',
+          'transgendered',
+          'two-spirit',
+          'male to female transexual',
+          'female to male transexual',
+          'intersex'
+        ]
         booleanArray.forEach((element, index) => {
           if (element) {
             if (firstTime) {
-              returnString += textArray[index].charAt(0).toUpperCase() + textArray[index].slice(1)
+              returnString +=
+                textArray[index].charAt(0).toUpperCase() +
+                textArray[index].slice(1)
               firstTime = false
-            }
-            else {
+            } else {
               returnString += ', ' + textArray[index]
             }
           }
@@ -165,30 +236,57 @@ export default {
       }
     },
     sexualOrientationsWelcome() {
-      const lesbian = (this.organization.orientation_lesbian == true)
-      const gay = (this.organization.orientation_gay == true)
-      const bisexual = (this.organization.orientation_bisexual == true)
-      const queer = (this.organization.orientation_queer == true)
-      const questioning = (this.organization.orientation_questioning == true)
-      const asexual = (this.organization.orientation_asexual == true)
-      const pansexual = (this.organization.orientation_pansexual == true)
-      const heterosexual = (this.organization.orientation_heterosexual == true)
+      const lesbian = this.organization.orientation_lesbian == true
+      const gay = this.organization.orientation_gay == true
+      const bisexual = this.organization.orientation_bisexual == true
+      const queer = this.organization.orientation_queer == true
+      const questioning = this.organization.orientation_questioning == true
+      const asexual = this.organization.orientation_asexual == true
+      const pansexual = this.organization.orientation_pansexual == true
+      const heterosexual = this.organization.orientation_heterosexual == true
 
-      if (lesbian && gay && bisexual && queer && questioning && asexual && pansexual && heterosexual) {
+      if (
+        lesbian &&
+        gay &&
+        bisexual &&
+        queer &&
+        questioning &&
+        asexual &&
+        pansexual &&
+        heterosexual
+      ) {
         return 'ALL'
-      }
-      else {
+      } else {
         let returnString = ''
         let firstTime = true
-        const booleanArray = [lesbian, gay, bisexual, queer, questioning, asexual, pansexual, heterosexual]
-        const textArray = ['lesbian', 'gay', 'bisexual', 'queer', 'questioning', 'asexual', 'pansexual', 'heterosexual']
+        const booleanArray = [
+          lesbian,
+          gay,
+          bisexual,
+          queer,
+          questioning,
+          asexual,
+          pansexual,
+          heterosexual
+        ]
+        const textArray = [
+          'lesbian',
+          'gay',
+          'bisexual',
+          'queer',
+          'questioning',
+          'asexual',
+          'pansexual',
+          'heterosexual'
+        ]
         booleanArray.forEach((element, index) => {
           if (element) {
             if (firstTime) {
-              returnString += textArray[index].charAt(0).toUpperCase() + textArray[index].slice(1)
+              returnString +=
+                textArray[index].charAt(0).toUpperCase() +
+                textArray[index].slice(1)
               firstTime = false
-            }
-            else {
+            } else {
               returnString += ', ' + textArray[index]
             }
           }
@@ -203,43 +301,87 @@ export default {
       return this.organization.race_religion
     },
     alliesWelcome() {
-      return (this.organization.only_race_religion == true)
+      return this.organization.only_race_religion == true
     },
     isFacebook() {
-      return (this.organization.display_facebook == true && this.organization.facebook)
+      return (
+        this.organization.display_facebook == true && this.organization.facebook
+      )
     },
     facebook() {
-      return this.isFacebook ? this.organization.facebook : '' 
+      return this.isFacebook ? this.organization.facebook : ''
     },
     isTwitter() {
-      return (this.organization.display_twitter == true && this.organization.twitter)
+      return (
+        this.organization.display_twitter == true && this.organization.twitter
+      )
     },
     twitter() {
-      return this.isTwitter ? this.organization.twitter : '' 
+      return this.isTwitter ? this.organization.twitter : ''
     },
     isYoutube() {
-      console.log('Display youtube: ' + this.organization.display_youtube)
-      console.log('youtube: ' + this.organization.youtube)
-      return (this.organization.display_youtube == true && this.organization.youtube)
+      return (
+        this.organization.display_youtube == true && this.organization.youtube
+      )
     },
     youtube() {
-      return this.isYoutube ? this.organization.youtube : '' 
+      return this.isYoutube ? this.organization.youtube : ''
     },
     isInstagram() {
-      return (this.organization.display_instagram == true && this.organization.instagram)
+      return (
+        this.organization.display_instagram == true &&
+        this.organization.instagram
+      )
     },
     instagram() {
-      return this.isInstagram ? this.organization.instagram : '' 
+      return this.isInstagram ? this.organization.instagram : ''
     },
     isLinkedin() {
-      return (this.organization.display_linkedin == true && this.organization.linkedin)
+      return (
+        this.organization.display_linkedin == true && this.organization.linkedin
+      )
     },
     linkedin() {
-      return this.isLinkedin ? this.organization.linkedin : '' 
+      return this.isLinkedin ? this.organization.linkedin : ''
+    },
+    isPinterest() {
+      return (
+        this.organization.display_pinterest == true && this.organization.pinterest
+      )
+    },
+    pinterest() {
+      return this.isPinterest ? this.organization.pinterest : ''
+    },
+    isGooglePlus() {
+      return (
+        this.organization.display_google_plus == true && this.organization.google_plus
+      )
+    },
+    googlePlus() {
+      return this.isGooglePlus ? this.organization.google_plus : ''
+    },
+    isRss() {
+      console.log('display_rss: ' + this.organization.display_rss)
+      return (
+        this.organization.display_rss == true && this.organization.rss
+      )
+    },
+    rss() {
+      console.log('rss: ' + this.organization.rss)
+      return this.isRss ? this.organization.rss : ''
     },
     isSocialMedia() {
-      return (this.isFacebook || this.isTwitter || this.isYoutube || this.isInstagram || this.isLinkedin)
-    },
+      return (
+        this.isFacebook ||
+        this.isTwitter ||
+        this.isYoutube ||
+        this.isInstagram ||
+        this.isLinkedin ||
+        this.isPinterest ||
+        this.isGooglePlus ||
+        this.isRss
+      )
+    }
   }
 }
 </script>

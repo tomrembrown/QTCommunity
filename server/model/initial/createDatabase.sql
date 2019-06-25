@@ -122,6 +122,12 @@ CREATE TABLE organizations(
   display_instagram BOOLEAN NOT NULL DEFAULT FALSE,
   linkedin TEXT DEFAULT NULL,
   display_linkedin BOOLEAN NOT NULL DEFAULT FALSE,
+  pinterest TEXT DEFAULT NULL,
+  display_pinterest BOOLEAN NOT NULL DEFAULT FALSE,
+  google_plus TEXT DEFAULT NULL,
+  display_google_plus BOOLEAN NOT NULL DEFAULT FALSE,
+  rss TEXT DEFAULT NULL,
+  display_rss BOOLEAN NOT NULL DEFAULT FALSE,
 
   -- Information about who organization is geared for
   family_friendly BOOLEAN NOT NULL DEFAULT TRUE,  

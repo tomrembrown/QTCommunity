@@ -6,10 +6,14 @@
  */
 
 // Require all methods from CRUD directories that are referred to in this interface
+
+// Create
 const createEvent = require('./create/createEvent')
 const createPlace = require('./create/createPlace')
 const createOrganization = require('./create/createOrganization')
+const createGeneric = require('./create/createGeneric')
 
+// Read
 const readRandomQuotation = require('./read/readRandomQuotation')
 const getIDForPlace = require('./read/getIDForPlace')
 const getIDForOrganization = require('./read/getIDForOrganization')
@@ -21,10 +25,13 @@ const getPasswordEncrypted = require('./read/getPasswordEncrypted')
 const checkElementTaken = require('./read/checkElementTaken')
 const readOrganizations = require('./read/readOrganizations')
 
+// Update
 const updateNewLogin = require('./update/updateNewLogin')
 
+// Database utility functions
 const close = require('./final/close')
 
+// Object to export
 const model = {
   /* ******
    * Create
@@ -32,6 +39,7 @@ const model = {
   createEvent: createEvent,
   createPlace: createPlace,
   createOrganization: createOrganization,
+  createGeneric: createGeneric,
 
   /* ******
    * Read

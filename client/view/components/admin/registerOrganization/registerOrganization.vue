@@ -153,6 +153,35 @@
             <div class="col-md-1">
               <ash-checkbox heading="Show" idName="display_linkedin" :value="false"></ash-checkbox>
             </div>
+            <div class="col-md-5">
+              <ash-textbox
+                heading="Pinterest"
+                helpText="Enter Pinterest address for organization. Leave blank if none"
+              ></ash-textbox>
+            </div>
+            <div class="col-md-1">
+              <ash-checkbox heading="Show" idName="display_pinterest" :value="false"></ash-checkbox>
+            </div>
+          </div>
+          <div class="row align-items-center">
+            <div class="col-md-5">
+              <ash-textbox
+                heading="Google Plus"
+                helpText="Enter Google+ address for organization. Leave blank if none"
+              ></ash-textbox>
+            </div>
+            <div class="col-md-1">
+              <ash-checkbox heading="Show" idName="display_google_plus" :value="false"></ash-checkbox>
+            </div>
+            <div class="col-md-5">
+              <ash-textbox
+                heading="RSS"
+                helpText="Enter RSS Feed for organization. Leave blank if none"
+              ></ash-textbox>
+            </div>
+            <div class="col-md-1">
+              <ash-checkbox heading="Show" idName="display_rss" :value="false"></ash-checkbox>
+            </div>
           </div>
         </fieldset>
         <fieldset>

@@ -19,6 +19,10 @@ const createOrganizationProcessFields = objectInputData => {
   // So this organization is shown
   objectInputData.is_shown = 'TRUE'
 
+  // Remove fields on form, but not in database
+  if (objectInputData.gender_all != null) { delete objectInputData.gender_all }
+  if (objectInputData.orientation_all != null) { delete objectInputData.orientation_all }
+
   // Convert password field to password encrypted
   objectInputData.password_encrypted = passwordHash.generate(
     objectInputData.password

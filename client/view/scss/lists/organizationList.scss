@@ -27,7 +27,7 @@ h2 {
   font: 12px "Anonymous Pro", Garamond, "Times New Roman", serif;
 }
 
-.fab {
+.fab, .fas {
   position: relative;
   top: 11px;
 }
@@ -50,4 +50,16 @@ h2 {
 
 .fa-linkedin {
   color: #0077b5;
+}
+
+.fa-pinterest {
+  color: #c8232c;
+}
+
+.fa-google-plus {
+  color: #cc3333;
+}
+
+.fa-rss-square {
+  color: #ee802f;
 }
