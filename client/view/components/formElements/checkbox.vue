@@ -44,7 +44,7 @@ export default {
   methods: {
     switched() {
       this.checked = !this.checked
-      this.$emit('input', this.value)
+      this.$emit('input', this.checked)
       this.$store.commit({
         type: 'setElement',
         element: this.idName,
