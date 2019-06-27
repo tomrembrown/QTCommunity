@@ -35,7 +35,7 @@
 
 <script>
 import MainInformation from './mainInformation.vue'
-import Place from '../editPlaces/place.vue'
+import Place from '../managePlaces/place.vue'
 import Organization from '../editOrganization/organization.vue'
 import Registration from './registration.vue'
 import TargetAudience from '../generalComponents/targetAudience.vue'
@@ -44,7 +44,7 @@ import TimeAndDate from '../../formElements/timeAndDate.vue'
 export default {
   methods: {
     submitForm() {
-      console.log('In Create Event')
+      console.log('In Manage Events')
       this.$store.commit('submitForm')
     }
   },

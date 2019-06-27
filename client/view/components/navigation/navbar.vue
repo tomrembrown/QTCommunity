@@ -74,11 +74,11 @@
             </li>
             
             <li class="nav-item px-2" v-if="isLoggedIn">
-              <router-link to="/editPlaces" class="nav-link" active-class="active">Add/Edit Places</router-link>
+              <router-link to="/managePlaces" class="nav-link" active-class="active">Manage Places</router-link>
             </li>                      
             
             <li class="nav-item px-2" v-if="isLoggedIn">
-              <router-link to="/editEvents" class="nav-link" active-class="active">Add/Edit Events</router-link>
+              <router-link to="/manageEvents" class="nav-link" active-class="active">Manage Events</router-link>
             </li>
           </ul>
 

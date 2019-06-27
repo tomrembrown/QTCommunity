@@ -35,19 +35,13 @@ const EditOrganization = () =>
   import(
     /* webpackChunkName: "EditOrganization" */ '../view/components/admin/editOrganization/editOrganization.vue'
   )
-const EditPlaces = () =>
+const ManagePlaces = () =>
   import(
-    /* webpackChunkName: "EditPlaces" */ '../view/components/admin/editPlaces/editPlaces.vue'
+    /* webpackChunkName: "ManagePlaces" */ '../view/components/admin/managePlaces/managePlaces.vue'
   )
-
-const addEvent = () =>
+const ManageEvents = () =>
   import(
-    /* webpackChunkName: "RegisterOrganization" */ '../view/components/admin/editEvents/createEvent.vue'
-  )  
-  
-const EditEvents = () =>
-  import(
-    /* webpackChunkName: "RegisterOrganization" */ '../view/components/admin/editEvents/editEvents.vue'
+    /* webpackChunkName: "ManageOrganization" */ '../view/components/admin/manageEvents/manageEvents.vue'
   )
 
 // Import General LInks
@@ -78,19 +72,14 @@ export const routes = [
     component: EditOrganization
   },
   {
-    path: '/editPlaces',
-    name: 'EditPlaces',
-    component: EditPlaces
-  },
+    path: '/managePlaces',
+    name: 'ManagePlaces',
+    component: ManagePlaces
+  }, 
   {
-    path: '/addEvent',
-    name: 'AddEvent',
-    component: addEvent
-  },  
-  {
-    path: '/editEvents',
-    name: 'EditEvents',
-    component: EditEvents
+    path: '/manageEvents',
+    name: 'ManageEvents',
+    component: ManageEvents
   },
   { path: '*', name: 'PageNotFound', component: PageNotFound }
 ]
