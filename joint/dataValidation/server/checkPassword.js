@@ -17,8 +17,8 @@ const checkPassword = async function(login, password) {
     if (passwordEncrypted != null) {
       authenticated = passwordHash.verify(password, passwordEncrypted)
       if (authenticated) {
-        const loginToken = await model.updateNewLogin(login, password)
-        return loginToken
+        const data = await model.updateNewLogin(login, password)
+        return data
       }
     }
     return null

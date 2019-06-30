@@ -36,6 +36,7 @@
                     v-model="loginAs"
                     v-bind:validate="false"
                     heading="Login"
+                    :idName="formName + '__login'"
                     placeholder="Login"
                     helpText="Enter a login for the organization"
                   ></ash-textbox>
@@ -47,6 +48,7 @@
                     v-model="password"
                     v-bind:validate="false"
                     heading="Password"
+                    :idName="formName + '__password'"
                     placeholder="Password"
                     helpText="Enter password for organization to login"
                   ></ash-password>
@@ -67,6 +69,7 @@
 import Textbox from '../../formElements/textbox.vue'
 import Password from '../../formElements/password.vue'
 import LoginModal from './organizationLogin.js'
+import { forms } from '../../../../../joint/dataValidation/general/formsAndTable'
 
 export default {
   data() {
@@ -80,6 +83,9 @@ export default {
   methods: {
     toggle() {
       this.visible = !this.visible
+    },
+    setThisForm() {
+      this.$store.commit('setThisForm', this.formName)
     },
     login() {
       const payload = {
@@ -104,10 +110,16 @@ export default {
     'ash-textbox': Textbox,
     'ash-password': Password
   },
+  computed: {
+    formName() {
+      return forms.LOGIN
+    }
+  },
   beforeMount() {
     LoginModal.EventBus.$on('toggle', () => {
       this.toggle()
     })
+    this.setThisForm()
   }
 }
 </script>

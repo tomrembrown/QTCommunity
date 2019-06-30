@@ -1,5 +1,7 @@
 'use strict'
 
+const { forms } = require('./dataValidation/general/formsAndTable')
+
 let constants = {}
 
 /***
@@ -12,7 +14,8 @@ constants.minLengths = {
 }
 
 // Forms can't be submitted without these elements
-constants.mandatoryElements = ['login', 'password', 'verify_password', 'name', 'image_link']
+constants.mandatoryElements = {}
+constants.mandatoryElements[forms.CREATE_ORGANIZATION] = ['login', 'password', 'verify_password', 'name', 'image_link']
 
 // Checks against database to ensure these elements are unique
 constants.uniqueElements = ['login', 'name']

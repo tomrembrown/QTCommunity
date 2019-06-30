@@ -5,25 +5,35 @@
  * create requests and use the post HTTP method. 
  */
 
-const express = require('express')
 const model = require('../model')
+const { forms } = require('../../joint/dataValidation/general/formsAndTable')
+
+const express = require('express')
 const router = express.Router()
 
+const extractDataForForm = require('../utils/extractDataForForm')
 const asyncMiddleware = require('../utils/asyncMiddleware')
 const createOrganizationProcessFields = require('../../joint/businessLogic/general/createOrganizationProcessFields')
 
-router.post('/createOrganization', asyncMiddleware(async (req, res) => {
+router.post('/create/:currentForm', asyncMiddleware(async (req, res) => {
 
-  let objectInputData = req.body
-  const password = objectInputData.password
-  const login = objectInputData.login
-  objectInputData = createOrganizationProcessFields(objectInputData)
+  const currentForm = req.params.currentForm
 
-  await model.createOrganization(objectInputData)
+  let objectInputData = extractDataForForm(currentForm,req.body)
 
-  const loginToken = await model.updateNewLogin(login, password)
+  if (currentForm === forms.CREATE_ORGANIZATION) {
 
-  res.json({loginToken: loginToken})
+    const password = objectInputData.password
+    const login = objectInputData.login
+    objectInputData = createOrganizationProcessFields(objectInputData)
+
+    await model.createOrganization(objectInputData)
+
+    const data = await model.updateNewLogin(login, password)
+
+    res.json(data)
+
+  }
 
 }))
 

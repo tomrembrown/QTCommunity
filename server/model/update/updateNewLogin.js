@@ -16,20 +16,20 @@ const updateNewLogin = async function(login, password) {
   const updateQuery =
     'UPDATE organizations SET login_token = MD5($1), last_logged_in = $2 WHERE login = $3'
   const tokenLookupQuery =
-    'SELECT login_token FROM organizations WHERE login = $1'
+    'SELECT id, login_token FROM organizations WHERE login = $1'
 
-  let loginToken = null
+  let data = null
 
   try {
     await db.query(updateQuery, [token, now, login])
     const { rows } = await db.query(tokenLookupQuery, [login])
-    loginToken = rows[0].login_token
+    data = rows[0]
   } catch (error) {
     console.log(`Error in updateNewLogin: ${error.message}`)
     throw new Error(`Error in updateNewLogin: ${error.message}`)
   }
 
-  return loginToken
+  return data
 }
 
 module.exports = updateNewLogin

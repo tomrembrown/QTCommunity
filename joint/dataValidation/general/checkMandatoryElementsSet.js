@@ -2,13 +2,13 @@
 
 const constants = require('../../constants')
 
-const checkMandatoryElementsSet = function (formElements) {
+const checkMandatoryElementsSet = function (currentForm, formElements) {
   let missingErrors = []
 
-  constants.mandatoryElements.forEach(element => {
-    if (typeof formElements[element] === 'undefined') {
+  constants.mandatoryElements[currentForm].forEach(element => {
+    if (typeof formElements[currentForm + '__' + element] === 'undefined') {
       missingErrors.push({
-        element: element,
+        element: currentForm + '__' + element,
         message: 'This is a mandatory field'
       })
     }

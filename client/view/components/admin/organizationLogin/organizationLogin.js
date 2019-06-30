@@ -7,7 +7,6 @@ const LoginModal = {
     Vue.component('login-modal', OrganizationLogin)
     Vue.prototype.$login = {
       toggle(params) {
-        console.log('In toggle login')
         LoginModal.EventBus.$emit('toggle', params)
       }
     }

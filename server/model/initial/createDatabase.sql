@@ -51,6 +51,9 @@ CREATE TABLE places(
   latitude DECIMAL(9,6) DEFAULT NULL,
   longitude DECIMAL(9,6) DEFAULT NULL,
 
+  -- Most places linked to specific organizations, i.e. 519 organization linked to 519 place
+  organization_id INTEGER REFERENCES organizations(id) DEFAULT NULL,
+
   -- Information about who place is geared for 
   -- Below is also in organizations & events
   family_friendly BOOLEAN NOT NULL DEFAULT TRUE,  

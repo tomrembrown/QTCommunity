@@ -5,6 +5,15 @@
       <fieldset>
         <div class="row">
           <div class="col-md-12">
+            <ash-textbox
+              heading="Name"
+              placeholder="Enter name"
+              helpText="Enter a short, unique, name to refer to the place"
+            ></ash-textbox>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
             <section>
               <label for="places" class="label">Address</label>
               <label class="input" id="places-wrapper">
@@ -12,7 +21,7 @@
                   ref="address"
                   id="places"
                   placeholder="Please enter your address"
-                  v-on:placechanged="getAddressData"
+                  @placechanged="getAddressData"
                   country="ca"
                 ></vue-google-autocomplete>
               </label>
@@ -41,6 +50,7 @@
 import VueGoogleAutocomplete from 'vue-google-autocomplete'
 import TargetAudience from '../generalComponents/targetAudience.vue'
 import Checkbox from '../../formElements/checkbox.vue'
+import Textbox from '../../formElements/textbox.vue'
 
 export default {
   data() {
@@ -54,7 +64,8 @@ export default {
   components: {
     VueGoogleAutocomplete,
     'qt-target-audience': TargetAudience,
-    'ash-checkbox': Checkbox
+    'ash-checkbox': Checkbox,
+    'ash-textbox': Textbox
   },
   mounted() {
     this.$refs.address.focus()
@@ -69,7 +80,7 @@ export default {
       console.log(id)
     },
     submitForm() {
-      this.$store.dispatch('submitRegisterOrganizationForm')
+      this.$store.dispatch('submitPlaceForm')
     }
   }
 }

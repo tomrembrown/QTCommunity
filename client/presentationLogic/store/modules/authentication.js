@@ -5,7 +5,8 @@ import axios from 'axios'
 const state = {
   loggedIn: false,
   loginToken: null,
-  organizationLogin: null
+  organizationLogin: null,
+  organizationID: null
 }
 
 const getters = {
@@ -14,6 +15,9 @@ const getters = {
   },
   getLoginToken: state => {
     return state.loginToken
+  },
+  getOrganizationID: state => {
+    return state.organizationID
   }
 }
 
@@ -22,31 +26,35 @@ const mutations = {
     state.loggedIn = true
     state.loginToken = payload.loginToken
     state.organizationLogin = payload.organizationLogin
+    state.organizationID = payload.organizationID
   },
   logout(state) {
     state.loggedIn = false
     state.loginToken = null
     state.organizationLogin = null
+    state.organizationID = null
   }
 }
 
 const actions = {
-  loginOrganization: async ({ commit, state }, payload) => {
+  loginOrganization: async ({commit}, payload) => {
     try {
+
       const response = await axios.get(
         '/readRoutesServer/checkPassword/' +
           payload.login +
           '/' +
           payload.password
       )
-      console.log('response.data', response.data)
-
+ 
       if (response.data.isError) throw new Error(response.data.message)
 
-      if (response.data.loginToken != null) {
+      if (response.data.login_token != null) {
+        console.log('Logging in')
         commit('login', {
-          loginToken: response.data.loginToken,
-          organizationLogin: payload.login 
+          loginToken: response.data.login_token,
+          organizationLogin: payload.login,
+          organizationID: response.data.id
         })
       }
     } catch (error) {
@@ -54,8 +62,8 @@ const actions = {
       alert(`Error attempting to login organization: ${error.message}`)
     }
   },
-  logoutOrganization: async ({ commit, state }) => {
-    commit('resetRegistrationForm')
+  logoutOrganization: async ({commit}) => {
+    commit('resetAllForms')
     commit('logout')
   }
 }

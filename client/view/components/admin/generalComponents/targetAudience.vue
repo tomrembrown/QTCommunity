@@ -4,14 +4,13 @@
       <div class="form-group col-md-4">
         <ash-checkbox
           :heading="'Is ' + type + ' family friendly?'"
-          idName="family_friendly"
-        >
-        </ash-checkbox>
+          :idName="formName + '__family_friendly'"
+        ></ash-checkbox>
       </div>
       <div class="form-group col-md-4">
         <ash-textbox
           :heading="'Minimum Age for ' + typeCapitalized"
-          idName="min_age"
+          :idName="formName + '__min_age'"
           :helpText="
             'Enter minimum age to ' +
               verb +
@@ -24,7 +23,7 @@
       <div class="form-group col-md-4">
         <ash-textbox
           :heading="'Maximum Age for ' + typeCapitalized"
-          idName="max_age"
+          :idName="formName + '__max_age'"
           :helpText="
             'Enter maximum age to ' +
               verb +
@@ -41,12 +40,7 @@
         <h3>Gender Identities Welcome at {{ typeCapitalized }}</h3>
       </div>
       <div class="col-md-6">
-        <ash-checkbox
-          heading="All are welcome"
-          idName="gender_all"
-          v-model="allGendersWelcome"
-        >
-        </ash-checkbox>
+        <ash-checkbox heading="All are welcome" idName="gender_all" v-model="allGendersWelcome"></ash-checkbox>
       </div>
     </div>
 
@@ -54,49 +48,37 @@
       <div v-if="!allGendersWelcome">
         <div class="row align-items-center">
           <div class="col-md-4">
-            <ash-checkbox
-              heading="Female"
-              idName="gender_female"
-            ></ash-checkbox>
+            <ash-checkbox heading="Female" :idName="formName + '__gender_female'"></ash-checkbox>
           </div>
           <div class="col-md-4">
-            <ash-checkbox heading="Male" idName="gender_male"></ash-checkbox>
+            <ash-checkbox heading="Male" :idName="formName + '__gender_male'"></ash-checkbox>
           </div>
           <div class="col-md-4">
-            <ash-checkbox
-              heading="Transgendered"
-              idName="gender_transgendered"
-            ></ash-checkbox>
+            <ash-checkbox heading="Transgendered" :idName="formName + '__gender_transgendered'"></ash-checkbox>
           </div>
         </div>
 
         <div class="row align-items-center">
           <div class="col-md-4">
-            <ash-checkbox
-              heading="Two-spirit"
-              idName="gender_two_spirit"
-            ></ash-checkbox>
+            <ash-checkbox heading="Two-spirit" :idName="formName + '__gender_two_spirit'"></ash-checkbox>
           </div>
           <div class="col-md-4">
             <ash-checkbox
               heading="Male to Female Transexual"
-              idName="gender_m2f_transexual"
+              :idName="formName + '__gender_m2f_transexual'"
             ></ash-checkbox>
           </div>
           <div class="col-md-4">
             <ash-checkbox
               heading="Female to Male Transexual"
-              idName="gender_f2m_transexual"
+              :idName="formName + '__gender_f2m_transexual'"
             ></ash-checkbox>
           </div>
         </div>
 
         <div class="row align-items-center">
           <div class="col-md-4">
-            <ash-checkbox
-              heading="Intersex"
-              idName="gender_intersex"
-            ></ash-checkbox>
+            <ash-checkbox heading="Intersex" :idName="formName + '__gender_intersex'"></ash-checkbox>
           </div>
         </div>
       </div>
@@ -111,8 +93,7 @@
           heading="All are welcome"
           idName="orientation_all"
           v-model="allOrientationsWelcome"
-        >
-        </ash-checkbox>
+        ></ash-checkbox>
       </div>
     </div>
 
@@ -120,55 +101,34 @@
       <div v-if="!allOrientationsWelcome">
         <div class="row align-items-center">
           <div class="col-md-4">
-            <ash-checkbox
-              heading="Lesbian"
-              idName="orientation_lesbian"
-            ></ash-checkbox>
+            <ash-checkbox heading="Lesbian" :idName="formName + '__orientation_lesbian'"></ash-checkbox>
           </div>
           <div class="col-md-4">
-            <ash-checkbox heading="Gay" idName="orientation_gay"></ash-checkbox>
+            <ash-checkbox heading="Gay" :idName="formName + '__orientation_gay'"></ash-checkbox>
           </div>
           <div class="col-md-4">
-            <ash-checkbox
-              heading="Bisexual"
-              idName="orientation_bisexual"
-            ></ash-checkbox>
+            <ash-checkbox heading="Bisexual" :idName="formName + '__orientation_bisexual'"></ash-checkbox>
           </div>
         </div>
 
         <div class="row align-items-center">
           <div class="col-md-4">
-            <ash-checkbox
-              heading="Queer"
-              idName="orientation_queer"
-            ></ash-checkbox>
+            <ash-checkbox heading="Queer" :idName="formName + '__orientation_queer'"></ash-checkbox>
           </div>
           <div class="col-md-4">
-            <ash-checkbox
-              heading="Questioning"
-              idName="orientation_questioning"
-            ></ash-checkbox>
+            <ash-checkbox heading="Questioning" :idName="formName + '__orientation_questioning'"></ash-checkbox>
           </div>
           <div class="col-md-4">
-            <ash-checkbox
-              heading="Asexual"
-              idName="orientation_asexual"
-            ></ash-checkbox>
+            <ash-checkbox heading="Asexual" :idName="formName + '__orientation_asexual'"></ash-checkbox>
           </div>
         </div>
 
         <div class="row align-items-center">
           <div class="col-md-4">
-            <ash-checkbox
-              heading="Pansexual"
-              idName="orientation_pansexual"
-            ></ash-checkbox>
+            <ash-checkbox heading="Pansexual" :idName="formName + '__orientation_pansexual'"></ash-checkbox>
           </div>
           <div class="col-md-4">
-            <ash-checkbox
-              heading="Heterosexual"
-              idName="orientation_heterosexual"
-            ></ash-checkbox>
+            <ash-checkbox heading="Heterosexual" :idName="formName + '__orientation_heterosexual'"></ash-checkbox>
           </div>
         </div>
       </div>
@@ -183,8 +143,7 @@
           :heading="'Is ' + type + ' aimed at a particular race or religion?'"
           idName="race_religion_targetted"
           v-model="aimedAtRaceReligion"
-        >
-        </ash-checkbox>
+        ></ash-checkbox>
       </div>
     </div>
 
@@ -199,7 +158,7 @@
                 id="only"
                 v-model="only_race_religion"
                 @click="switchRadio('only')"
-              />
+              >
               <i></i>Only for this race or religion
             </label>
           </section>
@@ -213,7 +172,7 @@
                 id="others"
                 v-model="only_race_religion"
                 @click="switchRadio('other')"
-              />
+              >
               <i></i>Admirers and allies welcome too
             </label>
           </section>
@@ -221,7 +180,7 @@
         <div class="col-md-4">
           <ash-textbox
             :heading="'Race or Religion ' + typeCapitalized + ' is aimed at'"
-            idName="race_religion"
+            :idName="formName + '__race_religion'"
             helpText="Enter name of race or religion. Leave blank if not applicable."
           ></ash-textbox>
         </div>
@@ -244,6 +203,10 @@ export default {
     }
   },
   props: {
+    formName: {
+      type: String,
+      required: true
+    },
     type: {
       type: String,
       required: true
@@ -254,22 +217,20 @@ export default {
     }
   },
   methods: {
-    switchRadio: function(inValue) {
+    switchRadio: inValue => {
       this.$store.commit({
         type: 'setElement',
-        element: 'only_race_religion',
+        element: formName + '__only_race_religion',
         value: inValue
       })
     }
   },
   computed: {
-    typeCapitalized: function() {
-      return (
-        this.type
-          .trim()
-          .charAt(0)
-          .toUpperCase() + this.type.trim().slice(1)
-      )
+    typeCapitalized() {
+      return this.type
+        .trim()
+        .charAt(0)
+        .toUpperCase() + this.type.trim().slice(1)
     }
   },
   components: {

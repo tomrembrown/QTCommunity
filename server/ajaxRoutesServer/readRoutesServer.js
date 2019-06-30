@@ -27,15 +27,15 @@ router.get('/getValuesList/:table', asyncMiddleware(async (req, res) => {
 }))
  
 // Check if a unique element in taken
-router.get('/checkElementTaken/:element/:value', asyncMiddleware(async (req, res) => {
+router.get('/checkElementTaken/:currentForm/:element/:value', asyncMiddleware(async (req, res) => {
   const isTaken = await model.checkElementTaken(req.params.element, req.params.value)
   res.send(isTaken)
 }))
 
 // Check that the login and password match what in database
 router.get('/checkPassword/:login/:password', asyncMiddleware(async(req, res) => {
-  const loginToken = await checkPassword(req.params.login, req.params.password)
-  res.send({loginToken: loginToken})
+  const data = await checkPassword(req.params.login, req.params.password)
+  res.send(data)
 }))
 
 // A list of all organization in database

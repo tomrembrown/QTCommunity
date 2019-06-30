@@ -57,11 +57,11 @@ export default {
   },
   methods: {
     updateStore() {
-	    if(this.validate){
+	    if (this.validate) {
 	      const payload = {
 	        element: this.idName,
 	        value: this.value
-	      }
+        }
 	      this.$store.dispatch('checkErrorAndSetElement', payload)		    
 	    }
     }
