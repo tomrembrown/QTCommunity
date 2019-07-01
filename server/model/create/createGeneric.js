@@ -1,12 +1,15 @@
 'use strict'
 
+/*
+ * This method creates an entry in a database table. The data can 
+ * either come from a json file read by an admin script, or from the
+ * client - which is why there is a wrapper around this function for
+ * data coming from the client
+ */
+
 const db = require('./../db')
 
-const createGeneric = async function(
-  columnList,
-  rowsArray,
-  tableName
-) {
+const createGeneric = async function(columnList, rowsArray, tableName) {
 
   let createQuery =
     'INSERT INTO ' +
@@ -35,6 +38,7 @@ const createGeneric = async function(
   }
 
   createQuery += ';'
+
 
   try {
     await db.query(createQuery, dataList)

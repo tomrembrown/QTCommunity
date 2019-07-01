@@ -361,13 +361,11 @@ export default {
       return this.isGooglePlus ? this.organization.google_plus : ''
     },
     isRss() {
-      console.log('display_rss: ' + this.organization.display_rss)
       return (
         this.organization.display_rss == true && this.organization.rss
       )
     },
     rss() {
-      console.log('rss: ' + this.organization.rss)
       return this.isRss ? this.organization.rss : ''
     },
     isSocialMedia() {

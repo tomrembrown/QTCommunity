@@ -11,8 +11,7 @@ const checkVerifyPassword = require('../../../../joint/dataValidation/general/ch
 const state = {
   currentForm: null,
   formElements: {},
-  errors: [],
-  formSubmittedOK: false
+  errors: []
 }
 
 const mutations = {
@@ -53,9 +52,6 @@ const getters = {
     return state.errors.filter(
       error => error !== undefined && error.element === element
     )
-  },
-  getFormSubmittedOK(state) {
-    return state.formSubmittedOK
   }
 }
 
@@ -80,7 +76,7 @@ const actions = {
     commit('removeError', payload.element)
     commit('addError', thisError)
   },
-  submitForm: async ({ commit, state }) => {
+  submitForm: async ({ commit, state, getters }) => {
     try {
       const missingErrors = checkMandatoryElementsSet(state.currentForm,state.formElements)
       if (missingErrors.length > 0) {
@@ -89,6 +85,7 @@ const actions = {
           commit('addError', thisError)
         })
         document.getElementById(missingErrors[0].element).scrollIntoView()
+        return false
       }
 
       if (state.currentForm === forms.CREATE_ORGANIZATION) {
@@ -98,6 +95,7 @@ const actions = {
           commit('removeError', verifyError.element)
           commit('pushError', verifyError)
           document.getElementById(verifyError.element).scrollIntoView()
+          return false
         }
 
       }
@@ -112,15 +110,11 @@ const actions = {
       // Only submit form if no errors
       if (!(state.errors.some(error => error.element.substring(0,formStrLen) === formStr))) {
 
-        console.log('No errors - continuing')
-
         const response = await axios.post(
           'createRoutesServer/create/' + state.currentForm, state.formElements
         )
    
         if (response.data.isError) throw new Error(response.data.message)
-
-        state.formSubmittedOK = true
 
         if (state.currentForm === forms.CREATE_ORGANIZATION) {
           // Also, switch to being logged in and store login token
@@ -130,6 +124,9 @@ const actions = {
             organizationID: response.data.id
           })
         }
+        return true
+      } else {
+        return false
       }
     } catch (error) {
       console.log(`Error attempting to submit form: ${error.message}`)

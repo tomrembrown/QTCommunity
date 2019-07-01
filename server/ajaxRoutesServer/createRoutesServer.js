@@ -6,33 +6,38 @@
  */
 
 const model = require('../model')
-const { forms } = require('../../joint/dataValidation/general/formsAndTable')
+const { forms, getTableFromForm } = require('../../joint/dataValidation/general/formsAndTable')
 
 const express = require('express')
 const router = express.Router()
 
 const extractDataForForm = require('../utils/extractDataForForm')
 const asyncMiddleware = require('../utils/asyncMiddleware')
-const createOrganizationProcessFields = require('../../joint/businessLogic/general/createOrganizationProcessFields')
+const processFields = require('../../joint/businessLogic/general/processFields')
 
 router.post('/create/:currentForm', asyncMiddleware(async (req, res) => {
 
   const currentForm = req.params.currentForm
 
   let objectInputData = extractDataForForm(currentForm,req.body)
+  let password
+  let login
 
   if (currentForm === forms.CREATE_ORGANIZATION) {
+    password = objectInputData.password
+    login = objectInputData.login
+  }
 
-    const password = objectInputData.password
-    const login = objectInputData.login
-    objectInputData = createOrganizationProcessFields(objectInputData)
+  objectInputData = processFields(currentForm,objectInputData)
 
-    await model.createOrganization(objectInputData)
+  const tableName = getTableFromForm.get(currentForm)
+  await model.createGenericFromClient(tableName, objectInputData)
 
+  if (currentForm === forms.CREATE_ORGANIZATION) {
     const data = await model.updateNewLogin(login, password)
-
     res.json(data)
-
+  } else {
+    res.sendStatus(200)
   }
 
 }))

@@ -8,9 +8,7 @@
 // Require all methods from CRUD directories that are referred to in this interface
 
 // Create
-const createEvent = require('./create/createEvent')
-const createPlace = require('./create/createPlace')
-const createOrganization = require('./create/createOrganization')
+const createGenericFromClient = require('./create/createGenericFromClient')
 const createGeneric = require('./create/createGeneric')
 
 // Read
@@ -36,9 +34,7 @@ const model = {
   /* ******
    * Create
    * ******/
-  createEvent: createEvent,
-  createPlace: createPlace,
-  createOrganization: createOrganization,
+  createGenericFromClient: createGenericFromClient,
   createGeneric: createGeneric,
 
   /* ******

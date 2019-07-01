@@ -13,6 +13,7 @@ const router = express.Router()
 const model = require('../model')
 const checkPassword = require('../../joint/dataValidation/server/checkPassword')
 const asyncMiddleware = require('../utils/asyncMiddleware')
+const { getTableFromForm } = require('../../joint/dataValidation/general/formsAndTable')
  
 // Get a random quote from model/database and send back to client
 router.get('/readRandomQuotation', asyncMiddleware(async (req, res) => {
@@ -28,7 +29,8 @@ router.get('/getValuesList/:table', asyncMiddleware(async (req, res) => {
  
 // Check if a unique element in taken
 router.get('/checkElementTaken/:currentForm/:element/:value', asyncMiddleware(async (req, res) => {
-  const isTaken = await model.checkElementTaken(req.params.element, req.params.value)
+  const table = getTableFromForm.get(req.params.currentForm)
+  const isTaken = await model.checkElementTaken(table, req.params.element, req.params.value)
   res.send(isTaken)
 }))
 

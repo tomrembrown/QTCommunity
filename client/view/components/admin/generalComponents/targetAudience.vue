@@ -217,10 +217,10 @@ export default {
     }
   },
   methods: {
-    switchRadio: inValue => {
+    switchRadio(inValue) {
       this.$store.commit({
         type: 'setElement',
-        element: formName + '__only_race_religion',
+        element: this.formName + '__only_race_religion',
         value: inValue
       })
     }

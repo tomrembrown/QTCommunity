@@ -50,7 +50,6 @@ const actions = {
       if (response.data.isError) throw new Error(response.data.message)
 
       if (response.data.login_token != null) {
-        console.log('Logging in')
         commit('login', {
           loginToken: response.data.login_token,
           organizationLogin: payload.login,

@@ -10,9 +10,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ```
 A Linux OS
-node version 11.12.0 or later
+node version 12.5.0 or later
 npm version 6.9.0 or later
-PostgreSQL 11 with postgresql-contrib
+PostgreSQL 11.4 with postgresql-contrib
 ```
 
 ### Installing
@@ -23,7 +23,7 @@ Clone GIT repository and download
 git clone https://github.com/tomrembrown/QTCommunity
 ```
 
-Update npm, node, and postgresql to latest versions and install postgresql-contrib. This projects currently uses npm 6.9.0, node 12.4.0, PostgreSQL 11.3.
+Update npm, node, and postgresql to latest versions and install postgresql-contrib. This projects currently uses npm 6.9.0, node 12.5.0, PostgreSQL 11.4.
 
 ```
 sudo npm update -g npm

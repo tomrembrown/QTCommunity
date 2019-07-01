@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <form action class="sky-form form-sizing-reset">
-      <div v-if="formSubmittedOK">
+      <div v-if="registerOrganizationFormSubmittedOK">
         <header>Organization Registered Successfully</header>
       </div>
       <div v-else>
@@ -270,12 +270,20 @@ import Textarea from '../../formElements/textarea.vue'
 import Checkbox from '../../formElements/checkbox.vue'
 
 export default {
+  data() {
+    return {
+      registerOrganizationFormSubmittedOK: false
+    }
+  }, 
   methods: {
     setThisForm() {
       this.$store.commit('setThisForm', this.formName)
     },
     submitForm() {
-      this.$store.dispatch('submitForm')
+      let $this = this
+      this.$store.dispatch('submitForm').then(itWorked => {
+        if (itWorked) $this.registerOrganizationFormSubmittedOK = true
+      })
     }
   },
   components: {
@@ -287,9 +295,6 @@ export default {
     'ash-checkbox': Checkbox
   },
   computed: {
-    formSubmittedOK() {
-      return this.$store.getters.getFormSubmittedOK
-    },
     formName() {
       return forms.CREATE_ORGANIZATION
     }

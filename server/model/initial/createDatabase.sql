@@ -10,6 +10,7 @@ Script to create the Queer Toronto database
 DROP TABLE IF EXISTS categories_event_groups_relations;
 DROP TABLE IF EXISTS event_details;
 DROP TABLE IF EXISTS event_groups;
+ALTER TABLE places DROP COLUMN IF EXISTS organization_id;
 DROP TABLE IF EXISTS organizations;
 DROP TABLE IF EXISTS places;
 DROP TABLE IF EXISTS categories;
@@ -50,9 +51,6 @@ CREATE TABLE places(
   google_places_id TEXT NOT NULL,  
   latitude DECIMAL(9,6) DEFAULT NULL,
   longitude DECIMAL(9,6) DEFAULT NULL,
-
-  -- Most places linked to specific organizations, i.e. 519 organization linked to 519 place
-  organization_id INTEGER REFERENCES organizations(id) DEFAULT NULL,
 
   -- Information about who place is geared for 
   -- Below is also in organizations & events
@@ -155,6 +153,10 @@ CREATE TABLE organizations(
   race_religion TEXT DEFAULT NULL,
   only_race_religion BOOLEAN NOT NULL DEFAULT FALSE
 );
+
+-- Most places linked to specific organizations, i.e. 519 organization linked to 519 place
+ALTER TABLE places 
+ADD COLUMN organization_id INTEGER REFERENCES organizations(id) DEFAULT NULL;
 
 CREATE TABLE event_groups(
 
@@ -297,7 +299,9 @@ INSERT INTO quotations
   ('To love oneself is the beginning of a lifelong romance.',
     'Oscar Wilde'),
   ('Hope will never be silent.',
-    'Harvey Milk');
+    'Harvey Milk'),
+  ('Our society needs to recognize the unstoppable momentum toward unequivocal civil equality for every gay, lesbian, bisexual and transgendered citizen of this country.',
+    'Zachary Quinto');
 
 INSERT INTO organization_types
   (name_english) VALUES

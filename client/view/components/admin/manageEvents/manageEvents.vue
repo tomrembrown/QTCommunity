@@ -44,7 +44,6 @@ import TimeAndDate from '../../formElements/timeAndDate.vue'
 export default {
   methods: {
     submitForm() {
-      console.log('In Manage Events')
       this.$store.commit('submitForm')
     }
   },
