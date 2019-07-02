@@ -25,6 +25,7 @@
                   <vue-google-autocomplete
                     ref="address"
                     id="places"
+                    types=""
                     placeholder="Please enter your address"
                     @placechanged="getAddressData"
                     country="ca"
@@ -122,8 +123,18 @@ export default {
     }
   },  
   mounted() {
-    this.setThisForm()
-    this.$refs.address.focus()
+    this.setThisForm();
+    this.$refs.address.focus();
+
+    let toronto = 	new google.maps.LatLng(43.651070, -79.347015);
+    let circle =	new google.maps.Circle({
+	    center:toronto,
+	    radius:40000
+    });
+    this.$refs.address.autocomplete.setBounds(circle.getBounds());
+    this.$refs.address.autocomplete.setOptions({
+	    strictBounds:true
+    });
   }
 }
 </script>

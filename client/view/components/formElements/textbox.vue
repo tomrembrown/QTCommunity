@@ -61,7 +61,7 @@ export default {
 	      const payload = {
 	        element: this.idName,
 	        value: this.value
-        }
+		  }
 	      this.$store.dispatch('checkErrorAndSetElement', payload)		    
 	    }
     }
