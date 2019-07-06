@@ -10,7 +10,7 @@ Script to create the Queer Toronto database
 DROP TABLE IF EXISTS categories_event_groups_relations;
 DROP TABLE IF EXISTS event_details;
 DROP TABLE IF EXISTS event_groups;
-ALTER TABLE places DROP COLUMN IF EXISTS organization_id;
+ALTER TABLE IF EXISTS places DROP COLUMN IF EXISTS organization_id;
 DROP TABLE IF EXISTS organizations;
 DROP TABLE IF EXISTS places;
 DROP TABLE IF EXISTS categories;
