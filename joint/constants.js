@@ -16,6 +16,7 @@ constants.minLengths = {
 // Forms can't be submitted without these elements
 constants.mandatoryElements = {}
 constants.mandatoryElements[forms.CREATE_ORGANIZATION] = ['login', 'password', 'verify_password', 'name', 'image_link']
+constants.mandatoryElements[forms.SEND_EMAIL] = ['name', 'email', 'subject', 'message']
 
 // Checks against database to ensure these elements are unique
 constants.uniqueElements = ['login', 'name']
