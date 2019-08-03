@@ -111,7 +111,6 @@ export default {
       this.showAdminBar = !this.showAdminBar
     },
     loginModal() {
-      console.log('In login modal')
       this.$login.toggle()
     },
     logout() {

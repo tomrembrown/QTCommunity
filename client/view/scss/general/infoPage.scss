@@ -1,0 +1,33 @@
+@import "../variables";
+
+.main-box {
+	margin: 40px auto;
+	outline: none;
+	box-shadow: 0 0 20px rgba(0,0,0,.3);
+	font: $text-font;
+	color: $text-color;
+}
+
+.main-box h2 {
+  display: block;
+	padding: 20px 30px;	
+	border-bottom: $border-line;
+	background: $header-footer-background-color;
+	font-size: $header-font-size;
+	font-weight: $header-font-weight;
+	color: $header-text-color;
+}
+
+.main-box p {
+  padding: 0px 30px;
+  font: $infoParagraphFontSize $infoParagraphFontStack;
+  text-indent: $infoTextIndent;
+}
+
+.main-box p:first-of-type {
+  padding-top: 15px;
+}
+
+.main-box p:last-of-type {
+  padding-bottom: 40px;
+}

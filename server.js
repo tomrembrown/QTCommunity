@@ -9,6 +9,7 @@ require('dotenv').config() // load the environment variables from .env
 // Requires of my files
 const readRoutesServer = require('./server/ajaxRoutesServer/readRoutesServer')
 const createRoutesServer = require('./server/ajaxRoutesServer/createRoutesServer')
+const generalRoutesServer = require('./server/ajaxRoutesServer/generalRoutesServer')
 
 const app = express()
 
@@ -35,6 +36,7 @@ app.get('/', (req, res) => {
 // AJAX routes
 app.use('/readRoutesServer', readRoutesServer)
 app.use('/createRoutesServer', createRoutesServer)
+app.use('/generalRoutesServer', generalRoutesServer)
 
 // Error handling
 app.use((error, req, res, next) => {

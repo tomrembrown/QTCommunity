@@ -1,0 +1,39 @@
+'use strict'
+/*
+ * This file uses nodemailer to send e-mails with mailgun
+ */
+
+const nodemailer = require('nodemailer')
+const mg = require('nodemailer-mailgun-transport')
+
+const auth = {
+  auth: {
+    api_key: 'key-01e530e73325f2b75aecd0a9d3346ef4',
+    domain: 'ashroh.com'
+  },
+  proxy: false
+}
+
+const sendEmail = (objectInputData, callback) => {
+
+  const nodemailerMailgun = nodemailer.createTransport(mg(auth))
+
+  nodemailerMailgun.sendMail({
+    from: 'feedbackQueerTorontoSite@ashroh.com',
+    to: 'tom@ashroh.com',
+    subject: objectInputData.subject,
+    text: 'Message from ' + objectInputData.name + '(' + objectInputData.email + 
+          ') on queertoronto.com form\n' + objectInputData.message
+  }, function(error, info) {
+    if (error) {
+      console.log('Error: ' + error)
+      throw Error(error)
+    }
+    else {
+      return callback(info.message)
+    }
+  })
+
+}
+
+module.exports = sendEmail

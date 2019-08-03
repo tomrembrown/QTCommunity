@@ -88,6 +88,11 @@ module.exports = {
         context: ['/createRoutesServer'],
         target: 'http://localhost:' + process.env.PORT,
         secure: false
+      },
+      {
+        context: ['/generalRoutesServer'],
+        target: 'http://localhost:' + process.env.PORT,
+        secure: false
       }
     ]
   },

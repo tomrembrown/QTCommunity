@@ -59,6 +59,7 @@ const actions = {
   checkErrorAndSetElement: async ({ commit }, payload) => {
     commit('setElement', payload)
     let thisError = null
+ 
     thisError = checkErrorClient(
       state.currentForm,
       payload.element,
@@ -78,6 +79,7 @@ const actions = {
   },
   submitForm: async ({ commit, state, getters }) => {
     try {
+  
       const missingErrors = checkMandatoryElementsSet(state.currentForm,state.formElements)
       if (missingErrors.length > 0) {
         missingErrors.forEach(thisError => {
@@ -87,7 +89,7 @@ const actions = {
         document.getElementById(missingErrors[0].element).scrollIntoView()
         return false
       }
-
+    
       if (state.currentForm === forms.CREATE_ORGANIZATION) {
 
         const verifyError = checkVerifyPassword(state.formElements)
@@ -110,20 +112,32 @@ const actions = {
       // Only submit form if no errors
       if (!(state.errors.some(error => error.element.substring(0,formStrLen) === formStr))) {
 
-        const response = await axios.post(
-          'createRoutesServer/create/' + state.currentForm, state.formElements
-        )
-   
-        if (response.data.isError) throw new Error(response.data.message)
+        if (state.currentForm === forms.SEND_EMAIL) {
 
-        if (state.currentForm === forms.CREATE_ORGANIZATION) {
-          // Also, switch to being logged in and store login token
-          commit('login', {
-            loginToken: response.data.loginToken,
-            organizationLogin: state.formElements[forms.CREATE_ORGANIZATION + '__login'],
-            organizationID: response.data.id
-          })
+          const response = await axios.post(
+            'generalRoutesServer/sendEmail', state.formElements
+          )
+    
+          if (response.data.isError) throw new Error(response.data.message)
+
         }
+        else {
+          const response = await axios.post(
+            'createRoutesServer/create/' + state.currentForm, state.formElements
+          )
+     
+          if (response.data.isError) throw new Error(response.data.message)
+  
+          if (state.currentForm === forms.CREATE_ORGANIZATION) {
+            // Also, switch to being logged in and store login token
+            commit('login', {
+              loginToken: response.data.loginToken,
+              organizationLogin: state.formElements[forms.CREATE_ORGANIZATION + '__login'],
+              organizationID: response.data.id
+            })
+          }
+        }
+
         return true
       } else {
         return false

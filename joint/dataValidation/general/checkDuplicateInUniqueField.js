@@ -5,7 +5,7 @@ const axios = require('axios')
 
 const checkDuplicateInUniqueField = async (currentForm, formElement, value) => {
 
-  if (constants.uniqueElements.indexOf(formElement) > -1 && value.trim()) {
+  if (constants.uniqueElements[currentForm].indexOf(formElement) > -1 && value.trim()) {
     const response = await axios.get('readRoutesServer/checkElementTaken/' + currentForm +'/' + formElement + '/' + value)
     return response.data
   } else {

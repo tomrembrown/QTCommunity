@@ -10,8 +10,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 ```
 A Linux OS
-node version 12.5.0 or later
-npm version 6.9.0 or later
+node version 12.7.0 or later
+npm version 6.10.2 or later
 PostgreSQL 11.4 with postgresql-contrib
 ```
 

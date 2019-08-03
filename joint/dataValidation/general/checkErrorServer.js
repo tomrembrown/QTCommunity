@@ -7,7 +7,7 @@ const checkErrorServer = async (currentForm, element, value, formElements) => {
 
   const formElement = element.split('__')[1]
 
-  if (constants.uniqueElements.includes(formElement)) {
+  if (constants.uniqueElements[currentForm].includes(formElement)) {
 
     const isDuplicate = await checkDuplicateInUniqueField(currentForm, formElement, value)
 

@@ -9,6 +9,7 @@
     "createDatabase": "node ./server/model/initial/createDatabase.js",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --mode=production",
     "prod": "node ./server.js",
+    "server": "pm2 start ./server.js --name \"QueerTorontoCommunitySite\" ",
     "checklint": "eslint --ignore-path .gitignore .",
     "fixlint": "./node_modules/.bin/eslint --fix --ignore-path .gitignore .",
     "makepretty": "./node_modules/.bin/prettier --write --ignore-path .gitignore '**/*.js' '**/*.vue'",
@@ -39,7 +40,7 @@
     "not ie <= 8"
   ],
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.9.0",
+    "@fortawesome/fontawesome-free": "^5.10.1",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.24",
@@ -49,13 +50,14 @@
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "jest": "^24.8.0",
-    "luxon": "^1.17.1",
+    "luxon": "^1.17.2",
     "md5": "^2.2.1",
     "microdata-node": "^1.0.0",
     "nodemailer": "^6.3.0",
     "nodemailer-mailgun-transport": "^1.4.0",
     "password-hash": "^1.2.2",
-    "pg": "^7.11.0",
+    "pg": "^7.12.0",
+    "pm2": "^3.5.1",
     "prettier": "^1.18.2",
     "regenerator-runtime": "^0.13.3",
     "vue": "^2.6.10",
@@ -91,7 +93,7 @@
     "sass-loader": "^7.1.0",
     "vue-loader": "^15.7.1",
     "vue-template-compiler": "^2.6.10",
-    "webpack": "^4.36.1",
+    "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
   }
