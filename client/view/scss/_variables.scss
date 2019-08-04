@@ -1,4 +1,6 @@
 // === COLORS ===
+$topGradientColor: #ff8600;
+$bottomGradientColor: #f6063b;
 $text-color: #666;
 $header-footer-background-color: rgba(248, 248, 248, 0.9);
 $form-background-color: rgba(255, 255, 255, 0.9);
@@ -20,6 +22,9 @@ $secondary-button-color: #b3b3b3;
 // === FONTS ===
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 @import url(https://fonts.googleapis.com/css?family=Raleway|Roboto+Slab);
+@import url(https://fonts.googleapis.com/css?family=Unica+One&display=swap);
+
+$titleFontStack: 'Unica One', serif;
 
 $infoParagraphFontStack: 'Roboto Slab', serif;
 $infoParagraphFontSize: 15px;

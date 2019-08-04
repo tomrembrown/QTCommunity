@@ -13,6 +13,14 @@
     <div class="headliner-wrapper">
       <div class="headliner">Queer Toronto</div>
     </div>
+    <div class="corporate-logo-wrapper">
+      <div class="corporate-logo">
+        <img src="/img/AshrohLogo.svg" />
+        An
+        <a href="www.ashroh.com">Ashroh Enterprises</a>
+        Community Website
+      </div>
+    </div>
   </div>
 </template>
 

@@ -3,15 +3,18 @@
     <qt-navbar></qt-navbar>
     <router-view></router-view>
     <login-modal/>
+    <qt-footer></qt-footer>
   </div>
 </template>
 
 <script>
 import Navbar from './components/navigation/navbar.vue'
+import Footer from './components/general/footer.vue'
 
 export default {
   components: {
-    qtNavbar: Navbar
+    qtNavbar: Navbar,
+    qtFooter: Footer
   }
 }
 </script>
