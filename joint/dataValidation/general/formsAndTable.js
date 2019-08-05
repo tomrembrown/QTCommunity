@@ -9,6 +9,7 @@
 
 const forms = {
   CREATE_ORGANIZATION: 'createOrganization',
+  EDIT_ORGANIZATION: 'editOrganization',
   LOGIN: 'login',
   ADD_PLACE: 'addPlace',
   SEND_EMAIL: 'sendEmail'
@@ -18,7 +19,8 @@ const getTableFromForm = new Map([
   [forms.CREATE_ORGANIZATION, 'organizations'],
   [forms.LOGIN, 'organizations'],
   [forms.ADD_PLACE, 'places'],
-  [forms.SEND_EMAIL, 'NONE']
+  [forms.SEND_EMAIL, 'NONE'],
+  [forms.EDIT_ORGANIZATION, 'organizations']
 ])
 
 module.exports = { forms, getTableFromForm }

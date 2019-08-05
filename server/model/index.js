@@ -22,6 +22,7 @@ const getColumnDefaults = require('./read/getColumnDefaults')
 const getPasswordEncrypted = require('./read/getPasswordEncrypted')
 const checkElementTaken = require('./read/checkElementTaken')
 const readOrganizations = require('./read/readOrganizations')
+const getColumnsForRow = require('./read/getColumnsForRow')
 
 // Update
 const updateNewLogin = require('./update/updateNewLogin')
@@ -51,6 +52,7 @@ const model = {
   getMandatoryColumns: getMandatoryColumns,
   getColumnDefaults: getColumnDefaults,
   getPasswordEncrypted: getPasswordEncrypted,
+  getColumnsForRow: getColumnsForRow,
 
   // Checks
   checkElementTaken: checkElementTaken,

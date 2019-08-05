@@ -14,7 +14,8 @@ const model = require('../model')
 const checkPassword = require('../../joint/dataValidation/server/checkPassword')
 const asyncMiddleware = require('../utils/asyncMiddleware')
 const { getTableFromForm } = require('../../joint/dataValidation/general/formsAndTable')
- 
+const getFormData = require('../../joint/businessLogic/server/getFormData')
+
 // Get a random quote from model/database and send back to client
 router.get('/readRandomQuotation', asyncMiddleware(async (req, res) => {
   const quotationObject = await model.readRandomQuotation()
@@ -44,6 +45,15 @@ router.get('/checkPassword/:login/:password', asyncMiddleware(async(req, res) =>
 router.get('/readOrganizations', asyncMiddleware(async (req, res) => {
   const organizations = await model.readOrganizations()
   res.send(organizations)
+}))
+
+// Read all data for a particular form
+router.get('/readForm/:formName/:id', asyncMiddleware(async(req, res) => {
+  console.log('In readForm route')
+  console.log('formName: ' + req.params.formName)
+  console.log('id: ' + req.params.id)
+  const formData = await getFormData(req.params.formName, req.params.id)
+  res.send(formData)
 }))
 
 module.exports = router

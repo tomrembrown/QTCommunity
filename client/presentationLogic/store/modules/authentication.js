@@ -10,15 +10,9 @@ const state = {
 }
 
 const getters = {
-  isLoggedIn: state => {
-    return state.loggedIn
-  },
-  getLoginToken: state => {
-    return state.loginToken
-  },
-  getOrganizationID: state => {
-    return state.organizationID
-  }
+  isLoggedIn: state => state.loggedIn,
+  getLoginToken: state => state.loginToken,
+  getOrganizationID: state => state.organizationID
 }
 
 const mutations = {

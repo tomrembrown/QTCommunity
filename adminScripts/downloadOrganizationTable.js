@@ -14,6 +14,7 @@ const model = require('../server/model')
 const buildRowsArray = require('../joint/utils/buildRowsArray')
 const checkColumns = require('../joint/utils/checkColumns')
 const selectUnique = require('../joint/utils/selectUnique')
+const columnArrayToObject = require('../joint/utils/columnArrayToObject')
 const saveOutput = require('./saveOutput')
 
 async function runAll() {
@@ -27,7 +28,8 @@ async function runAll() {
     const mandatoryColumns = await model.getMandatoryColumns('organizations')
 
     // Get list of columns which have data which is non-default data
-    const columnDefaults = await model.getColumnDefaults('organizations')
+    const columnDefaultsArray = await model.getColumnDefaults('organizations')
+    const columnDefaults = columnArrayToObject(columnDefaultsArray)
     model.close()
     const columnsWithData = checkColumns(organizationsArray, columnDefaults)
 

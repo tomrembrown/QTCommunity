@@ -11,23 +11,21 @@ const getColumnDefaults = async function(tableName) {
 
   try {
     const getColumnDefaultsQuery =
-      'SELECT column_name, column_default FROM information_schema.columns ' +
-      'WHERE table_name = $1;'
+        "SELECT column_name, column_default " +
+        "FROM information_schema.columns " +
+        "WHERE table_name = $1 " +
+        "AND table_schema = 'public';"
 
     const { rows } = await db.query(getColumnDefaultsQuery, [tableName])
     columnDefaults = rows
+
   } catch (error) {
     console.log(`Error in getColumnDefaults: ${error.message}`)
     throw new Error(`Error in getColumnDefaults: ${error.message}`)
   }
 
-  let columnDefaultsObject = {}
+  return columnDefaults
 
-  columnDefaults.forEach(columnObject => {
-    columnDefaultsObject[columnObject.column_name] = columnObject.column_default
-  })
-
-  return columnDefaultsObject
 }
 
 module.exports = getColumnDefaults

@@ -4,6 +4,9 @@ const { forms } = require('./dataValidation/general/formsAndTable')
 
 let constants = {}
 
+// General constants
+constants.databaseName = 'queer_toronto';
+
 /***
  * Verifications
  */
@@ -38,5 +41,11 @@ constants.uniqueElements[forms.ADD_PLACE] = ['name']
 
 //Number fields - strip all non-numeric characters from these before going to database
 constants.numberFields = [ 'phone', 'phone_extension']
+
+// Columns that we don't need to get for loading form data
+constants.columnsToRemove = {}
+constants.columnsToRemove[forms.EDIT_ORGANIZATION] = 
+  ['id', 'description_french', 'is_member', 'is_shown', 'login', 'password_encrypted',
+   'login_token', 'signup_date', 'logged_in', 'last_logged_in', 'website_french']
 
 module.exports = constants
