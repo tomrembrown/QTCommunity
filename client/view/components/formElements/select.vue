@@ -55,6 +55,7 @@ export default {
         .get('readRoutesServer/getValuesList/' + this.table)
         .then(response => {
           $this.valuesList = response.data
+          $this.value = $this.valuesList[0].id;
         })
     }
   },
@@ -63,7 +64,7 @@ export default {
       return this.idName + 'Help'
     }
   },
-  beforeMount() {
+  mounted() {
     this.getValuesList()
     this.updateStore()
   }

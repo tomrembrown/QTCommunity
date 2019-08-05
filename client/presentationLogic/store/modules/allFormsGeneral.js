@@ -79,13 +79,14 @@ const actions = {
   },
   submitForm: async ({ commit, state, getters }) => {
     try {
-  
       const missingErrors = checkMandatoryElementsSet(state.currentForm,state.formElements)
+
       if (missingErrors.length > 0) {
         missingErrors.forEach(thisError => {
           commit('removeError', thisError.element)
           commit('addError', thisError)
-        })
+        })        
+
         document.getElementById(missingErrors[0].element).scrollIntoView()
         return false
       }
@@ -96,6 +97,7 @@ const actions = {
         if (verifyError !== null) {
           commit('removeError', verifyError.element)
           commit('pushError', verifyError)
+
           document.getElementById(verifyError.element).scrollIntoView()
           return false
         }
@@ -144,6 +146,7 @@ const actions = {
       }
     } catch (error) {
       console.log(`Error attempting to submit form: ${error.message}`)
+      console.log(error);
       alert(`Error attempting to submit form: ${error.message}`)
     }
   },

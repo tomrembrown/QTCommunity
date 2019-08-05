@@ -2,107 +2,96 @@
   <fieldset>
     <div class="row align-items-center">
       <div class="col-md-12">
-        <h2>Place</h2>
+        <h2>Place / Time</h2>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-6">
-        <section>
-          <label class="label" for="place">Location Where Event is Held</label>
-          <label class="select">
-            <select id="place" name="place" @change="onChangePlace($event)">
-              <option value="1">The 519</option>
-              <option value="2">Buddies in Bad Times Theatre</option>
-              <option value="3">Spa Excess</option>
-              <option value="4">Steam Works</option>
-              <option value="5">The Black Eagle</option>
-              <option value="New">Enter New Place</option>
-            </select>
-            <i></i>
-          </label>
-        </section>
+    <div class="row" v-for="(instance, index) in instances">
+      <div class="col-md-2">
+        <ash-select :idName="formName + '__place_id__' + index" heading="Location Where Event is Held" table="places">
+        </ash-select>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-3">
         <ash-textbox
           heading="Room in Place"
-          idName="roomPlace"
+           :idName="formName + '__place_room__' + index"
           helpText="Enter specific room in location where event is held. Leave blank if unknown or not applicable."
         ></ash-textbox>
       </div>
+      <div class="col-md-3">
+        <section>
+          <label class="label" for="startTime">Start Date and Time</label>
+          <ash-datetime :idName="formName + '__place_start__' + index" :myInputId="'startTime' + index"></ash-datetime>
+          <div class="note" id="startTimeHelp">
+            Enter the start date and time of the event
+          </div>
+        </section>
+      </div>
+      <div class="col-md-3">
+        <section>
+          <label class="label" for="endTime">End Date and Time</label>
+          <ash-datetime :idName="formName + '__place_end__' + index" :myInputId="'endTime-' + index"></ash-datetime>
+          <div class="note" id="endTimeHelp">
+            Enter the end date and time of the event
+          </div>
+        </section>
+      </div> 
+      
+      <div class="col-md-1" v-if="index > 0">
+        <button class="button" v-on:click.prevent="removeTime(index)">Remove</button>
+      </div>            
+    </div>
+    
+    <div class="row">
+      <div class="col-md-12">
+      <button class="button" v-on:click.prevent="addTime">Add More Time(s)</button>
+      </div>
+    </div>      
+      
     </div>
 
-    <transition name="fade">
-      <div v-if="newPlace">
-        <div class="row align-items-center">
-          <div class="col-md-4">
-            <ash-textbox
-              heading="Name of Place"
-              idName="placeName"
-              placeholder="Enter name"
-              helpText="Enter a short, unique, name to refer to the place"
-            >
-            </ash-textbox>
-          </div>
-          <div class="col-md-8">
-            <section>
-              <label class="label" for="placeAddress">Address of Place</label>
-              <label class="textarea textarea-expandable">
-                <textarea
-                  id="placeAddress"
-                  name="placeAddress"
-                  placeholder="Enter address"
-                  rows="3"
-                >
-                </textarea>
-              </label>
-              <div class="note" id="placeAddressHelp">
-                Enter full street address of the place
-              </div>
-            </section>
-          </div>
-        </div>
 
-        <qt-target-audience type="place" verb="enter"></qt-target-audience>
-
-        <div class="row align-items-center">
-          <div class="col-md-6">
-            <section>
-              <label for="wheelChairAccessible" class="checkbox">
-                <input
-                  type="checkbox"
-                  name="wheelChairAccessible"
-                  id="wheelChairAccessible"
-                />
-                <i></i>Is place wheel chair accessible?
-              </label>
-            </section>
-          </div>
-        </div>
-      </div>
-    </transition>
   </fieldset>
 </template>
 
 <script>
+import axios from 'axios'
+
 import Textbox from '../../formElements/textbox.vue'
-import TargetAudience from '../generalComponents/targetAudience.vue'
+import Select from '../../formElements/select.vue'
+import MyDateTimeBox from '../../formElements/myDateTimeBox.vue'
+
+//import TargetAudience from '../generalComponents/targetAudience.vue'
+import { convertHeadingToName } from '../../../../utils/convertHeadingToName'
 
 export default {
   data() {
     return {
-      newPlace: false
+      instances:[]
     }
+  },  
+  props: {
+    formName: {
+      type: String,
+      required: true
+    },
+  },
+  mounted(){
+      this.addTime();
   },
   methods: {
-    onChangePlace(event) {
-      if (event.target.value === 'New') this.newPlace = true
-      else this.newPlace = false
-    }
+    addTime(){
+	  this.instances.push({});
+    },
+    removeTime(removeAt){
+	  this.instances.splice(removeAt, 1);
+    }    
   },
   components: {
     'ash-textbox': Textbox,
-    'qt-target-audience': TargetAudience
+    'ash-select': 	Select,
+    'ash-datetime': MyDateTimeBox
+    //'qt-target-audience': TargetAudience
   }
 }
 </script>

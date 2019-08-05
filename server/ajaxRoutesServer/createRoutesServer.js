@@ -28,7 +28,13 @@ router.post('/create/:currentForm', asyncMiddleware(async (req, res) => {
     login = objectInputData.login
   }
 
-  objectInputData = processFields(currentForm,objectInputData)
+  objectInputData = processFields(currentForm, objectInputData)
+  
+  let holdover = null;
+  if (currentForm == forms.ADD_EVENT){
+	  holdover = objectInputData.placetime;
+	  delete objectInputData.placetime;
+  }
 
   const tableName = getTableFromForm.get(currentForm)
   await model.createGenericFromClient(tableName, objectInputData)

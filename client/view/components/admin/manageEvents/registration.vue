@@ -8,13 +8,12 @@
       <div class="col-md-6">
         <section>
           <label for="requireRegistration" class="checkbox">
-            <input
-              type="checkbox"
-              name="requireRegistration"
-              id="requireRegistration"
+            <ash-checkbox
+              :idName="formName + '__need_registration'"
+              heading="Event Requires Registration"
+              value=false
               v-model="isRegistrationRequired"
             />
-            <i></i>Event Requires Registration
           </label>
         </section>
       </div>
@@ -24,6 +23,7 @@
       <div class="row" v-if="isRegistrationRequired">
         <div class="col-md-6">
           <ash-textbox
+          	:idName="formName + '__website_english'"
             heading="Registration Website"
             placeholder="Enter registration website"
             helpText="Enter website for users to register for event. Leave blank if no registration needed or website not known."
@@ -33,6 +33,7 @@
 
         <div class="col-md-6">
           <ash-textbox
+            :idName="formName + '__price'"
             heading="Price"
             helpText="Enter price of event. Leave blank if unknown"
           >
@@ -45,6 +46,7 @@
 
 <script>
 import Textbox from '../../formElements/textbox.vue'
+import Checkbox from '../../formElements/checkbox.vue'
 
 export default {
   data() {
@@ -52,8 +54,15 @@ export default {
       isRegistrationRequired: false
     }
   },
+  props: {
+    formName: {
+      type: String,
+      required: true
+    },
+  },  
   components: {
-    'ash-textbox': Textbox
+    'ash-textbox': Textbox,
+    'ash-checkbox': Checkbox,
   }
 }
 </script>

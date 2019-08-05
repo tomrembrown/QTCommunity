@@ -38,10 +38,12 @@ const processFields = (currentForm, objectInputData) => {
   }
 
   // Remove fields on form, but not in database
-  if (currentForm === forms.CREATE_ORGANIZATION) {
+//  if (currentForm === forms.CREATE_ORGANIZATION) {
+  if(typeof objectInputData.gender_all != 'undefined' || typeof objectInputData.orientation_all != 'undefined' || typeof objectInputData.verify_password != 'undefined' || typeof objectInputData.race_religion_targetted != 'undefined'){
     if (objectInputData.gender_all != null) { delete objectInputData.gender_all }
     if (objectInputData.orientation_all != null) { delete objectInputData.orientation_all }
     if (objectInputData.verify_password != null) { delete objectInputData.verify_password }
+    if (objectInputData.race_religion_targetted != null) { delete objectInputData.race_religion_targetted }
   }
 
   // Remove all non-number characters from number fields like phone number
@@ -50,6 +52,29 @@ const processFields = (currentForm, objectInputData) => {
       objectInputData[fieldName] = objectInputData[fieldName].replace(/\D/g, '')
     }
   }
+
+
+  //separate out places/time data
+  if(currentForm == forms.ADD_EVENT){
+	  objectInputData.placetime = [];
+	  
+	  let translationTable = {
+		  'place_start':'start_time',
+		  'place_end':	'end_time'
+	  };
+	  
+	  for(let id in objectInputData){
+		  let tokens = id.split('__');
+		  if(tokens.length == 2 && tokens[0].startsWith('place_')){
+			  if(typeof objectInputData['placetime'][tokens[1]] == 'undefined'){
+				  objectInputData['placetime'][tokens[1]] = {};
+			  }
+			  
+			  objectInputData['placetime'][tokens[1]][tokens[0]] = objectInputData[id];
+		  }
+	  }
+  }
+
 
   return objectInputData
 }

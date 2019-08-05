@@ -40,7 +40,7 @@
         <h3>Gender Identities Welcome at {{ typeCapitalized }}</h3>
       </div>
       <div class="col-md-6">
-        <ash-checkbox heading="All are welcome" idName="gender_all" v-model="allGendersWelcome"></ash-checkbox>
+        <ash-checkbox heading="All are welcome" :idName="formName + '__gender_all'" v-model="allGendersWelcome"></ash-checkbox>
       </div>
     </div>
 
@@ -91,7 +91,7 @@
       <div class="col-md-6">
         <ash-checkbox
           heading="All are welcome"
-          idName="orientation_all"
+          :idName="formName + '__orientation_all'"
           v-model="allOrientationsWelcome"
         ></ash-checkbox>
       </div>
@@ -141,7 +141,7 @@
       <div class="col-md-6">
         <ash-checkbox
           :heading="'Is ' + type + ' aimed at a particular race or religion?'"
-          idName="race_religion_targetted"
+          :idName="formName + '__race_religion_targetted'"
           v-model="aimedAtRaceReligion"
         ></ash-checkbox>
       </div>

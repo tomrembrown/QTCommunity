@@ -11,7 +11,7 @@
         v-model.lazy="value"
         @blur="updateStore"
         @input="$emit('input', $event.target.value)"
-      />
+      />      
     </label>
     <div v-if="isError" class="note error">
       {{ errorMessage }}
@@ -53,7 +53,11 @@ export default {
     validate: {
 	    type: Boolean,
 	    default: true
-    }
+    },
+   /* required: {
+	    type:Boolean,
+	    default:false
+    } */
   },
   methods: {
     updateStore() {
@@ -88,4 +92,6 @@ export default {
 @import '../../scss/forms/input';
 @import '../../scss/forms/note';
 @import '../../scss/forms/section';
+@import '../../scss/forms/buttons';
+</style>
 </style>

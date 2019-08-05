@@ -39,7 +39,12 @@ export default {
     }
   },
   mounted(){
-	 this.checked = this.value;
+	  this.checked = this.value;
+	  this.$store.commit({
+	    type: 'setElement',
+	    element: this.idName,
+	    value: this.checked
+	  })	 
   },
   methods: {
     switched() {
@@ -51,7 +56,21 @@ export default {
         value: this.checked
       })
     }
-  }
+  },
+  computed: {
+    idHelp: function() {
+      return this.idName + 'Help'
+    },
+    isError() {
+      let thisError =
+        this.$store.getters.getError(this.idName).length === 0 ? false : true
+      return thisError
+    },
+    errorMessage() {
+      let errorObject = this.$store.getters.getError(this.idName)
+      return errorObject[0].message
+    }
+  }  
 }
 </script>
 

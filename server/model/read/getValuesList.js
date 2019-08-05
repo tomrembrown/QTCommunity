@@ -4,10 +4,10 @@ const db = require('./../db')
  
 const getValuesList = async function(table) {
   let textName = new Map([
-    ['organizations', 'name'],
-    ['places', 'name'],
-    ['categories', 'name_english'],
-    ['organization_types', 'name_english']
+    ['organizations', 		'name'],
+    ['places', 				'name'],
+    ['categories', 			'name_english'],
+    ['organization_types', 	'name_english']
   ])
  
   const textColName = textName.get(table)

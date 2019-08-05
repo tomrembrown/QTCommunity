@@ -47,7 +47,7 @@
       <div class="col-md-6">
         <section>
           <label class="label" for="startTime">Start Date and Time</label>
-          <my-date-time-box :myInputId="'startTime' + index"></my-date-time-box>
+          <my-date-time-box :idName="'startTime' + index"></my-date-time-box>
           <div class="note" id="startTimeHelp">
             Enter the start date and time of the event
           </div>
