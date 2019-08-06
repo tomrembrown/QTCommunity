@@ -14,7 +14,7 @@ const createGenericFromClient = async function(tableName, objectInputData) {
   try {
     let columnList = Object.keys(objectInputData)
     let rowsArray = buildRowsArray(columnList, objectInputData)
-    await createGeneric(columnList, rowsArray, tableName)
+    return await createGeneric(columnList, rowsArray, tableName)
   } catch (error) {
     console.log(`Caught error in createGenericFromClient: ${error.message}`)
     throw error

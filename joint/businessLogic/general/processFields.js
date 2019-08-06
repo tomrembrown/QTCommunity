@@ -36,10 +36,13 @@ const processFields = (currentForm, objectInputData) => {
     delete objectInputData.password
 
   }
-
+  
   // Remove fields on form, but not in database
 //  if (currentForm === forms.CREATE_ORGANIZATION) {
-  if(typeof objectInputData.gender_all != 'undefined' || typeof objectInputData.orientation_all != 'undefined' || typeof objectInputData.verify_password != 'undefined' || typeof objectInputData.race_religion_targetted != 'undefined'){
+  if(typeof objectInputData.gender_all != 'undefined' || 
+  		typeof objectInputData.orientation_all != 'undefined' || 
+  		typeof objectInputData.verify_password != 'undefined' || 
+  		typeof objectInputData.race_religion_targetted != 'undefined'){
     if (objectInputData.gender_all != null) { delete objectInputData.gender_all }
     if (objectInputData.orientation_all != null) { delete objectInputData.orientation_all }
     if (objectInputData.verify_password != null) { delete objectInputData.verify_password }
@@ -56,7 +59,7 @@ const processFields = (currentForm, objectInputData) => {
 
   //separate out places/time data
   if(currentForm == forms.ADD_EVENT){
-	  objectInputData.placetime = [];
+	  objectInputData['placetime'] = [];
 	  
 	  let translationTable = {
 		  'place_start':'start_time',
@@ -70,7 +73,10 @@ const processFields = (currentForm, objectInputData) => {
 				  objectInputData['placetime'][tokens[1]] = {};
 			  }
 			  
+			  tokens[0] = translationTable[tokens[0]] || tokens[0];
+			  
 			  objectInputData['placetime'][tokens[1]][tokens[0]] = objectInputData[id];
+			  delete objectInputData[id];
 		  }
 	  }
   }

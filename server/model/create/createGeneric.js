@@ -37,11 +37,12 @@ const createGeneric = async function(columnList, rowsArray, tableName) {
     createQuery += ')'
   }
 
-  createQuery += ';'
+  createQuery += ' RETURNING id;'
 console.log(createQuery);
 
   try {
-    await db.query(createQuery, dataList)
+    let response = await db.query(createQuery, dataList);
+    return response.rows[0].id;
   } catch (error) {
     console.error('error running query in createGeneric', error)
     throw Error(

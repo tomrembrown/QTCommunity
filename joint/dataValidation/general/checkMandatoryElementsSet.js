@@ -5,8 +5,6 @@ const constants = require('../../constants')
 const checkMandatoryElementsSet = function (currentForm, formElements) {
   let missingErrors = []
 
-console.log(formElements);
-
   if (constants.mandatoryElements[currentForm]) {
 
     constants.mandatoryElements[currentForm].forEach(element => {

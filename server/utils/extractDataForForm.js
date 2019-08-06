@@ -11,7 +11,13 @@ const extractDataForForm = (currentForm, inputData) => {
   let element
 
   for (const [key, value] of Object.entries(inputData)) {
-    [checkForm, element] = key.split('__')
+	let tokens = key.split("__");
+	if(tokens.length == 3){
+		tokens[1] = tokens[1] + "__" + tokens[2];
+	}
+	  
+    [checkForm, element] = tokens;
+    
     if (checkForm === currentForm) {
       outputData[element] = value
     }

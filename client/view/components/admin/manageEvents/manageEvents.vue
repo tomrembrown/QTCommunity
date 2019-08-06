@@ -42,10 +42,18 @@ export default {
     },
     submitForm() {
 	  //if(this.$refs.form.checkValidity()){
+		  debugger;
+		  
+		  const payload = {
+	        element: this.formName + '__organization_id',
+	        value: this.$store.getters.getOrganizationID
+	      }
+	      this.$store.commit('setElement',payload)	  
+		  
 	      let $this = this
 	      this.$store.dispatch('submitForm').then(itWorked => {
 		      debugger;
-	        //if (itWorked) $this.registerOrganizationFormSubmittedOK = true
+			  if (itWorked) $this.registerOrganizationFormSubmittedOK = true
 	      })		  
 	 /* }
 	  else{
