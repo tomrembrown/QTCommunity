@@ -25,6 +25,7 @@ const readOrganizations = require('./read/readOrganizations')
 const getColumnsForRow = require('./read/getColumnsForRow')
 
 // Update
+const insertPlaceIfNecessary = require('./update/insertPlaceIfNecessary')
 const updateNewLogin = require('./update/updateNewLogin')
 
 // Database utility functions
@@ -63,6 +64,7 @@ const model = {
   /* ******
    * Update
    * ******/
+  insertPlaceIfNecessary: insertPlaceIfNecessary,
   updateNewLogin: updateNewLogin,
 
   /* ******
