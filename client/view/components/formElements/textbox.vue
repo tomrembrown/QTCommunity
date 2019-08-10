@@ -53,11 +53,7 @@ export default {
     validate: {
 	    type: Boolean,
 	    default: true
-    },
-   /* required: {
-	    type:Boolean,
-	    default:false
-    } */
+    }
   },
   methods: {
     updateStore() {
@@ -83,6 +79,11 @@ export default {
       let errorObject = this.$store.getters.getError(this.idName)
       return errorObject[0].message
     }
+  },
+  mounted() {
+    // Check in store if this had something set in server
+    const valueFromStore = this.$store.getters.getValueForElement(this.idName)
+    if (valueFromStore) this.value = valueFromStore
   }
 }
 </script>

@@ -137,7 +137,7 @@ CREATE TABLE organizations(
   max_age SMALLINT CHECK (max_age >= 1 AND max_age <= 100) DEFAULT NULL,
   gender_female BOOLEAN NOT NULL DEFAULT TRUE,
   gender_male BOOLEAN NOT NULL DEFAULT TRUE,
-  gender_transgendered BOOLEAN NOT NULL DEF)AULT TRUE,
+  gender_transgendered BOOLEAN NOT NULL DEFAULT TRUE,
   gender_two_spirit BOOLEAN NOT NULL DEFAULT TRUE,
   gender_m2f_transexual BOOLEAN NOT NULL DEFAULT TRUE,
   gender_f2m_transexual BOOLEAN NOT NULL DEFAULT TRUE,

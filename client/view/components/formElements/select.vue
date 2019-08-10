@@ -55,7 +55,12 @@ export default {
         .get('readRoutesServer/getValuesList/' + this.table)
         .then(response => {
           $this.valuesList = response.data
-          $this.value = $this.valuesList[0].id;
+          // Checks if something set - i.e. if got data from server
+          // Otherwise set the value - this drop-down option selected to first 
+          // drop-down option
+          if ($this.value == null) {
+            $this.value = $this.valuesList[0].id
+          }
         })
     }
   },
@@ -65,8 +70,13 @@ export default {
     }
   },
   mounted() {
+    // Get values from server for this dropdown
     this.getValuesList()
-    this.updateStore()
+    // Check in the store if this had something set from the server
+    const valueFromStore = this.$store.getters.getValueForElement(this.idName)
+    if (valueFromStore) {
+      this.value = valueFromStore
+    }
   }
 }
 </script>

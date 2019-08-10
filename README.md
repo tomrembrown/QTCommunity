@@ -23,7 +23,7 @@ Clone GIT repository and download
 git clone https://github.com/tomrembrown/QTCommunity
 ```
 
-Update npm, node, and postgresql to latest versions and install postgresql-contrib. This projects currently uses npm 6.9.0, node 12.5.0, PostgreSQL 11.4.
+Update npm, node, and postgresql to latest versions and install postgresql-contrib. This project currently uses npm 6.10.2, node 12.8.0, PostgreSQL 11.5.
 
 ```
 sudo npm update -g npm

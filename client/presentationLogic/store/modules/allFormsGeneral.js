@@ -52,6 +52,19 @@ const getters = {
     return state.errors.filter(
       error => error !== undefined && error.element === element
     )
+  },
+  getValueForElement: state => element => {
+    return (element in state.formElements) ? state.formElements[element] : null
+  },
+  // Used for checking if the gender & orientation checkboxes have any
+  // which were false from server - so that they can be unchecked
+  checkIfAnyFalse: state => baseElement => {
+    let anyFalse = false
+    for (const [thisElement, thisValue] of Object.entries(state.formElements)) {
+      if (thisElement.startsWith(baseElement) && thisValue === false)
+        anyFalse = true
+    }
+    return anyFalse
   }
 }
 
@@ -146,38 +159,10 @@ const actions = {
       }
     } catch (error) {
       console.log(`Error attempting to submit form: ${error.message}`)
-      console.log(error);
+      console.log(error)
       alert(`Error attempting to submit form: ${error.message}`)
     }
-  },
-  loadInitialData: async ({ commit, state, rootState }, formName) => {
-    try {
-
-      // This is called in the created hook for edit forms to load data already 
-      // in the form
-
-      // Set this form name
-      commit('setThisForm', formName)
-
-      // Figure out who is logged in so we can get data just for this organization
-      const organizationID = rootState.authentication.organizationID
-
-      console.log('Calling read route server, formName: ' + formName)
-      console.log('organizationID: ' + organizationID)
-
-      // Go to database and get the data for this form
-      const formData = await axios.get(
-        'readRoutesServer/readForm/' + formName + '/' + organizationID
-      )
-
-      // Return data received for form so that it can be set as initial data
-      return formData
-
-    } catch (error) {
-      console.log(`Error attempting to load initial data: ${error.message}`)
-      alert(`Error attempting to load initial data: ${error.message}`)
-    }
-  }  
+  }
 }
 
 export default {

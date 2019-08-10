@@ -47,11 +47,13 @@ router.get('/readOrganizations', asyncMiddleware(async (req, res) => {
   res.send(organizations)
 }))
 
-// Read all data for a particular form
+// Read all data for a particular form - receives the formname and the
+// value for id in the database from the client - should work for any table
 router.get('/readForm/:formName/:id', asyncMiddleware(async(req, res) => {
   console.log('In readForm route')
   console.log('formName: ' + req.params.formName)
   console.log('id: ' + req.params.id)
+  // This function in business logic handles everything
   const formData = await getFormData(req.params.formName, req.params.id)
   res.send(formData)
 }))

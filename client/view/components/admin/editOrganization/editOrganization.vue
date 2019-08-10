@@ -49,11 +49,15 @@
               <ash-textbox 
                 heading="Phone Extension"
                 :idName="formName + '__phone_extension'"
-                helpText="Phone extension. Blank if none"
+                helpText="Blank if none"
               ></ash-textbox>
             </div>
             <div class="col-md-1">
-              <ash-checkbox heading="Show" idName="display_phone" :value="false"></ash-checkbox>
+              <ash-checkbox 
+                heading="Show" 
+                :idName="formName + '__display_phone'" 
+                :value="false"
+              ></ash-checkbox>
             </div>
             <div class="col-md-6">
               <ash-textbox
@@ -236,6 +240,9 @@
 
 <script>
 import { forms } from '../../../../../joint/dataValidation/general/formsAndTable'
+import axios from 'axios'
+import authenticationStore from '../../../../presentationLogic/store/modules/authentication'
+import allFormsGeneralStore from '../../../../presentationLogic/store/modules/allFormsGeneral'
 import TargetAudience from '../generalComponents/targetAudience.vue'
 import Textbox from '../../formElements/textbox.vue'
 import Password from '../../formElements/password.vue'
@@ -246,28 +253,56 @@ import Checkbox from '../../formElements/checkbox.vue'
 export default {
   data() {
     return {
-      editOrganizationFormSubmittedOK: false,
-      initialData: {}
+      editOrganizationFormSubmittedOK: false
     }
   }, 
+  /**
+   * This code is used to populate the data in the form. beforeRouteEnter is called
+   * when this route is first selected. It runs before the route starts processing or 
+   * displaying - the old route information is present while this is running. 
+   * Note that when this is called none of the data() for this component have yet
+   * been initialized
+   */
+  beforeRouteEnter (to, from, next) {
+    const formName = forms.EDIT_ORGANIZATION
+    const organizationID = authenticationStore.state.organizationID
+    // Read form data for this form and this organization from server
+    axios.get('readRoutesServer/readForm/' + formName + '/' + organizationID).
+      then(formData => {
+        // Loop through data returned and put it in the store - the data() for
+        // this component is not yet initialized - but the store is
+        for (const [key, value] of Object.entries(formData.data)) {
+          allFormsGeneralStore.state.formElements[formName + '__' + key] =
+            value
+        }
+        // Calling next() causes the rest of this component to start processing
+        // The information is in the store, so each element (text-box, checkbox, 
+        // etc...) will check when it is called if there is a default or not
+        next()
+      })
+  },
   methods: {
     setThisForm() {
       this.$store.commit('setThisForm', this.formName)
     },
     getData() {
-      console.log('in getData')
       let $this = this
-      this.$store.dispatch('loadInitialData', this.formName).then(initialData => {
-        console.log('Returned from loadInitialData')
-        console.log(initialData)
-        $this.initialData = initialData
-      })
+      this.$store.dispatch('loadInitialData', this.formName)
     },
     submitForm() {
       let $this = this
       this.$store.dispatch('submitForm').then(itWorked => {
         if (itWorked) $this.editOrganizationFormSubmittedOK = true
       })
+    },
+    setData(initialData) {
+      console.log('In setData, initialData: ')
+      console.log(initialData)
+      for (const [key, value] of Object.entries(initialData)) {
+        this.initialData[key] = value
+      }
+      console.log('Internal initial data: ')
+      console.log(this.initialData)
     }
   },
   components: {
@@ -282,10 +317,6 @@ export default {
     formName() {
       return forms.EDIT_ORGANIZATION
     }
-  },
-  created() {
-    console.log('In created hook')
-    this.getData()
   },
   mounted() {
     this.setThisForm()

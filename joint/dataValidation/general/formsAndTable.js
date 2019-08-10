@@ -20,7 +20,7 @@ const getTableFromForm = new Map([
   [forms.CREATE_ORGANIZATION, 'organizations'],
   [forms.LOGIN, 'organizations'],
   [forms.ADD_PLACE, 'places'],
-  [forms.EDIT_ORGANIZATION, 'organizations']
+  [forms.EDIT_ORGANIZATION, 'organizations'],
   [forms.ADD_EVENT, 'event_groups'],  
   [forms.SEND_EMAIL, 'NONE']
 ])

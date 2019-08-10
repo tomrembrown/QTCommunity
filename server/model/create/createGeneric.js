@@ -38,7 +38,6 @@ const createGeneric = async function(columnList, rowsArray, tableName) {
   }
 
   createQuery += ';'
-console.log(createQuery);
 
   try {
     await db.query(createQuery, dataList)

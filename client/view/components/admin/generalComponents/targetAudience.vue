@@ -236,6 +236,19 @@ export default {
   components: {
     'ash-textbox': Textbox,
     'ash-checkbox': Checkbox
+  },
+  created() {
+    // Uncheck the all orientation and all gender textboxes if any of the
+    // other checkboxes are unchecked from data from server. 
+    const anyOrientationFalse = this.$store.getters.checkIfAnyFalse(this.formName + '__orientation')
+    if (anyOrientationFalse) {
+      // This causes checkbox to be unchecked and also section expanded
+      this.allOrientationsWelcome = false
+    }
+    const anyGenderFalse = this.$store.getters.checkIfAnyFalse(this.formName + '__gender')
+    if (anyGenderFalse) { 
+      this.allGendersWelcome = false
+    }
   }
 }
 </script>
