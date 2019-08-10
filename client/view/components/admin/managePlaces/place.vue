@@ -21,7 +21,10 @@
       <div class="col-md-3">
         <section>
           <label class="label" for="startTime">Start Date and Time</label>
-          <ash-datetime :idName="formName + '__place_start__' + index" :myInputId="'startTime' + index"></ash-datetime>
+          <ash-datetime 
+          	:idName="formName + '__place_start__' + index" 
+          	:myInputId="'startTime' + index"
+          	v-on:dateUpdated="validateDate"></ash-datetime>
           <div class="note" id="startTimeHelp">
             Enter the start date and time of the event
           </div>
@@ -30,7 +33,10 @@
       <div class="col-md-3">
         <section>
           <label class="label" for="endTime">End Date and Time</label>
-          <ash-datetime :idName="formName + '__place_end__' + index" :myInputId="'endTime-' + index"></ash-datetime>
+          <ash-datetime 
+          	:idName="formName + '__place_end__' + index" 
+          	:myInputId="'endTime-' + index"
+          	:startDate=startDate></ash-datetime>
           <div class="note" id="endTimeHelp">
             Enter the end date and time of the event
           </div>
@@ -67,7 +73,8 @@ import { convertHeadingToName } from '../../../../utils/convertHeadingToName'
 export default {
   data() {
     return {
-      instances:[]
+      instances:[],
+      startDate:null
     }
   },  
   props: {
@@ -85,7 +92,10 @@ export default {
     },
     removeTime(removeAt){
 	  this.instances.splice(removeAt, 1);
-    }    
+    },
+    validateDate(startDate){
+	    this.startDate = startDate;
+    }
   },
   components: {
     'ash-textbox': Textbox,

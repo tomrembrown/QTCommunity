@@ -1,24 +1,39 @@
 <template>
-  <datetime
-    type="datetime"
-    input-class="my-datetime-class"
-    :id="idName"
-    :input-id="idName"
-    use12-hour=true
-    minute-step=15
-    v-model="date"
-  ></datetime>
+  <fieldset>
+	  <datetime
+	    type="datetime"
+	    input-class="my-datetime-class"
+	    :id="idName"
+	    :input-id="idName"
+	    use12-hour
+	    :minute-step="10"
+	    v-model="date"
+	    @change="updateStore"
+	    :min-datetime="startDate"
+	  ></datetime>
+    <div v-if="isError" class="note error">
+      {{ errorMessage }}
+    </div>	  
+  </fieldset>
 </template>
 
 <script>
 import { Datetime } from 'vue-datetime'
 
-export default {
+export default { 
   data() {
     return {
-      instances:[]
+      date:null
     }
-  },  
+  },
+  watch:{
+	 date:function(){
+	    if(this.date != null && this.date != ""){
+		   this.updateStore();
+		   this.$emit('dateUpdated', this.date);
+	    }
+	 }
+  },
   props: {
     idName: {
       type: String,
@@ -27,20 +42,24 @@ export default {
     myInputId: {
       type: String,
       required:true
-    },        
+    },
+    startDate:{
+	    type:String,
+	    default:function(){
+	    	return new Date().toISOString();
+	    }
+    }
   },
   components: {
     datetime: Datetime
   },
   methods: {
     updateStore() {
-	    if (this.validate) {
-	      const payload = {
-	        element: this.idName,
-	        value: this.value
-		  }
-	      this.$store.dispatch('checkErrorAndSetElement', payload)		    
-	    }
+      const payload = {
+        element: this.idName,
+        value: this.date
+	  }
+      this.$store.dispatch('checkErrorAndSetElement', payload)		    
     }
   },
   computed: {

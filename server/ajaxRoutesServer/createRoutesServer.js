@@ -19,7 +19,7 @@ router.post('/create/:currentForm', asyncMiddleware(async (req, res) => {
 
   const currentForm = req.params.currentForm
 
-  let objectInputData = extractDataForForm(currentForm,req.body)
+  let objectInputData = extractDataForForm(currentForm, req.body)  
   let password
   let login
 
@@ -29,7 +29,7 @@ router.post('/create/:currentForm', asyncMiddleware(async (req, res) => {
   }
 
   objectInputData = processFields(currentForm, objectInputData)
-  
+
   let holdover = null;
   if (currentForm == forms.ADD_EVENT){
 	  holdover = objectInputData.placetime;
@@ -37,7 +37,16 @@ router.post('/create/:currentForm', asyncMiddleware(async (req, res) => {
   }
 
   const tableName = getTableFromForm.get(currentForm)
-  await model.createGenericFromClient(tableName, objectInputData)
+  let rowID = await model.createGenericFromClient(tableName, objectInputData)
+
+  if(holdover && currentForm == forms.ADD_EVENT){
+	 for(let i in holdover){
+		holdover[i]['event_group_id'] = rowID;
+ 		model.createGenericFromClient('event_details', holdover[i]);	    
+	 } 
+  }
+  
+  res.json(holdover);
 
   if (currentForm === forms.CREATE_ORGANIZATION) {
     const data = await model.updateNewLogin(login, password)
