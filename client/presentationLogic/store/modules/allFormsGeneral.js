@@ -44,6 +44,14 @@ const mutations = {
   resetAllForms(state) {
     state.formElements = {}
     state.errors = []
+  },
+  checkFormBoxes(state, baseElement) {
+    // This checks all checkboxes as true if the all welcome is chosen
+    // for gender identities or sexual orientations welcome
+    for (const [thisElement, thisValue] of Object.entries(state.formElements)) {
+      if (thisElement.startsWith(baseElement) && thisValue === false)
+        state.formElements[thisElement] = true
+    }
   }
 }
 

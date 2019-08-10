@@ -40,7 +40,11 @@
         <h3>Gender Identities Welcome at {{ typeCapitalized }}</h3>
       </div>
       <div class="col-md-6">
-        <ash-checkbox heading="All are welcome" :idName="formName + '__gender_all'" v-model="allGendersWelcome"></ash-checkbox>
+        <ash-checkbox 
+          heading="All are welcome" 
+          :idName="formName + '__gender_all'" 
+          v-model="allGendersWelcome"
+          @input="checkGenderBoxes()"></ash-checkbox>
       </div>
     </div>
 
@@ -93,6 +97,7 @@
           heading="All are welcome"
           :idName="formName + '__orientation_all'"
           v-model="allOrientationsWelcome"
+          @input="checkOrientationBoxes()"
         ></ash-checkbox>
       </div>
     </div>
@@ -223,6 +228,16 @@ export default {
         element: this.formName + '__only_race_religion',
         value: inValue
       })
+    },
+    checkOrientationBoxes() {
+      if (this.allOrientationsWelcome) {
+        this.$store.commit('checkFormBoxes',this.formName + '__orientation')
+      }
+    },
+    checkGenderBoxes() {
+      if (this.allGendersWelcome) {
+        this.$store.commit('checkFormBoxes',this.formName + '__gender')
+      }
     }
   },
   computed: {
