@@ -37,12 +37,7 @@ const createGeneric = async function(columnList, rowsArray, tableName) {
     createQuery += ')'
   }
 
-<<<<<<< HEAD
-  createQuery += ';'
-=======
   createQuery += ' RETURNING id;'
-console.log(createQuery);
->>>>>>> master
 
   try {
     let response = await db.query(createQuery, dataList);
