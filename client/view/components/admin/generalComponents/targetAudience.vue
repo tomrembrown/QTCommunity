@@ -274,5 +274,4 @@ export default {
 @import '../../../scss/forms/checkbox';
 @import '../../../scss/forms/h3';
 @import '../../../scss/forms/radio';
-@import '../../../scss/forms/section';
 </style>
