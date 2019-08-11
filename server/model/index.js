@@ -22,11 +22,15 @@ const getColumnDefaults = require('./read/getColumnDefaults')
 const getPasswordEncrypted = require('./read/getPasswordEncrypted')
 const checkElementTaken = require('./read/checkElementTaken')
 const readOrganizations = require('./read/readOrganizations')
+const readPlaces = require('./read/readPlaces')
 const getColumnsForRow = require('./read/getColumnsForRow')
 
 // Update
 const insertPlaceIfNecessary = require('./update/insertPlaceIfNecessary')
 const updateNewLogin = require('./update/updateNewLogin')
+
+// Delete
+const deletePlace = require('./delete/deletePlace')
 
 // Database utility functions
 const close = require('./final/close')
@@ -60,12 +64,16 @@ const model = {
 
   // Lookup whole tables
   readOrganizations: readOrganizations,
+  readPlaces: readPlaces,
 
   /* ******
    * Update
    * ******/
   insertPlaceIfNecessary: insertPlaceIfNecessary,
   updateNewLogin: updateNewLogin,
+  
+  //delete
+  deletePlace: deletePlace,
 
   /* ******
    * Database utility functions

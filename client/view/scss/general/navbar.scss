@@ -1,0 +1,10 @@
+nav#submenu{
+	background-color:#666 !important;
+	
+	ul.navbar-nav{
+		li.nav-item:first-child,
+		li.nav-item:first-child a{
+			padding-left:0 !important;
+		}
+	}
+}

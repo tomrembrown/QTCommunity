@@ -47,6 +47,7 @@ export default {
         element: this.idName,
         value: this.value
       }
+
       this.$store.dispatch('checkErrorAndSetElement', payload)
     },
     getValuesList() {
@@ -59,8 +60,10 @@ export default {
           // Otherwise set the value - this drop-down option selected to first 
           // drop-down option
           if ($this.value == null) {
-            $this.value = $this.valuesList[0].id
+            $this.value = $this.valuesList[0].id;
           }
+          
+          $this.updateStore();
         })
     }
   },

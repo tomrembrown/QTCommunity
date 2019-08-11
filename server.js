@@ -7,9 +7,10 @@ const history = require('connect-history-api-fallback')
 require('dotenv').config() // load the environment variables from .env
 
 // Requires of my files
-const readRoutesServer = require('./server/ajaxRoutesServer/readRoutesServer')
-const createRoutesServer = require('./server/ajaxRoutesServer/createRoutesServer')
+const readRoutesServer = 	require('./server/ajaxRoutesServer/readRoutesServer')
+const createRoutesServer = 	require('./server/ajaxRoutesServer/createRoutesServer')
 const generalRoutesServer = require('./server/ajaxRoutesServer/generalRoutesServer')
+const deleteRoutesServer = 	require('./server/ajaxRoutesServer/deleteRoutesServer')
 
 const app = express()
 
@@ -37,6 +38,7 @@ app.get('/', (req, res) => {
 app.use('/readRoutesServer', readRoutesServer)
 app.use('/createRoutesServer', createRoutesServer)
 app.use('/generalRoutesServer', generalRoutesServer)
+app.use('/deleteRoutesServer', deleteRoutesServer)
 
 // Error handling
 app.use((error, req, res, next) => {

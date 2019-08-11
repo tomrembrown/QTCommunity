@@ -102,7 +102,7 @@ CREATE TABLE organizations(
   last_logged_in TIMESTAMP DEFAULT NULL,
   
   -- Physical location
-  place_id INTEGER REFERENCES places(id) DEFAULT NULL,
+  place_id INTEGER REFERENCES places(id) ON DELETE SET NULL DEFAULT NULL,
   place_room TEXT DEFAULT NULL,
 
   -- Contact information

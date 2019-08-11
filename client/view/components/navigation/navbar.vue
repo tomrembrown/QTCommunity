@@ -128,4 +128,5 @@ export default {
 
 <style lang="scss">
 @import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+@import '../../scss/general/navbar.scss';
 </style>

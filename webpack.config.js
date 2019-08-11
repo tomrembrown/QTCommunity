@@ -93,6 +93,11 @@ module.exports = {
         context: ['/generalRoutesServer'],
         target: 'http://localhost:' + process.env.PORT,
         secure: false
+      },
+      {
+        context: ['/deleteRoutesServer'],
+        target: 'http://localhost:' + process.env.PORT,
+        secure: false
       }
     ]
   },
