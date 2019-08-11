@@ -135,32 +135,42 @@ const actions = {
       // Only submit form if no errors
       if (!(state.errors.some(error => error.element.substring(0,formStrLen) === formStr))) {
 
+        let response
+
         if (state.currentForm === forms.SEND_EMAIL) {
 
-          const response = await axios.post(
+          response = await axios.post(
             'generalRoutesServer/sendEmail', state.formElements
           )
-    
-          if (response.data.isError) throw new Error(response.data.message)
 
         }
-        else {
-          const response = await axios.post(
+        else  if (state.currentForm === forms.EDIT_ORGANIZATION) {
+        
+          response = await axios.patch(
+            'updateRoutesServer/update/' + state.currentForm, state.formElements
+          )
+
+        } else {
+
+          // Currently default forms are the create - as in create organization,
+          // create place, create event
+          response = await axios.post(
             'createRoutesServer/create/' + state.currentForm, state.formElements
           )
      
-          if (response.data.isError) throw new Error(response.data.message)
-  
-          if (state.currentForm === forms.CREATE_ORGANIZATION) {
-            // Also, switch to being logged in and store login token
-            commit('login', {
-              loginToken: response.data.loginToken,
-              organizationLogin: state.formElements[forms.CREATE_ORGANIZATION + '__login'],
-              organizationID: response.data.id
-            })
-          }
         }
 
+        if (response.data.isError) throw new Error(response.data.message)
+  
+        if (state.currentForm === forms.CREATE_ORGANIZATION) {
+          // Also, switch to being logged in and store login token
+          commit('login', {
+            loginToken: response.data.loginToken,
+            organizationLogin: state.formElements[forms.CREATE_ORGANIZATION + '__login'],
+            organizationID: response.data.id
+          })
+        }
+        
         return true
       } else {
         return false
