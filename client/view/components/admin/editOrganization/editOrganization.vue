@@ -106,19 +106,20 @@ export default {
       this.$store.dispatch('loadInitialData', this.formName)
     },
     submitForm() {
+      const payload = {
+        element: this.formName + '__organization_id',
+        value: this.$store.getters.getOrganizationID
+      }
+      this.$store.commit('setElement',payload)
       let $this = this
       this.$store.dispatch('submitForm').then(itWorked => {
         if (itWorked) $this.editOrganizationFormSubmittedOK = true
       })
     },
     setData(initialData) {
-      console.log('In setData, initialData: ')
-      console.log(initialData)
       for (const [key, value] of Object.entries(initialData)) {
         this.initialData[key] = value
       }
-      console.log('Internal initial data: ')
-      console.log(this.initialData)
     }
   },
   components: {

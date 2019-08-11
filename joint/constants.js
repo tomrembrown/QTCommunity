@@ -49,14 +49,4 @@ constants.columnsToRemove[forms.EDIT_ORGANIZATION] =
   ['id', 'description_french', 'is_member', 'is_shown', 'login', 'password_encrypted',
    'login_token', 'signup_date', 'logged_in', 'last_logged_in', 'website_french']
 
-/***
- * Collapse Checkbox Fields
- */
-// Right now the collapse just works with checkboxes and a default of true
-// So there is an orientation_all checkbox at the top, it is checked by default
-// Unchecking expands. Checking collapses an sets the other orientation back 
-// to true. If it is editing something and getting data from the database
-// then 
-constants.collapseCheckboxes = ['orientation', 'gender']
-
 module.exports = constants
