@@ -1,7 +1,10 @@
 'use strict'
 
 import axios from 'axios'
+import FormData from 'form-data'
+import uploadImage from '../../../utils/uploadImage'
 import { forms } from '../../../../joint/dataValidation/general/formsAndTable'
+import { exportDefaultSpecifier } from '@babel/types'
 const checkErrorClient = require('../../../../joint/dataValidation/general/checkErrorClient')
 const checkErrorServer = require('../../../../joint/dataValidation/general/checkErrorServer')
 const possibleServerError = require('../../../../joint/dataValidation/general/possibleServerError')
@@ -11,6 +14,7 @@ const checkVerifyPassword = require('../../../../joint/dataValidation/general/ch
 const state = {
   currentForm: null,
   formElements: {},
+  fileData: {},
   errors: []
 }
 
@@ -21,11 +25,15 @@ const mutations = {
   setElement(state, payload) {
     state.formElements[payload.element] = payload.value
   },
+  setFileData(state, file) {
+    state.fileData[state.currentForm] = new FormData()
+    state.fileData[state.currentForm].append('file', file, file.fileName)
+  },
   removeElement(state, element) {
     if (element in state.formElements) {
       delete state.formElements[element]
     }
-  },  
+  },
   addError(state, thisError) {
     if (thisError != null) {
       state.errors.push(thisError)
@@ -62,7 +70,7 @@ const getters = {
     )
   },
   getValueForElement: state => element => {
-    return (element in state.formElements) ? state.formElements[element] : null
+    return element in state.formElements ? state.formElements[element] : null
   },
   // Used for checking if the gender & orientation checkboxes have any
   // which were false from server - so that they can be unchecked
@@ -80,14 +88,17 @@ const actions = {
   checkErrorAndSetElement: async ({ commit }, payload) => {
     commit('setElement', payload)
     let thisError = null
- 
+
     thisError = checkErrorClient(
       state.currentForm,
       payload.element,
       payload.value,
       state.formElements
     )
-    if (thisError == null && possibleServerError(state.currentForm,payload.element)) {
+    if (
+      thisError == null &&
+      possibleServerError(state.currentForm, payload.element)
+    ) {
       thisError = await checkErrorServer(
         state.currentForm,
         payload.element,
@@ -100,20 +111,22 @@ const actions = {
   },
   submitForm: async ({ commit, state, getters }) => {
     try {
-      const missingErrors = checkMandatoryElementsSet(state.currentForm,state.formElements)
+      const missingErrors = checkMandatoryElementsSet(
+        state.currentForm,
+        state.formElements
+      )
 
       if (missingErrors.length > 0) {
         missingErrors.forEach(thisError => {
           commit('removeError', thisError.element)
           commit('addError', thisError)
-        })        
+        })
 
         document.getElementById(missingErrors[0].element).scrollIntoView()
         return false
       }
-    
-      if (state.currentForm === forms.CREATE_ORGANIZATION) {
 
+      if (state.currentForm === forms.CREATE_ORGANIZATION) {
         const verifyError = checkVerifyPassword(state.formElements)
         if (verifyError !== null) {
           commit('removeError', verifyError.element)
@@ -122,7 +135,6 @@ const actions = {
           document.getElementById(verifyError.element).scrollIntoView()
           return false
         }
-
       }
 
       // For some reason sometimes undefined errors appear - remove any
@@ -133,44 +145,68 @@ const actions = {
       const formStrLen = formStr.length
 
       // Only submit form if no errors
-      if (!(state.errors.some(error => error.element.substring(0,formStrLen) === formStr))) {
-
+      if (
+        !state.errors.some(
+          error => error.element.substring(0, formStrLen) === formStr
+        )
+      ) {
         let response
 
         if (state.currentForm === forms.SEND_EMAIL) {
-
           response = await axios.post(
-            'generalRoutesServer/sendEmail', state.formElements
+            'generalRoutesServer/sendEmail',
+            state.formElements
           )
-
-        }
-        else  if (state.currentForm === forms.EDIT_ORGANIZATION) {
-        
-          response = await axios.patch(
-            'updateRoutesServer/update/' + state.currentForm, state.formElements
-          )
-
+        } else if (state.currentForm === forms.EDIT_ORGANIZATION) {
+          if (state.currentForm in state.fileData) {
+            let [responseElements, responseFile] = await Promise.all([
+              axios.patch(
+                'updateRoutesServer/update/' + state.currentForm,
+                state.formElements
+              ),
+              uploadImage(state.fileData[state.currentForm])
+            ])
+            if (responseFile.data.isError) response = responseFile
+            else response = responseElements
+          } else {
+            response = await axios.patch(
+              'updateRoutesServer/update/' + state.currentForm,
+              state.formElements
+            )
+          }
         } else {
-
           // Currently default forms are the create - as in create organization,
           // create place, create event
-          response = await axios.post(
-            'createRoutesServer/create/' + state.currentForm, state.formElements
-          )
-     
+          if (state.currentForm in state.fileData) {
+            let [responseElements, responseFile] = await Promise.all([
+              axios.post(
+                'createRoutesServer/create/' + state.currentForm,
+                state.formElements
+              ),
+              uploadImage(state.fileData[state.currentForm])
+            ])
+            if (responseFile.data.isError) response = responseFile
+            else response = responseElements
+          } else {
+            response = await axios.post(
+              'createRoutesServer/create/' + state.currentForm,
+              state.formElements
+            )
+          }
         }
 
         if (response.data.isError) throw new Error(response.data.message)
-  
+
         if (state.currentForm === forms.CREATE_ORGANIZATION) {
           // Also, switch to being logged in and store login token
           commit('login', {
             loginToken: response.data.loginToken,
-            organizationLogin: state.formElements[forms.CREATE_ORGANIZATION + '__login'],
+            organizationLogin:
+              state.formElements[forms.CREATE_ORGANIZATION + '__login'],
             organizationID: response.data.id
           })
         }
-        
+
         return true
       } else {
         return false

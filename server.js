@@ -7,11 +7,11 @@ const history = require('connect-history-api-fallback')
 require('dotenv').config() // load the environment variables from .env
 
 // Requires of my files
+const createRoutesServer = require('./server/ajaxRoutesServer/createRoutesServer')
 const readRoutesServer = require('./server/ajaxRoutesServer/readRoutesServer')
 const updateRoutesServer = require('./server/ajaxRoutesServer/updateRoutesServer')
-const createRoutesServer = require('./server/ajaxRoutesServer/createRoutesServer')
-const generalRoutesServer = require('./server/ajaxRoutesServer/generalRoutesServer')
 const deleteRoutesServer = 	require('./server/ajaxRoutesServer/deleteRoutesServer')
+const generalRoutesServer = require('./server/ajaxRoutesServer/generalRoutesServer')
 
 const app = express()
 
@@ -39,14 +39,17 @@ app.get('/', (req, res) => {
 app.use('/createRoutesServer', createRoutesServer)
 app.use('/readRoutesServer', readRoutesServer)
 app.use('/updateRoutesServer', updateRoutesServer)
-app.use('/generalRoutesServer', generalRoutesServer)
 app.use('/deleteRoutesServer', deleteRoutesServer)
+app.use('/generalRoutesServer', generalRoutesServer)
 
 // Error handling
 app.use((error, req, res, next) => {
   console.log('Error occurred in express')
   res.json({ isError: true, message: error.message })
 })
+
+// Save global application root for later
+global.appRoot = path.resolve(__dirname)
 
 // Start server listening for requests from browser
 let logString = ' Express started on http://localhost:' + app.get('port') + '; '

@@ -20,11 +20,11 @@
         <ash-checkbox heading="Show" :idName="formName + '__display_phone'" :value="false"></ash-checkbox>
       </div>
       <div class="col-md-6">
-        <ash-textbox
-          heading="Image Link"
+        <ash-imageupload
+          heading="Image of Organization Logo"
           :idName="formName + '__image_link'"
-          helpText="Web address for logo for organization.  Mandatory field"
-        ></ash-textbox>
+          helpText="Upload image for logo for organization. Mandatory field"
+        ></ash-imageupload>
       </div>
     </div>
 
@@ -146,6 +146,7 @@
 <script>
 import Textbox from '../../formElements/textbox.vue'
 import Checkbox from '../../formElements/checkbox.vue'
+import ImageUpload from '../../formElements/imageUpload.vue'
 
 export default {
   props: {
@@ -156,7 +157,8 @@ export default {
   },
   components: {
     'ash-textbox': Textbox,
-    'ash-checkbox': Checkbox
+    'ash-checkbox': Checkbox,
+    'ash-imageupload': ImageUpload
   }
 }
 </script>

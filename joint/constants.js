@@ -49,4 +49,12 @@ constants.columnsToRemove[forms.EDIT_ORGANIZATION] =
   ['id', 'description_french', 'is_member', 'is_shown', 'login', 'password_encrypted',
    'login_token', 'signup_date', 'logged_in', 'last_logged_in', 'website_french']
 
+/***
+ * For uploading image
+ */
+constants.maxSizeNumber = 1024 * 1024
+constants.maxSizeText = '1 MB'
+constants.imageURLStart = '/img/organizationLogos/'
+
+
 module.exports = constants
