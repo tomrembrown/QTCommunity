@@ -7,8 +7,6 @@ import axios from "axios"
 
 const uploadImage = async function(data) {
 
-  console.log('In uploadImage function')
-
   let response
 
   try {

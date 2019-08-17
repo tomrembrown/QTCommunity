@@ -68,23 +68,14 @@ router.post(
 router.post(
   '/uploadImage',
   asyncMiddleware(async (req, res) => {
-    console.log('In uploadImage route')
     new formidable.IncomingForm().parse(req)
-      .on('field', (name, field) => {
-        console.log('Field' + name, ', ' + field)
-      })
       .on('fileBegin', (name, file) => {
         file.path = appRoot + '/client/view/public' + constants.imageURLStart + file.name
-        console.log('In fileBegin, file.path: ' + file.path)
-      })
-      .on('file', (name, file) => {
-        console.log('Uploaded file: ' + name + ', ' + file)
       })
       .on('error', (err) => {
         console.log('Error message: ' + err.message)
       })
       .on('end', () => {
-        console.log('In end of upload file')
         res.sendStatus(200)
       })
   })

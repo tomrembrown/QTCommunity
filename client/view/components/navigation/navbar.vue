@@ -56,12 +56,12 @@
               </router-link>
             </li>
             <li class="nav-item px-2" v-if="!isLoggedIn">
-              <router-link to="/organizationLogin" class="nav-link" active-class="active">
-                <span @click="loginModal">
+              <span @click="showLogin">
+                <router-link to="/organizationLogin" class="nav-link" active-class="active">
                   <i class="fas fa-user"></i>
                   Organization Login
-                </span>
-              </router-link>
+                </router-link>
+              </span>
             </li>
 
             <!-- Display only when logged in -->
@@ -72,11 +72,11 @@
                 active-class="active"
               >Edit Organization</router-link>
             </li>
-            
+
             <li class="nav-item px-2" v-if="isLoggedIn">
               <router-link to="/managePlaces" class="nav-link" active-class="active">Manage Places</router-link>
-            </li>                      
-            
+            </li>
+
             <li class="nav-item px-2" v-if="isLoggedIn">
               <router-link to="/manageEvents" class="nav-link" active-class="active">Manage Events</router-link>
             </li>
@@ -87,8 +87,8 @@
             <li class="nav-item px-2">
               <router-link to="/" class="nav-link" active-class="active" exact>
                 <span @click="logout">
-                <i class="fas fa-user"></i>
-                Logout
+                  <i class="fas fa-user"></i>
+                  Logout
                 </span>
               </router-link>
             </li>
@@ -110,8 +110,12 @@ export default {
     clickAdmin() {
       this.showAdminBar = !this.showAdminBar
     },
-    loginModal() {
-      this.$login.toggle()
+    showLogin() {
+      const params = {
+        componentName: 'login-modal',
+        title: 'Organization Login'
+      }
+      this.$modal.show(params)
     },
     logout() {
       this.showAdminBar = false

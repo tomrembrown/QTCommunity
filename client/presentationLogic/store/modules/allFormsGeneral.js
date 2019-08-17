@@ -26,8 +26,11 @@ const mutations = {
     state.formElements[payload.element] = payload.value
   },
   setFileData(state, file) {
+    if (state.currentForm in state.fileData) {
+      delete state.fileData[state.currentForm]
+    }
     state.fileData[state.currentForm] = new FormData()
-    state.fileData[state.currentForm].append('file', file, file.fileName)
+    state.fileData[state.currentForm].append('file', file, file.name)
   },
   removeElement(state, element) {
     if (element in state.formElements) {
