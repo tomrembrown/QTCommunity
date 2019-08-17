@@ -69,6 +69,7 @@ const processFields = (currentForm, objectInputData) => {
 	  for(let id in objectInputData){
 		  let tokens = id.split('__');
 		  if(tokens.length == 2 && tokens[0].startsWith('place_')){
+			  //if new, make the object
 			  if(typeof objectInputData['placetime'][tokens[1]] == 'undefined'){
 				  objectInputData['placetime'][tokens[1]] = {};
 			  }

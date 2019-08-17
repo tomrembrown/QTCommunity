@@ -101,7 +101,7 @@ const actions = {
   submitForm: async ({ commit, state, getters }) => {
     try {
       const missingErrors = checkMandatoryElementsSet(state.currentForm,state.formElements)
-
+debugger;
       if (missingErrors.length > 0) {
         missingErrors.forEach(thisError => {
           commit('removeError', thisError.element)

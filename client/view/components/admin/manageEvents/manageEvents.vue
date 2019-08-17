@@ -1,92 +1,85 @@
 <template>
   <div class="container">
-    <form action class="sky-form form-sizing-reset" ref="form">
-      <header>Create New Event</header>
-
-      <qt-main-information :formName="formName"></qt-main-information>
-      <qt-place :formName="formName"></qt-place>
-      <qt-registration :formName="formName"></qt-registration>
-
-      <fieldset>
-        <div class="row align-items-center">
-          <div class="col-md-12">
-            <h2>Target Audience for Event</h2>
-          </div>
-        </div>
-
-        <qt-target-audience type="event" verb="attend" :formName = "formName"></qt-target-audience>
-      </fieldset>
-
-      <footer>
-        <button type="submit" class="button" @click.prevent="submitForm">
-          Submit
-        </button>
-        <button type="reset" class="button button-secondary" @click="resetForm">Reset</button>
-      </footer>
-    </form>
+	<h1>Manage Events</h1>
+	  
+	<button type="button" class="btn btn-primary btn-lg" @click="addEvent=true"><i class="fas fa-plus"></i> Add Event</button>
+	
+	<edit-event v-if="addEvent" @submitted="refreshEvent">
+	</edit-event>
+	  
+    <table class="table crud">
+	  <thead>
+		  <tr>
+			<th scope="col" colspan="3">Events</th>
+		  </tr>
+	  </thead>
+	  <tbody>
+		 <tr v-for="(event, index) in events">
+			 <td>
+				<div class="first-line">{{event.name}}</div>
+			 </td>
+			 <td>
+				 <button class="btn btn-secondary" @click="editEvent(index)">Edit</button>
+			 </td>
+			 <td>
+				 <button class="btn btn-link" @click="deleteEvent(index)">Delete</button>
+			 </td>
+		 </tr>
+	  </tbody>
+    </table>
   </div>
 </template>
 
 <script>
-import { forms } from '../../../../../joint/dataValidation/general/formsAndTable'
-import MainInformation from './mainInformation.vue'
-import Place from '../managePlaces/place.vue'
-import Organization from '../editOrganization/organization.vue'
-import Registration from './registration.vue'
-import TargetAudience from '../generalComponents/targetAudience.vue'
+import axios from 'axios';
+import editEvent from './editEvent.vue';
 
 export default {
-  methods: {
-    setThisForm() {
-      this.$store.commit('setThisForm', this.formName)
-    },
-    submitForm() {
-	  //if(this.$refs.form.checkValidity()){
-		  debugger;
-		  
-		  const payload = {
-	        element: this.formName + '__organization_id',
-	        value: this.$store.getters.getOrganizationID
-	      }
-	      this.$store.commit('setElement',payload)	  
-		  
-	      let $this = this
-	      this.$store.dispatch('submitForm').then(itWorked => {
-		      debugger;
-			  if (itWorked) $this.registerOrganizationFormSubmittedOK = true
-	      })		  
-	 /* }
-	  else{
-		  this.$refs.form.reportValidity();
-	  } */
-    },
-    resetForm(){
-	    this.$refs.form.reset();
+  data() {
+    return {
+	  events:[],
+	  addEvent:false
     }
+  },
+  components: {
+    'edit-event': editEvent
   },
   computed: {
-    formName() {
-      return forms.ADD_EVENT
+  },
+  methods: {
+    editEvent(index){
+	    debugger;
+    },
+    deleteEvent:function(index){
+	  let deleted = this.events.splice(index, 1);
+	  let $this = this;
+	  
+	  axios.get(
+		'deleteRoutesServer/deleteEvent/' + this.$store.getters.getOrganizationID + '/' + deleted[0].id
+      ).then(this.refreshPlace);
+    },
+    refreshEvent:function(){
+		let $this = this;
+		let organizationID = this.$store.getters.getOrganizationID;
+		
+		$this.addEvent = false;
+		
+		axios.get(
+		  'readRoutesServer/readEvents/' + organizationID
+		).then(function(response){
+			$this.events = response.data;
+			if($this.events == "" || $this.events.length == 0){
+				$this.addEvent = true;
+			}
+		});	    
     }
   },  
-  components: {
-    'qt-main-information': MainInformation,
-    'qt-place': Place,
-    'qt-organization': Organization,
-    'qt-registration': Registration,
-    'qt-target-audience': TargetAudience
-  },
-  mounted() {
-    this.setThisForm()
-  }  
+  mounted(){
+	  this.refreshEvent();
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../../../scss/forms/form';
-@import '../../../scss/forms/header';
-@import '../../../scss/forms/fieldset';
-@import '../../../scss/forms/h2';
-@import '../../../scss/forms/footer';
-@import '../../../scss/forms/buttons';
+@import '../../../scss/general/crudTable';
 </style>

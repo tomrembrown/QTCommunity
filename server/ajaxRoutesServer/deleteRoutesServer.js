@@ -15,6 +15,10 @@ const asyncMiddleware = require('../utils/asyncMiddleware')
 
 router.get('/deletePlace/:organizationID/:placeID', asyncMiddleware(async (req, res) => {
   await model.deletePlace(req.params.organizationID, req.params.placeID);
+}));
+
+router.get('/deleteEvent/:organizationID/:eventID', asyncMiddleware(async (req, res) => {
+  await model.deleteEvent(req.params.organizationID, req.params.eventID);
 }))
 
 module.exports = router

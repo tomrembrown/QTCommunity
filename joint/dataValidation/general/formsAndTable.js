@@ -8,12 +8,12 @@
  */
 
 const forms = {
-  CREATE_ORGANIZATION: 'createOrganization',
-  EDIT_ORGANIZATION: 'editOrganization',
-  LOGIN: 'login',
-  ADD_PLACE: 'addPlace',
-  ADD_EVENT: 'addEvent',  
-  SEND_EMAIL: 'sendEmail'
+  CREATE_ORGANIZATION: 	'createOrganization',
+  EDIT_ORGANIZATION: 	'editOrganization',
+  LOGIN: 				'login',
+  ADD_PLACE: 			'addPlace',
+  ADD_EVENT: 			'addEvent',  
+  SEND_EMAIL: 			'sendEmail'
 }
 
 const getTableFromForm = new Map([

@@ -53,7 +53,7 @@ router.post(
         holdover[i]['event_group_id'] = rowID
         model.createGenericFromClient('event_details', holdover[i])
       }
-      res.json(holdover)
+      //res.json(holdover)
     } else if (currentForm === forms.CREATE_ORGANIZATION) {
       const data = await model.updateNewLogin(login, password)
       res.json(data)
