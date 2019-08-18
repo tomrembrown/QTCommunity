@@ -23,6 +23,7 @@ const getPasswordEncrypted = require('./read/getPasswordEncrypted')
 const checkElementTaken = require('./read/checkElementTaken')
 const readOrganizations = require('./read/readOrganizations')
 const readPlaces = require('./read/readPlaces')
+const readPlacesAll = require('./read/readPlacesAll')
 const getColumnsForRow = require('./read/getColumnsForRow')
 
 // Update
@@ -66,6 +67,7 @@ const model = {
   // Lookup whole tables
   readOrganizations: readOrganizations,
   readPlaces: readPlaces,
+  readPlacesAll: readPlacesAll,
 
   /* ******
    * Update

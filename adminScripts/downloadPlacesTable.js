@@ -2,7 +2,7 @@
 
 /*
  * This subroutine is to be designed to be run from node at the command 
- * prompt. It gets all data from the organization table, then extracts
+ * prompt. It gets all data from the organizations table, then extracts
  * only that data that is either in mandatory columns or is entered and 
  * different from the defaults. It puts it in an object with the first
  * property being an array of column names, and the second being an array
@@ -19,25 +19,25 @@ const saveOutput = require('./saveOutput')
 
 async function runAll() {
   try {
-    // Get all data from organizations table
-    const organizationsArray = await model.readOrganizations(true)
+    // Get all data from places table
+    const placesArray = await model.readPlacesAll()
 
     // Figure out which columns to populate
 
     // Get list of mandatory columns
-    const mandatoryColumns = await model.getMandatoryColumns('organizations')
+    const mandatoryColumns = await model.getMandatoryColumns('places')
 
     // Get list of columns which have data which is non-default data
-    const columnDefaultsArray = await model.getColumnDefaults('organizations')
+    const columnDefaultsArray = await model.getColumnDefaults('places')
     const columnDefaults = columnArrayToObject(columnDefaultsArray)
     model.close()
-    const columnsWithData = checkColumns(organizationsArray, columnDefaults)
+    const columnsWithData = checkColumns(placesArray, columnDefaults)
 
     // Build column list
     const columnList = selectUnique(mandatoryColumns, columnsWithData)
 
     // Build rows array
-    const rowsArray = buildRowsArray(columnList, organizationsArray)
+    const rowsArray = buildRowsArray(columnList, placesArray)
 
     // Store in final javascript object
     const finalObject = {
@@ -48,7 +48,7 @@ async function runAll() {
     // Convert to JSON and output
     const outputJSON = JSON.stringify(finalObject)
 
-    await saveOutput('ORGANIZATIONS',outputJSON)
+    await saveOutput('PLACES',outputJSON)
   } catch (error) {
     console.log('Error: ' + error.message)
   }
