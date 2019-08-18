@@ -1,12 +1,15 @@
 'use strict'
-
-import constants from '../../../../joint/constants'
+/*
+ * This is the part of the store that handles the image upload modal
+ * window - storing information there when loaded
+ */
 
 const state = {
   imageFile: null,
   imageUrl: null,
   imageFileName: '',
-  imageFormIDName: ''
+  imageFormIDName: '',
+  imageFileType: ''
 }
 
 const mutations = {
@@ -17,45 +20,29 @@ const mutations = {
     state.imageUrl = null
     state.imageFile = imageFile
     state.imageUrl = URL.createObjectURL(state.imageFile)
+    state.imageFileType = imageFile.type
   },
   setImageFormIDName(state, imageFormIDName) {
     // Called just before modal window opens - so have form id name
     // in the saveImageFile
     state.imageFormIDName = imageFormIDName
   },
-  setImageFileName(state, imageFileName) {
-    state.imageFileName = imageFileName
+  setImageFileName(state) {
+    // Called when save image - so it puts on the form
+    // Note that watch placed on imagefilename in form
+    state.imageFileName = state.imageFile.name
   }
 }
 
 const getters = {
   getImageUrl: state => state.imageUrl,
-  getImageFileName: state => state.imageFileName
-}
-
-const actions = {
-  saveImageFile: ({state, commit, dispatch}) => {
-    // Called when user clicks to save the image file
-    
-    // Update image name in form - there is a watcher there on the file name
-    // so ok to just change the filename
-    commit('setImageFileName', state.imageFile.name)
-
-    // Update the form elements in the forms store with path to file
-    const payload = {
-      element: state.imageFormIDName,
-      value: constants.imageURLStart + state.imageFileName
-    }
-    dispatch('checkErrorAndSetElement', payload)
-
-    // Update the file data in the forms store
-    commit('setFileData', state.imageFile)
-  }
+  getImageFileName: state => state.imageFileName,
+  getImageFileType: state => state.imageFileType,
+  getImageFormIDName: state => state.imageFormIDName
 }
 
 export default {
   state,
   mutations,
-  getters,
-  actions
+  getters
 }

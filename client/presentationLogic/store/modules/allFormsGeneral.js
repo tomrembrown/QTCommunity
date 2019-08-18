@@ -1,8 +1,10 @@
 'use strict'
+/*
+ * This is the part of the store that handles all the forms - collecting data,
+ * running verifications, and sending data to the server when needed
+ */
 
 import axios from 'axios'
-import FormData from 'form-data'
-import uploadImage from '../../../utils/uploadImage'
 import { forms } from '../../../../joint/dataValidation/general/formsAndTable'
 import { exportDefaultSpecifier } from '@babel/types'
 const checkErrorClient = require('../../../../joint/dataValidation/general/checkErrorClient')
@@ -14,7 +16,6 @@ const checkVerifyPassword = require('../../../../joint/dataValidation/general/ch
 const state = {
   currentForm: null,
   formElements: {},
-  fileData: {},
   errors: []
 }
 
@@ -24,13 +25,6 @@ const mutations = {
   },
   setElement(state, payload) {
     state.formElements[payload.element] = payload.value
-  },
-  setFileData(state, file) {
-    if (state.currentForm in state.fileData) {
-      delete state.fileData[state.currentForm]
-    }
-    state.fileData[state.currentForm] = new FormData()
-    state.fileData[state.currentForm].append('file', file, file.name)
   },
   removeElement(state, element) {
     if (element in state.formElements) {
@@ -161,41 +155,17 @@ const actions = {
             state.formElements
           )
         } else if (state.currentForm === forms.EDIT_ORGANIZATION) {
-          if (state.currentForm in state.fileData) {
-            let [responseElements, responseFile] = await Promise.all([
-              axios.patch(
-                'updateRoutesServer/update/' + state.currentForm,
-                state.formElements
-              ),
-              uploadImage(state.fileData[state.currentForm])
-            ])
-            if (responseFile.data.isError) response = responseFile
-            else response = responseElements
-          } else {
-            response = await axios.patch(
-              'updateRoutesServer/update/' + state.currentForm,
-              state.formElements
-            )
-          }
+          response = await axios.patch(
+            'updateRoutesServer/update/' + state.currentForm,
+            state.formElements
+          )
         } else {
           // Currently default forms are the create - as in create organization,
           // create place, create event
-          if (state.currentForm in state.fileData) {
-            let [responseElements, responseFile] = await Promise.all([
-              axios.post(
-                'createRoutesServer/create/' + state.currentForm,
-                state.formElements
-              ),
-              uploadImage(state.fileData[state.currentForm])
-            ])
-            if (responseFile.data.isError) response = responseFile
-            else response = responseElements
-          } else {
-            response = await axios.post(
-              'createRoutesServer/create/' + state.currentForm,
-              state.formElements
-            )
-          }
+          response = await axios.post(
+            'createRoutesServer/create/' + state.currentForm,
+            state.formElements
+          )
         }
 
         if (response.data.isError) throw new Error(response.data.message)
