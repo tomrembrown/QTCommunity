@@ -73,8 +73,26 @@
           </div>
         </div>
         <p class="description-text">{{ organization.description_english }}</p>
+        <hr v-if="displayAddressSection || displayContactSection">
+        <section v-if="displayAddressSection">
+          <div class="row" v-if="displayHostedAt">
+            <div class="col-md-3 contact-heading">Hosted At</div>
+            <div class="col-md-9 contact-address">{{ organization.place_name }}</div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 contact-heading">Address</div>
+            <div class="col-md-6 contact-address">{{ organization.place_address }}</div>
+            <div class="col-md-3" v-b-tooltip.hover
+              title="Wheelchair Accessible" v-if="isWheelchairAccessible">
+              <i class="fab fa-lg fa-fw fa-accessible-icon"></i>
+            </div>
+          </div>
+          <div class="row" v-if="displayPlaceRoom">
+            <div class="col-md-3 contact-heading">Room</div>
+            <div class="col-md-9 contact-address">{{ organization.place_room }}</div>
+          </div>
+        </section>
         <section v-if="displayContactSection">
-          <hr>
           <div class="row" v-if="displayWebsite">
             <div class="col-md-3 contact-heading">Website</div>
             <div class="col-md-9 contact-text">
@@ -96,8 +114,8 @@
         <section>
           <div class="row">
             <div class="col-md-3 contact-heading">Type</div>
-            <div class="col-md-3 contact-text">{{ organization.organization_type }}</div>
-            <div class="col-md-6 contact-heading" v-if="isFamilyFriendly">Family Friendly</div>
+            <div class="col-md-6 contact-text">{{ organization.organization_type }}</div>
+            <div class="col-md-3 contact-heading" v-if="isFamilyFriendly">Family Friendly</div>
           </div>
           <div class="row" v-if="isAgeLimits">
             <div class="col-md-3 contact-heading" v-if="isMinAge">Minimum Age</div>
@@ -379,6 +397,18 @@ export default {
         this.isGooglePlus ||
         this.isRss
       )
+    },
+    displayAddressSection() {
+      return (this.organization.place_address != null)
+    },
+    displayHostedAt() {
+      return (this.displayAddressSection && (this.organization.name != this.organization.place_name))
+    },
+    isWheelchairAccessible() {
+      return (this.organization.wheelchair_accessible == true)
+    },
+    displayPlaceRoom() {
+      return (this.organization.place_room != null)
     }
   }
 }

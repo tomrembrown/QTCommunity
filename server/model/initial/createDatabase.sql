@@ -76,7 +76,7 @@ CREATE TABLE places(
   only_race_religion BOOLEAN NOT NULL DEFAULT FALSE,
 
   -- Information about who place is for - only in place
-  wheelchair_accessible BOOLEAN NOT NULL DEFAULT FALSE
+  wheelchair_accessible BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE organizations(
