@@ -30,6 +30,7 @@ const getColumnsForRow = require('./read/getColumnsForRow')
 const insertPlaceIfNecessary = require('./update/insertPlaceIfNecessary')
 const updateNewLogin = require('./update/updateNewLogin')
 const updateGeneric = require('./update/updateGeneric')
+const updateGenericMany = require('./update/updateGenericMany')
 
 // Delete
 const deletePlace = require('./delete/deletePlace')
@@ -75,8 +76,11 @@ const model = {
   insertPlaceIfNecessary: insertPlaceIfNecessary,
   updateNewLogin: updateNewLogin,
   updateGeneric: updateGeneric,
-  
-  //delete
+  updateGenericMany: updateGenericMany,
+
+  /* ******
+   * Delete
+   * ******/
   deletePlace: deletePlace,
 
   /* ******

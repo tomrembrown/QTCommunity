@@ -22,12 +22,6 @@ async function runAll() {
     // Get all data from organizations table
     const organizationsArray = await model.readOrganizations(true)
 
-    // Remove the places column - this won't be able to be inserted since places
-    // not present now - will need to update later
-    for (let i = 0; i<organizationsArray.length; i++) {
-      if ('place_id' in organizationsArray[i]) delete organizationsArray[i].place_id
-    }
-
     // Figure out which columns to populate
 
     // Get list of mandatory columns
@@ -41,6 +35,13 @@ async function runAll() {
 
     // Build column list
     const columnList = selectUnique(mandatoryColumns, columnsWithData)
+
+    // Remove the places column - this won't be able to be inserted since places
+    // not present now - will need to update later
+    const index = columnList.indexOf('place_id')
+    if (index > -1) {
+      columnList.splice(index,1)
+    }
 
     // Build rows array
     const rowsArray = buildRowsArray(columnList, organizationsArray)

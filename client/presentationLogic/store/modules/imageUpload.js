@@ -16,10 +16,14 @@ const mutations = {
   setImageFile(state, imageFile) {
     // Called just before modal window opens - so it has access to 
     // image and the URL for the preview
+    console.log('In setImageFile store routine, imageFile: ')
+    console.log(imageFile)
+    console.log('old URL: ' + state.imageUrl)
     state.imageFile = null
     state.imageUrl = null
     state.imageFile = imageFile
     state.imageUrl = URL.createObjectURL(state.imageFile)
+    console.log('new URL: ' + state.imageUrl)
     state.imageFileType = imageFile.type
   },
   setImageFormIDName(state, imageFormIDName) {
@@ -35,7 +39,7 @@ const mutations = {
 }
 
 const getters = {
-  getImageUrl: state => state.imageUrl,
+  getImageUrl: state => state.imageFileUrl,
   getImageFileName: state => state.imageFileName,
   getImageFileType: state => state.imageFileType,
   getImageFormIDName: state => state.imageFormIDName

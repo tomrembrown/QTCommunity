@@ -19,10 +19,7 @@ const processImage = async function(objectInputData) {
     const pathFromServer = appRoot + '/client/view/public' + constants.imageURLStart
     
     // Filename is the organization login (the base64ToFile method will add extension)
-    let filename
-    if ('login' in objectInputData) {
-      filename = objectInputData.login
-    }
+    const filename = objectInputData.login
 
     const savedFilePath = await base64ToFilePromise(objectInputData.image_link,pathFromServer,filename)
 

@@ -23,7 +23,7 @@ Clone GIT repository and download
 git clone https://github.com/tomrembrown/QTCommunity
 ```
 
-Update npm, node, and postgresql to latest versions and install postgresql-contrib. This project currently uses npm 6.10.2, node 12.8.0, PostgreSQL 11.5.
+Update npm, node, and postgresql to latest versions and install postgresql-contrib. This project currently uses npm 6.11.0, node 12.9.0, PostgreSQL 11.5.
 
 ```
 sudo npm update -g npm
@@ -74,6 +74,12 @@ Create the database tables
 
 ```
 npm run createDatabase
+```
+
+If using existing data, upload the latest data set
+
+```
+npm run uploadLatest
 ```
 
 Increase the number of watches allowed for nodemon to work properly
