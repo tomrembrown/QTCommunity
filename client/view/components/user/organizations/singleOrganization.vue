@@ -6,10 +6,10 @@
       </div>
       <div class="col-md-9">
         <div class="row">
-          <div class="col-md-9">
+          <div class="col-md-8">
             <h2>{{ organization.name }}</h2>
           </div>
-          <div class="col-md-3" v-if="isSocialMedia">
+          <div class="col-md-4" v-if="isSocialMedia">
             <a
               :href="facebook"
               target="_blank"
@@ -81,8 +81,8 @@
           </div>
           <div class="row">
             <div class="col-md-3 contact-heading">Address</div>
-            <div class="col-md-6 contact-address">{{ organization.place_address }}</div>
-            <div class="col-md-3" v-b-tooltip.hover
+            <div class="col-md-5 contact-address">{{ organization.place_address }}</div>
+            <div class="col-md-4" v-b-tooltip.hover
               title="Wheelchair Accessible" v-if="isWheelchairAccessible">
               <i class="fab fa-lg fa-fw fa-accessible-icon"></i>
             </div>
@@ -114,8 +114,8 @@
         <section>
           <div class="row">
             <div class="col-md-3 contact-heading">Type</div>
-            <div class="col-md-6 contact-text">{{ organization.organization_type }}</div>
-            <div class="col-md-3 contact-heading" v-if="isFamilyFriendly">Family Friendly</div>
+            <div class="col-md-5 contact-text">{{ organization.organization_type }}</div>
+            <div class="col-md-4 contact-heading" v-if="isFamilyFriendly">Family Friendly</div>
           </div>
           <div class="row" v-if="isAgeLimits">
             <div class="col-md-3 contact-heading" v-if="isMinAge">Minimum Age</div>
@@ -133,8 +133,8 @@
           </div>
           <div class="row" v-if="aimedAtRaceOrReligion">
             <div class="col-md-3 contact-heading">Aimed At</div>
-            <div class="col-md-3 contact-text">{{ raceReligionText }}</div>
-            <div class="col-md-6 contact-text" v-if="alliesWelcome">Admirers and Allies Welcome</div>
+            <div class="col-md-5 contact-text">{{ raceReligionText }}</div>
+            <div class="col-md-4 contact-text" v-if="!onlyRaceReligion">Admirers and Allies Welcome</div>
           </div>
         </section>
       </div>
@@ -318,7 +318,7 @@ export default {
     raceReligionText() {
       return this.organization.race_religion
     },
-    alliesWelcome() {
+    onlyRaceReligion() {
       return this.organization.only_race_religion == true
     },
     isFacebook() {

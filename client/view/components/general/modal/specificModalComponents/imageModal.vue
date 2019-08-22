@@ -1,11 +1,7 @@
 <template>
   <div>
     <div class="modal-body">
-      <cropper 
-        classname="cropper"
-        :src="imageUrl"
-        @change="change"
-      ></cropper>
+      <cropper class="cropper" :src="imageUrl" @change="change"></cropper>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="cancel">Cancel</button>
@@ -20,8 +16,12 @@ import { Cropper } from 'vue-advanced-cropper'
 export default {
   data() {
     return {
-      imageUrl: '',
       savedImageBase64String: ''
+    }
+  },
+  computed: {
+    imageUrl() {
+      return this.$store.getters.getImageUrl
     }
   },
   methods: {
@@ -32,7 +32,7 @@ export default {
         value: this.savedImageBase64String
       }
       this.$store.commit('setElement', payload)
-      
+
       // Update image file name - a watch placed on this in form
       // So updates there when this is done
       this.$store.commit('setImageFileName')
@@ -43,15 +43,14 @@ export default {
     cancel() {
       this.$modal.hide()
     },
-    change({canvas}) {
-      this.savedImageBase64String = canvas.toDataURL(this.$store.getters.getImageFileType)
+    change({ canvas }) {
+      this.savedImageBase64String = canvas.toDataURL(
+        this.$store.getters.getImageFileType
+      )
     }
   },
   components: {
     Cropper
-  },
-  mounted() {
-    this.imageUrl = this.$store.getters.getImageUrl
   }
 }
 </script>

@@ -162,7 +162,7 @@
                 value="only"
                 id="only"
                 v-model="only_race_religion"
-                @click="switchRadio('only')"
+                @click="switchRadio('TRUE')"
               >
               <i></i>Only for this race or religion
             </label>
@@ -176,7 +176,7 @@
                 value="others"
                 id="others"
                 v-model="only_race_religion"
-                @click="switchRadio('other')"
+                @click="switchRadio('FALSE')"
               >
               <i></i>Admirers and allies welcome too
             </label>

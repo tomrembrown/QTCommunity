@@ -67,7 +67,8 @@ const readOrganizations = async function (forDownload = false) {
       'FROM organizations AS o ' +
       'LEFT JOIN organization_types AS t ON o.organization_type_id = t.id ' +
       'LEFT JOIN places AS p ON o.place_id = p.id ' +
-      'WHERE o.is_shown=TRUE;'
+      'WHERE o.is_shown=TRUE ' +
+      'ORDER BY o.name ASC;'
   }
 
   let organizationsArray

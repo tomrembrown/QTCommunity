@@ -14,7 +14,7 @@ constants.databaseName = 'queer_toronto';
 // Will automatically check in form that these elements have this min length
 constants.minLengths = {}
 constants.minLengths[forms.CREATE_ORGANIZATION] = {
-  login: 5,
+  login: 3,
   password: 8,
   name: 5
 }
