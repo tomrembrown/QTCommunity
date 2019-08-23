@@ -140,6 +140,18 @@
         <ash-checkbox heading="Show" :idName="formName + '__display_rss'" :value="false"></ash-checkbox>
       </div>
     </div>
+    <div class="row align-items-center">
+      <div class="col-md-5">
+        <ash-textbox
+          heading="Spotify"
+          :idName="formName + '__spotify'"
+          helpText="Spotify address for organization. Leave blank if none"
+        ></ash-textbox>
+      </div>
+      <div class="col-md-1">
+        <ash-checkbox heading="Show" :idName="formName + '__display_spotify'" :value="false"></ash-checkbox>
+      </div>
+    </div>
   </fieldset>
 </template>
 

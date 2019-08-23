@@ -70,6 +70,15 @@
             >
               <i class="fas fa-lg fa-fw fa-rss-square"></i>
             </a>
+            <a
+              :href="spotify"
+              target="_blank"
+              v-b-tooltip.hover
+              title="Spotify"
+              v-if="isSpotify"
+            >
+              <i class="fab fa-lg fa-fw fa-spotify"></i>
+            </a>
           </div>
         </div>
         <p class="description-text">{{ organization.description_english }}</p>
@@ -386,6 +395,14 @@ export default {
     rss() {
       return this.isRss ? this.organization.rss : ''
     },
+    isSpotify() {
+      return (
+        this.organization.display_spotify == true && this.organization.spotify
+      )
+    },
+    spotify() {
+      return this.isSpotify ? this.organization.spotify : ''
+    },
     isSocialMedia() {
       return (
         this.isFacebook ||
@@ -395,7 +412,8 @@ export default {
         this.isLinkedin ||
         this.isPinterest ||
         this.isGooglePlus ||
-        this.isRss
+        this.isRss ||
+        this.isSpotify
       )
     },
     displayAddressSection() {

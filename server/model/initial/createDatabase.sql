@@ -130,6 +130,8 @@ CREATE TABLE organizations(
   display_google_plus BOOLEAN NOT NULL DEFAULT FALSE,
   rss TEXT DEFAULT NULL,
   display_rss BOOLEAN NOT NULL DEFAULT FALSE,
+  spotify TEXT DEFAULT NULL,
+  display_spotify BOOLEAN NOT NULL DEFAULT FALSE,
 
   -- Information about who organization is geared for
   family_friendly BOOLEAN NOT NULL DEFAULT TRUE,  

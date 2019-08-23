@@ -6,10 +6,7 @@
  */
 
 const model = require('../model')
-const {
-  forms,
-  getTableFromForm
-} = require('../../joint/dataValidation/general/formsAndTable')
+const { getTableFromForm } = require('../../joint/dataValidation/general/formsAndTable')
 
 const express = require('express')
 const router = express.Router()
@@ -30,6 +27,7 @@ router.patch(
     const tableName = getTableFromForm.get(currentForm)
     const id = objectInputData.organization_id
     delete objectInputData.organization_id
+
     await model.updateGeneric(tableName, id, objectInputData)
 
     res.sendStatus(200)

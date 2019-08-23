@@ -7,15 +7,10 @@
 const db = require('./../db')
 
 const updateGeneric = async function(tableName, id, objectInputData) {
-  
   try {
+    let updateTableQueryStart = 'UPDATE ' + tableName + ' SET '
 
-    let updateTableQueryStart = 
-      "UPDATE " + tableName + 
-      " SET "
-
-    const updateTableQueryEnd = 
-      " WHERE id=" + id + ";"
+    let updateTableQueryEnd = ' WHERE id='
 
     // Loop through all data in objectInputData, adding to update query
     // and data array
@@ -25,18 +20,19 @@ const updateGeneric = async function(tableName, id, objectInputData) {
       if (paramNum > 1) updateTableQueryStart += ', '
       updateTableQueryStart += columnName + ' = $' + paramNum
       dataList.push(columnValue)
-      paramNum ++
+      paramNum++
     }
 
-    const updataTableQuery = updateTableQueryStart + updateTableQueryEnd
+    updateTableQueryEnd += '$' + paramNum + ';'
+    dataList.push(id)
 
-    await db.query(updataTableQuery, dataList)
+    const updateTableQuery = updateTableQueryStart + updateTableQueryEnd
 
+    await db.query(updateTableQuery, dataList)
   } catch (error) {
     console.log(`Error in updateGeneric: ${error.message}`)
-    throw new Error(`Error in updateGeneric: ${error.message}`)
+    throw error
   }
-
 }
 
 module.exports = updateGeneric

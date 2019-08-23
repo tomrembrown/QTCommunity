@@ -40,6 +40,8 @@ const readOrganizations = async function (forDownload = false) {
       '       o.display_google_plus AS display_google_plus, ' +
       '       o.rss AS rss, ' +
       '       o.display_rss AS display_rss, ' +
+      '       o.spotify AS spotify, ' +
+      '       o.display_spotify AS display_spotify, ' +
       '       o.family_friendly AS family_friendly, ' +
       '       o.min_age AS min_age, ' + 
       '       o.max_age AS max_age, ' +
