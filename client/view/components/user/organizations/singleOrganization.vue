@@ -2,7 +2,7 @@
   <fieldset>
     <div class="row">
       <div class="col-md-3">
-        <img :src="organization.image_link" :alt="organization.name" width="90%">
+        <img v-if="organization.image_link" :src="organization.image_link" :alt="organization.name" width="90%">
       </div>
       <div class="col-md-9">
         <div class="row">
@@ -78,6 +78,15 @@
               v-if="isSpotify"
             >
               <i class="fab fa-lg fa-fw fa-spotify"></i>
+            </a>
+            <a
+              :href="tumblr"
+              target="_blank"
+              v-b-tooltip.hover
+              title="Tumblr"
+              v-if="isTumblr"
+            >
+              <i class="fab fa-lg fa-fw fa-tumblr-square"></i>
             </a>
           </div>
         </div>
@@ -403,6 +412,14 @@ export default {
     spotify() {
       return this.isSpotify ? this.organization.spotify : ''
     },
+    isTumblr() {
+      return (
+        this.organization.display_tumblr == true && this.organization.tumblr
+      )
+    },
+    tumblr() {
+      return this.isTumblr ? this.organization.tumblr : ''
+    },
     isSocialMedia() {
       return (
         this.isFacebook ||
@@ -413,7 +430,8 @@ export default {
         this.isPinterest ||
         this.isGooglePlus ||
         this.isRss ||
-        this.isSpotify
+        this.isSpotify ||
+        this.isTumblr
       )
     },
     displayAddressSection() {

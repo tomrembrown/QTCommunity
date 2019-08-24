@@ -58,7 +58,6 @@ const processFields = (currentForm, objectInputData) => {
       fieldName in objectInputData &&
       typeof objectInputData[fieldName] === 'string'
     ) {
-      console.log('fieldName: ' + fieldName)
       objectInputData[fieldName] = objectInputData[fieldName].replace(/\D/g, '')
     }
   }

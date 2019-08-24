@@ -27,7 +27,7 @@ constants.minLengths[forms.SEND_EMAIL] = {
 
 // Forms can't be submitted without these elements
 constants.mandatoryElements = {}
-constants.mandatoryElements[forms.CREATE_ORGANIZATION] = ['login', 'password', 'verify_password', 'name', 'image_link', 'organization_type_id']
+constants.mandatoryElements[forms.CREATE_ORGANIZATION] = ['login', 'password', 'verify_password', 'name', 'organization_type_id']
 constants.mandatoryElements[forms.SEND_EMAIL] = ['name', 'email', 'subject', 'message']
 constants.mandatoryElements[forms.ADD_EVENT] = ['long_title_english', 'short_title_english', 'mobile_title_english', 'description_english', 'place_id__0', 'place_room__0', 'place_start__0', 'place_end__0']
 

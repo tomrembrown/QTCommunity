@@ -89,7 +89,7 @@ CREATE TABLE organizations(
   organization_type_id SMALLINT REFERENCES organization_types(id) NOT NULL,
   description_english TEXT DEFAULT NULL,
   description_french TEXT DEFAULT NULL,
-  image_link TEXT NOT NULL,
+  image_link TEXT DEFAULT NULL,
 
   -- Login information (some organizations don't - just get data from parser feed)
   is_member BOOLEAN NOT NULL DEFAULT FALSE,
@@ -132,6 +132,8 @@ CREATE TABLE organizations(
   display_rss BOOLEAN NOT NULL DEFAULT FALSE,
   spotify TEXT DEFAULT NULL,
   display_spotify BOOLEAN NOT NULL DEFAULT FALSE,
+  tumblr TEXT DEFAULT NULL,
+  display_tumblr BOOLEAN NOT NULL DEFAULT FALSE,
 
   -- Information about who organization is geared for
   family_friendly BOOLEAN NOT NULL DEFAULT TRUE,  
