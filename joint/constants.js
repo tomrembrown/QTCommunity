@@ -56,5 +56,9 @@ constants.maxSizeNumber = 1024 * 1024
 constants.maxSizeText = '1 MB'
 constants.imageURLStart = '/img/organizationLogos/'
 
+/***
+ * For autoloading in scrolling
+ */
+constants.numberOrgsToLoad = 4
 
 module.exports = constants

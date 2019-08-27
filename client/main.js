@@ -7,7 +7,7 @@ import App from './view/App.vue'
 import { routes } from './presentationLogic/clientRoutes'
 import { store } from './presentationLogic/store/store'
 import Modal from './view/components/general/modal/modalPlugin'
-import { isFlowBaseAnnotation } from '@babel/types';
+import { isFlowBaseAnnotation } from '@babel/types'
 
 Vue.use(VueRouter)
 Vue.use(Modal)

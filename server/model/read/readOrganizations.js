@@ -15,6 +15,7 @@ const readOrganizations = async function (forDownload = false) {
     readOrganizationsQuery =
       'SELECT o.image_link AS image_link, ' +
       '       o.name AS name, ' +
+      '       o.id AS id, ' +
       '       o.description_english AS description_english, ' +
       '       o.website_english AS website_english, ' +
       '       o.display_website AS display_website, ' +
