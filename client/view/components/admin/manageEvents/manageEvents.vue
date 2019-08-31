@@ -16,7 +16,13 @@
 	  <tbody>
 		 <tr v-for="(event, index) in events">
 			 <td>
-				<div class="first-line">{{event.name}}</div>
+				<div class="event first-line">{{event.long_title_english}}</div>
+				<div class="event description">{{event.description_english}}</div>
+				<div class="event event-details">
+					<div v-for="(detail, index) in event.details">
+						{{detail.place_name}} ({{detail.place_address}}) - {{detail.start_time}} - {{detail.end_time}}
+					</div>
+				</div>
 			 </td>
 			 <td>
 				 <button class="btn btn-secondary" @click="editEvent(index)">Edit</button>
@@ -38,6 +44,7 @@ export default {
   data() {
     return {
 	  events:[],
+	  places:[],
 	  addEvent:false
     }
   },
@@ -50,7 +57,7 @@ export default {
     editEvent(index){
 	    debugger;
     },
-    deleteEvent:function(index){
+    deleteEvent:function(index){ debugger;
 	  let deleted = this.events.splice(index, 1);
 	  let $this = this;
 	  

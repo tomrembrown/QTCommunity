@@ -19,8 +19,6 @@ const checkMandatoryElementsSet = function (currentForm, formElements) {
   }
   
 	if(currentForm === 'addEvent'){
-		
-		
 		let place_checked = [];
 		let place_elements = ['place_id', 'place_room', 'place_start', 'place_end'];
 		
@@ -29,7 +27,7 @@ const checkMandatoryElementsSet = function (currentForm, formElements) {
 
 			if(tokens.length == 3 && tokens[1].startsWith('place_') && !place_checked.includes(tokens[2])){
 				for(let i in place_elements){
-					if(!((currentForm + "__" + place_elements[i] + "__" + tokens[2]) in formElements)){
+					if(!((currentForm + "__" + place_elements[i] + "__" + tokens[2]) in formElements) || formElements[currentForm + "__" + place_elements[i] + "__" + tokens[2]] == ''){
 						missingErrors.push({
 							element: currentForm + '__' + place_elements[i] + "__" + tokens[2],
 							message: 'This is a mandatory field'
