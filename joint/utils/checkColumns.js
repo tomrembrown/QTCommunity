@@ -15,7 +15,6 @@ const checkColumns = (organizationsArray, columnDefaults) => {
     Object.keys(organizationData).forEach(column => {
       if (
         !columnsWithData.includes(column) &&
-        column !== 'id' &&
         organizationData[column] != columnDefaults[column]
       ) {
         columnsWithData.push(column)

@@ -2,7 +2,7 @@
 
 /*
  * This subroutine is to be designed to be run from node at the command 
- * prompt. It gets all data from the organization table, then extracts
+ * prompt. It gets all data from the organizations table, then extracts
  * only that data that is either in mandatory columns or is entered and 
  * different from the defaults. It puts it in an object with the first
  * property being an array of column names, and the second being an array
@@ -35,6 +35,13 @@ async function runAll() {
 
     // Build column list
     const columnList = selectUnique(mandatoryColumns, columnsWithData)
+
+    // Remove the places column - this won't be able to be inserted since places
+    // not present now - will need to update later
+    const index = columnList.indexOf('place_id')
+    if (index > -1) {
+      columnList.splice(index,1)
+    }
 
     // Build rows array
     const rowsArray = buildRowsArray(columnList, organizationsArray)

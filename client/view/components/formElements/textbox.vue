@@ -95,4 +95,4 @@ export default {
 @import '../../scss/forms/section';
 @import '../../scss/forms/buttons';
 </style>
-</style>
+

@@ -36,9 +36,6 @@ const getFormData = async function(formName, id) {
     // Remove anything that is a default before sending to client side
     formData = removeDefaults(formDataAll, columns)
 
-    console.log('final form data ')
-    console.log(formData)
-
   } catch (error) {
     console.log(`Error in businessLogic/server/getFormData: ${error.message}`)
     throw new Error(`Error in businessLogic/server/getFormData: ${error.message}`)

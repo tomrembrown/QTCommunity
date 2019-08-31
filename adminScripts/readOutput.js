@@ -6,21 +6,19 @@
  */
 
 const fs = require('fs')
+const util = require('util')
+const readFile = util.promisify(fs.readFile)
 
-const readOutput = (fileName, callback) => {
-  
-  fs.readFile(fileName, (error, dataInput) => {
-    if (error) {
-      console.log('Error reading file: ' + error.message)
-      throw error
-    }
-    else {
-      const dataObject = JSON.parse(dataInput.toString())
-      callback(dataObject)
-    }
+const readOutput = async fileName => {
+  try {
+    const dataInput = await readFile(fileName)
 
-  })
-
+    const dataObject = JSON.parse(dataInput.toString())
+    return dataObject
+  } catch (error) {
+    console.log('Error reading file: ' + error.message)
+    throw error
+  }
 }
 
 module.exports = readOutput

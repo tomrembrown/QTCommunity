@@ -76,7 +76,7 @@ CREATE TABLE places(
   only_race_religion BOOLEAN NOT NULL DEFAULT FALSE,
 
   -- Information about who place is for - only in place
-  wheelchair_accessible BOOLEAN NOT NULL DEFAULT FALSE
+  wheelchair_accessible BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE organizations(
@@ -89,7 +89,7 @@ CREATE TABLE organizations(
   organization_type_id SMALLINT REFERENCES organization_types(id) NOT NULL,
   description_english TEXT DEFAULT NULL,
   description_french TEXT DEFAULT NULL,
-  image_link TEXT NOT NULL,
+  image_link TEXT DEFAULT NULL,
 
   -- Login information (some organizations don't - just get data from parser feed)
   is_member BOOLEAN NOT NULL DEFAULT FALSE,
@@ -130,6 +130,10 @@ CREATE TABLE organizations(
   display_google_plus BOOLEAN NOT NULL DEFAULT FALSE,
   rss TEXT DEFAULT NULL,
   display_rss BOOLEAN NOT NULL DEFAULT FALSE,
+  spotify TEXT DEFAULT NULL,
+  display_spotify BOOLEAN NOT NULL DEFAULT FALSE,
+  tumblr TEXT DEFAULT NULL,
+  display_tumblr BOOLEAN NOT NULL DEFAULT FALSE,
 
   -- Information about who organization is geared for
   family_friendly BOOLEAN NOT NULL DEFAULT TRUE,  
@@ -310,4 +314,5 @@ INSERT INTO organization_types
   ('Bar or Dance Club'), 
   ('Art, Theatre, Culture'), 
   ('Adult Entertainment'),
+  ('Social Club'),
   ('Athletic Club');

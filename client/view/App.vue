@@ -2,7 +2,7 @@
   <div>
     <qt-navbar></qt-navbar>
     <router-view></router-view>
-    <login-modal/>
+    <app-modal/>
     <qt-footer></qt-footer>
   </div>
 </template>

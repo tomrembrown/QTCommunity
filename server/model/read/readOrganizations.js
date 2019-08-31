@@ -15,6 +15,7 @@ const readOrganizations = async function (forDownload = false) {
     readOrganizationsQuery =
       'SELECT o.image_link AS image_link, ' +
       '       o.name AS name, ' +
+      '       o.id AS id, ' +
       '       o.description_english AS description_english, ' +
       '       o.website_english AS website_english, ' +
       '       o.display_website AS display_website, ' +
@@ -40,6 +41,10 @@ const readOrganizations = async function (forDownload = false) {
       '       o.display_google_plus AS display_google_plus, ' +
       '       o.rss AS rss, ' +
       '       o.display_rss AS display_rss, ' +
+      '       o.spotify AS spotify, ' +
+      '       o.display_spotify AS display_spotify, ' +
+      '       o.tumblr AS tumblr, ' +
+      '       o.display_tumblr AS display_tumblr, ' +
       '       o.family_friendly AS family_friendly, ' +
       '       o.min_age AS min_age, ' + 
       '       o.max_age AS max_age, ' +
@@ -59,10 +64,16 @@ const readOrganizations = async function (forDownload = false) {
       '       o.orientation_pansexual AS orientation_pansexual, ' +
       '       o.orientation_heterosexual AS orientation_heterosexual, ' +
       '       o.race_religion AS race_religion, ' +
-      '       o.only_race_religion AS only_race_religion ' +
+      '       o.only_race_religion AS only_race_religion, ' +
+      '       p.name AS place_name, ' +
+      '       p.address AS place_address, ' +
+      '       o.place_room AS place_room, ' +
+      '       p.wheelchair_accessible AS wheelchair_accessible ' +
       'FROM organizations AS o ' +
-      'INNER JOIN organization_types AS t ON o.organization_type_id = t.id ' +
-      'WHERE o.is_shown=TRUE;'
+      'LEFT JOIN organization_types AS t ON o.organization_type_id = t.id ' +
+      'LEFT JOIN places AS p ON o.place_id = p.id ' +
+      'WHERE o.is_shown=TRUE ' +
+      'ORDER BY o.name ASC;'
   }
 
   let organizationsArray
@@ -75,6 +86,7 @@ const readOrganizations = async function (forDownload = false) {
     throw new Error('Error running read organizations query, query: ' +
       readOrganizationsQuery + ', error: ' + err.module)
   }
+
   return organizationsArray
 }
 

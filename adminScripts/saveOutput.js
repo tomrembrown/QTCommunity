@@ -24,7 +24,6 @@ const saveOutput = (startName, outputJSON) => {
       console.error(error)
       return
     }
-    console.log('File ' + filename + ' has been created')
   })
 }
 

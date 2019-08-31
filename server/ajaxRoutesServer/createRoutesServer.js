@@ -13,12 +13,10 @@ const {
 
 const express = require('express')
 const router = express.Router()
-const formidable = require('formidable')
-
 const extractDataForForm = require('../utils/extractDataForForm')
 const asyncMiddleware = require('../utils/asyncMiddleware')
 const processFields = require('../../joint/businessLogic/general/processFields')
-const constants = require('../../joint/constants')
+const processImage = require('../../joint/businessLogic/server/processImage')
 
 router.post(
   '/create/:currentForm',
@@ -35,6 +33,12 @@ router.post(
     }
 
     objectInputData = processFields(currentForm, objectInputData)
+
+    // If there is an image being sent - then convert image to file, save it,
+    // and change the value in the form data to the location of the image
+    if ('image_link' in objectInputData) {
+      objectInputData = await processImage(objectInputData)
+    }
 
     let holdover = null
     if (currentForm == forms.ADD_EVENT) {
@@ -62,31 +66,6 @@ router.post(
     } else {
       res.sendStatus(200)
     }
-  })
-)
-
-router.post(
-  '/uploadImage',
-  asyncMiddleware(async (req, res) => {
-    console.log('In uploadImage route')
-    new formidable.IncomingForm().parse(req)
-      .on('field', (name, field) => {
-        console.log('Field' + name, ', ' + field)
-      })
-      .on('fileBegin', (name, file) => {
-        file.path = appRoot + '/client/view/public' + constants.imageURLStart + file.name
-        console.log('In fileBegin, file.path: ' + file.path)
-      })
-      .on('file', (name, file) => {
-        console.log('Uploaded file: ' + name + ', ' + file)
-      })
-      .on('error', (err) => {
-        console.log('Error message: ' + err.message)
-      })
-      .on('end', () => {
-        console.log('In end of upload file')
-        res.sendStatus(200)
-      })
   })
 )
 

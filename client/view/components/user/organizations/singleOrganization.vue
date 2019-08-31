@@ -2,14 +2,14 @@
   <fieldset>
     <div class="row">
       <div class="col-md-3">
-        <img :src="organization.image_link" :alt="organization.name" width="90%">
+        <img v-if="organization.image_link" :src="organization.image_link" :alt="organization.name" width="90%">
       </div>
       <div class="col-md-9">
         <div class="row">
-          <div class="col-md-9">
+          <div class="col-md-8">
             <h2>{{ organization.name }}</h2>
           </div>
-          <div class="col-md-3" v-if="isSocialMedia">
+          <div class="col-md-4" v-if="isSocialMedia">
             <a
               :href="facebook"
               target="_blank"
@@ -70,11 +70,47 @@
             >
               <i class="fas fa-lg fa-fw fa-rss-square"></i>
             </a>
+            <a
+              :href="spotify"
+              target="_blank"
+              v-b-tooltip.hover
+              title="Spotify"
+              v-if="isSpotify"
+            >
+              <i class="fab fa-lg fa-fw fa-spotify"></i>
+            </a>
+            <a
+              :href="tumblr"
+              target="_blank"
+              v-b-tooltip.hover
+              title="Tumblr"
+              v-if="isTumblr"
+            >
+              <i class="fab fa-lg fa-fw fa-tumblr-square"></i>
+            </a>
           </div>
         </div>
         <p class="description-text">{{ organization.description_english }}</p>
+        <hr v-if="displayAddressSection || displayContactSection">
+        <section v-if="displayAddressSection">
+          <div class="row" v-if="displayHostedAt">
+            <div class="col-md-3 contact-heading">Hosted At</div>
+            <div class="col-md-9 contact-address">{{ organization.place_name }}</div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 contact-heading">Address</div>
+            <div class="col-md-5 contact-address">{{ organization.place_address }}</div>
+            <div class="col-md-4" v-b-tooltip.hover
+              title="Wheelchair Accessible" v-if="isWheelchairAccessible">
+              <i class="fab fa-lg fa-fw fa-accessible-icon"></i>
+            </div>
+          </div>
+          <div class="row" v-if="displayPlaceRoom">
+            <div class="col-md-3 contact-heading">Room</div>
+            <div class="col-md-9 contact-address">{{ organization.place_room }}</div>
+          </div>
+        </section>
         <section v-if="displayContactSection">
-          <hr>
           <div class="row" v-if="displayWebsite">
             <div class="col-md-3 contact-heading">Website</div>
             <div class="col-md-9 contact-text">
@@ -96,8 +132,8 @@
         <section>
           <div class="row">
             <div class="col-md-3 contact-heading">Type</div>
-            <div class="col-md-3 contact-text">{{ organization.organization_type }}</div>
-            <div class="col-md-6 contact-heading" v-if="isFamilyFriendly">Family Friendly</div>
+            <div class="col-md-5 contact-text">{{ organization.organization_type }}</div>
+            <div class="col-md-4 contact-heading" v-if="isFamilyFriendly">Family Friendly</div>
           </div>
           <div class="row" v-if="isAgeLimits">
             <div class="col-md-3 contact-heading" v-if="isMinAge">Minimum Age</div>
@@ -115,8 +151,8 @@
           </div>
           <div class="row" v-if="aimedAtRaceOrReligion">
             <div class="col-md-3 contact-heading">Aimed At</div>
-            <div class="col-md-3 contact-text">{{ raceReligionText }}</div>
-            <div class="col-md-6 contact-text" v-if="alliesWelcome">Admirers and Allies Welcome</div>
+            <div class="col-md-5 contact-text">{{ raceReligionText }}</div>
+            <div class="col-md-4 contact-text" v-if="!onlyRaceReligion">Admirers and Allies Welcome</div>
           </div>
         </section>
       </div>
@@ -300,7 +336,7 @@ export default {
     raceReligionText() {
       return this.organization.race_religion
     },
-    alliesWelcome() {
+    onlyRaceReligion() {
       return this.organization.only_race_religion == true
     },
     isFacebook() {
@@ -368,6 +404,22 @@ export default {
     rss() {
       return this.isRss ? this.organization.rss : ''
     },
+    isSpotify() {
+      return (
+        this.organization.display_spotify == true && this.organization.spotify
+      )
+    },
+    spotify() {
+      return this.isSpotify ? this.organization.spotify : ''
+    },
+    isTumblr() {
+      return (
+        this.organization.display_tumblr == true && this.organization.tumblr
+      )
+    },
+    tumblr() {
+      return this.isTumblr ? this.organization.tumblr : ''
+    },
     isSocialMedia() {
       return (
         this.isFacebook ||
@@ -377,8 +429,22 @@ export default {
         this.isLinkedin ||
         this.isPinterest ||
         this.isGooglePlus ||
-        this.isRss
+        this.isRss ||
+        this.isSpotify ||
+        this.isTumblr
       )
+    },
+    displayAddressSection() {
+      return (this.organization.place_address != null)
+    },
+    displayHostedAt() {
+      return (this.displayAddressSection && (this.organization.name != this.organization.place_name))
+    },
+    isWheelchairAccessible() {
+      return (this.organization.wheelchair_accessible == true)
+    },
+    displayPlaceRoom() {
+      return (this.organization.place_room != null)
     }
   }
 }

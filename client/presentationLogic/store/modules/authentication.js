@@ -1,4 +1,9 @@
 'use strict'
+/*
+ * This is the part of the store that handles authentication - storing
+ * if the organization is logged in, the login token, the organization
+ * ID & login, with mutations to login and logout organization
+ */
 
 import axios from 'axios'
 

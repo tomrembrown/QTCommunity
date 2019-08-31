@@ -47,10 +47,21 @@
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="theme-color" content="#ffffff" />
 
+    <!-- JavaScript for Google Maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMzBdnWozopXjnLALdA2WBhYXOL14IsU&libraries=places"></script>
+
+    <!-- General CSS loaded before any scripts or scss - for handling things like loading message -->
+    <link rel="stylesheet" type="text/css" href="/css/general.css" />
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app" v-cloak>
+      <div id="loading">
+        <div id="inner">
+          <img src="/img/birdLoaderAnimatedCropped.gif" />
+          <h1>Loading ...</h1>
+        </div>
+      </div>
+    </div>
     <script src="/dist/build.js"></script>
   </body>
 </html>

@@ -17,7 +17,11 @@ const app = express()
 
 app.use(history()) // To get the SPA router to work
 
-app.use(express.json()) // For handling json data from POST requests
+// Increased limit to handle uploading image files
+app.use(express.json({
+  limit: '50mb',
+  type: 'application/json'
+})) // For handling json data from POST requests
 
 // For security reasons, don't send info on server to client
 app.disable('x-powered-by')
