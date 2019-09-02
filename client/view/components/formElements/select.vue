@@ -2,8 +2,9 @@
   <section>
     <label class="label" :for="idName">{{ heading }}</label>
     <label class="select">
-      <select :id="idName" :name="idName" v-model="value" @change="updateStore">
-        <option disabled value="">Please select one</option>
+      <select :id="idName" :name="idName" v-model="value" @change="update">
+        <option v-if="isForFilter" value="all" key="all">All Organizations</option>
+        <option v-else disabled value>Please select one</option>
         <option
           v-for="thisValue in valuesList"
           :value="thisValue.id"
@@ -12,12 +13,8 @@
       </select>
       <i></i>
     </label>
-    <div v-if="isError" class="note error">
-      {{ errorMessage }}
-    </div>
-    <div v-else-if="helpText.length > 0" class="note" :id="idHelp">
-      {{ helpText }}
-    </div>
+    <div v-if="isError" class="note error">{{ errorMessage }}</div>
+    <div v-else-if="helpText.length > 0" class="note" :id="idHelp">{{ helpText }}</div>
   </section>
 </template>
 
@@ -28,7 +25,7 @@ import { convertHeadingToName } from '../../../utils/convertHeadingToName'
 export default {
   data() {
     return {
-      value: "",
+      value: '',
       valuesList: []
     }
   },
@@ -50,16 +47,23 @@ export default {
     helpText: {
       type: String,
       default: ''
+    },
+    isForFilter: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
-    updateStore() {
-      const payload = {
-        element: this.idName,
-        value: this.value
+    update() {
+      if (this.isForFilter) {
+        this.$emit('change', {element: this.filterToEmit, value: this.value})
+      } else {
+        const payload = {
+          element: this.idName,
+          value: this.value
+        }
+        this.$store.dispatch('checkErrorAndSetElement', payload)
       }
-
-      this.$store.dispatch('checkErrorAndSetElement', payload)
     },
     getValuesList() {
       let $this = this
@@ -68,13 +72,13 @@ export default {
         .then(response => {
           $this.valuesList = response.data
           // Checks if something set - i.e. if got data from server
-          // Otherwise set the value - this drop-down option selected to first 
+          // Otherwise set the value - this drop-down option selected to first
           // drop-down option
           if ($this.value == null) {
-            $this.value = $this.valuesList[0].id;
+            $this.value = $this.valuesList[0].id
           }
-          
-          $this.updateStore();
+
+          $this.update()
         })
     }
   },
@@ -90,15 +94,26 @@ export default {
     errorMessage() {
       let errorObject = this.$store.getters.getError(this.idName)
       return errorObject[0].message
+    },
+    filterToEmit() {
+      return this.idName.replace(/([-_][a-z])/g,
+                  (group) => group.toUpperCase()
+                    .replace('-', '')
+                    .replace('_', ''))
     }
   },
   mounted() {
     // Get values from server for this dropdown
     this.getValuesList()
-    // Check in the store if this had something set from the server
-    const valueFromStore = this.$store.getters.getValueForElement(this.idName)
-    if (valueFromStore) {
-      this.value = valueFromStore
+
+    if (this.isForFilter) {
+      this.value = 'all'
+    } else {
+      // Check in the store if this had something set from the server
+      const valueFromStore = this.$store.getters.getValueForElement(this.idName)
+      if (valueFromStore) {
+        this.value = valueFromStore
+      }
     }
   }
 }

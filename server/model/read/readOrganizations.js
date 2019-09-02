@@ -25,6 +25,7 @@ const readOrganizations = async function (forDownload = false) {
       '       o.display_phone AS display_phone, ' +
       '       o.phone_extension AS phone_extension, ' +
       '       t.name_english AS organization_type, ' +
+      '       o.organization_type_id AS organization_type_id, ' + 
       '       o.facebook AS facebook, ' +
       '       o.display_facebook AS display_facebook, ' +
       '       o.twitter AS twitter, ' +
