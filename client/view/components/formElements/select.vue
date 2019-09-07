@@ -3,8 +3,7 @@
     <label class="label" :for="idName">{{ heading }}</label>
     <label class="select">
       <select :id="idName" :name="idName" v-model="value" @change="update">
-        <option v-if="isForFilter" value="all" key="all">All Organizations</option>
-        <option v-else disabled value>Please select one</option>
+        <option disabled value>Please select one</option>
         <option
           v-for="thisValue in valuesList"
           :value="thisValue.id"
@@ -47,23 +46,15 @@ export default {
     helpText: {
       type: String,
       default: ''
-    },
-    isForFilter: {
-      type: Boolean,
-      default: false
     }
   },
   methods: {
     update() {
-      if (this.isForFilter) {
-        this.$emit('change', {element: this.filterToEmit, value: this.value})
-      } else {
-        const payload = {
-          element: this.idName,
-          value: this.value
-        }
-        this.$store.dispatch('checkErrorAndSetElement', payload)
+      const payload = {
+        element: this.idName,
+        value: this.value
       }
+      this.$store.dispatch('checkErrorAndSetElement', payload)
     },
     getValuesList() {
       let $this = this
@@ -94,26 +85,16 @@ export default {
     errorMessage() {
       let errorObject = this.$store.getters.getError(this.idName)
       return errorObject[0].message
-    },
-    filterToEmit() {
-      return this.idName.replace(/([-_][a-z])/g,
-                  (group) => group.toUpperCase()
-                    .replace('-', '')
-                    .replace('_', ''))
     }
   },
   mounted() {
     // Get values from server for this dropdown
     this.getValuesList()
 
-    if (this.isForFilter) {
-      this.value = 'all'
-    } else {
-      // Check in the store if this had something set from the server
-      const valueFromStore = this.$store.getters.getValueForElement(this.idName)
-      if (valueFromStore) {
-        this.value = valueFromStore
-      }
+    // Check in the store if this had something set from the server
+    const valueFromStore = this.$store.getters.getValueForElement(this.idName)
+    if (valueFromStore) {
+      this.value = valueFromStore
     }
   }
 }

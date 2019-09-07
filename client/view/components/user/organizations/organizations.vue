@@ -3,20 +3,10 @@
     <div class="sky-form">
       <header>
         <div class="row">
-          <div class="col-md-6">List of Organizations</div>
-          <div class="col-md-6">
-            <form action>
-              <ash-select
-                heading="Filter by Organization Type"
-                idName="organization_type_chosen"
-                table="organization_types"
-                :isForFilter="true"
-                @change="changeFilter($event)"
-              ></ash-select>
-            </form>
-          </div>
+          <div class="col-md-12">List of Organizations</div>
         </div>
       </header>
+      <organization-filter @changeFilter="changeFilter($event)"></organization-filter>
       <div v-if="loading">
         <fieldset>
           <h2>Loading ...</h2>
@@ -43,6 +33,7 @@
 import { forms } from '../../../../../joint/dataValidation/general/formsAndTable'
 import axios from 'axios'
 import SingleOrganization from './singleOrganization.vue'
+import OrganizationFilter from './OrganizationFilter.vue'
 import Select from '../../formElements/select.vue'
 import scrollMonitor from 'scrollmonitor'
 import constants from '../../../../../joint/constants'
@@ -56,7 +47,8 @@ export default {
       filteredOrganizations: [],
       displayedOrganizations: [],
       loading: false,
-      organizationTypeChosen: 'all'
+      organizationTypeChosen: 'all',
+      wheelchairAccessible: false
     }
   },
   methods: {
@@ -87,28 +79,41 @@ export default {
         )
       }
     },
-    changeFilter(event) {
-      this[event.element] = event.value
-      this.filteredOrganizations = this.allOrganizations.filter(
-        organization => {
+    changeFilter($event) {
+      console.log('In changefilter')
+      console.log($event)
+      this[$event.element] = $event.value
+      console.log('orgtype: ' + this.organizationTypeChosen)
+      this.filteredOrganizations = this.allOrganizations
+        .filter(organization => {
           if (this.organizationTypeChosen === 'all') return true
           else
             return (
               organization.organization_type_id == this.organizationTypeChosen
             )
-        }
-      )
+        })
+        .filter(organization => {
+          if (!this.wheelchairAccessible) return true
+          else return (organization.wheelchair_accessible == true)
+        })
       this.displayedOrganizations = []
       this.appendResults()
     }
   },
   components: {
     'single-organization': SingleOrganization,
-    'ash-select': Select
+    'ash-select': Select,
+    OrganizationFilter
   },
   computed: {
     formName() {
       return forms.ORGANIZATION_FILTER
+    }
+  },
+  watch: {
+    filterChanged: filterChanged => {
+      if (filterChanged) {
+      }
     }
   },
   created() {
