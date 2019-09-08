@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS event_groups;
 ALTER TABLE IF EXISTS places DROP COLUMN IF EXISTS organization_id;
 DROP TABLE IF EXISTS organizations;
 DROP TABLE IF EXISTS places;
+DROP TABLE IF EXISTS wheelchair_choices;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS organization_types;
 DROP TABLE IF EXISTS quotations;
@@ -42,6 +43,11 @@ CREATE TABLE categories(
   name_english TEXT NOT NULL,
   name_french TEXT DEFAULT NULL,
   colour CHAR(6) NOT NULL
+);
+
+CREATE TABLE wheelchair_choices(
+  id SMALLSERIAL PRIMARY KEY,
+  name TEXT NOT NULL
 );
 
 CREATE TABLE places(
@@ -76,7 +82,9 @@ CREATE TABLE places(
   only_race_religion BOOLEAN NOT NULL DEFAULT FALSE,
 
   -- Information about who place is for - only in place
-  wheelchair_accessible BOOLEAN NOT NULL DEFAULT TRUE
+  wheelchair_accessible BOOLEAN NOT NULL DEFAULT TRUE,
+  wheelchair_choice_id SMALLINT REFERENCES wheelchair_choices(id) NOT NULL,
+  wheelchair_text TEXT DEFAULT NULL
 );
 
 CREATE TABLE organizations(
@@ -316,3 +324,9 @@ INSERT INTO organization_types
   ('Adult Entertainment'),
   ('Social Club'),
   ('Athletic Club');
+
+INSERT INTO wheelchair_choices
+  (name) VALUES
+  ('Not Wheelchair Accessible'),
+  ('Partially Wheelchair Accessible'),
+  ('Fully Wheelchair Accessible');

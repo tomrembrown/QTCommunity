@@ -69,10 +69,12 @@ const readOrganizations = async function (forDownload = false) {
       '       p.name AS place_name, ' +
       '       p.address AS place_address, ' +
       '       o.place_room AS place_room, ' +
-      '       p.wheelchair_accessible AS wheelchair_accessible ' +
+      '       w.name AS wheelchair_accessible, ' +
+      '       p.wheelchair_text AS wheelchair_text ' +
       'FROM organizations AS o ' +
       'LEFT JOIN organization_types AS t ON o.organization_type_id = t.id ' +
       'LEFT JOIN places AS p ON o.place_id = p.id ' +
+      'LEFT JOIN wheelchair_choices AS w ON p.wheelchair_choice_id = w.id ' +
       'WHERE o.is_shown=TRUE ' +
       'ORDER BY o.name ASC;'
   }

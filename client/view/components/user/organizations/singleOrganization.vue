@@ -100,10 +100,7 @@
           <div class="row">
             <div class="col-md-3 contact-heading">Address</div>
             <div class="col-md-5 contact-address">{{ organization.place_address }}</div>
-            <div class="col-md-4" v-b-tooltip.hover
-              title="Wheelchair Accessible" v-if="isWheelchairAccessible">
-              <i class="fab fa-lg fa-fw fa-accessible-icon"></i>
-            </div>
+            <div class="col-md-4">{{ organization.wheelchair_accessible }}</div>   
           </div>
           <div class="row" v-if="displayPlaceRoom">
             <div class="col-md-3 contact-heading">Room</div>
@@ -115,7 +112,7 @@
             <div class="col-md-3 contact-heading">Website</div>
             <div class="col-md-9 contact-text">
               <a :href="website" target="_blank">{{ website }}</a>
-            </div>
+            </div> 
           </div>
           <div class="row" v-if="displayEmail">
             <div class="col-md-3 contact-heading">Email</div>
@@ -439,9 +436,6 @@ export default {
     },
     displayHostedAt() {
       return (this.displayAddressSection && (this.organization.name != this.organization.place_name))
-    },
-    isWheelchairAccessible() {
-      return (this.organization.wheelchair_accessible == true)
     },
     displayPlaceRoom() {
       return (this.organization.place_room != null)

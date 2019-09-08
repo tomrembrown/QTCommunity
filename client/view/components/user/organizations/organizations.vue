@@ -48,7 +48,7 @@ export default {
       displayedOrganizations: [],
       loading: false,
       organizationTypeChosen: 'all',
-      wheelchairAccessible: false
+      isWheelchairAccessible: 'not'
     }
   },
   methods: {
@@ -80,10 +80,7 @@ export default {
       }
     },
     changeFilter($event) {
-      console.log('In changefilter')
-      console.log($event)
       this[$event.element] = $event.value
-      console.log('orgtype: ' + this.organizationTypeChosen)
       this.filteredOrganizations = this.allOrganizations
         .filter(organization => {
           if (this.organizationTypeChosen === 'all') return true
@@ -93,8 +90,18 @@ export default {
             )
         })
         .filter(organization => {
-          if (!this.wheelchairAccessible) return true
-          else return (organization.wheelchair_accessible == true)
+          if (this.isWheelchairAccessible === 'not') return true
+          else if (
+            organization.wheelchair_accessible === 'Fully Wheelchair Accessible'
+          )
+            return true
+          else if (
+            organization.wheelchair_accessible ===
+              'Partially Wheelchair Accessible' &&
+            this.isWheelchairAccessible === 'some'
+          )
+            return true
+          else return false
         })
       this.displayedOrganizations = []
       this.appendResults()

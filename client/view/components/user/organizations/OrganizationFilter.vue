@@ -29,16 +29,18 @@
         </div>
         <div class="col-md-6">
           <section>
-            <label for="wheelchair-accessible" class="checkbox">
-              <input
-                type="checkbox"
-                name="wheelchair-accessible"
-                id="wheelchair-accessible"
-                :checked="wheelchairAccessible"
-                @click="switchWheelchair"
-              />
+            <label class="label" for="is-wheelchair-accessible">Is Wheelchair Accessibility Required?</label>
+            <label class="select">
+              <select
+                id="is-wheelchair-accessible"
+                name="is-wheelchair-accessible"
+                @change="changeFilter"
+              >
+                <option value="not" selected>Not Required</option>
+                <option value="some">At Least Some Wheelchair Accessibility Required</option>
+                <option value="full">Full Wheelchair Accessibility Required</option>
+              </select>
               <i></i>
-              Wheelchair Accessibility Required?
             </label>
           </section>
         </div>
