@@ -2,12 +2,27 @@
   <fieldset>
     <div class="row">
       <div class="col-md-3">
-        <img v-if="organization.image_link" :src="organization.image_link" :alt="organization.name" width="90%">
+        <img
+          v-if="organization.image_link"
+          :src="organization.image_link"
+          :alt="organization.name"
+          width="90%"
+        />
       </div>
       <div class="col-md-9">
         <div class="row">
           <div class="col-md-8">
-            <h2>{{ organization.name }}</h2>
+            <h2 v-if="searchTerm!=''">
+              <Highlighter
+                class="my-highlight"
+                :highlightStyle=" { backgroundColor: '#FFFF00' }"
+                highlightClassName="highlight"
+                :searchWords="[searchTerm]"
+                :autoEscape="true"
+                :textToHighlight="organization.name"
+              />
+            </h2>
+            <h2 v-else>{{ organization.name }}</h2>
           </div>
           <div class="col-md-4" v-if="isSocialMedia">
             <a
@@ -61,37 +76,29 @@
             >
               <i class="fab fa-lg fa-fw fa-google-plus"></i>
             </a>
-            <a
-              :href="rss"
-              target="_blank"
-              v-b-tooltip.hover
-              title="RSS Feed"
-              v-if="isRss"
-            >
+            <a :href="rss" target="_blank" v-b-tooltip.hover title="RSS Feed" v-if="isRss">
               <i class="fas fa-lg fa-fw fa-rss-square"></i>
             </a>
-            <a
-              :href="spotify"
-              target="_blank"
-              v-b-tooltip.hover
-              title="Spotify"
-              v-if="isSpotify"
-            >
+            <a :href="spotify" target="_blank" v-b-tooltip.hover title="Spotify" v-if="isSpotify">
               <i class="fab fa-lg fa-fw fa-spotify"></i>
             </a>
-            <a
-              :href="tumblr"
-              target="_blank"
-              v-b-tooltip.hover
-              title="Tumblr"
-              v-if="isTumblr"
-            >
+            <a :href="tumblr" target="_blank" v-b-tooltip.hover title="Tumblr" v-if="isTumblr">
               <i class="fab fa-lg fa-fw fa-tumblr-square"></i>
             </a>
           </div>
         </div>
-        <p class="description-text">{{ organization.description_english }}</p>
-        <hr v-if="displayAddressSection || displayContactSection">
+        <p v-if="searchTerm == ''" class="description-text">{{ organization.description_english }}</p>
+        <p v-else class="description-text">
+          <Highlighter
+            class="my-highlight"
+            :highlightStyle=" { backgroundColor: '#FFFF00' }"
+            highlightClassName="highlight"
+            :searchWords="[searchTerm]"
+            :autoEscape="true"
+            :textToHighlight="organization.description_english"
+          />
+        </p>
+        <hr v-if="displayAddressSection || displayContactSection" />
         <section v-if="displayAddressSection">
           <div class="row" v-if="displayHostedAt">
             <div class="col-md-3 contact-heading">Hosted At</div>
@@ -100,7 +107,7 @@
           <div class="row">
             <div class="col-md-3 contact-heading">Address</div>
             <div class="col-md-5 contact-address">{{ organization.place_address }}</div>
-            <div class="col-md-4">{{ organization.wheelchair_accessible }}</div>   
+            <div class="col-md-4">{{ organization.wheelchair_accessible }}</div>
           </div>
           <div class="row" v-if="displayPlaceRoom">
             <div class="col-md-3 contact-heading">Room</div>
@@ -112,7 +119,7 @@
             <div class="col-md-3 contact-heading">Website</div>
             <div class="col-md-9 contact-text">
               <a :href="website" target="_blank">{{ website }}</a>
-            </div> 
+            </div>
           </div>
           <div class="row" v-if="displayEmail">
             <div class="col-md-3 contact-heading">Email</div>
@@ -125,7 +132,7 @@
             <div class="col-md-9 contact-text">{{ phone }}</div>
           </div>
         </section>
-        <hr>
+        <hr />
         <section>
           <div class="row">
             <div class="col-md-3 contact-heading">Type</div>
@@ -158,12 +165,21 @@
 </template>
  
 <script>
+import Highlighter from 'vue-highlight-words'
+
 export default {
   props: {
     organization: {
       type: Object,
       required: true
+    },
+    searchTerm: {
+      type: String,
+      required: true
     }
+  },
+  components: {
+    Highlighter
   },
   computed: {
     displayWebsite() {
@@ -379,7 +395,8 @@ export default {
     },
     isPinterest() {
       return (
-        this.organization.display_pinterest == true && this.organization.pinterest
+        this.organization.display_pinterest == true &&
+        this.organization.pinterest
       )
     },
     pinterest() {
@@ -387,16 +404,15 @@ export default {
     },
     isGooglePlus() {
       return (
-        this.organization.display_google_plus == true && this.organization.google_plus
+        this.organization.display_google_plus == true &&
+        this.organization.google_plus
       )
     },
     googlePlus() {
       return this.isGooglePlus ? this.organization.google_plus : ''
     },
     isRss() {
-      return (
-        this.organization.display_rss == true && this.organization.rss
-      )
+      return this.organization.display_rss == true && this.organization.rss
     },
     rss() {
       return this.isRss ? this.organization.rss : ''
@@ -432,13 +448,16 @@ export default {
       )
     },
     displayAddressSection() {
-      return (this.organization.place_address != null)
+      return this.organization.place_address != null
     },
     displayHostedAt() {
-      return (this.displayAddressSection && (this.organization.name != this.organization.place_name))
+      return (
+        this.displayAddressSection &&
+        this.organization.name != this.organization.place_name
+      )
     },
     displayPlaceRoom() {
-      return (this.organization.place_room != null)
+      return this.organization.place_room != null
     }
   }
 }

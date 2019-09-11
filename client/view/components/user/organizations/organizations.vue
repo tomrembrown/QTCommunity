@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="sky-form">
+    <div class="sky-form form-sizing-reset">
       <header>
         <div class="row">
           <div class="col-md-12">List of Organizations</div>
@@ -16,6 +16,7 @@
         <single-organization
           v-for="organization in displayedOrganizations"
           :organization="organization"
+          :searchTerm="searchTerm"
           :key="organization.id"
         ></single-organization>
       </div>
@@ -48,7 +49,13 @@ export default {
       displayedOrganizations: [],
       loading: false,
       organizationTypeChosen: 'all',
-      isWheelchairAccessible: 'not'
+      isWheelchairAccessible: 'not',
+      genderIdentityChosen: 'any',
+      sexualOrientationChosen: 'any',
+      isFamilyFriendly: false,
+      ageAllowed: '',
+      raceReligionTargetted: '',
+      searchTerm: ''
     }
   },
   methods: {
@@ -81,6 +88,7 @@ export default {
     },
     changeFilter($event) {
       this[$event.element] = $event.value
+      console.log($event)
       this.filteredOrganizations = this.allOrganizations
         .filter(organization => {
           if (this.organizationTypeChosen === 'all') return true
@@ -102,6 +110,60 @@ export default {
           )
             return true
           else return false
+        })
+        .filter(organization => {
+          if (this.genderIdentityChosen === 'any') return true
+          else if (organization['gender_' + this.genderIdentityChosen] == true)
+            return true
+          else return false
+        })
+        .filter(organization => {
+          if (this.sexualOrientationChosen === 'any') return true
+          else if (
+            organization['orientation_' + this.sexualOrientationChosen] == true
+          )
+            return true
+          else return false
+        })
+        .filter(organization => {
+          if (!this.isFamilyFriendly) return true
+          else if (organization.family_friendly == true) return true
+          else return false
+        })
+        .filter(organization => {
+          if (this.ageAllowed == '') return true
+          else if (
+            organization.min_age != null &&
+            this.ageAllowed < organization.min_age
+          )
+            return false
+          else if (
+            organization.max_age != null &&
+            this.ageAllowed > organization.max_age
+          )
+            return false
+          else return true
+        })
+        .filter(organization => {
+          if (this.raceReligionTargetted == '') return true
+          else if (
+            organization.race_religion != null &&
+            organization.race_religion.toLowerCase() ==
+              this.raceReligionTargetted.toLowerCase()
+          )
+            return true
+          else return false
+        })
+        .filter(organization => {
+          if (this.searchTerm == '') return true
+          else if (
+            (organization.name.includes(this.searchTerm)) ||
+            (organization.description_english != null &&
+             organization.description_english.includes(this.searchTerm))
+          )
+            return true
+          else
+            return false
         })
       this.displayedOrganizations = []
       this.appendResults()
@@ -147,5 +209,4 @@ export default {
 @import '../../../scss/forms/form';
 @import '../../../scss/forms/header';
 @import '../../../scss/lists/organizationList';
-@import '../../../scss/forms/fieldset';
 </style>
