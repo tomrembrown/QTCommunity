@@ -1,6 +1,6 @@
 <template>
   <div class="container embed-form">
-    <form action class="sky-form form-sizing-reset">
+    <form action class="sky-form form-sizing-reset" ref="form">
       <div v-if="addPlaceFormSubmittedOK">
         <header>Place Added Successfully</header>
       </div>
@@ -122,6 +122,8 @@ export default {
       
       this.addPlaceFormSubmittedOK = true;
       this.$emit('submitted');
+      
+      this.$refs.form.reset();
     }
   },  
   mounted() {

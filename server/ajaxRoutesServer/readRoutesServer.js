@@ -53,6 +53,11 @@ router.get('/readPlaces/:organizationID', asyncMiddleware(async (req, res) => {
   res.send(places)
 }))
 
+router.get('/readEvents/:organizationID', asyncMiddleware(async (req, res) => {
+  const events = await model.readEvents(req.params.organizationID)
+  res.send(events)
+}));
+
 // Read all data for a particular form - receives the formname and the
 // value for id in the database from the client - should work for any table
 router.get('/readForm/:formName/:id', asyncMiddleware(async(req, res) => {
