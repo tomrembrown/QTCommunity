@@ -9,6 +9,15 @@ import { store } from './presentationLogic/store/store'
 import Modal from './view/components/general/modal/modalPlugin'
 import { isFlowBaseAnnotation } from '@babel/types'
 
+import moment from 'moment-timezone'
+moment.tz.setDefault('EST')
+
+Object.defineProperty(Vue.prototype, '$moment', {
+  get() {
+    return this.$root.moment;
+  }
+});
+
 Vue.use(VueRouter)
 Vue.use(Modal)
 Vue.use(BootStrapVue)
@@ -21,6 +30,9 @@ const router = new VueRouter({
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  data: {
+    moment
+  },
   store: store,
   router: router,
   render: h => h(App)

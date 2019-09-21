@@ -12,7 +12,7 @@
             <div class="col-md-12">
               <ash-textbox
                 v-model="loginAs"
-                v-bind:validate="false"
+                :validate="false"
                 heading="Login"
                 :idName="formName + '__login'"
                 placeholder="Login"
@@ -24,7 +24,7 @@
             <div class="col-md-12">
               <ash-password
                 v-model="password"
-                v-bind:validate="false"
+                :validate="false"
                 heading="Password"
                 :idName="formName + '__password'"
                 placeholder="Password"

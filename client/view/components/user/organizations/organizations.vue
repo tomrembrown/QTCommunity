@@ -88,7 +88,6 @@ export default {
     },
     changeFilter($event) {
       this[$event.element] = $event.value
-      console.log($event)
       this.filteredOrganizations = this.allOrganizations
         .filter(organization => {
           if (this.organizationTypeChosen === 'all') return true
