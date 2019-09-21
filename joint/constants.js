@@ -61,4 +61,31 @@ constants.imageURLStart = '/img/organizationLogos/'
  */
 constants.numberOrgsToLoad = 4
 
+/***
+ * List of genderIdentities - also set in database
+ */
+constants.genderIdentities = [
+  { heading: 'Female', id: 'female' },
+  { heading: 'Male', id: 'male' },
+  { heading: 'Transgendered', id: 'transgendered' },
+  { heading: 'Two-spirit', id: 'two_spirit' },
+  { heading: 'Male to Female Transexual', id: 'm2f_transexual' },
+  { heading: 'Female to Male Transexual', id: 'f2m_transexual' },
+  { heading: 'Intersex', id: 'intersex' }
+]
+
+/***
+ * List of sexual orientations - also set in database
+ */
+constants.sexualOrientations = [
+  { heading: 'Lesbian', id: 'lesbian' },
+  { heading: 'Gay', id: 'gay' },
+  { heading: 'Bisexual', id: 'bisexual' },
+  { heading: 'Queer', id: 'queer' },
+  { heading: 'Questioning', id: 'questioning' },
+  { heading: 'Asexual', id: 'asexual' },
+  { heading: 'Pansexual', id: 'pansexual' },
+  { heading: 'Heterosexual', id: 'heterosexual' }
+]
+
 module.exports = constants

@@ -1,26 +1,41 @@
 <template>
   <div class="container">
-    <div class="sky-form" v-if="loading">
-      <header>Loading ...</header>
-    </div>
-    <div class="sky-form" v-else-if="displayedOrganizations.length > 0">
-      <header>List of Organizations</header>
-      <single-organization
-        v-for="organization in displayedOrganizations"
-        :organization="organization"
-        :key="organization.id"
-      ></single-organization>
+    <div class="sky-form form-sizing-reset">
+      <header>
+        <div class="row">
+          <div class="col-md-12">List of Organizations</div>
+        </div>
+      </header>
+      <organization-filter @changeFilter="changeFilter($event)"></organization-filter>
+      <div v-if="loading">
+        <fieldset>
+          <h2>Loading ...</h2>
+        </fieldset>
+      </div>
+      <div v-else-if="filteredOrganizations.length > 0">
+        <single-organization
+          v-for="organization in displayedOrganizations"
+          :organization="organization"
+          :searchTerm="searchTerm"
+          :key="organization.id"
+        ></single-organization>
+      </div>
+      <div v-else>
+        <fieldset>
+          <h2>No Organizations Found Matching Criteria</h2>
+        </fieldset>
+      </div>
       <div id="organization-list-bottom"></div>
-    </div>
-    <div class="sky-form" v-else>
-      <header>No Organizations Found Matching Criteria</header>
     </div>
   </div>
 </template>
  
 <script>
+import { forms } from '../../../../../joint/dataValidation/general/formsAndTable'
 import axios from 'axios'
 import SingleOrganization from './singleOrganization.vue'
+import OrganizationFilter from './OrganizationFilter.vue'
+import Select from '../../formElements/select.vue'
 import scrollMonitor from 'scrollmonitor'
 import constants from '../../../../../joint/constants'
 
@@ -30,8 +45,17 @@ export default {
   data() {
     return {
       allOrganizations: [],
+      filteredOrganizations: [],
       displayedOrganizations: [],
-      loading: false
+      loading: false,
+      organizationTypeChosen: 'all',
+      isWheelchairAccessible: 'not',
+      genderIdentityChosen: 'any',
+      sexualOrientationChosen: 'any',
+      isFamilyFriendly: false,
+      ageAllowed: '',
+      raceReligionTargetted: '',
+      searchTerm: ''
     }
   },
   methods: {
@@ -40,7 +64,9 @@ export default {
       $this.loading = true
       axios.get('readRoutesServer/readOrganizations').then(response => {
         // Load all organizations to allOrganizations - but don't display yet
+        // Initially no filter applied - so also load all to filtered orgs
         $this.allOrganizations = response.data
+        $this.filteredOrganizations = $this.allOrganizations
         $this.loading = false
         $this.appendResults()
       })
@@ -48,8 +74,10 @@ export default {
     appendResults() {
       // This displays a chunk of the organizations - either on loading, or
       // when user scrolls down to bottom of page
-      if (this.displayedOrganizations.length < this.allOrganizations.length) {
-        const toAppend = this.allOrganizations.slice(
+      if (
+        this.displayedOrganizations.length < this.filteredOrganizations.length
+      ) {
+        const toAppend = this.filteredOrganizations.slice(
           this.displayedOrganizations.length,
           constants.numberOrgsToLoad + this.displayedOrganizations.length
         )
@@ -57,10 +85,105 @@ export default {
           toAppend
         )
       }
+    },
+    changeFilter($event) {
+      this[$event.element] = $event.value
+      console.log($event)
+      this.filteredOrganizations = this.allOrganizations
+        .filter(organization => {
+          if (this.organizationTypeChosen === 'all') return true
+          else
+            return (
+              organization.organization_type_id == this.organizationTypeChosen
+            )
+        })
+        .filter(organization => {
+          if (this.isWheelchairAccessible === 'not') return true
+          else if (
+            organization.wheelchair_accessible === 'Fully Wheelchair Accessible'
+          )
+            return true
+          else if (
+            organization.wheelchair_accessible ===
+              'Partially Wheelchair Accessible' &&
+            this.isWheelchairAccessible === 'some'
+          )
+            return true
+          else return false
+        })
+        .filter(organization => {
+          if (this.genderIdentityChosen === 'any') return true
+          else if (organization['gender_' + this.genderIdentityChosen] == true)
+            return true
+          else return false
+        })
+        .filter(organization => {
+          if (this.sexualOrientationChosen === 'any') return true
+          else if (
+            organization['orientation_' + this.sexualOrientationChosen] == true
+          )
+            return true
+          else return false
+        })
+        .filter(organization => {
+          if (!this.isFamilyFriendly) return true
+          else if (organization.family_friendly == true) return true
+          else return false
+        })
+        .filter(organization => {
+          if (this.ageAllowed == '') return true
+          else if (
+            organization.min_age != null &&
+            this.ageAllowed < organization.min_age
+          )
+            return false
+          else if (
+            organization.max_age != null &&
+            this.ageAllowed > organization.max_age
+          )
+            return false
+          else return true
+        })
+        .filter(organization => {
+          if (this.raceReligionTargetted == '') return true
+          else if (
+            organization.race_religion != null &&
+            organization.race_religion.toLowerCase() ==
+              this.raceReligionTargetted.toLowerCase()
+          )
+            return true
+          else return false
+        })
+        .filter(organization => {
+          if (this.searchTerm == '') return true
+          else if (
+            (organization.name.includes(this.searchTerm)) ||
+            (organization.description_english != null &&
+             organization.description_english.includes(this.searchTerm))
+          )
+            return true
+          else
+            return false
+        })
+      this.displayedOrganizations = []
+      this.appendResults()
     }
   },
   components: {
-    'single-organization': SingleOrganization
+    'single-organization': SingleOrganization,
+    'ash-select': Select,
+    OrganizationFilter
+  },
+  computed: {
+    formName() {
+      return forms.ORGANIZATION_FILTER
+    }
+  },
+  watch: {
+    filterChanged: filterChanged => {
+      if (filterChanged) {
+      }
+    }
   },
   created() {
     this.readOrganizations()
@@ -85,4 +208,5 @@ export default {
 <style lang="scss" scoped>
 @import '../../../scss/forms/form';
 @import '../../../scss/forms/header';
+@import '../../../scss/lists/organizationList';
 </style>

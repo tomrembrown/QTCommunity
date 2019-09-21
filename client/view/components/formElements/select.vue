@@ -2,8 +2,8 @@
   <section>
     <label class="label" :for="idName">{{ heading }}</label>
     <label class="select">
-      <select :id="idName" :name="idName" v-model="value" @change="updateStore">
-        <option disabled value="">Please select one</option>
+      <select :id="idName" :name="idName" v-model="value" @change="update">
+        <option disabled value>Please select one</option>
         <option
           v-for="thisValue in valuesList"
           :value="thisValue.id"
@@ -12,12 +12,8 @@
       </select>
       <i></i>
     </label>
-    <div v-if="isError" class="note error">
-      {{ errorMessage }}
-    </div>
-    <div v-else-if="helpText.length > 0" class="note" :id="idHelp">
-      {{ helpText }}
-    </div>
+    <div v-if="isError" class="note error">{{ errorMessage }}</div>
+    <div v-else-if="helpText.length > 0" class="note" :id="idHelp">{{ helpText }}</div>
   </section>
 </template>
 
@@ -28,7 +24,7 @@ import { convertHeadingToName } from '../../../utils/convertHeadingToName'
 export default {
   data() {
     return {
-      value: "",
+      value: '',
       valuesList: []
     }
   },
@@ -53,12 +49,11 @@ export default {
     }
   },
   methods: {
-    updateStore() {
+    update() {
       const payload = {
         element: this.idName,
         value: this.value
       }
-
       this.$store.dispatch('checkErrorAndSetElement', payload)
     },
     getValuesList() {
@@ -68,13 +63,13 @@ export default {
         .then(response => {
           $this.valuesList = response.data
           // Checks if something set - i.e. if got data from server
-          // Otherwise set the value - this drop-down option selected to first 
+          // Otherwise set the value - this drop-down option selected to first
           // drop-down option
           if ($this.value == null) {
-            $this.value = $this.valuesList[0].id;
+            $this.value = $this.valuesList[0].id
           }
-          
-          $this.updateStore();
+
+          $this.update()
         })
     }
   },
@@ -95,6 +90,7 @@ export default {
   mounted() {
     // Get values from server for this dropdown
     this.getValuesList()
+
     // Check in the store if this had something set from the server
     const valueFromStore = this.$store.getters.getValueForElement(this.idName)
     if (valueFromStore) {
