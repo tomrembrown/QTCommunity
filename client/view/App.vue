@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="background">
     <qt-navbar></qt-navbar>
     <router-view></router-view>
     <app-modal/>
@@ -22,5 +22,5 @@ export default {
 <style lang="scss">
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import 'node_modules/bootstrap-vue/src/index.scss';
-@import './scss/forms/resetSizing';
+@import './scss/main';
 </style>

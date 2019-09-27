@@ -1,0 +1,146 @@
+
+$dusty-gray: #999;
+$gallery: #eeeeee;
+$alto: #ddd;
+$bittersweet: #ff6f69;
+$buttermilk: rgba(255, 238, 173, 0.4);
+$vista-blue: #42b983;
+$pink: rgba(255, 182, 193, 0.3);
+$pickled-bluewood: #35495e;
+
+$calendar-border: 1px solid $alto;
+
+@mixin calendar-row {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+@mixin calendar-cell {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+#outer {
+
+  color: $pickled-bluewood;
+
+  justify-content: center;
+
+  width: 100%;
+
+  padding-bottom: 2rem;
+  background-color: $gallery;
+
+  #header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    .calendar-button {
+      color: $dusty-gray;
+      font-size: 1rem;
+      padding: 0;
+      width: 20px;
+      background-color: white;
+      user-select: none;
+      border: 1px solid $alto;
+      border-radius: 2px;
+      margin-left: 0.25rem;
+      &:focus {
+        outline: none;
+      }
+      &:hover {
+        color: $pickled-bluewood;
+        box-shadow: 0 2px 2px $alto;
+      }
+    }
+
+    div:first-child {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 1rem 0;
+      img {
+        width: 50px;
+        height: 50px;
+      }
+      h1 {
+        margin: 0 0 0 0.5rem;
+        color: $pickled-bluewood;
+        padding-top: 7px;
+      }
+    }
+
+    div:last-child {
+      font-weight: bold;
+    }
+  }
+
+  #day-bar {
+    @include calendar-row;
+    div {
+      @include calendar-cell;
+    }
+  }
+
+  #calendar {
+
+    background-color: white;
+
+    .calendar-week {
+      @include calendar-row;
+      .day {
+        overflow: hidden;
+        font-weight: bold;
+        @include calendar-cell;
+        height: 100px;
+        user-select: none;
+        cursor: default;
+        border-left: $calendar-border;
+        border-top: $calendar-border;
+
+        &:last-child {
+          border-right: $calendar-border;
+        }
+
+        &.past {
+          opacity: 0.6;
+        }
+
+        &.not-current-month {
+          color: $alto;
+        }
+
+        &.today {
+          background-color: $buttermilk;
+        }
+
+        &.active {
+          background-color: $pink;
+        }
+
+        .event-list {
+          font-size: 0.8rem;
+          font-weight: bold;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+
+          li {
+            color: $vista-blue;
+            white-space: nowrap;
+          }
+        }
+      }
+
+      &:last-child {
+        .day {
+          border-bottom: $calendar-border;
+        }
+      }
+    }
+  }
+
+}

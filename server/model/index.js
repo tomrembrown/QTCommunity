@@ -28,6 +28,7 @@ const readEvents = require('./read/readEvents')
 const readPlacesAll = require('./read/readPlacesAll')
 
 const getColumnsForRow = require('./read/getColumnsForRow')
+const readEventsForCalendar = require('./read/readEventsForCalendar')
 
 // Update
 const insertPlaceIfNecessary = require('./update/insertPlaceIfNecessary')
@@ -65,6 +66,7 @@ const model = {
   getColumnDefaults: getColumnDefaults,
   getPasswordEncrypted: getPasswordEncrypted,
   getColumnsForRow: getColumnsForRow,
+  readEventsForCalendar: readEventsForCalendar,
 
   // Checks
   checkElementTaken: checkElementTaken,

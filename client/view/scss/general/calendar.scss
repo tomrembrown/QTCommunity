@@ -22,22 +22,8 @@ $calendar-border: 1px solid $alto;
   padding: 0.5rem;
 }
 
-@font-face {
-  font-family: 'Muli';
-  src: url('~./assets/Muli-Light.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Muli';
-  src: url('~./assets/Muli-Regular.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-}
-
 body {
-  font-family: 'Muli', Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   color: $pickled-bluewood;
   padding-bottom: 2rem;
 
@@ -139,7 +125,8 @@ body {
           }
 
           .event-list {
-            font-size: 0.8rem;
+            font-size: 0.6rem;
+            list-style-type: none;
             color: $vista-blue;
             font-weight: bold;
             list-style: none;
