@@ -17,14 +17,13 @@ export default {
     qtFooter: Footer
   },
   mounted() {
-    // if (!$cookies.get('isLoaded')) {
-    const params = {
-      componentName: 'site-modal',
-      title: 'Site Login'
+    if (!this.$store.getters.hasAgreedToTerms) {
+      const params = {
+        componentName: 'site-modal',
+        title: 'Site Login'
+      }
+      this.$modal.show(params)
     }
-    this.$modal.show(params)
-    // $cookies.set('isLoaded', true)
-    // }
   }
 }
 </script>

@@ -1,5 +1,7 @@
 'use strict'
 
+import siteLogin from './store/modules/siteLogin'
+
 // Import user links
 const Home = () =>
   import(/* webpackChunkName: "Home" */ '../view/components/user/home.vue')
@@ -50,36 +52,73 @@ const PageNotFound = () =>
     /* webpackChunkName: "PageNotFound" */ '../view/components/general/pageNotFound.vue'
   )
 
+const checkRoute = (to, from, next) => {
+  if (to.name === 'Home') {
+    next()
+  } else {
+    if (siteLogin.state.agreedToTerms) {
+      next()
+    } else {
+      next('/')
+    }
+  }
+}
+
 export const routes = [
-  { path: '', name: 'Home', component: Home },
-  { path: '/events', name: 'Events', component: Events },
-  { path: '/organizations', name: 'Organizations', component: Organizations },
-  { path: '/aboutUs', name: 'AboutUs', component: AboutUs },
-  { path: '/contactUs', name: 'ContactUs', component: ContactUs },
+  { path: '', name: 'Home', component: Home, beforeEnter: checkRoute },
+  {
+    path: '/events',
+    name: 'Events',
+    component: Events,
+    beforeEnter: checkRoute
+  },
+  {
+    path: '/organizations',
+    name: 'Organizations',
+    component: Organizations,
+    beforeEnter: checkRoute
+  },
+  {
+    path: '/aboutUs',
+    name: 'AboutUs',
+    component: AboutUs,
+    beforeEnter: checkRoute
+  },
+  {
+    path: '/contactUs',
+    name: 'ContactUs',
+    component: ContactUs,
+    beforeEnter: checkRoute
+  },
   {
     path: '/registerOrganization',
     name: 'RegisterOrganization',
-    component: RegisterOrganization
+    component: RegisterOrganization,
+    beforeEnter: checkRoute
   },
   {
     path: '/organizationLogin',
     name: 'OrganizationLogin',
-    component: OrganizationLogin
+    component: OrganizationLogin,
+    beforeEnter: checkRoute
   },
   {
     path: '/editOrganization',
     name: 'EditOrganization',
-    component: EditOrganization
+    component: EditOrganization,
+    beforeEnter: checkRoute
   },
   {
     path: '/managePlaces',
     name: 'ManagePlaces',
-    component: ManagePlaces
-  }, 
+    component: ManagePlaces,
+    beforeEnter: checkRoute
+  },
   {
     path: '/manageEvents',
     name: 'ManageEvents',
-    component: ManageEvents
+    component: ManageEvents,
+    beforeEnter: checkRoute
   },
   { path: '*', name: 'PageNotFound', component: PageNotFound }
 ]

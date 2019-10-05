@@ -55,7 +55,7 @@ router.get(
 router.get(
   '/checkPassword/:login/:password',
   asyncMiddleware(async (req, res) => {
-    const data = await checkPassword(req.params.login, req.params.password, tableName)
+    const data = await checkPassword(req.params.login, req.params.password)
     res.send(data)
   })
 )

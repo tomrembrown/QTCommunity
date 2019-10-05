@@ -35,7 +35,7 @@ new Vue({
   data: {
     moment
   },
-  store: store,
-  router: router,
+  store,
+  router,
   render: h => h(App)
 })

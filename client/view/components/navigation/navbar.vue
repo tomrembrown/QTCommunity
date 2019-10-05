@@ -10,19 +10,33 @@
         <div class="collapse navbar-collapse" id="navbarCollapseTop">
           <ul class="navbar-nav">
             <li class="nav-item px-2">
-              <router-link to="/" class="nav-link" active-class="active" exact>Home</router-link>
+              <span @click="showSiteLogin">
+                <router-link to="/" class="nav-link" active-class="active" exact>Home</router-link>
+              </span>
             </li>
             <li class="nav-item px-2">
-              <router-link to="/events" class="nav-link" active-class="active">Events</router-link>
+              <span @click="showSiteLogin">
+                <router-link to="/events" class="nav-link" active-class="active">Events</router-link>
+              </span>
             </li>
             <li class="nav-item px-2">
-              <router-link to="/organizations" class="nav-link" active-class="active">Organizations</router-link>
+              <span @click="showSiteLogin">
+                <router-link
+                  to="/organizations"
+                  class="nav-link"
+                  active-class="active"
+                >Organizations</router-link>
+              </span>
             </li>
             <li class="nav-item px-2">
-              <router-link to="/aboutUs" class="nav-link" active-class="active">About Us</router-link>
+              <span @click="showSiteLogin">
+                <router-link to="/aboutUs" class="nav-link" active-class="active">About Us</router-link>
+              </span>
             </li>
             <li class="nav-item px-2">
-              <router-link to="/contactUs" class="nav-link" active-class="active">Contact Us</router-link>
+              <span @click="showSiteLogin">
+                <router-link to="/contactUs" class="nav-link" active-class="active">Contact Us</router-link>
+              </span>
             </li>
           </ul>
 
@@ -108,7 +122,11 @@ export default {
   },
   methods: {
     clickAdmin() {
-      this.showAdminBar = !this.showAdminBar
+      if (!this.$store.getters.hasAgreedToTerms) {
+        this.showSiteLogin() 
+      } else {
+        this.showAdminBar = !this.showAdminBar
+      }
     },
     showLogin() {
       const params = {
@@ -116,6 +134,15 @@ export default {
         title: 'Organization Login'
       }
       this.$modal.show(params)
+    },
+    showSiteLogin() {
+      if (!this.$store.getters.hasAgreedToTerms) {
+        const params = {
+          componentName: 'site-modal',
+          title: 'Site Login'
+        }
+        this.$modal.show(params)
+      }
     },
     logout() {
       this.showAdminBar = false
