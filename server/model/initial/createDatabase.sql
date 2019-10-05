@@ -17,6 +17,7 @@ DROP TABLE IF EXISTS wheelchair_choices;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS organization_types;
 DROP TABLE IF EXISTS quotations;
+DROP TABLE IF EXISTS site_access;
 
 -- Drop tables with the older names
 DROP TABLE IF EXISTS member_types;
@@ -242,6 +243,15 @@ CREATE TABLE categories_event_groups_relations(
   category_id SMALLINT REFERENCES categories(id),
   event_group_id INTEGER REFERENCES event_groups(id),
   PRIMARY KEY(category_id, event_group_id)
+);
+
+CREATE TABLE site_access(
+
+  -- Stores password and login for overall access to site
+  -- Temporary table for demo purposes - to be deleted when 'live'
+  login CITEXT UNIQUE NOT NULL,
+  password_encrypted TEXT NOT NULL
+
 );
 
 -- ****

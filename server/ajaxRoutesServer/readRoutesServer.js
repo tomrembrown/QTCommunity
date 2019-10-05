@@ -12,6 +12,7 @@ const router = express.Router()
 
 const model = require('../model')
 const checkPassword = require('../../joint/dataValidation/server/checkPassword')
+const checkSitePassword = require('../../joint/dataValidation/server/checkSitePassword')
 const asyncMiddleware = require('../utils/asyncMiddleware')
 const {
   getTableFromForm
@@ -54,7 +55,16 @@ router.get(
 router.get(
   '/checkPassword/:login/:password',
   asyncMiddleware(async (req, res) => {
-    const data = await checkPassword(req.params.login, req.params.password)
+    const data = await checkPassword(req.params.login, req.params.password, tableName)
+    res.send(data)
+  })
+)
+
+// Check that the site login and password matches what is in database
+router.get(
+  '/checkSiteLogin/:login/:password',
+  asyncMiddleware(async (req, res) => {
+    const data = await checkSitePassword(req.params.login, req.params.password)
     res.send(data)
   })
 )

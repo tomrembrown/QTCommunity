@@ -5,18 +5,18 @@
         class="alert alert-danger"
         role="alert"
         v-show="errorVisible"
-      >Either your login or password does not match our records!</div>
+      >Either the login or password does not match our records!</div>
       <form action class="sky-form form-sizing-reset">
         <div>
           <div class="row">
             <div class="col-md-12">
               <ash-textbox
-                v-model="loginAs"
+                v-model="login"
                 :validate="false"
                 heading="Login"
                 :idName="formName + '__login'"
                 placeholder="Login"
-                helpText="Enter a login for the organization"
+                helpText="Enter the site login"
               ></ash-textbox>
             </div>
           </div>
@@ -28,15 +28,19 @@
                 heading="Password"
                 :idName="formName + '__password'"
                 placeholder="Password"
-                helpText="Enter password for organization to login"
+                helpText="Enter the site password"
               ></ash-password>
             </div>
           </div>
         </div>
       </form>
+      <div class="legal-notice">
+        This site is currently a prototype in alpha only. It is still in development. The data in it is for demonstration purposes only. The creators of this site 
+        cannot be held liable for any damages resulting from the use of the site. By clicking on 'Login and Agree' below you are accepting these terms.
+      </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-primary" @click="login">Login</button>
+      <button type="button" class="btn btn-primary" @click="processLogin">Login and Agree</button>
     </div>
   </div>
 </template>
@@ -49,7 +53,7 @@ import { forms } from '../../../../../../joint/dataValidation/general/formsAndTa
 export default {
   data() {
     return {
-      loginAs: null,
+      login: null,
       password: null,
       errorVisible: false
     }
@@ -58,19 +62,19 @@ export default {
     setThisForm() {
       this.$store.commit('setThisForm', this.formName)
     },
-    login() {
+    processLogin() {
       const payload = {
-        login: this.loginAs,
+        login: this.login,
         password: this.password
       }
 
       const marker = this
-      this.$store.dispatch('loginOrganization', payload).then(function() {
-        if (marker.$store.state.authentication.loggedIn) {
-          marker.$modal.hide()
+      this.$store.dispatch('siteLogin', payload).then(function() {
+        if (marker.$store.state.siteLogin.agreedToTerms) {
           marker.errorVisible = false
-          marker.loginAs = null
+          marker.login = null
           marker.password = null
+          marker.$modal.hide()
         } else {
           marker.errorVisible = true
         }
@@ -83,7 +87,7 @@ export default {
   }, 
   computed: {
     formName() {
-      return forms.LOGIN
+      return forms.SITE_LOGIN
     }
   },
   beforeMount() {

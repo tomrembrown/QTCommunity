@@ -10,6 +10,7 @@
 // Create
 const createGenericFromClient = require('./create/createGenericFromClient')
 const createGeneric = require('./create/createGeneric')
+const createSiteLogin = require('./create/createSiteLogin')
 
 // Read
 const readRandomQuotation = require('./read/readRandomQuotation')
@@ -50,6 +51,7 @@ const model = {
    * ******/
   createGenericFromClient: createGenericFromClient,
   createGeneric: createGeneric,
+  createSiteLogin: createSiteLogin,
 
   /* ******
    * Read

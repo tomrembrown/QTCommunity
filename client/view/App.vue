@@ -1,9 +1,9 @@
 <template>
   <div id="background">
-    <qt-navbar></qt-navbar>
-    <router-view></router-view>
-    <app-modal/>
-    <qt-footer></qt-footer>
+    <qt-navbar />
+    <router-view />
+    <app-modal />
+    <qt-footer />
   </div>
 </template>
 
@@ -15,6 +15,16 @@ export default {
   components: {
     qtNavbar: Navbar,
     qtFooter: Footer
+  },
+  mounted() {
+    // if (!$cookies.get('isLoaded')) {
+    const params = {
+      componentName: 'site-modal',
+      title: 'Site Login'
+    }
+    this.$modal.show(params)
+    // $cookies.set('isLoaded', true)
+    // }
   }
 }
 </script>

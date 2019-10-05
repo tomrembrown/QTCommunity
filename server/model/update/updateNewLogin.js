@@ -2,7 +2,7 @@
 /*
  * This creates an unhashed token which is a combination of a function of the current
  * date and time, plus the login and password. Then it updates the database with the
- * token, using the database to run a MD5 has on the token, as well as the current
+ * token, using the database to run a MD5 hash on the token, as well as the current
  * date and time in the last logged field. Finally it retrieves the hashed token from
  * the database and returns it
  */

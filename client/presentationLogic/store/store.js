@@ -2,18 +2,21 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
-import authentication from './modules/authentication'
+
 import allFormsGeneral from './modules/allFormsGeneral'
-import imageUpload from './modules/imageUpload'
+import authentication from './modules/authentication'
 import calendar from './modules/calendar'
+import imageUpload from './modules/imageUpload'
+import siteLogin from './modules/siteLogin'
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   modules: {
-    authentication,
     allFormsGeneral,
+    authentication,
+    calendar,
     imageUpload,
-    calendar
+    siteLogin
   }
 })

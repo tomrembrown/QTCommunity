@@ -26,8 +26,9 @@
 
 <script>
 import Modal from './modalPlugin.js'
-import LoginModal from './specificModalComponents/loginModal.vue'
-import ImageModal from './specificModalComponents/imageModal.vue'
+import LoginModal from './specificModalComponents/LoginModal.vue'
+import ImageModal from './specificModalComponents/ImageModal.vue'
+import SiteModal from './specificModalComponents/SiteModal.vue'
 
 export default {
   data() {
@@ -48,8 +49,9 @@ export default {
     }
   },
   components: {
-    'login-modal': LoginModal,
-    'image-modal': ImageModal
+    LoginModal,
+    ImageModal,
+    SiteModal
   },
   beforeMount() {
     // Listen for events emitted outside

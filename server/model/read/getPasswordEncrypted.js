@@ -6,9 +6,9 @@
 
 const db = require('./../db')
 
-const getPasswordEncrypted = async function(login) {
+const getPasswordEncrypted = async function(login, tableName) {
   const getPasswordEncryptedQuery =
-    'SELECT password_encrypted FROM organizations WHERE login = $1'
+    `SELECT password_encrypted FROM ${tableName} WHERE login = $1`
 
   let passwordEncrypted = null
 
@@ -21,7 +21,7 @@ const getPasswordEncrypted = async function(login) {
       passwordEncrypted = rows[0].password_encrypted
     }
   } catch (error) {
-    console.log('Error running query', error)
+    console.log(`Error in getPasswordEncrypted: ${error.message}`)
     throw new Error(`Error in getPasswordEncrypted: ${error.message}`)
   }
 
