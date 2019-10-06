@@ -42,10 +42,20 @@
             verb="enter"
           ></qt-target-audience>
           <div class="row">
-            <ash-checkbox
+            <div class="col-md-6">
+            <ash-select
               heading="Is this place wheelchair-accessible?"
-              :idName="formName + '__wheelchair_accessible'"
-            ></ash-checkbox>
+              :idName="formName + '__wheelchair_choice_id'"
+              table="wheelchair_choices"
+            ></ash-select>
+            </div>
+            <div class="col-md-6">
+              <ash-textbox
+                heading="Details of accessibility"
+                :idName="formName + '__wheelchair_text'"
+                helpText="Enter details if only partially wheelchair accessible"
+              ></ash-textbox>
+            </div>
           </div>
         </fieldset>
         <footer>
@@ -63,6 +73,7 @@ import VueGoogleAutocomplete from 'vue-google-autocomplete'
 import TargetAudience from '../generalComponents/targetAudience.vue'
 import Checkbox from '../../formElements/checkbox.vue'
 import Textbox from '../../formElements/textbox.vue'
+import Select from '../../formElements/select.vue'
 
 export default {
   data() {
@@ -75,7 +86,8 @@ export default {
     VueGoogleAutocomplete,
     'qt-target-audience': TargetAudience,
     'ash-checkbox': Checkbox,
-    'ash-textbox': Textbox
+    'ash-textbox': Textbox,
+    'ash-select': Select
   },
   computed: {
     formName() {

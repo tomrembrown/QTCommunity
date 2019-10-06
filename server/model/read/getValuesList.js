@@ -7,7 +7,8 @@ const getValuesList = async function(table) {
     ['organizations', 'name'],
     ['places', 'name'],
     ['categories', 'name_english'],
-    ['organization_types', 'name_english']
+    ['organization_types', 'name_english'],
+    ['wheelchair_choices', 'name']
   ])
 
   const textColName = textName.get(table)
