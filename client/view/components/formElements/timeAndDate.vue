@@ -43,7 +43,7 @@
       </div>
     </div>-->
     
-    <div class="row align-items-center" v-for="(instance, index) in instances">
+    <div class="row align-items-center" :key="index" v-for="(instance, index) in instances">
       <div class="col-md-6">
         <section>
           <label class="label" for="startTime">Start Date and Time</label>

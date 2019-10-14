@@ -156,9 +156,9 @@ export default {
         .filter(organization => {
           if (this.searchTerm == '') return true
           else if (
-            (organization.name.includes(this.searchTerm)) ||
+            (organization.name.toLowerCase().includes(this.searchTerm)) ||
             (organization.description_english != null &&
-             organization.description_english.includes(this.searchTerm))
+             organization.description_english.toLowerCase().includes(this.searchTerm))
           )
             return true
           else

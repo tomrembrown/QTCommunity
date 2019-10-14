@@ -6,6 +6,8 @@
 	    :id="idName"
 	    :input-id="idName"
 	    use12-hour
+      zone="UTC"
+      value-zone="UTC"
 	    :minute-step="10"
 	    v-model="date"
 	    @change="updateStore"
@@ -19,6 +21,9 @@
 
 <script>
 import { Datetime } from 'vue-datetime'
+import moment from 'moment'
+import { Settings } from 'luxon'
+Settings.defaultLocale = 'en'
 
 export default { 
   data() {

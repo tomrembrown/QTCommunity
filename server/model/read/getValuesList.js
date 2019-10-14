@@ -11,17 +11,24 @@ const getValuesList = async function(table) {
     ['wheelchair_choices', 'name']
   ])
 
+  let hasColourColumn = false
+  if (table === 'categories') hasColourColumn = true
+
   const textColName = textName.get(table)
 
-  const getValuesListQuery =
-    'SELECT id, ' + textColName + ' FROM ' + table + ';'
+  let getValuesListQuery
+  if (hasColourColumn)
+    getValuesListQuery = `SELECT id, ${textColName}, colour FROM ${table};`
+  else getValuesListQuery = `SELECT id, ${textColName} FROM ${table};`
 
   let valuesList
 
   try {
     const { rows } = await db.query(getValuesListQuery)
     valuesList = rows.map(row => {
-      return { id: row.id, text: row[textColName] }
+      if (hasColourColumn)
+        return { id: row.id, text: row[textColName], colour: row.colour }
+      else return { id: row.id, text: row[textColName], colour: 'FF0000' }
     })
   } catch (err) {
     console.error('error running query', err)

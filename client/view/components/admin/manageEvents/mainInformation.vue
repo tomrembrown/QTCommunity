@@ -50,22 +50,28 @@
       </div>
     </div>
 
-    <div class="row align-items-center">
-      <div class="col-md-6">
-        <ash-textbox
+    <div class="row">
+      <div class="col-md-4">
+        <ash-imageupload
           :idName="formName + '__image_link'"
-          heading="Image Link"
-          placeholder="Enter link to image for event"
-          helpText="A link to an image to display next to event in detailed description screen."
-        ></ash-textbox>
+          heading="Image for Event"
+          helpText="Upload image to display next to event in detailed description screen."
+        ></ash-imageupload>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-4">
         <ash-textbox
           :idName="formName + '__website_english'"
           heading="Website"
           placeholder="Enter primary website for event"
           helpText="Enter the primary website or facebook page describing the event. Leave blank if none."
         ></ash-textbox>
+      </div>
+      <div class="form-group col-md-4">
+        <ash-select
+          :idName="formName + '__category_id'"
+          heading="Category of Event"
+          table="categories"
+        ></ash-select>
       </div>
     </div>
   </fieldset>
@@ -74,6 +80,8 @@
 <script>
 import Textbox from '../../formElements/textbox.vue'
 import Textarea from '../../formElements/textarea.vue'
+import ImageUpload from '../../formElements/imageUpload.vue'
+import Select from '../../formElements/select.vue'
 
 export default {
   props: {
@@ -85,6 +93,8 @@ export default {
   components: {
     'ash-textbox': Textbox,
     'ash-textarea': Textarea,
+    'ash-imageupload': ImageUpload,
+    'ash-select': Select
   } 
 }
 </script>
