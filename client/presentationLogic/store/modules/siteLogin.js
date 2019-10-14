@@ -9,7 +9,7 @@
 import axios from 'axios'
 
 const state = {
-  agreedToTerms: true
+  agreedToTerms: false;
 }
 
 const getters = {

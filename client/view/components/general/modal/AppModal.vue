@@ -8,6 +8,7 @@
     aria-hidden="true"
     :style="'display:' + (visible ? 'block' : 'none')"
   >
+  	<div class="modal-background" @click="hide"></div>
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -18,7 +19,7 @@
         </div>
         <!-- The modal body and modal footer are set in one of the specific modals
              inside of the specificModals folder -->
-        <component :is="componentName" />
+        <component ref="modal" :is="componentName" />
       </div>
     </div>
   </div>
@@ -40,9 +41,14 @@ export default {
   },
   methods: {
     hide() {
-      this.visible = false
+      this.visible = false;     
+      this.$store.dispatch('resetAllForms');
     },
     show(params) {
+      if(this.$refs.modal){
+	    this.$refs.modal.$refs.form.reset();
+	  }	    
+	    
       this.visible = true
       this.title = params.title
       this.componentName = params.componentName
@@ -61,10 +67,24 @@ export default {
     Modal.EventBus.$on('hide', () => {
       this.hide()
     })
-  }
+  },
+  mounted(){
+	var $modal = this;
+  	document.addEventListener("keydown", (event) => {
+      if ($modal.visible && event.keyCode == 27) {
+        $modal.hide();
+      }
+    });	  
+  }  
 }
 </script>
 
 <style lang="scss" scoped>
-
+	.modal-background{
+		position:absolute;
+		width:100vw;
+		height:100vh;
+		overflow:hidden;
+		background-color:rgba(0, 0, 0, 0.75);
+	}
 </style>

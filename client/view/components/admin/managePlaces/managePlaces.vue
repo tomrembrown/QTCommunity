@@ -4,8 +4,8 @@
 	  
 	<button type="button" class="btn btn-primary btn-lg" @click="addPlace=true"><i class="fas fa-plus"></i> Add Place</button>
 	
-	<edit-place v-if="addPlace" @submitted="refreshPlace">
-	</edit-place>
+	<add-place v-if="addPlace" @submitted="refreshPlace">
+	</add-place>
 	  
     <table class="table crud">
 	  <thead>
@@ -33,7 +33,7 @@
 
 <script>
 import axios from 'axios';
-import editPlace from './editPlace.vue';
+import addPlace from './addPlace.vue';
 
 export default {
   data() {
@@ -43,7 +43,7 @@ export default {
     }
   },
   components: {
-    'edit-place': editPlace
+    'add-place': addPlace
   },
   computed: {
   },
@@ -62,7 +62,6 @@ export default {
     refreshPlace:function(){
 		let $this = this;
 		let organizationID = this.$store.getters.getOrganizationID;
-		
 		$this.addPlace = false;
 		
 		axios.get(

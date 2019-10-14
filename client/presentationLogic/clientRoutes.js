@@ -41,6 +41,10 @@ const ManagePlaces = () =>
   import(
     /* webpackChunkName: "ManagePlaces" */ '../view/components/admin/managePlaces/managePlaces.vue'
   )
+const EditPlace = () =>
+  import(
+    /* webpackChunkName: "ManagePlaces" */ '../view/components/admin/managePlaces/editPlace.vue'
+  )  
 const ManageEvents = () =>
   import(
     /* webpackChunkName: "ManageOrganization" */ '../view/components/admin/manageEvents/manageEvents.vue'
@@ -114,6 +118,12 @@ export const routes = [
     component: ManagePlaces,
     beforeEnter: checkRoute
   },
+ /* {
+    path: '/editPlaces/:placeID',
+    name: 'editPlace',
+    component: ManagePlaces,
+    beforeEnter: checkRoute
+  },*/  
   {
     path: '/manageEvents',
     name: 'ManageEvents',

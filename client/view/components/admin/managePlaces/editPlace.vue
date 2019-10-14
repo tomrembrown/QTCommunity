@@ -5,59 +5,8 @@
         <header>Place Added Successfully</header>
       </div>
       <div v-else>
-        <header>Add Place</header>
-        <fieldset>
-          <div class="row">
-            <div class="col-md-12">
-              <ash-textbox
-                heading="Name"
-                :idName="formName + '__name'"
-                placeholder="Enter name"
-                helpText="Enter a short, unique, name to refer to the place"
-              ></ash-textbox>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <section>
-                <label for="places" class="label">Address</label>
-                <label class="input" id="places-wrapper">
-                  <vue-google-autocomplete
-                    ref="address"
-                    id="places"
-                    types=""
-                    placeholder="Please enter your address"
-                    @placechanged="getAddressData"
-                    country="ca"
-                  ></vue-google-autocomplete>
-                </label>
-              </section>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset>
-          <qt-target-audience
-            :formName = "formName" 
-            type="place" 
-            verb="enter"
-          ></qt-target-audience>
-          <div class="row">
-            <div class="col-md-6">
-            <ash-select
-              heading="Is this place wheelchair-accessible?"
-              :idName="formName + '__wheelchair_choice_id'"
-              table="wheelchair_choices"
-            ></ash-select>
-            </div>
-            <div class="col-md-6">
-              <ash-textbox
-                heading="Details of accessibility"
-                :idName="formName + '__wheelchair_text'"
-                helpText="Enter details if only partially wheelchair accessible"
-              ></ash-textbox>
-            </div>
-          </div>
-        </fieldset>
+       	<header>Add Place</header>
+       	<qt-place-form></qt-place-form>
         <footer>
           <button type="submit" class="button" @click.prevent="submitForm">Submit</button>
           <button type="reset" class="button button-secondary">Reset</button>
@@ -74,6 +23,7 @@ import TargetAudience from '../generalComponents/targetAudience.vue'
 import Checkbox from '../../formElements/checkbox.vue'
 import Textbox from '../../formElements/textbox.vue'
 import Select from '../../formElements/select.vue'
+import PlaceForm from './placeForm.vue'
 
 export default {
   data() {
@@ -87,7 +37,8 @@ export default {
     'qt-target-audience': TargetAudience,
     'ash-checkbox': Checkbox,
     'ash-textbox': Textbox,
-    'ash-select': Select
+    'ash-select': Select,
+    'qt-place-form': PlaceForm
   },
   computed: {
     formName() {
