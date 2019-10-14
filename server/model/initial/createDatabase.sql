@@ -185,6 +185,7 @@ CREATE TABLE event_groups(
   mobile_title_french TEXT NULL,
   description_english TEXT,
   description_french TEXT, 
+  category_id SMALLINT REFERENCES categories(id),
   image_link TEXT,
 
   -- Is Shown, organization, registration
@@ -235,14 +236,6 @@ CREATE TABLE event_details(
   place_room TEXT,
   start_time TIMESTAMP NOT NULL,
   end_time TIMESTAMP NULL
-);
-
-CREATE TABLE categories_event_groups_relations(
-
-  -- Ids of two tables that combined make composite primary key
-  category_id SMALLINT REFERENCES categories(id),
-  event_group_id INTEGER REFERENCES event_groups(id),
-  PRIMARY KEY(category_id, event_group_id)
 );
 
 CREATE TABLE site_access(
@@ -334,6 +327,16 @@ INSERT INTO organization_types
   ('Adult Entertainment'),
   ('Social Club'),
   ('Athletic Club');
+
+INSERT INTO categories
+  (name_english, colour) VALUES
+  ('Arts and Culture', '800080'),
+  ('Social Gathering', 'FF1493'),
+  ('Sports and Fitness', 'FFA500'),
+  ('Support Group', '0000FF'),
+  ('Adult Entertainment', 'FF0000'),
+  ('Religion and Spirituality', 'CCCC00'),
+  ('Career and Networking', '8B4513');
 
 INSERT INTO wheelchair_choices
   (name) VALUES

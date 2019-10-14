@@ -24,7 +24,10 @@ const readEventsForCalendar = async function(
 
     const readCalendarEventsQuery =
       `SELECT d.id AS id, ` +
+      `       g.long_title_english AS long_title_english, ` +
       `       g.short_title_english AS short_title_english, ` +
+      `       g.mobile_title_english AS mobile_title_english, ` +
+      `       g.description_english AS description_english, ` +
       `       d.start_time AS start_time, ` +
       `       d.end_time AS end_time ` +
       `FROM event_groups AS g ` +

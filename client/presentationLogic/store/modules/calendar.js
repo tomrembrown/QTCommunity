@@ -6,7 +6,6 @@
 
 import axios from 'axios'
 import moment from 'moment-timezone'
-moment.tz.setDefault('EST')
 
 const state = {
   currentYear: moment().year(),

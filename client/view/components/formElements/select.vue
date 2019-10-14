@@ -2,12 +2,13 @@
   <section>
     <label class="label" :for="idName">{{ heading }}</label>
     <label class="select">
-      <select :id="idName" :name="idName" v-model="value" @change="update">
+      <select :id="idName" :name="idName" v-model="value" @change="update" :style="{ color: '#'+selectedColour }">
         <option disabled value>Please select one</option>
         <option
           v-for="thisValue in valuesList"
           :value="thisValue.id"
-          :key="thisValue.text"
+          :key="thisValue.id"
+          :style="{ color: '#'+thisValue.colour }"
         >{{ thisValue.text }}</option>
       </select>
       <i></i>
@@ -25,7 +26,8 @@ export default {
   data() {
     return {
       value: '',
-      valuesList: []
+      valuesList: [],
+      selectedColour: '808080'
     }
   },
   props: {
@@ -55,6 +57,11 @@ export default {
         value: this.value
       }
       this.$store.dispatch('checkErrorAndSetElement', payload)
+      let currentValueObject = this.valuesList.filter(option => option.id === this.value)
+      if (currentValueObject.length > 0) {
+        this.selectedColour = currentValueObject[0].colour
+        console.log('Colour set to: ' + this.selectedColour)
+      }  
     },
     getValuesList() {
       let $this = this

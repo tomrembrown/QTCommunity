@@ -232,8 +232,8 @@ export default {
           value: ''
         })
       else {
-        value = value.trim()
-        if (value.length > 3)
+        value = value.trim().toLowerCase()
+        if (value.length >= 3)
           this.$emit('changeFilter', {
             element,
             value

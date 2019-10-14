@@ -11,7 +11,6 @@ import Modal from './view/components/general/modal/modalPlugin'
 import { isFlowBaseAnnotation } from '@babel/types'
 
 import moment from 'moment-timezone'
-moment.tz.setDefault('EST')
 
 Object.defineProperty(Vue.prototype, '$moment', {
   get() {
