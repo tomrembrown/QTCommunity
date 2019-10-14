@@ -31,16 +31,18 @@ const mutations = {
   setEvents(state, payload) {
     state.events = payload
     // Convert date string to moment
-    state.events.forEach((event) => {
+    state.events.forEach(event => {
       event.start_time = moment(event.start_time)
       event.end_time = moment(event.end_time)
     })
   },
   calculateDays(state) {
-
     // Generating all days in current month
     let days = []
-    let currentDay = moment(`${state.currentYear}-${state.currentMonth}-1`, 'YYYY-M-D')
+    let currentDay = moment(
+      `${state.currentYear}-${state.currentMonth}-1`,
+      'YYYY-M-D'
+    )
 
     do {
       days.push(currentDay)
@@ -78,25 +80,33 @@ const getters = {
   getCurrentYear: state => state.currentYear,
   getCurrentMonth: state => state.currentMonth,
   getDays: state => state.days,
-  getEvents: state =>state.events
+  getEvents: state => state.events
 }
 
 const actions = {
   readEventsForCalendar: async ({ state, commit }) => {
     try {
       const calendarStartDate = state.days[0].format('YYYY-MM-DD')
-      const calendarEndDate = state.days[state.days.length-1].format('YYYY-MM-DD')
+      const calendarEndDate = state.days[state.days.length - 1].format(
+        'YYYY-MM-DD'
+      )
       const response = await axios.get(
         '/readRoutesServer/readEventsForCalendar/' +
           calendarStartDate +
           '/' +
           calendarEndDate
       )
-      
+
       if (response.data.isError) throw new Error(response.data.message)
 
-      commit('setEvents', response.data)
+      for (let i in response.data) {
+        response.data[i].tool_tip_title =
+          moment(response.data[i].start_time).format('h:mm a') +
+          ' to ' +
+          moment(response.data[i].end_time).format('h:mm a')
+      }
 
+      commit('setEvents', response.data)
     } catch (error) {
       console.log(
         `Error attempting to get events for calendar: ${error.message}`
@@ -106,26 +116,25 @@ const actions = {
   },
   incrementMonth: ({ state, commit, dispatch }) => {
     if (state.currentMonth === 12) {
-      commit('setCurrentMonth', 1);
-      commit('setCurrentYear', state.currentYear + 1);
+      commit('setCurrentMonth', 1)
+      commit('setCurrentYear', state.currentYear + 1)
     } else {
-      commit('setCurrentMonth', state.currentMonth + 1);
+      commit('setCurrentMonth', state.currentMonth + 1)
     }
     commit('calculateDays')
     dispatch('readEventsForCalendar')
   },
   decrementMonth: ({ state, commit, dispatch }) => {
     if (state.currentMonth === 1) {
-      commit('setCurrentMonth', 12);
-      commit('setCurrentYear', state.currentYear - 1);
-    }
-    else {
-      commit('setCurrentMonth', state.currentMonth - 1);
+      commit('setCurrentMonth', 12)
+      commit('setCurrentYear', state.currentYear - 1)
+    } else {
+      commit('setCurrentMonth', state.currentMonth - 1)
     }
     commit('calculateDays')
     dispatch('readEventsForCalendar')
   },
-  initialMonth: ({commit, dispatch}) => {
+  initialMonth: ({ commit, dispatch }) => {
     commit('calculateDays')
     dispatch('readEventsForCalendar')
   }

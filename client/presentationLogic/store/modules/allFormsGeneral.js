@@ -83,6 +83,7 @@ const getters = {
 
 const actions = {
   checkErrorAndSetElement: async ({ commit }, payload) => {
+    console.log('In checkErrorAndSetElement, value: ' + payload.value)
     commit('setElement', payload)
     let thisError = null
 

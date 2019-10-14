@@ -2,7 +2,12 @@
   <div :class="classObject">
     {{ day.format('D') }}
     <ul class="event-list">
-      <li v-for="event in events" :key="event.id">{{ event.short_title_english }}</li>
+      <li
+        v-for="event in events"
+        :key="event.id"
+        v-b-tooltip.hover
+        :title="event.tool_tip_title"
+      >{{ event.short_title_english }}</li>
     </ul>
   </div>
 </template>

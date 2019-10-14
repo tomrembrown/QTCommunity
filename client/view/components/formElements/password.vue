@@ -80,7 +80,7 @@ export default {
       return errorObject[0].message
     }
   },
-  updated() {
+  mounted() {
     // Check in store if this had something set in server
     const valueFromStore = this.$store.getters.getValueForElement(this.idName)
     if (valueFromStore) this.value = valueFromStore
