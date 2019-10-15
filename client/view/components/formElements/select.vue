@@ -44,7 +44,7 @@ export default {
       default: function() {
         return convertHeadingToName(this.heading)
       }
-    },
+    },    
     helpText: {
       type: String,
       default: ''

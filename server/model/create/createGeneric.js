@@ -11,7 +11,6 @@ const db = require('./../db')
 
 const createGeneric = async function(columnList, rowsArray, tableName) {
   try {
-
     let createQuery =
       'INSERT INTO ' + tableName + ' (' + columnList.join(', ') + ') VALUES '
 
