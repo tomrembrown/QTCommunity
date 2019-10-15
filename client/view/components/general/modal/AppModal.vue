@@ -42,7 +42,7 @@ export default {
   methods: {
     hide() {
       this.visible = false;     
-      this.$store.dispatch('resetAllForms');
+      this.$store.commit('resetAllForms');
     },
     show(params) {
       if(this.$refs.modal){

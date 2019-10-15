@@ -39,10 +39,11 @@ router.get(
 
 // Check if a unique element in taken
 router.get(
-  '/checkElementTaken/:currentForm/:element/:value',
+  '/checkElementTaken/:organizationID/:currentForm/:element/:value',
   asyncMiddleware(async (req, res) => {
     const table = getTableFromForm.get(req.params.currentForm)
     const isTaken = await model.checkElementTaken(
+	  req.params.organizationID,
       table,
       req.params.element,
       req.params.value
