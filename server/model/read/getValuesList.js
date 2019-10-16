@@ -28,7 +28,7 @@ const getValuesList = async function(table) {
     valuesList = rows.map(row => {
       if (hasColourColumn)
         return { id: row.id, text: row[textColName], colour: row.colour }
-      else return { id: row.id, text: row[textColName], colour: 'FF0000' }
+      else return { id: row.id, text: row[textColName], colour: '000000' }
     })
   } catch (err) {
     console.error('error running query', err)

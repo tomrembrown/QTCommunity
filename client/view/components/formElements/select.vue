@@ -60,7 +60,6 @@ export default {
       let currentValueObject = this.valuesList.filter(option => option.id === this.value)
       if (currentValueObject.length > 0) {
         this.selectedColour = currentValueObject[0].colour
-        console.log('Colour set to: ' + this.selectedColour)
       }  
     },
     getValuesList() {

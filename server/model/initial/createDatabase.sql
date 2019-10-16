@@ -193,7 +193,7 @@ CREATE TABLE event_groups(
   organization_id INTEGER REFERENCES organizations(id),
   registration_website_english TEXT,
   registration_website_french TEXT, 
-  need_registration BOOLEAN NOT NULL DEFAULT TRUE,
+  need_registration BOOLEAN NOT NULL DEFAULT FALSE,
   price MONEY DEFAULT NULL,
   
   -- Contact information
@@ -330,13 +330,14 @@ INSERT INTO organization_types
 
 INSERT INTO categories
   (name_english, colour) VALUES
-  ('Arts and Culture', '800080'),
+  ('Art, Theatre, Culture', '800080'),
   ('Social Gathering', 'FF1493'),
   ('Sports and Fitness', 'FFA500'),
   ('Support Group', '0000FF'),
   ('Adult Entertainment', 'FF0000'),
   ('Religion and Spirituality', 'CCCC00'),
-  ('Career and Networking', '8B4513');
+  ('Career and Networking', '8B4513'),
+  ('Health', '00FF00');
 
 INSERT INTO wheelchair_choices
   (name) VALUES
