@@ -27,6 +27,7 @@ const readPlaces = require('./read/readPlaces')
 
 const readEvents = require('./read/readEvents')
 const readPlacesAll = require('./read/readPlacesAll')
+const readTableAll = require('./read/readTableAll')
 
 const getColumnsForRow = require('./read/getColumnsForRow')
 const readEventsForCalendar = require('./read/readEventsForCalendar')
@@ -42,7 +43,8 @@ const deletePlace = require('./delete/deletePlace')
 const deleteEvent = require('./delete/deleteEvent')
 
 // Database utility functions
-const close = require('./final/close')
+const close = require('./utils/close')
+const setTimeZoneUTC = require('./utils/setTimeZoneUTC')
 
 // Object to export
 const model = {
@@ -78,6 +80,7 @@ const model = {
   readPlaces: readPlaces,
   readEvents: readEvents,
   readPlacesAll: readPlacesAll,
+  readTableAll: readTableAll,
 
   /* ******
    * Update
@@ -96,7 +99,8 @@ const model = {
   /* ******
    * Database utility functions
    * ******/
-  close: close
+  close: close,
+  setTimeZoneUTC: setTimeZoneUTC
 }
 
 module.exports = model

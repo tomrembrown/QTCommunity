@@ -99,10 +99,17 @@ const actions = {
       if (response.data.isError) throw new Error(response.data.message)
 
       for (let i in response.data) {
-        response.data[i].tool_tip_title =
-          moment(response.data[i].start_time).format('h:mm a') +
+        let titleHtml = '<p align="left" style="font-size:12px">' +
+        moment(response.data[i].start_time).format('h:mm a') +
           ' to ' +
-          moment(response.data[i].end_time).format('h:mm a')
+          moment(response.data[i].end_time).format('h:mm a') +
+          ' <br/> at ' +
+          response.data[i].place_name
+        if (response.data[i].need_registration) {
+          titleHtml += '<br/><em><strong>Requires Registration</strong></em>'
+        }
+        titleHtml += '</p>'
+        response.data[i].tool_tip_title = titleHtml
       }
 
       commit('setEvents', response.data)
