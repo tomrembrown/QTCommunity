@@ -4,6 +4,7 @@
     <label class="input">
       <input
         type="text"
+        ref="input"
         :id="idName"
         :name="idName"
         :aria-describedby="idHelp"
@@ -11,6 +12,7 @@
         v-model.lazy="value"
         @blur="updateStore"
         @input="$emit('input', $event.target.value)"
+        v-on:keyup.13="$emit('enterPressed')"
       />      
     </label>
     <div v-if="isError" class="note error">
@@ -53,6 +55,10 @@ export default {
     validate: {
 	    type: Boolean,
 	    default: true
+    },
+    focus: {
+	    type: Boolean,
+	    default: false
     }
   },
   methods: {
@@ -84,6 +90,10 @@ export default {
     // Check in store if this had something set in server
     const valueFromStore = this.$store.getters.getValueForElement(this.idName)
     if (valueFromStore) this.value = valueFromStore
+    
+    if(this.focus){
+	    this.$refs.input.focus();
+    }
   }
 }
 </script>

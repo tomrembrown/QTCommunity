@@ -1,19 +1,60 @@
 <template>
-  <div class="container embed-form">
-    <form action class="sky-form form-sizing-reset" ref="form">
-      <div v-if="addPlaceFormSubmittedOK">
-        <header>Place Added Successfully</header>
-      </div>
-      <div v-else>
-       	<header>Add Place</header>
-       	<qt-place-form></qt-place-form>
-        <footer>
-          <button type="submit" class="button" @click.prevent="submitForm">Submit</button>
-          <button type="reset" class="button button-secondary">Reset</button>
-        </footer>
-        </div>
-    </form>
-  </div>
+	<div>
+		<fieldset>
+			<div class="row">
+				<div class="col-md-12">
+					<ash-textbox
+					ref="name"
+					heading="Name"
+					:idName="formName + '__name'"
+					placeholder="Enter name"
+					helpText="Enter a short, unique, name to refer to the place"
+					v-bind:focus="true"
+					></ash-textbox>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<section>
+						<label for="places" class="label">Address</label>
+						<label class="input" id="places-wrapper">
+						<vue-google-autocomplete
+						ref="address"
+						id="places"
+						types=""
+						placeholder="Please enter your address"
+						@placechanged="getAddressData"
+						country="ca"
+						></vue-google-autocomplete>
+						</label>
+					</section>
+				</div>
+			</div>
+		</fieldset>
+		<fieldset>
+			<qt-target-audience
+			:formName = "formName" 
+			type="place" 
+			verb="enter"
+			></qt-target-audience>
+			<div class="row">
+				<div class="col-md-6">
+					<ash-select
+					heading="Is this place wheelchair-accessible?"
+					:idName="formName + '__wheelchair_choice_id'"
+					table="wheelchair_choices"
+					></ash-select>
+				</div>
+				<div class="col-md-6">
+					<ash-textbox
+					heading="Details of accessibility"
+					:idName="formName + '__wheelchair_text'"
+					helpText="Enter details if only partially wheelchair accessible"
+					></ash-textbox>
+				</div>
+			</div>
+		</fieldset>
+	</div>
 </template>
 
 <script>
@@ -23,13 +64,11 @@ import TargetAudience from '../generalComponents/targetAudience.vue'
 import Checkbox from '../../formElements/checkbox.vue'
 import Textbox from '../../formElements/textbox.vue'
 import Select from '../../formElements/select.vue'
-import PlaceForm from './placeForm.vue'
 
 export default {
   data() {
     return {
-      address: null,
-      addPlaceFormSubmittedOK: false
+      address: null
     }
   },
   components: {
@@ -38,13 +77,18 @@ export default {
     'ash-checkbox': Checkbox,
     'ash-textbox': Textbox,
     'ash-select': Select,
-    'qt-place-form': PlaceForm
   },
-  computed: {
+/*  computed: {
     formName() {
-      return forms.ADD_PLACE
+      return this.formID;
     }
-  },
+  },*/
+  props: {
+    formName: {
+      type: String,
+      required: true
+    },
+  },  
   methods: {
     getAddressData(addressData, placeResultData, id) {
       ////https://www.npmjs.com/package/vue-google-autocomplete
@@ -74,24 +118,10 @@ export default {
     },
     setThisForm() {
       this.$store.commit('setThisForm', this.formName)
-    },
-    submitForm() {
-      const payload = {
-        element: this.formName + '__organization_id',
-        value: this.$store.getters.getOrganizationID
-      }
-      this.$store.commit('setElement',payload)
-      this.$store.dispatch('submitForm')
-      
-      this.addPlaceFormSubmittedOK = true;
-      this.$emit('submitted');
-      
-      this.$refs.form.reset();
     }
   },  
   mounted() {
     this.setThisForm();
-    this.$refs.address.focus();
 
     let toronto = 	new google.maps.LatLng(43.651070, -79.347015);
     let circle =	new google.maps.Circle({

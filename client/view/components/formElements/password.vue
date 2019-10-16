@@ -11,6 +11,7 @@
         v-model.lazy="value"
         @blur="updateStore"
         @input="$emit('input', $event.target.value)"
+        v-on:keyup.13="$emit('enterPressed')"
       />
     </label>
     <div v-if="isError" class="note error">

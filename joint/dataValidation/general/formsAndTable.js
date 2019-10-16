@@ -13,6 +13,7 @@ const forms = {
   LOGIN: 'login',
   SITE_LOGIN: 'siteLogin',
   ADD_PLACE: 'addPlace',
+  EDIT_PLACE: 'editPlace',  
   ADD_EVENT: 'addEvent',  
   SEND_EMAIL: 'sendEmail',
   ORGANIZATION_FILTER: 'organizationFilter'
@@ -23,6 +24,7 @@ const getTableFromForm = new Map([
   [forms.LOGIN, 'organizations'],
   [forms.SITE_LOGIN,'site_access'],
   [forms.ADD_PLACE, 'places'],
+  [forms.EDIT_PLACE, 'places'],  
   [forms.EDIT_ORGANIZATION, 'organizations'],
   [forms.ADD_EVENT, 'event_groups'],  
   [forms.SEND_EMAIL, 'NONE'],

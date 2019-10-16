@@ -2,12 +2,24 @@
 
 const db = require('./../db')
 
-const checkElementTaken = async (table, element, value) => {
+const checkElementTaken = async (organizationID, table, element, value) => {
+  var args = [value];
+	
+  var suffix = '';
+  if(table == 'places' && element == 'name'){
+	  suffix = 'AND organization_id = $2';
+	  args.push(organizationID);
+  }
+  
+  console.log(organizationID);
+	
   const checkElementTakenQuery =
-    'SELECT id FROM ' + table + ' WHERE ' + element + ' = $1;'
+    'SELECT id FROM ' + table + ' WHERE ' + element + ' = $1' + (suffix ? ' ' + suffix : '') + ';';
+
+  console.log(checkElementTakenQuery);
 
   try {
-    const response = await db.query(checkElementTakenQuery, [value])
+    const response = await db.query(checkElementTakenQuery, args)
     return !(response.rowCount === 0)
   } catch (error) {
     console.error(`Error in checkElementTaken: ${error.message}`)

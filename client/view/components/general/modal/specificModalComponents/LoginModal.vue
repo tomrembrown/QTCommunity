@@ -6,7 +6,7 @@
         role="alert"
         v-show="errorVisible"
       >Either your login or password does not match our records!</div>
-      <form action class="sky-form form-sizing-reset">
+      <form action ref="form" class="sky-form form-sizing-reset">
         <div>
           <div class="row">
             <div class="col-md-12">
@@ -17,6 +17,7 @@
                 :idName="formName + '__login'"
                 placeholder="Login"
                 helpText="Enter a login for the organization"
+                @enterPressed="login"
               ></ash-textbox>
             </div>
           </div>
@@ -29,6 +30,7 @@
                 :idName="formName + '__password'"
                 placeholder="Password"
                 helpText="Enter password for organization to login"
+                @enterPressed="login"
               ></ash-password>
             </div>
           </div>
@@ -53,7 +55,7 @@ export default {
       password: null,
       errorVisible: false
     }
-  },
+  },  
   methods: {
     setThisForm() {
       this.$store.commit('setThisForm', this.formName)
@@ -70,6 +72,8 @@ export default {
           marker.errorVisible = false
           marker.loginAs = null
           marker.password = null
+          
+          marker.$refs.form.reset();
           marker.$modal.hide()
         } else {
           marker.errorVisible = true

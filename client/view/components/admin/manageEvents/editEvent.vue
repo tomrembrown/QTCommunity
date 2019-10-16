@@ -30,7 +30,7 @@
 <script>
 import { forms } from '../../../../../joint/dataValidation/general/formsAndTable'
 import MainInformation from './mainInformation.vue'
-import Place from '../managePlaces/place.vue'
+import Place from '../managePlaces/placeDetails.vue'
 import Organization from '../editOrganization/organization.vue'
 import Registration from './registration.vue'
 import TargetAudience from '../generalComponents/targetAudience.vue'

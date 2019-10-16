@@ -45,7 +45,7 @@ const actions = {
           '/' +
           payload.password
       )
- 
+
       if (response.data.isError) throw new Error(response.data.message)
 
       if (response.data.login_token != null) {
