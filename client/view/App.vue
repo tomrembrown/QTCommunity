@@ -24,6 +24,8 @@ export default {
       }
       this.$modal.show(params)
     }
+    // Set both database and javascript date objects on server & client to UTC timezone
+    this.$store.dispatch('setTimeZone')
   }
 }
 </script>

@@ -25,6 +25,13 @@ constants.minLengths[forms.SEND_EMAIL] = {
   message: 20
 }
 
+// Will automatically check in form that these elements are not more than this length
+constants.maxLengths = {}
+constants.maxLengths[forms.ADD_EVENT] = {
+  short_title_english: 18,
+  mobile_title_english: 12
+}
+
 // Forms can't be submitted without these elements
 constants.mandatoryElements = {}
 constants.mandatoryElements[forms.CREATE_ORGANIZATION] = ['login', 'password', 'verify_password', 'name', 'organization_type_id']

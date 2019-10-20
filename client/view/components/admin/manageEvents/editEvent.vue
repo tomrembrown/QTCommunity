@@ -14,13 +14,11 @@
           </div>
         </div>
 
-        <qt-target-audience type="event" verb="attend" :formName = "formName"></qt-target-audience>
+        <qt-target-audience type="event" verb="attend" :formName="formName"></qt-target-audience>
       </fieldset>
 
       <footer>
-        <button type="submit" class="button" @click.prevent="submitForm">
-          Submit
-        </button>
+        <button type="submit" class="button" @click.prevent="submitForm">Submit</button>
         <button type="reset" class="button button-secondary" @click="resetForm">Reset</button>
       </footer>
     </form>
@@ -41,35 +39,37 @@ export default {
       this.$store.commit('setThisForm', this.formName)
     },
     submitForm() {
-	  //if(this.$refs.form.checkValidity()){
-		  const payload = {
-			element: this.formName + '__organization_id',
-			value: this.$store.getters.getOrganizationID
-	      }
-	      this.$store.commit('setElement',payload)	  
-		  
-	      let $this = this
-	      this.$store.dispatch('submitForm').then(itWorked => {
-			  if (itWorked){
-				  $this.registerOrganizationFormSubmittedOK = true			  
-			      this.$emit('submitted');		      
-			      this.$refs.form.reset();			  
-			  }
-	      })		  
-	 /* }
+      //if(this.$refs.form.checkValidity()){
+      const payload = {
+        element: this.formName + '__organization_id',
+        value: this.$store.getters.getOrganizationID
+      }
+      this.$store.commit('setElement', payload)
+
+      let $this = this
+      this.$store.dispatch('submitForm').then(itWorked => {
+        if (itWorked) {
+          $this.registerOrganizationFormSubmittedOK = true
+          this.$emit('submitted')
+          this.$refs.form.reset()
+          this.$store.commit('resetAllForms')
+        }
+      })
+      /* }
 	  else{
 		  this.$refs.form.reportValidity();
 	  } */
     },
-    resetForm(){
-	    this.$refs.form.reset();
+    resetForm() {
+      this.$refs.form.reset()
+      this.$store.commit('resetAllForms')
     }
   },
   computed: {
     formName() {
       return forms.ADD_EVENT
     }
-  },  
+  },
   components: {
     'qt-main-information': MainInformation,
     'qt-place': Place,
@@ -79,7 +79,7 @@ export default {
   },
   mounted() {
     this.setThisForm()
-  }  
+  }
 }
 </script>
 

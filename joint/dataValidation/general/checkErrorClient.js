@@ -11,14 +11,33 @@ const checkErrorClient = (currentForm, element, value, formElements) => {
   if (currentForm in constants.minLengths) {
     const thisMinLengths = constants.minLengths[currentForm]
 
-    if (formElement in thisMinLengths && value.length < thisMinLengths[formElement]) {
+    if (
+      formElement in thisMinLengths &&
+      value.length < thisMinLengths[formElement]
+    ) {
       return {
         element: element,
         message:
-          'The value for ' +
-          formElement +
-          ' must be at least ' +
+          'The value for this field must be at least ' +
           thisMinLengths[formElement] +
+          ' characters long'
+      }
+    }
+  }
+
+  // Not more than max
+  if (currentForm in constants.maxLengths) {
+    const thisMaxLengths = constants.maxLengths[currentForm]
+
+    if (
+      formElement in thisMaxLengths &&
+      value.length > thisMaxLengths[formElement]
+    ) {
+      return {
+        element: element,
+        message:
+          'The value for this field cannot be more than ' +
+          thisMaxLengths[formElement] +
           ' characters long'
       }
     }

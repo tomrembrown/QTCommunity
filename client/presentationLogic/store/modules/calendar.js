@@ -6,6 +6,8 @@
 
 import axios from 'axios'
 import moment from 'moment-timezone'
+moment.tz.setDefault('UTC')
+process.env.TZ = 'UTC'
 
 const state = {
   currentYear: moment().year(),
@@ -143,6 +145,10 @@ const actions = {
   initialMonth: ({ commit, dispatch }) => {
     commit('calculateDays')
     dispatch('readEventsForCalendar')
+  },
+  setTimeZone: ({ state }) => {
+    // Set time zone on the server - set in client at top of this page
+    axios.patch('updateRoutesServer/setTimeZone')
   }
 }
 

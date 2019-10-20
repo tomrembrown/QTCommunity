@@ -34,4 +34,14 @@ router.patch(
   })
 )
 
+router.patch(
+  '/setTimeZone',
+  asyncMiddleware(async (req, res) => {
+    process.env.TZ = 'UTC'
+    await model.setTimeZoneUTC()
+
+    res.sendStatus(200)
+  })
+)
+
 module.exports = router

@@ -59,6 +59,8 @@ const processFields = (currentForm, objectInputData) => {
       typeof objectInputData[fieldName] === 'string'
     ) {
       objectInputData[fieldName] = objectInputData[fieldName].replace(/\D/g, '')
+      // Delete field if empty
+      if (objectInputData[fieldName].length === 0) delete objectInputData[fieldName]
     }
   }
 

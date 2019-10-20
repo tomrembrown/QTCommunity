@@ -10,13 +10,9 @@ const checkElementTaken = async (organizationID, table, element, value) => {
 	  suffix = 'AND organization_id = $2';
 	  args.push(organizationID);
   }
-  
-  console.log(organizationID);
 	
   const checkElementTakenQuery =
     'SELECT id FROM ' + table + ' WHERE ' + element + ' = $1' + (suffix ? ' ' + suffix : '') + ';';
-
-  console.log(checkElementTakenQuery);
 
   try {
     const response = await db.query(checkElementTakenQuery, args)

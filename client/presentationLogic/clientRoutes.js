@@ -49,6 +49,10 @@ const ManageEvents = () =>
   import(
     /* webpackChunkName: "ManageOrganization" */ '../view/components/admin/manageEvents/manageEvents.vue'
   )
+const EventDetails = () =>
+    import(
+      /* webpackChunkName: "EventDetails" */ '../view/components/user/events/EventDetails.vue'
+    )
 
 // Import General LInks
 const PageNotFound = () =>
@@ -74,6 +78,12 @@ export const routes = [
     path: '/events',
     name: 'Events',
     component: Events,
+    beforeEnter: checkRoute
+  },
+  {
+    path: '/eventdetails/:id',
+    name: 'EventDetails',
+    component: EventDetails,
     beforeEnter: checkRoute
   },
   {

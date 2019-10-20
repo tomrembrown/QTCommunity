@@ -337,7 +337,8 @@ INSERT INTO categories
   ('Adult Entertainment', 'FF0000'),
   ('Religion and Spirituality', 'CCCC00'),
   ('Career and Networking', '8B4513'),
-  ('Health', '00FF00');
+  ('Health', '00FF00'),
+  ('Community Building', '000000');
 
 INSERT INTO wheelchair_choices
   (name) VALUES

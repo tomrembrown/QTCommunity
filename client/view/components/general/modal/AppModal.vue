@@ -8,7 +8,7 @@
     aria-hidden="true"
     :style="'display:' + (visible ? 'block' : 'none')"
   >
-  	<div class="modal-background" @click="hide"></div>
+    <div class="modal-background" @click="hide"></div>
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -18,7 +18,7 @@
           </button>
         </div>
         <!-- The modal body and modal footer are set in one of the specific modals
-             inside of the specificModals folder -->
+        inside of the specificModals folder-->
         <component ref="modal" :is="componentName" />
       </div>
     </div>
@@ -41,14 +41,14 @@ export default {
   },
   methods: {
     hide() {
-      this.visible = false;     
-      this.$store.commit('resetAllForms');
+      this.visible = false
+      if (this.componentName === 'login-modal') this.$store.commit('resetAllForms')
     },
     show(params) {
-      if(this.$refs.modal){
-	    this.$refs.modal.$refs.form.reset();
-	  }	    
-	    
+      if (params.componentName === 'login-modal' && this.$refs.modal) {
+        this.$refs.modal.$refs.form.reset()
+      }
+
       this.visible = true
       this.title = params.title
       this.componentName = params.componentName
@@ -68,23 +68,23 @@ export default {
       this.hide()
     })
   },
-  mounted(){
-	var $modal = this;
-  	document.addEventListener("keydown", (event) => {
+  mounted() {
+    var $modal = this
+    document.addEventListener('keydown', event => {
       if ($modal.visible && event.keyCode == 27) {
-        $modal.hide();
+        $modal.hide()
       }
-    });	  
-  }  
+    })
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-	.modal-background{
-		position:absolute;
-		width:100vw;
-		height:100vh;
-		overflow:hidden;
-		background-color:rgba(0, 0, 0, 0.75);
-	}
+.modal-background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.75);
+}
 </style>

@@ -82,8 +82,10 @@ const getters = {
 }
 
 const actions = {
-  checkErrorAndSetElement: async ({ dispatch, commit, getters, rootGetters }, payload) => {
-    console.log('In checkErrorAndSetElement, value: ' + payload.value)
+  checkErrorAndSetElement: async (
+    { state, commit, rootGetters },
+    payload
+  ) => {
     commit('setElement', payload)
     let thisError = null
 
@@ -98,7 +100,7 @@ const actions = {
       possibleServerError(state.currentForm, payload.element)
     ) {
       thisError = await checkErrorServer(
-	    rootGetters.getOrganizationID, //https://stackoverflow.com/questions/41366388/vuex-access-state-from-another-module
+        rootGetters.getOrganizationID, //https://stackoverflow.com/questions/41366388/vuex-access-state-from-another-module
         state.currentForm,
         payload.element,
         payload.value,
