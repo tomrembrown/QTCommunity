@@ -161,7 +161,11 @@ CREATE TABLE organizations(
   orientation_pansexual BOOLEAN NOT NULL DEFAULT TRUE,
   orientation_heterosexual BOOLEAN NOT NULL DEFAULT TRUE,
   race_religion TEXT DEFAULT NULL,
-  only_race_religion BOOLEAN NOT NULL DEFAULT FALSE
+  only_race_religion BOOLEAN NOT NULL DEFAULT FALSE,
+  
+  -- Places
+  place_id INTEGER REFERENCES places(id) DEFAULT NULL,
+  place_room TEXT DEFAULT NULL
 );
 
 -- Most places linked to specific organizations, i.e. 519 organization linked to 519 place
@@ -172,7 +176,6 @@ CREATE TABLE places_organizations(
   id SERIAL PRIMARY KEY,
   organization_id INTEGER REFERENCES organizations(id) NOT NULL,
   place_id INTEGER REFERENCES places(id) NOT NULL,
-  place_room TEXT DEFAULT NULL
 );
   
 /*  place_room TEXT DEFAULT NULL, */
