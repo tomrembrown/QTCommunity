@@ -9,7 +9,7 @@
         v-b-tooltip.hover="{ html: true }"
         :title="event.tool_tip_title"
       >
-        <router-link
+        <router-link :style=" {color: '#' + event.colour }"
           :to="{ name: 'EventDetails', params: { id: event.id } }"
         >{{ event.short_title_english }}</router-link>
       </li>

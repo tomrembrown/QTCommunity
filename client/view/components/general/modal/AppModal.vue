@@ -45,7 +45,7 @@ export default {
       if (this.componentName === 'login-modal') this.$store.commit('resetAllForms')
     },
     show(params) {
-      if (params.componentName === 'login-modal' && this.$refs.modal) {
+      if (params.componentName === 'login-modal' && this.$refs.modal && this.$refs.modal.$refs.form) {
         this.$refs.modal.$refs.form.reset()
       }
 
