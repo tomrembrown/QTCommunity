@@ -11,8 +11,9 @@ DROP TABLE IF EXISTS categories_event_groups_relations;
 DROP TABLE IF EXISTS event_details;
 DROP TABLE IF EXISTS event_groups;
 ALTER TABLE IF EXISTS places DROP COLUMN IF EXISTS organization_id;
-DROP TABLE IF EXISTS organizations;
-DROP TABLE IF EXISTS places;
+DROP TABLE IF EXISTS organizations CASCADE;
+DROP TABLE IF EXISTS places CASCADE;
+DROP TABLE IF EXISTS places_organizations;
 DROP TABLE IF EXISTS wheelchair_choices;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS organization_types;
@@ -109,10 +110,6 @@ CREATE TABLE organizations(
   signup_date TIMESTAMP DEFAULT NULL,
   logged_in BOOLEAN DEFAULT NULL,
   last_logged_in TIMESTAMP DEFAULT NULL,
-  
-  -- Physical location
-  place_id INTEGER REFERENCES places(id) ON DELETE SET NULL DEFAULT NULL,
-  place_room TEXT DEFAULT NULL,
 
   -- Contact information
   email CITEXT DEFAULT NULL,
@@ -169,7 +166,16 @@ CREATE TABLE organizations(
 
 -- Most places linked to specific organizations, i.e. 519 organization linked to 519 place
 ALTER TABLE places 
-ADD COLUMN organization_id INTEGER REFERENCES organizations(id) DEFAULT NULL;
+ADD COLUMN owner_id INTEGER REFERENCES organizations(id) DEFAULT NULL;
+
+CREATE TABLE places_organizations(
+  id SERIAL PRIMARY KEY,
+  organization_id INTEGER REFERENCES organizations(id) NOT NULL,
+  place_id INTEGER REFERENCES places(id) NOT NULL,
+  place_room TEXT DEFAULT NULL
+);
+  
+/*  place_room TEXT DEFAULT NULL, */
 
 CREATE TABLE event_groups(
 
