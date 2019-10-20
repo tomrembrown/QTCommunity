@@ -175,7 +175,7 @@ ADD COLUMN owner_id INTEGER REFERENCES organizations(id) DEFAULT NULL;
 CREATE TABLE places_organizations(
   id SERIAL PRIMARY KEY,
   organization_id INTEGER REFERENCES organizations(id) NOT NULL,
-  place_id INTEGER REFERENCES places(id) NOT NULL,
+  place_id INTEGER REFERENCES places(id) NOT NULL
 );
   
 /*  place_room TEXT DEFAULT NULL, */

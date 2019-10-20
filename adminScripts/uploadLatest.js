@@ -17,9 +17,11 @@ const model = require('../server/model')
 const runAll = async () => {
   await uploadTableFunction(path.join(__dirname,'/ORGANIZATIONS_LATEST.dat'),'organizations')
   await uploadTableFunction(path.join(__dirname,'/PLACES_LATEST.dat'),'places')
-  await uploadTableFunction(path.join(__dirname,'/ORG_PLACE_JOIN_LATEST.dat'),'places_organizations')
+  await uploadTableFunction(path.join(__dirname,'/ORG_PLACE_JOIN_LATEST-places.dat'),'places_organizations')
   await uploadTableFunction(path.join(__dirname,'/EVENT_GROUPS_LATEST.dat'),'event_groups')
   await uploadTableFunction(path.join(__dirname,'/EVENT_DETAILS_LATEST.dat'),'event_details')
+  
+  await updateTableFunction(path.join(__dirname,'/ORG_PLACE_JOIN_LATEST-organizations.dat'),'organizations')  
   model.close()
 }
 
