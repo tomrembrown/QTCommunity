@@ -18,7 +18,7 @@
               <div
                 class="note"
                 id="search-term-help"
-              >Search for a term in organization name and description</div>
+              >Search for a term in {{ thisPage }} name and description</div>
             </label>
         </div>
       </div>
@@ -82,7 +82,7 @@
               <label
                 class="label"
                 for="gender-identity-chosen"
-              >Organizations Welcoming this Gender Identity</label>
+              >{{pageCapitalized}}s Welcoming this Gender Identity</label>
               <label class="select">
                 <select
                   id="gender-identity-chosen"
@@ -105,7 +105,7 @@
               <label
                 class="label"
                 for="sexual-orientation-chosen"
-              >Organizations Welcoming this Sexual Orientation</label>
+              >{{pageCapitalized}}s Welcoming this Sexual Orientation</label>
               <label class="select">
                 <select
                   id="sexual-orientation-chosen"
@@ -127,7 +127,7 @@
         <div class="row align-items-center">
           <div class="col-md-4">
             <section>
-              <label class="label" for="age-allowed">Organization Accepts this Age</label>
+              <label class="label" for="age-allowed">{{pageCapitalized}} Accepts this Age</label>
               <label class="input">
                 <input
                   type="text"
@@ -139,7 +139,7 @@
                 <div
                   class="note"
                   id="age-allowed-help"
-                >Only show organizations which accept this age</div>
+                >Only show {{thisPage}}s which accept this age</div>
               </label>
             </section>
           </div>
@@ -157,7 +157,7 @@
                 <div
                   class="note"
                   id="race-religion-targetted-help"
-                >Only show organizations targetted at this race or religion</div>
+                >Only show {{thisPage}}s targetted at this race or religion</div>
               </label>
             </section>
           </div>
@@ -252,6 +252,17 @@ export default {
         .then(response => {
           $this.organizationTypes = response.data
         })
+    }
+  },
+  props: {
+    thisPage: { 
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    pageCapitalized() {
+      return this.thisPage.charAt(0).toUpperCase() + this.thisPage.slice(1)
     }
   },
   mounted() {

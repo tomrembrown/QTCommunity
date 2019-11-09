@@ -3,10 +3,13 @@
 /*
  * Upload the latest data from organizations and places table. This is run
  * node uploadLatest.js
- * It uses three files:
+ * It uses six files
  * ORGANIZATIONS_LATEST.dat
  * PLACES_LATEST.dat
- * ORG_PLACE_JOIN_LATEST.dat
+ * ORG_PLACE_JOIN_LATEST-places.dat
+ * EVENT_GROUPS_LATEST.dat
+ * EVENT_DETAILS_LATEST.dat
+ * ORG_PLACE_JOIN_LATEST-organizations.dat
  */
 
 const path = require('path')

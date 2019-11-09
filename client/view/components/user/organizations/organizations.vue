@@ -6,7 +6,7 @@
           <div class="col-md-12">List of Organizations</div>
         </div>
       </header>
-      <organization-filter @changeFilter="changeFilter($event)"></organization-filter>
+      <result-filter @changeFilter="changeFilter($event)" thisPage="organization"></result-filter>
       <div v-if="loading">
         <fieldset>
           <h2>Loading ...</h2>
@@ -34,7 +34,7 @@
 import { forms } from '../../../../../joint/dataValidation/general/formsAndTable'
 import axios from 'axios'
 import SingleOrganization from './singleOrganization.vue'
-import OrganizationFilter from './OrganizationFilter.vue'
+import ResultFilter from '../generalComponents/ResultFilter.vue'
 import Select from '../../formElements/select.vue'
 import scrollMonitor from 'scrollmonitor'
 import constants from '../../../../../joint/constants'
@@ -171,7 +171,7 @@ export default {
   components: {
     'single-organization': SingleOrganization,
     'ash-select': Select,
-    OrganizationFilter
+    ResultFilter
   },
   computed: {
     formName() {

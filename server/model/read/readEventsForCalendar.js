@@ -29,6 +29,7 @@ const readEventsForCalendar = async function(
       `       g.mobile_title_english AS mobile_title_english, ` +
       `       g.description_english AS description_english, ` +
       `       o.name AS organization_name, ` +
+      `       o.organization_type_id AS organization_type_id, ` +
       `       c.name_english AS category_name, ` +
       `       c.colour AS colour, ` +
       `       d.start_time AS start_time, ` +

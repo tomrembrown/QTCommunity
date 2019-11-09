@@ -9,7 +9,8 @@
         v-b-tooltip.hover="{ html: true }"
         :title="event.tool_tip_title"
       >
-        <router-link :style=" {color: '#' + event.colour }"
+        <router-link
+          :style=" {color: '#' + event.colour }"
           :to="{ name: 'EventDetails', params: { id: event.id } }"
         >{{ event.short_title_english }}</router-link>
       </li>
@@ -19,15 +20,13 @@
 
 <script>
 export default {
+  data() {
+    return {
+      events: []
+    }
+  },
   props: ['day'],
   computed: {
-    events() {
-      return this.$store.getters.getEvents.filter(
-        event =>
-          event.start_time.isSameOrBefore(this.day, 'day') &&
-          event.end_time.isSameOrAfter(this.day, 'day')
-      )
-    },
     classObject() {
       let today = this.day.isSame(this.$moment(), 'day')
       return {
@@ -38,6 +37,19 @@ export default {
           this.day.month() + 1 !== this.$store.getters.getCurrentMonth
       }
     }
+  },
+  created() {
+    this.$store.subscribe((mutation, state) => {
+      if (
+        (mutation.type === 'setEvents' ||
+          mutation.type === 'changeEventFilter') &&
+        state.calendar.filteredEvents != null
+      ) {
+        this.events = state.calendar.filteredEvents.filter(event =>
+          event.start_time.isSame(this.day, 'day')
+        )
+      }
+    })
   }
 }
 </script>

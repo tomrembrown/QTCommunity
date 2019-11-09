@@ -6,6 +6,7 @@
 
 import axios from 'axios'
 import moment from 'moment-timezone'
+import { statement } from '@babel/template'
 moment.tz.setDefault('UTC')
 process.env.TZ = 'UTC'
 
@@ -13,7 +14,16 @@ const state = {
   currentYear: moment().year(),
   currentMonth: moment().month() + 1,
   days: [],
-  events: []
+  allEvents: [],
+  fiteredEvents: [],
+  organizationTypeChosen: 'all',
+  isWheelchairAccessible: 'not',
+  genderIdentityChosen: 'any',
+  sexualOrientationChosen: 'any',
+  isFamilyFriendly: false,
+  ageAllowed: '',
+  raceReligionTargetted: '',
+  searchTerm: ''
 }
 
 const mutations = {
@@ -30,12 +40,13 @@ const mutations = {
     state.calendarEndDate = payload
   },
   setEvents(state, payload) {
-    state.events = payload
+    state.allEvents = payload
     // Convert date string to moment
-    state.events.forEach(event => {
+    state.allEvents.forEach(event => {
       event.start_time = moment(event.start_time)
       event.end_time = moment(event.end_time)
     })
+    state.filteredEvents = state.allEvents
   },
   calculateDays(state) {
     // Generating all days in current month
@@ -74,6 +85,89 @@ const mutations = {
     }
 
     state.days = days
+  },
+  changeEventFilter(state, $event) {
+    state[$event.element] = $event.value
+    if (state.allEvents == null) state.filteredEvents = null
+    else
+      state.filteredEvents = state.allEvents
+      .filter(event => {
+        if (state.organizationTypeChosen === 'all') return true
+        else
+          return (
+            event.organization_type_id == state.organizationTypeChosen
+          )
+      })
+      .filter(event => {
+        if (state.isWheelchairAccessible === 'not') return true
+        else if (
+          event.wheelchair_accessible === 'Fully Wheelchair Accessible'
+        )
+          return true
+        else if (
+          event.wheelchair_accessible ===
+            'Partially Wheelchair Accessible' &&
+          state.isWheelchairAccessible === 'some'
+        )
+          return true
+        else return false
+      })
+      .filter(event => {
+        if (state.genderIdentityChosen === 'any') return true
+        else if (event['gender_' + state.genderIdentityChosen] == true)
+          return true
+        else return false
+      })
+      .filter(event => {
+        if (state.sexualOrientationChosen === 'any') return true
+        else if (
+          event['orientation_' + state.sexualOrientationChosen] == true
+        )
+          return true
+        else return false
+      })
+      .filter(event => {
+        if (!state.isFamilyFriendly) return true
+        else if (event.family_friendly == true) return true
+        else return false
+      })
+      .filter(event => {
+        if (state.ageAllowed == '') return true
+        else if (
+          event.min_age != null &&
+          state.ageAllowed < event.min_age
+        )
+          return false
+        else if (
+          event.max_age != null &&
+          state.ageAllowed > event.max_age
+        )
+          return false
+        else return true
+      })
+      .filter(event => {
+        if (state.raceReligionTargetted == '') return true
+        else if (
+          event.race_religion != null &&
+          event.race_religion.toLowerCase() ==
+            state.raceReligionTargetted.toLowerCase()
+        )
+          return true
+        else return false
+      })
+      .filter(event => {
+        if (state.searchTerm == '') return true
+        else if (
+          event.long_title_english.toLowerCase().includes(state.searchTerm) ||
+          event.short_title_english.toLowerCase().includes(state.searchTerm) ||
+          event.mobile_title_english.toLowerCase().includes(state.searchTerm) ||
+          event.description_english.toLowerCase().includes(state.searchTerm) ||
+          event.organization_name.toLowerCase().includes(state.searchTerm)
+        )
+          return true
+        else 
+          return false
+      })
   }
 }
 
@@ -81,7 +175,7 @@ const getters = {
   getCurrentYear: state => state.currentYear,
   getCurrentMonth: state => state.currentMonth,
   getDays: state => state.days,
-  getEvents: state => state.events
+  getFilteredEvents: state => state.filteredEvents
 }
 
 const actions = {
@@ -100,9 +194,11 @@ const actions = {
 
       if (response.data.isError) throw new Error(response.data.message)
 
+      // Set the tool tip
       for (let i in response.data) {
-        let titleHtml = '<p align="left" style="font-size:12px">' +
-        moment(response.data[i].start_time).format('h:mm a') +
+        let titleHtml =
+          '<p align="left" style="font-size:12px">' +
+          moment(response.data[i].start_time).format('h:mm a') +
           ' to ' +
           moment(response.data[i].end_time).format('h:mm a') +
           ' <br/> at ' +
@@ -113,7 +209,6 @@ const actions = {
         titleHtml += '</p>'
         response.data[i].tool_tip_title = titleHtml
       }
-
       commit('setEvents', response.data)
     } catch (error) {
       console.log(
