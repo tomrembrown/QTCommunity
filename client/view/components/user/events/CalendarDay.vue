@@ -1,6 +1,8 @@
 <template>
   <div :class="classObject">
-    {{ day.format('D') }}
+    <span class="calendar">{{ day.format('D') }}</span>
+    <span class="transition">{{ day.format('dddd - MMM D, YYYY') }}</span>
+    
     <ul class="event-list">
       <li
         v-for="event in events"
@@ -34,7 +36,8 @@ export default {
         today,
         past: this.day.isSameOrBefore(this.$moment(), 'day') && !today,
         'not-current-month':
-          this.day.month() + 1 !== this.$store.getters.getCurrentMonth
+          this.day.month() + 1 !== this.$store.getters.getCurrentMonth,
+        blank: this.events.length == 0
       }
     }
   },

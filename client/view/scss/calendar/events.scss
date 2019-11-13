@@ -10,6 +10,8 @@ $pickled-bluewood: #35495e;
 
 $calendar-border: 1px solid $alto;
 
+$break-transition: 800px;
+
 @mixin calendar-row {
   display: flex;
   justify-content: flex-start;
@@ -19,6 +21,12 @@ $calendar-border: 1px solid $alto;
 @mixin calendar-cell {
   width: 100%;
   padding: 0.5rem;
+}
+
+@mixin calendar-row-transition{
+	display:flex;
+	flex-direction:column;
+	width:100%;
 }
 
 #outer {
@@ -80,9 +88,16 @@ $calendar-border: 1px solid $alto;
 
   #day-bar {
     @include calendar-row;
+    
+      @media screen and (max-width: $break-transition){
+	      display:none;
+      }       
+    
     div {
       @include calendar-cell;
     }
+    
+ 
   }
 
   #calendar {
@@ -90,7 +105,14 @@ $calendar-border: 1px solid $alto;
     background-color: white;
 
     .calendar-week {
-      @include calendar-row;
+	  @media screen and (min-width: $break-transition){
+		 @include calendar-row; 
+	  }
+      
+      @media screen and (max-width: $break-transition){
+	      @include calendar-row-transition;
+      }
+      
       .day {
         overflow: hidden;
         font-weight: bold;
@@ -120,6 +142,27 @@ $calendar-border: 1px solid $alto;
         &.active {
           background-color: $pink;
         }
+      
+  
+      @media screen and (min-width: $break-transition){
+	      span.calendar{
+		      display:inline-block;
+	      }
+	      
+		 span.transition{
+			 display:none;
+		 }
+	  }
+      
+      @media screen and (max-width: $break-transition){
+	      span.calendar{
+		      display:none;
+	      }
+	      
+		 span.transition{
+			 display:inline-block;
+		 }
+      }
 
         .event-list {
           font-size: 0.8rem;
@@ -132,6 +175,12 @@ $calendar-border: 1px solid $alto;
             color: $vista-blue;
             white-space: nowrap;
           }
+        }
+        
+        @media screen and (max-width: $break-transition){
+	      &.past, &.blank{
+		      display:none;
+	      }
         }
       }
 

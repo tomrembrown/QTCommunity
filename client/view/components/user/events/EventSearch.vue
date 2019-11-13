@@ -13,11 +13,12 @@
       />
       <div class="note" id="search-term-help">Search for a term in event name, title, or description</div>
     </label>
+    <md-toolbar></md-toolbar>
   </form>
 </template>
 
 <script>
-export default {
+export default {	
   methods: {
     changeFilter($event) {
       let element = $event.target.id

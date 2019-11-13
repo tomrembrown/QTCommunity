@@ -1,5 +1,15 @@
 <template>
   <form action>
+  	<md-toolbar class="md-primary md-large">
+  		<div class="md-toolbar-row">
+			<md-field class="md-primary">
+				<md-icon>search</md-icon>
+				<label>Search events by name</label>
+				<md-input></md-input>
+			</md-field> 		
+  		</div>
+  	</md-toolbar>
+  	
     <fieldset>
       <div class="row">
         <div class="col-md-12">
@@ -184,6 +194,14 @@
 <script>
 import axios from 'axios'
 import constants from '../../../../../joint/constants'
+import Vue from 'vue'
+import { MdToolbar, MdField, MdIcon } from 'vue-material/dist/components'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
+
+Vue.use(MdToolbar);
+Vue.use(MdField);
+Vue.use(MdIcon);
 
 export default {
   data() {
